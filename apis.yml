@@ -22,7 +22,7 @@ apis:
       - type: Documentation
         url: https://weaviate.io/developers/weaviate/api/rest
       - type: OpenAPI
-        url: properties/weaviate-openapi-original.yml
+        url: openapiweaviate-openapi-original.yml
     aid: weaviate:weaviate
 common:
   - type: Learn
