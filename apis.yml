@@ -25,7 +25,6 @@ apis:
       - url: openapi/weaviate-openapi.yml
         type: OpenAPI
     description: |-
-
       Weaviate is an open source, AI-native vector database that helps
       developers create intuitive and reliable AI-powered applications.
 common:
