@@ -1,5 +1,6 @@
 name: Weaviate
-description: >-
+description: |-
+
   Weaviate is more than just a database. It's a flexible platform for building
   powerful, production-ready AI applications.
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
@@ -12,20 +13,21 @@ tags:
   - AI
   - Vector Databases
 apis:
-  - name: Weaviate API
-    description: >-
+  - aid: weaviate:weaviate
+    name: Weaviate API
+    tags: []
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://platform.openai.com/
+    humanURL: https://weaviate.io/developers/weaviate/api/rest
+    properties:
+      - url: https://weaviate.io/developers/weaviate/api/rest
+        type: Documentation
+      - url: properties/weaviate-openapi.yml
+        type: OpenAPI
+    description: |-
+
       Weaviate is an open source, AI-native vector database that helps
       developers create intuitive and reliable AI-powered applications.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://weaviate.io/developers/weaviate/api/rest
-    baseURL: https://platform.openai.com/
-    tags: []
-    properties:
-      - type: Documentation
-        url: https://weaviate.io/developers/weaviate/api/rest
-      - type: OpenAPI
-        url: openapi/weaviate-openapi-original.yml
-    aid: weaviate:weaviate
 common:
   - type: Learn
     url: https://weaviate.io/developers/academy
