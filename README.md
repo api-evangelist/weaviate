@@ -1,37 +1,41 @@
 # Weaviate (weaviate)
-Weaviate is more than just a database. It's a flexible platform for building powerful, production-ready AI applications.
+
+Weaviate is more than just a database. It's a flexible platform for building
+powerful, production-ready AI applications.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-search/ai/main/_apis/weaviate/apis.md)
 
 ## Scope
 
 
-## Tags
+## Tags:
 
-- Artificial Intelligence
-- AI
-- Vector Databases
+ - Artificial Intelligence, AI, Vector Databases
 
 ## Timestamps
 
-- **Created:** 2024-06-18T00:00:00.000Z 
-- **Modified:** 2024-06-18T00:00:00.000Z 
+- **Created:** 2024-06-18 
+- **Modified:** 2024-06-18 
 
 ## APIs
 
 ### Weaviate API
-Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications.
+Weaviate is an open source, AI-native vector database that helps
+developers create intuitive and reliable AI-powered applications.
 
 **Human URL:** [https://weaviate.io/developers/weaviate/api/rest](https://weaviate.io/developers/weaviate/api/rest)
+
 **Base URL:** [https://platform.openai.com/](https://platform.openai.com/)
 
-#### Tags
 
+#### Tags:
+
+ - Root, Known, Live, Ready, Configuration, Roles, Add, Permissions, Remove, Permission, Users, Assign, Revoke, Objects, Class, Name, References, Properties, Validate, Batch, GraphQL, Meta, Schema, Shard, Tenant, Backups, Backends, Restore, Clusters, Statistics, Nodes, Classifications
 
 #### Properties
 
 - [Documentation](https://weaviate.io/developers/weaviate/api/rest)
-- [OpenAPI](properties/weaviate-openapi-original.yml)
+- [OpenAPI](properties/weaviate-openapi.yml)
 
 ## Common Properties
 
