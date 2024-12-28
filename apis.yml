@@ -22,7 +22,7 @@ apis:
     properties:
       - url: https://weaviate.io/developers/weaviate/api/rest
         type: Documentation
-      - url: openapi/weaviate-openapi.yml
+      - url: properties/weaviate-openapi.yml
         type: OpenAPI
     description: |-
       Weaviate is an open source, AI-native vector database that helps
