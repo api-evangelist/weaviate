@@ -4,40 +4,39 @@ apis:
   - aid: weaviate:weaviate
     name: Weaviate API
     tags:
-      - Root
+      - Add
+      - Assign
+      - Backends
+      - Backups
+      - Batch
+      - Class
+      - Classifications
+      - Clusters
+      - Configuration
+      - GraphQL
       - Known
       - Live
-      - Ready
-      - Configuration
-      - Roles
-      - Add
-      - Permissions
-      - Remove
-      - Permission
-      - Users
-      - Assign
-      - Revoke
-      - Objects
-      - Class
-      - Name
-      - References
-      - Properties
-      - Validate
-      - Batch
-      - GraphQL
       - Meta
+      - Name
+      - Nodes
+      - Objects
+      - Permission
+      - Permissions
+      - Properties
+      - Ready
+      - References
+      - Remove
+      - Restore
+      - Revoke
+      - Roles
+      - Root
       - Schema
       - Shard
-      - Tenant
-      - Backups
-      - Backends
-      - Restore
-      - Clusters
       - Statistics
-      - Nodes
-      - Classifications
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Tenant
+      - Users
+      - Validate
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://platform.openai.com/
     humanURL: https://weaviate.io/developers/weaviate/api/rest
     properties:
@@ -50,11 +49,10 @@ apis:
       create intuitive and reliable AI-powered applications.
 name: Weaviate
 tags:
-  - Artificial Intelligence
   - AI
+  - Artificial Intelligence
   - Vector Databases
-image: 
-  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 common:
   - url: https://weaviate.io/developers/academy
     type: Learn
