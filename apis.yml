@@ -36,7 +36,8 @@ apis:
       - Statistics
       - Nodes
       - Classifications
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://platform.openai.com/
     humanURL: https://weaviate.io/developers/weaviate/api/rest
     properties:
@@ -44,15 +45,16 @@ apis:
         type: Documentation
       - url: properties/weaviate-openapi.yml
         type: OpenAPI
-    description: |-
-      Weaviate is an open source, AI-native vector database that helps
-      developers create intuitive and reliable AI-powered applications.
+    description: >-
+      Weaviate is an open source, AI-native vector database that helps developers
+      create intuitive and reliable AI-powered applications.
 name: Weaviate
 tags:
   - Artificial Intelligence
   - AI
   - Vector Databases
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: 
+  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 common:
   - url: https://weaviate.io/developers/academy
     type: Learn
@@ -79,15 +81,12 @@ common:
 created: '2024-06-18T00:00:00.000Z'
 modified: '2025-01-04'
 description: >-
-  Weaviate is an open-source, cloud-native vector search engine that allows
-  developers to easily add machine learning capabilities to their applications.
-  It uses a knowledge graph to organize and relate data in a way that makes it
-  easily searchable and automatically discoverable. Weaviate's powerful semantic
-  search capabilities enable users to quickly find and retrieve relevant
-  information from large amounts of structured and unstructured data. With its
-  user-friendly interface and robust API, Weaviate is a versatile tool that can
-  be used in a wide range of industries, including healthcare, e-commerce, and
-  content management.
+  Weaviate is an open-source, cloud-native vector search engine that allows developers
+  to easily add machine learning capabilities to their applications. It uses a knowledge
+  graph to organize and relate data in a way that makes it easily searchable and automatically
+  discoverable. Weaviate's powerful semantic search capabilities enable users to quickly
+  find and retrieve relevant information from large amounts of structured and unstructured
+  data.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
