@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-replication-scale-apply-response-schema.json",
+  "title": "ReplicationScaleApplyResponse",
+  "description": "Response for the POST /replication/scale endpoint containing the list of initiated shard copy operation IDs.",
+  "type": "object",
+  "properties": {
+    "operationIds": {
+      "type": "array",
+      "description": "List of shard copy operation IDs created during scaling.",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "planId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the replication scaling plan that generated these operations."
+    },
+    "collection": {
+      "type": "string",
+      "description": "The name of the collection associated with this replication scaling plan."
+    }
+  },
+  "required": [
+    "operationIds",
+    "planId",
+    "collection"
+  ]
+}

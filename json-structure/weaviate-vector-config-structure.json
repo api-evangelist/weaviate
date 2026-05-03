@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-vector-config-structure.json",
+  "title": "VectorConfig",
+  "description": "Weaviate VectorConfig schema",
+  "type": "object",
+  "properties": {
+    "vectorizer": {
+      "type": "map",
+      "description": "Configuration of a specific vectorizer used by this vector"
+    },
+    "vectorIndexType": {
+      "type": "str",
+      "description": "Name of the vector index to use, eg. (HNSW)"
+    },
+    "vectorIndexConfig": {
+      "type": "map",
+      "description": "Vector-index config, that is specific to the type of index selected in vectorIndexType"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-tokenize-response-schema.json",
+  "title": "TokenizeResponse",
+  "description": "Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time",
+  "type": "object",
+  "properties": {
+    "indexed": {
+      "type": "array",
+      "description": "The tokens as they would be stored in the inverted index.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "query": {
+      "type": "array",
+      "description": "The tokens as they would be used for query matching (e.g., after stopword removal).",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

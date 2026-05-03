@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-raft-statistics-structure.json",
+  "title": "RaftStatistics",
+  "description": "The definition of Raft statistics.",
+  "type": "object",
+  "properties": {
+    "appliedIndex": {
+      "type": "str"
+    },
+    "commitIndex": {
+      "type": "str"
+    },
+    "fsmPending": {
+      "type": "str"
+    },
+    "lastContact": {
+      "type": "str"
+    },
+    "lastLogIndex": {
+      "type": "str"
+    },
+    "lastLogTerm": {
+      "type": "str"
+    },
+    "lastSnapshotIndex": {
+      "type": "str"
+    },
+    "lastSnapshotTerm": {
+      "type": "str"
+    },
+    "latestConfiguration": {
+      "type": "map",
+      "description": "Weaviate Raft nodes."
+    },
+    "latestConfigurationIndex": {
+      "type": "str"
+    },
+    "numPeers": {
+      "type": "str"
+    },
+    "protocolVersion": {
+      "type": "str"
+    },
+    "protocolVersionMax": {
+      "type": "str"
+    },
+    "protocolVersionMin": {
+      "type": "str"
+    },
+    "snapshotVersionMax": {
+      "type": "str"
+    },
+    "snapshotVersionMin": {
+      "type": "str"
+    },
+    "state": {
+      "type": "str"
+    },
+    "term": {
+      "type": "str"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-tokenizer-user-dict-config-structure.json",
+  "title": "TokenizerUserDictConfig",
+  "description": "A list of pairs of strings that should be replaced with another string during tokenization.",
+  "type": "object",
+  "properties": {
+    "tokenizer": {
+      "type": "str",
+      "description": "The tokenizer to which the user dictionary should be applied. Currently, only the `kagame` ja and kr tokenizers supports user dictionaries."
+    },
+    "replacements": {
+      "type": "array"
+    }
+  }
+}

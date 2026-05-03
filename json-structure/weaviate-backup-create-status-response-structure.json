@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-backup-create-status-response-structure.json",
+  "title": "BackupCreateStatusResponse",
+  "description": "The definition of a backup create metadata",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "str",
+      "description": "The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+    },
+    "backend": {
+      "type": "str",
+      "description": "Backup backend name e.g. filesystem, gcs, s3."
+    },
+    "path": {
+      "type": "str",
+      "description": "Destination path of backup files valid for the selected backend."
+    },
+    "error": {
+      "type": "str",
+      "description": "error message if creation failed"
+    },
+    "status": {
+      "type": "str",
+      "description": "phase of backup creation process"
+    },
+    "startedAt": {
+      "type": "datetime",
+      "description": "Timestamp when the backup process started"
+    },
+    "completedAt": {
+      "type": "datetime",
+      "description": "Timestamp when the backup process completed (successfully or with failure)"
+    },
+    "size": {
+      "type": "float",
+      "description": "Size of the backup in Gibs"
+    }
+  }
+}

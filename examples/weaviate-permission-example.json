@@ -1,0 +1,46 @@
+{
+  "backups": {
+    "collection": "*"
+  },
+  "data": {
+    "collection": "*",
+    "tenant": "*",
+    "object": "*"
+  },
+  "nodes": {
+    "verbosity": "verbose",
+    "collection": "*"
+  },
+  "users": {
+    "users": "*"
+  },
+  "groups": {
+    "group": "*",
+    "groupType": {
+      "id": "example-id"
+    }
+  },
+  "tenants": {
+    "collection": "*",
+    "tenant": "*"
+  },
+  "roles": {
+    "role": "*",
+    "scope": "all"
+  },
+  "collections": {
+    "collection": "*"
+  },
+  "replicate": {
+    "collection": "*",
+    "shard": "*"
+  },
+  "aliases": {
+    "collection": "*",
+    "alias": "*"
+  },
+  "namespaces": {
+    "namespace": "*"
+  },
+  "action": "manage_backups"
+}

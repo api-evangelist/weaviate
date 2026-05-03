@@ -1,0 +1,22 @@
+{
+  "class": "example-onqhfkjm",
+  "vectorWeights": {
+    "id": "example-id"
+  },
+  "properties": {
+    "id": "example-id"
+  },
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "creationTimeUnix": 70,
+  "lastUpdateTimeUnix": 14,
+  "vector": {
+    "id": "example-id"
+  },
+  "vectors": {
+    "id": "example-id"
+  },
+  "tenant": "example-gwhbazbs",
+  "additional": {
+    "id": "example-id"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "state": "REGISTERED",
+  "whenStartedUnixMs": 47,
+  "errors": [
+    {
+      "id": "example-id"
+    }
+  ]
+}

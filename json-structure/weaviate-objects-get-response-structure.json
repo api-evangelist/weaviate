@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-objects-get-response-structure.json",
+  "title": "ObjectsGetResponse",
+  "description": "Weaviate ObjectsGetResponse schema",
+  "type": "any",
+  "properties": {}
+}

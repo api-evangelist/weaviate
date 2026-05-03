@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-node-status-structure.json",
+  "title": "NodeStatus",
+  "description": "The definition of a backup node status response body",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "str",
+      "description": "The name of the node."
+    },
+    "status": {
+      "type": "str",
+      "description": "Node's status."
+    },
+    "version": {
+      "type": "str",
+      "description": "The version of Weaviate."
+    },
+    "gitHash": {
+      "type": "str",
+      "description": "The gitHash of Weaviate."
+    },
+    "stats": {
+      "type": "#NodeStats"
+    },
+    "batchStats": {
+      "type": "#BatchStats"
+    },
+    "shards": {
+      "type": "array",
+      "description": "The list of the shards with it's statistics."
+    },
+    "operationalMode": {
+      "type": "str",
+      "description": "Which mode of operation the node is running in."
+    }
+  }
+}

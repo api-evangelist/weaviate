@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-shard-progress-structure.json",
+  "title": "ShardProgress",
+  "description": "Progress information for exporting a single shard",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "str",
+      "description": "Status of this shard's export"
+    },
+    "objectsExported": {
+      "type": "int64",
+      "description": "Number of objects exported from this shard"
+    },
+    "error": {
+      "type": "str",
+      "description": "Error message if this shard's export failed"
+    },
+    "skipReason": {
+      "type": "str",
+      "description": "Reason why this shard was skipped (e.g. tenant status)"
+    }
+  }
+}

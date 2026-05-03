@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-alias-schema.json",
+  "title": "Alias",
+  "description": "Represents the mapping between an alias name and a collection. An alias provides an alternative name for accessing a collection.",
+  "type": "object",
+  "properties": {
+    "alias": {
+      "type": "string",
+      "description": "The unique name of the alias that serves as an alternative identifier for the collection."
+    },
+    "class": {
+      "type": "string",
+      "description": "The name of the collection (class) to which this alias is mapped."
+    }
+  }
+}

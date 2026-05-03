@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-additional-properties-structure.json",
+  "title": "AdditionalProperties",
+  "description": "(Response only) Additional meta information about a single object.",
+  "type": "map"
+}

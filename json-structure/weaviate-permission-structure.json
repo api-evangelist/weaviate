@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-permission-structure.json",
+  "title": "Permission",
+  "description": "Permissions attached to a role.",
+  "type": "object",
+  "properties": {
+    "backups": {
+      "type": "map",
+      "description": "Resources applicable for backup actions."
+    },
+    "data": {
+      "type": "map",
+      "description": "Resources applicable for data actions."
+    },
+    "nodes": {
+      "type": "map",
+      "description": "Resources applicable for cluster actions."
+    },
+    "users": {
+      "type": "map",
+      "description": "Resources applicable for user actions."
+    },
+    "groups": {
+      "type": "map",
+      "description": "Resources applicable for group actions."
+    },
+    "tenants": {
+      "type": "map",
+      "description": "Resources applicable for tenant actions."
+    },
+    "roles": {
+      "type": "map",
+      "description": "Resources applicable for role actions."
+    },
+    "collections": {
+      "type": "map",
+      "description": "Resources applicable for collection and/or tenant actions."
+    },
+    "replicate": {
+      "type": "map",
+      "description": "resources applicable for replicate actions"
+    },
+    "aliases": {
+      "type": "map",
+      "description": "Resource definition for alias-related actions and permissions. Used to specify which aliases and collections can be accessed or modified."
+    },
+    "namespaces": {
+      "type": "map",
+      "description": "Resources applicable for namespace actions."
+    },
+    "action": {
+      "type": "str",
+      "description": "Allowed actions in weaviate."
+    }
+  }
+}

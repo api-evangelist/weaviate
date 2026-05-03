@@ -1,0 +1,37 @@
+{
+  "operands": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "operator": "And",
+  "path": [
+    "inCity",
+    "city",
+    "name"
+  ],
+  "valueInt": 2000,
+  "valueNumber": 3.14,
+  "valueBoolean": false,
+  "valueString": "my search term",
+  "valueText": "my search term",
+  "valueDate": "TODO",
+  "valueIntArray": "[100, 200]",
+  "valueNumberArray": [
+    3.14
+  ],
+  "valueBooleanArray": [
+    true,
+    false
+  ],
+  "valueStringArray": [
+    "my search term"
+  ],
+  "valueTextArray": [
+    "my search term"
+  ],
+  "valueDateArray": "TODO",
+  "valueGeoRange": {
+    "id": "example-id"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-multiple-ref-schema.json",
+  "title": "MultipleRef",
+  "description": "Multiple instances of references to other objects.",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/SingleRef"
+  }
+}

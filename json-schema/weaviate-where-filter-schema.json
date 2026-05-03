@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-where-filter-schema.json",
+  "title": "WhereFilter",
+  "description": "Filter search results using a where filter.",
+  "type": "object",
+  "properties": {
+    "operands": {
+      "type": "array",
+      "description": "Combine multiple where filters, requires 'And' or 'Or' operator.",
+      "items": {
+        "$ref": "#/components/schemas/WhereFilter"
+      }
+    },
+    "operator": {
+      "type": "string",
+      "description": "Operator to use.",
+      "enum": [
+        "And",
+        "Or",
+        "Equal",
+        "Like",
+        "NotEqual",
+        "GreaterThan",
+        "GreaterThanEqual",
+        "LessThan",
+        "LessThanEqual",
+        "WithinGeoRange",
+        "IsNull",
+        "ContainsAny",
+        "ContainsAll",
+        "ContainsNone",
+        "Not"
+      ],
+      "example": "GreaterThanEqual"
+    },
+    "path": {
+      "type": "array",
+      "description": "Path to the property currently being filtered.",
+      "example": [
+        "inCity",
+        "city",
+        "name"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "valueInt": {
+      "type": "integer",
+      "format": "int64",
+      "description": "value as integer",
+      "example": 2000
+    },
+    "valueNumber": {
+      "type": "number",
+      "format": "float64",
+      "description": "value as number/float",
+      "example": 3.14
+    },
+    "valueBoolean": {
+      "type": "boolean",
+      "description": "value as boolean",
+      "example": false
+    },
+    "valueString": {
+      "type": "string",
+      "description": "value as text (deprecated as of v1.19; alias for valueText)",
+      "example": "my search term"
+    },
+    "valueText": {
+      "type": "string",
+      "description": "value as text",
+      "example": "my search term"
+    },
+    "valueDate": {
+      "type": "string",
+      "description": "value as date (as string)",
+      "example": "TODO"
+    },
+    "valueIntArray": {
+      "type": "array",
+      "description": "value as integer",
+      "example": "[100, 200]",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "valueNumberArray": {
+      "type": "array",
+      "description": "value as number/float",
+      "example": [
+        3.14
+      ],
+      "items": {
+        "type": "number",
+        "format": "float64"
+      }
+    },
+    "valueBooleanArray": {
+      "type": "array",
+      "description": "value as boolean",
+      "example": [
+        true,
+        false
+      ],
+      "items": {
+        "type": "boolean"
+      }
+    },
+    "valueStringArray": {
+      "type": "array",
+      "description": "value as text (deprecated as of v1.19; alias for valueText)",
+      "example": [
+        "my search term"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "valueTextArray": {
+      "type": "array",
+      "description": "value as text",
+      "example": [
+        "my search term"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "valueDateArray": {
+      "type": "array",
+      "description": "value as date (as string)",
+      "example": "TODO",
+      "items": {
+        "type": "string"
+      }
+    },
+    "valueGeoRange": {
+      "$ref": "#/components/schemas/WhereFilterGeoRange"
+    }
+  }
+}

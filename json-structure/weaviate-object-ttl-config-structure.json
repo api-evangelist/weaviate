@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-object-ttl-config-structure.json",
+  "title": "ObjectTtlConfig",
+  "description": "Configuration of objects' time-to-live",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "bool",
+      "description": "Whether or not object ttl is enabled for this collection (default: `false`)."
+    },
+    "defaultTtl": {
+      "type": "int32",
+      "description": "Interval (in seconds) to be added to `deleteOn` value, denoting object's expiration time. Has to be positive for `deleteOn` set to `_creationTimeUnix` or `_lastUpdateTimeUnix`, any for custom property (default: `0`)."
+    },
+    "deleteOn": {
+      "type": "str",
+      "description": "Name of the property holding base time to compute object's expiration time (ttl = value of deleteOn property + defaultTtl). Can be set to `_creationTimeUnix`, `_lastUpdateTimeUnix` or custom property of `date` datatype."
+    },
+    "filterExpiredObjects": {
+      "type": "bool",
+      "description": "Whether remove from resultset expired, but not yet deleted by background process objects (default: `false`)."
+    }
+  }
+}

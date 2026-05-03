@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-meta-schema.json",
+  "title": "Meta",
+  "description": "Contains meta information of the current Weaviate instance.",
+  "type": "object",
+  "properties": {
+    "hostname": {
+      "type": "string",
+      "format": "url",
+      "description": "The url of the host."
+    },
+    "version": {
+      "type": "string",
+      "description": "The Weaviate server version."
+    },
+    "modules": {
+      "type": "object",
+      "description": "Module-specific meta information."
+    },
+    "grpcMaxMessageSize": {
+      "type": "integer",
+      "description": "Max message size for GRPC connection in bytes."
+    }
+  }
+}

@@ -1,0 +1,389 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Weaviate REST API"
+  description: "The Weaviate vector database REST API for managing objects, schemas, backups, authentication, and vector search operations."
+  tags:
+    - Vector Database
+    - AI
+    - Machine Learning
+    - Objects
+    - Schema
+    - Search
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WEAVIATE_HOST: WEAVIATE_HOST
+      WEAVIATE_API_KEY: WEAVIATE_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: weaviate
+      baseUri: http://localhost:8080
+      description: "Weaviate vector database REST API."
+      resources:
+        - name: health
+          path: /.well-known/ready
+          description: "Application readiness check"
+          operations:
+            - name: check-readiness
+              method: GET
+              description: "Check if Weaviate is ready to accept requests"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: objects
+          path: /objects
+          description: "Vector object management"
+          operations:
+            - name: list-objects
+              method: GET
+              description: "List objects in Weaviate"
+              inputParameters:
+                - name: class
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by collection class name"
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results"
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Offset for pagination"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-object
+              method: POST
+              description: "Create a new object in Weaviate"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: object
+          path: /objects/{id}
+          description: "Individual object operations"
+          operations:
+            - name: get-object
+              method: GET
+              description: "Get a specific object by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Object UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-object
+              method: DELETE
+              description: "Delete an object by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Object UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: graphql
+          path: /graphql
+          description: "GraphQL query interface"
+          operations:
+            - name: graphql-query
+              method: POST
+              description: "Execute a GraphQL query for vector search and data retrieval"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: schema
+          path: /schema
+          description: "Collection schema management"
+          operations:
+            - name: get-schema
+              method: GET
+              description: "Get the current data schema"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-class
+              method: POST
+              description: "Create a new collection class in the schema"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: class-schema
+          path: /schema/{className}
+          description: "Individual class schema operations"
+          operations:
+            - name: get-class
+              method: GET
+              description: "Get a specific class definition"
+              inputParameters:
+                - name: className
+                  in: path
+                  type: string
+                  required: true
+                  description: "Name of the collection class"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-class
+              method: DELETE
+              description: "Delete a class and all its objects"
+              inputParameters:
+                - name: className
+                  in: path
+                  type: string
+                  required: true
+                  description: "Name of the collection class"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: batch-objects
+          path: /batch/objects
+          description: "Batch object operations"
+          operations:
+            - name: batch-create-objects
+              method: POST
+              description: "Create multiple objects in a single batch request"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: backups
+          path: /backups/{backend}
+          description: "Backup management"
+          operations:
+            - name: create-backup
+              method: POST
+              description: "Create a backup of Weaviate data"
+              inputParameters:
+                - name: backend
+                  in: path
+                  type: string
+                  required: true
+                  description: "Storage backend (s3, gcs, filesystem, azure)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-backups
+              method: GET
+              description: "List available backups"
+              inputParameters:
+                - name: backend
+                  in: path
+                  type: string
+                  required: true
+                  description: "Storage backend"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nodes
+          path: /nodes
+          description: "Cluster node information"
+          operations:
+            - name: get-nodes
+              method: GET
+              description: "Get information about all nodes in the cluster"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: cluster-statistics
+          path: /cluster/statistics
+          description: "Cluster statistics"
+          operations:
+            - name: get-cluster-statistics
+              method: GET
+              description: "Get cluster-wide statistics"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: authz-roles
+          path: /authz/roles
+          description: "Authorization role management"
+          operations:
+            - name: list-roles
+              method: GET
+              description: "List all authorization roles"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-role
+              method: POST
+              description: "Create a new authorization role"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: weaviate-rest
+      resources:
+        - path: /v1/objects
+          name: objects
+          operations:
+            - method: GET
+              name: list-objects
+              description: "List Weaviate objects"
+              call: "weaviate.list-objects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-object
+              description: "Create a Weaviate object"
+              call: "weaviate.create-object"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: weaviate-mcp
+      transport: http
+      tools:
+        - name: check-readiness
+          description: "Check if Weaviate is ready to accept requests"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.check-readiness"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-objects
+          description: "List objects in Weaviate with optional class filter"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.list-objects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-object
+          description: "Create a new vector object in Weaviate"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.create-object"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-object
+          description: "Get a specific Weaviate object by UUID"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.get-object"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-object
+          description: "Delete a Weaviate object by UUID"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "weaviate.delete-object"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: graphql-query
+          description: "Execute a GraphQL vector search query"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "weaviate.graphql-query"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-schema
+          description: "Get the current Weaviate data schema"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.get-schema"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-class
+          description: "Create a new collection class in the schema"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.create-class"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-nodes
+          description: "Get information about all cluster nodes"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.get-nodes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-backup
+          description: "Create a backup of Weaviate data to a storage backend"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.create-backup"
+          outputParameters:
+            - type: object
+              mapping: "$."

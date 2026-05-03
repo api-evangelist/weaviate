@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-permission-schema.json",
+  "title": "Permission",
+  "description": "Permissions attached to a role.",
+  "type": "object",
+  "properties": {
+    "backups": {
+      "type": "object",
+      "description": "Resources applicable for backup actions.",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.",
+          "default": "*"
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "description": "Resources applicable for data actions.",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.",
+          "default": "*"
+        },
+        "tenant": {
+          "type": "string",
+          "description": "A string that specifies which tenants this permission applies to. Can be an exact tenant name or a regex pattern. The default value `*` applies the permission to all tenants.",
+          "default": "*"
+        },
+        "object": {
+          "type": "string",
+          "description": "A string that specifies which objects this permission applies to. Can be an exact object ID or a regex pattern. The default value `*` applies the permission to all objects.",
+          "default": "*"
+        }
+      }
+    },
+    "nodes": {
+      "type": "object",
+      "description": "Resources applicable for cluster actions.",
+      "properties": {
+        "verbosity": {
+          "type": "string",
+          "description": "Whether to allow (verbose) returning shards and stats data in the response.",
+          "enum": [
+            "verbose",
+            "minimal"
+          ],
+          "default": "minimal"
+        },
+        "collection": {
+          "type": "string",
+          "description": "A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.",
+          "default": "*"
+        }
+      }
+    },
+    "users": {
+      "type": "object",
+      "description": "Resources applicable for user actions.",
+      "properties": {
+        "users": {
+          "type": "string",
+          "description": "A string that specifies which users this permission applies to. Can be an exact user name or a regex pattern. The default value `*` applies the permission to all users.",
+          "default": "*"
+        }
+      }
+    },
+    "groups": {
+      "type": "object",
+      "description": "Resources applicable for group actions.",
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "A string that specifies which groups this permission applies to. Can be an exact group name or a regex pattern. The default value `*` applies the permission to all groups.",
+          "default": "*"
+        },
+        "groupType": {
+          "$ref": "#/components/schemas/GroupType"
+        }
+      }
+    },
+    "tenants": {
+      "type": "object",
+      "description": "Resources applicable for tenant actions.",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.",
+          "default": "*"
+        },
+        "tenant": {
+          "type": "string",
+          "description": "A string that specifies which tenants this permission applies to. Can be an exact tenant name or a regex pattern. The default value `*` applies the permission to all tenants.",
+          "default": "*"
+        }
+      }
+    },
+    "roles": {
+      "type": "object",
+      "description": "Resources applicable for role actions.",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "A string that specifies which roles this permission applies to. Can be an exact role name or a regex pattern. The default value `*` applies the permission to all roles.",
+          "default": "*"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Set the scope for the manage role permission.",
+          "enum": [
+            "all",
+            "match"
+          ],
+          "default": "match"
+        }
+      }
+    },
+    "collections": {
+      "type": "object",
+      "description": "Resources applicable for collection and/or tenant actions.",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.",
+          "default": "*"
+        }
+      }
+    },
+    "replicate": {
+      "type": "object",
+      "description": "resources applicable for replicate actions",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "string or regex. if a specific collection name, if left empty it will be ALL or *",
+          "default": "*"
+        },
+        "shard": {
+          "type": "string",
+          "description": "string or regex. if a specific shard name, if left empty it will be ALL or *",
+          "default": "*"
+        }
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Resource definition for alias-related actions and permissions. Used to specify which aliases and collections can be accessed or modified.",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.",
+          "default": "*"
+        },
+        "alias": {
+          "type": "string",
+          "description": "A string that specifies which aliases this permission applies to. Can be an exact alias name or a regex pattern. The default value `*` applies the permission to all aliases.",
+          "default": "*"
+        }
+      }
+    },
+    "namespaces": {
+      "type": "object",
+      "description": "Resources applicable for namespace actions.",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "A string that specifies which namespaces this permission applies to. Can be an exact namespace name or a regex pattern. The default value `*` applies the permission to all namespaces.",
+          "default": "*"
+        }
+      }
+    },
+    "action": {
+      "type": "string",
+      "description": "Allowed actions in weaviate.",
+      "enum": [
+        "manage_backups",
+        "read_cluster",
+        "create_data",
+        "read_data",
+        "update_data",
+        "delete_data",
+        "read_nodes",
+        "create_roles",
+        "read_roles",
+        "update_roles",
+        "delete_roles",
+        "create_collections",
+        "read_collections",
+        "update_collections",
+        "delete_collections",
+        "assign_and_revoke_users",
+        "create_users",
+        "read_users",
+        "update_users",
+        "delete_users",
+        "create_tenants",
+        "read_tenants",
+        "update_tenants",
+        "delete_tenants",
+        "create_replicate",
+        "read_replicate",
+        "update_replicate",
+        "delete_replicate",
+        "create_aliases",
+        "read_aliases",
+        "update_aliases",
+        "delete_aliases",
+        "assign_and_revoke_groups",
+        "read_groups",
+        "create_mcp",
+        "read_mcp",
+        "update_mcp",
+        "manage_namespaces"
+      ]
+    }
+  },
+  "required": [
+    "action"
+  ]
+}

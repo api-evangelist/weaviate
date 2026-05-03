@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-graph-qlresponses-schema.json",
+  "title": "GraphQLResponses",
+  "description": "A list of GraphQL responses.",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/GraphQLResponse"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-nodes-status-response-schema.json",
+  "title": "NodesStatusResponse",
+  "description": "The status of all of the Weaviate nodes",
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/NodeStatus"
+      }
+    }
+  }
+}

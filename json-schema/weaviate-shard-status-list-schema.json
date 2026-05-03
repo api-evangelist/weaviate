@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-shard-status-list-schema.json",
+  "title": "ShardStatusList",
+  "description": "The status of all the shards of a Class",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/ShardStatusGetResponse"
+  }
+}

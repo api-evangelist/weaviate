@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-where-filter-geo-range-structure.json",
+  "title": "WhereFilterGeoRange",
+  "description": "Filter within a distance of a georange.",
+  "type": "object",
+  "properties": {
+    "geoCoordinates": {
+      "type": "#GeoCoordinates"
+    },
+    "distance": {
+      "type": "map"
+    }
+  }
+}

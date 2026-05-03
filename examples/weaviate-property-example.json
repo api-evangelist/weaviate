@@ -1,0 +1,22 @@
+{
+  "dataType": [
+    "example-kmydagyf"
+  ],
+  "description": "example-levzhpar",
+  "moduleConfig": {},
+  "name": "example-qymqhtzj",
+  "indexInverted": true,
+  "indexFilterable": true,
+  "indexSearchable": true,
+  "indexRangeFilters": true,
+  "tokenization": "word",
+  "nestedProperties": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "disableDuplicatedReferences": true,
+  "textAnalyzer": {
+    "id": "example-id"
+  }
+}

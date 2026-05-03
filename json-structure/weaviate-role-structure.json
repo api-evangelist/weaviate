@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-role-structure.json",
+  "title": "Role",
+  "description": "Weaviate Role schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "str",
+      "description": "The name (ID) of the role."
+    },
+    "permissions": {
+      "type": "array"
+    }
+  }
+}

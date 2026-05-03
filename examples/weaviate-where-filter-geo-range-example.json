@@ -1,0 +1,8 @@
+{
+  "geoCoordinates": {
+    "id": "example-id"
+  },
+  "distance": {
+    "max": 4.52
+  }
+}

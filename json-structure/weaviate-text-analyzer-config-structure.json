@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-text-analyzer-config-structure.json",
+  "title": "TextAnalyzerConfig",
+  "description": "Text analysis options for a property. These settings are immutable after the property is created. Applies only to text and text[] data types that use an inverted index (searchable or filterable).",
+  "type": "object",
+  "properties": {
+    "asciiFold": {
+      "type": "bool",
+      "description": "If true, accent/diacritic marks are folded to their base characters during indexing and search. For example, '\u00e9cole' matches 'ecole'. Defaults to false."
+    },
+    "asciiFoldIgnore": {
+      "type": "array",
+      "description": "If provided, specifies a list of characters that should be excluded from ascii folding. For example, if ['\u00e9'] is provided, then '\u00e9' will not be folded to 'e' during indexing and search. This list is immutable after the property is created."
+    },
+    "stopwordPreset": {
+      "type": "str",
+      "description": "Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets."
+    }
+  }
+}

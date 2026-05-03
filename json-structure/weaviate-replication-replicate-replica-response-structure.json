@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-replicate-replica-response-structure.json",
+  "title": "ReplicationReplicateReplicaResponse",
+  "description": "Contains the unique identifier for a successfully initiated asynchronous replica movement operation. This ID can be used to track the progress of the operation.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "uuid",
+      "description": "The unique identifier (ID) assigned to the registered replication operation."
+    }
+  }
+}

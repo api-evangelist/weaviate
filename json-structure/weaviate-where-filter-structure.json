@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-where-filter-structure.json",
+  "title": "WhereFilter",
+  "description": "Filter search results using a where filter.",
+  "type": "object",
+  "properties": {
+    "operands": {
+      "type": "array",
+      "description": "Combine multiple where filters, requires 'And' or 'Or' operator."
+    },
+    "operator": {
+      "type": "str",
+      "description": "Operator to use."
+    },
+    "path": {
+      "type": "array",
+      "description": "Path to the property currently being filtered."
+    },
+    "valueInt": {
+      "type": "int64",
+      "description": "value as integer"
+    },
+    "valueNumber": {
+      "type": "float",
+      "description": "value as number/float"
+    },
+    "valueBoolean": {
+      "type": "bool",
+      "description": "value as boolean"
+    },
+    "valueString": {
+      "type": "str",
+      "description": "value as text (deprecated as of v1.19; alias for valueText)"
+    },
+    "valueText": {
+      "type": "str",
+      "description": "value as text"
+    },
+    "valueDate": {
+      "type": "str",
+      "description": "value as date (as string)"
+    },
+    "valueIntArray": {
+      "type": "array",
+      "description": "value as integer"
+    },
+    "valueNumberArray": {
+      "type": "array",
+      "description": "value as number/float"
+    },
+    "valueBooleanArray": {
+      "type": "array",
+      "description": "value as boolean"
+    },
+    "valueStringArray": {
+      "type": "array",
+      "description": "value as text (deprecated as of v1.19; alias for valueText)"
+    },
+    "valueTextArray": {
+      "type": "array",
+      "description": "value as text"
+    },
+    "valueDateArray": {
+      "type": "array",
+      "description": "value as date (as string)"
+    },
+    "valueGeoRange": {
+      "type": "#WhereFilterGeoRange"
+    }
+  }
+}

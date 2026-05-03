@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-roles-list-response-structure.json",
+  "title": "RolesListResponse",
+  "description": "List of roles.",
+  "type": "array"
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-vector-structure.json",
+  "title": "Vector",
+  "description": "A vector representation of the object. If provided at object creation, this wil take precedence over any vectorizer setting.",
+  "type": "map"
+}

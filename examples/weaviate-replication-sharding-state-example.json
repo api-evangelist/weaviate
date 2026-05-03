@@ -1,0 +1,8 @@
+{
+  "collection": "example-grocuxns",
+  "shards": [
+    {
+      "id": "example-id"
+    }
+  ]
+}

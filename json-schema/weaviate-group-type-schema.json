@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-group-type-schema.json",
+  "title": "GroupType",
+  "description": "If the group contains OIDC or database users.",
+  "type": "string",
+  "enum": [
+    "oidc"
+  ]
+}

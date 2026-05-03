@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-inverted-index-config-structure.json",
+  "title": "InvertedIndexConfig",
+  "description": "Configure the inverted index built into Weaviate. See [Reference: Inverted index](https://docs.weaviate.io/weaviate/config-refs/indexing/inverted-index#inverted-index-parameters) for details.",
+  "type": "object",
+  "properties": {
+    "cleanupIntervalSeconds": {
+      "type": "float",
+      "description": "Asynchronous index clean up happens every n seconds (default: 60)."
+    },
+    "bm25": {
+      "type": "#BM25Config"
+    },
+    "stopwords": {
+      "type": "#StopwordConfig"
+    },
+    "indexTimestamps": {
+      "type": "bool",
+      "description": "Index each object by its internal timestamps (default: `false`)."
+    },
+    "indexNullState": {
+      "type": "bool",
+      "description": "Index each object with the null state (default: `false`)."
+    },
+    "indexPropertyLength": {
+      "type": "bool",
+      "description": "Index length of properties (default: `false`)."
+    },
+    "usingBlockMaxWAND": {
+      "type": "bool",
+      "description": "Using BlockMax WAND for query execution (default: `false`, will be `true` for new collections created after 1.30)."
+    },
+    "tokenizerUserDict": {
+      "type": "array",
+      "description": "User-defined dictionary for tokenization."
+    },
+    "stopwordPresets": {
+      "type": "map",
+      "description": "User-defined named stopword lists. Each key is a preset name that can be referenced by a property's textAnalyzer.stopwordPreset field. The value is an array of stopword strings. Preset names must not be empty or whitespace-only; each list must contain at least one word; individual words must not be empty or whitespace-only."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-node-stats-structure.json",
+  "title": "NodeStats",
+  "description": "The summary of Weaviate's statistics.",
+  "type": "object",
+  "properties": {
+    "shardCount": {
+      "type": "float",
+      "description": "The count of Weaviate's shards. To see this value, set `output` to `verbose`."
+    },
+    "objectCount": {
+      "type": "float",
+      "description": "The total number of objects in DB."
+    }
+  }
+}

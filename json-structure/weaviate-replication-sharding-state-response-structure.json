@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-sharding-state-response-structure.json",
+  "title": "ReplicationShardingStateResponse",
+  "description": "Provides the detailed sharding state for one or more collections, including the distribution of shards and their replicas across the cluster nodes.",
+  "type": "object",
+  "properties": {
+    "shardingState": {
+      "type": "#ReplicationShardingState"
+    }
+  }
+}

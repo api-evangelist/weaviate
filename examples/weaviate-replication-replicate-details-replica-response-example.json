@@ -1,0 +1,20 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "shard": "example-wtfyjike",
+  "collection": "example-xpojefwh",
+  "sourceNode": "example-gjczrdxd",
+  "targetNode": "example-qhptlfkl",
+  "type": "COPY",
+  "uncancelable": true,
+  "scheduledForCancel": true,
+  "scheduledForDelete": true,
+  "status": {
+    "id": "example-id"
+  },
+  "statusHistory": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "whenStartedUnixMs": 47
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-graph-qlquery-schema.json",
+  "title": "GraphQLQuery",
+  "description": "GraphQL query based on: http://facebook.github.io/graphql/.",
+  "type": "object",
+  "properties": {
+    "operationName": {
+      "type": "string",
+      "description": "The name of the operation if multiple exist in the query."
+    },
+    "query": {
+      "type": "string",
+      "description": "Query based on GraphQL syntax."
+    },
+    "variables": {
+      "type": "object",
+      "description": "Additional variables for the query."
+    }
+  }
+}

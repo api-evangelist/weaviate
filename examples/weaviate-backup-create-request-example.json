@@ -1,0 +1,13 @@
+{
+  "id": "example-wtjtowfv",
+  "config": {
+    "id": "example-id"
+  },
+  "include": [
+    "example-mxilzaby"
+  ],
+  "exclude": [
+    "example-limeikmm"
+  ],
+  "incremental_base_backup_id": null
+}

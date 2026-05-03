@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-alias-response-structure.json",
+  "title": "AliasResponse",
+  "description": "Response object containing a list of alias mappings.",
+  "type": "object",
+  "properties": {
+    "aliases": {
+      "type": "array",
+      "description": "Array of alias objects, each containing an alias-to-collection mapping."
+    }
+  }
+}

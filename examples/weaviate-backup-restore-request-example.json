@@ -1,0 +1,15 @@
+{
+  "config": {
+    "id": "example-id"
+  },
+  "include": [
+    "example-brbpzbmf"
+  ],
+  "exclude": [
+    "example-vrnpfjes"
+  ],
+  "node_mapping": {
+    "key": "value"
+  },
+  "overwriteAlias": true
+}

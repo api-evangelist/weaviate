@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-single-ref-structure.json",
+  "title": "SingleRef",
+  "description": "Either set beacon (direct reference) or set collection (class) and schema (concept reference)",
+  "type": "object",
+  "properties": {
+    "class": {
+      "type": "uri",
+      "description": "If using a concept reference (rather than a direct reference), specify the desired collection (class) name here."
+    },
+    "schema": {
+      "type": "#PropertySchema"
+    },
+    "beacon": {
+      "type": "uri",
+      "description": "If using a direct reference, specify the URI to point to the cross-reference here. Should be in the form of weaviate://localhost/<uuid> for the example of a local cross-reference to an object"
+    },
+    "href": {
+      "type": "uri",
+      "description": "If using a direct reference, this read-only fields provides a link to the referenced resource. If 'origin' is globally configured, an absolute URI is shown - a relative URI otherwise."
+    },
+    "classification": {
+      "type": "#ReferenceMetaClassification"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "concatenatedWord": {
+    "concatenatedWord": "example-gxofhcfw",
+    "singleWords": [
+      {}
+    ],
+    "concatenatedVector": {
+      "id": "example-id"
+    },
+    "concatenatedNearestNeighbors": {
+      "id": "example-id"
+    }
+  },
+  "individualWords": [
+    {
+      "word": "example-zxlyxbrw",
+      "present": true,
+      "info": {
+        "vector": null,
+        "nearestNeighbors": null
+      }
+    }
+  ]
+}

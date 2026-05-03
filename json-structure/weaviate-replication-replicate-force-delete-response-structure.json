@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-replicate-force-delete-response-structure.json",
+  "title": "ReplicationReplicateForceDeleteResponse",
+  "description": "Provides the UUIDs that were successfully force deleted as part of the replication operation. If dryRun is true, this will return the expected outcome without actually deleting anything.",
+  "type": "object",
+  "properties": {
+    "deleted": {
+      "type": "array",
+      "description": "The unique identifiers (IDs) of the replication operations that were forcefully deleted."
+    },
+    "dryRun": {
+      "type": "bool",
+      "description": "Indicates whether the operation was a dry run (true) or an actual deletion (false)."
+    }
+  }
+}

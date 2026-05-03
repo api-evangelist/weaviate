@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-backup-config-structure.json",
+  "title": "BackupConfig",
+  "description": "Backup custom configuration.",
+  "type": "object",
+  "properties": {
+    "Endpoint": {
+      "type": "str",
+      "description": "Name of the endpoint, e.g. s3.amazonaws.com."
+    },
+    "Bucket": {
+      "type": "str",
+      "description": "Name of the bucket, container, volume, etc."
+    },
+    "Path": {
+      "type": "str",
+      "description": "Path or key within the bucket."
+    },
+    "CPUPercentage": {
+      "type": "int32",
+      "description": "Desired CPU core utilization ranging from 1%-80%"
+    },
+    "ChunkSize": {
+      "type": "int32",
+      "description": "Deprecated, has no effect."
+    },
+    "CompressionLevel": {
+      "type": "str",
+      "description": "compression level used by compression algorithm"
+    }
+  }
+}

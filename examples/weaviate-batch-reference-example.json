@@ -1,0 +1,5 @@
+{
+  "from": "weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals",
+  "to": "weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f",
+  "tenant": "example-ngsggfru"
+}

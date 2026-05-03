@@ -1,0 +1,16 @@
+{
+  "name": "example-etzkdqmw",
+  "class": "example-rvoxqnkg",
+  "objectCount": 69.1,
+  "vectorIndexingStatus": "example-xeaqtgch",
+  "compressed": true,
+  "vectorQueueLength": 67.03,
+  "loaded": true,
+  "asyncReplicationStatus": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "numberOfReplicas": 98,
+  "replicationFactor": 31
+}

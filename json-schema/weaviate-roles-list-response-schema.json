@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-roles-list-response-schema.json",
+  "title": "RolesListResponse",
+  "description": "List of roles.",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/Role"
+  }
+}

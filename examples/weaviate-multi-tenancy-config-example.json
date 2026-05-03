@@ -1,0 +1,5 @@
+{
+  "enabled": true,
+  "autoTenantCreation": true,
+  "autoTenantActivation": true
+}

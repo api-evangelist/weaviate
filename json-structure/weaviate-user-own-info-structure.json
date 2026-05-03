@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-user-own-info-structure.json",
+  "title": "UserOwnInfo",
+  "description": "Weaviate UserOwnInfo schema",
+  "type": "object",
+  "properties": {
+    "groups": {
+      "type": "array",
+      "description": "The groups associated with the user."
+    },
+    "roles": {
+      "type": "array"
+    },
+    "username": {
+      "type": "str",
+      "description": "The name (ID) of the user."
+    }
+  }
+}

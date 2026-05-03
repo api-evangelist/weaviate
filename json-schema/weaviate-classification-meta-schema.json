@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-classification-meta-schema.json",
+  "title": "ClassificationMeta",
+  "description": "Additional information to a specific classification.",
+  "type": "object",
+  "properties": {
+    "started": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time when this classification was started.",
+      "example": "2017-07-21T17:32:28Z"
+    },
+    "completed": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time when this classification finished.",
+      "example": "2017-07-21T17:32:28Z"
+    },
+    "count": {
+      "type": "integer",
+      "description": "Number of objects which were taken into consideration for classification.",
+      "example": 147
+    },
+    "countSucceeded": {
+      "type": "integer",
+      "description": "Number of objects successfully classified.",
+      "example": 140
+    },
+    "countFailed": {
+      "type": "integer",
+      "description": "Number of objects which could not be classified - see error message for details.",
+      "example": 7
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-statistics-structure.json",
+  "title": "Statistics",
+  "description": "The definition of node statistics.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "str",
+      "description": "The name of the node."
+    },
+    "status": {
+      "type": "str",
+      "description": "Node's status."
+    },
+    "bootstrapped": {
+      "type": "bool"
+    },
+    "dbLoaded": {
+      "type": "bool"
+    },
+    "initialLastAppliedIndex": {
+      "type": "float"
+    },
+    "lastAppliedIndex": {
+      "type": "float"
+    },
+    "isVoter": {
+      "type": "bool"
+    },
+    "leaderId": {
+      "type": "map"
+    },
+    "leaderAddress": {
+      "type": "map"
+    },
+    "open": {
+      "type": "bool"
+    },
+    "ready": {
+      "type": "bool"
+    },
+    "candidates": {
+      "type": "map"
+    },
+    "raft": {
+      "type": "#RaftStatistics"
+    }
+  }
+}

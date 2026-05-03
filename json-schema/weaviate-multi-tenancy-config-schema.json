@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-multi-tenancy-config-schema.json",
+  "title": "MultiTenancyConfig",
+  "description": "Configuration related to multi-tenancy within a collection (class)",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether or not multi-tenancy is enabled for this collection (class) (default: `false`)."
+    },
+    "autoTenantCreation": {
+      "type": "boolean",
+      "description": "Nonexistent tenants should (not) be created implicitly (default: `false`)."
+    },
+    "autoTenantActivation": {
+      "type": "boolean",
+      "description": "Existing tenants should (not) be turned HOT implicitly when they are accessed and in another activity status (default: `false`)."
+    }
+  }
+}

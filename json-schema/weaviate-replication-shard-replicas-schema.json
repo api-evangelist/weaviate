@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-replication-shard-replicas-schema.json",
+  "title": "ReplicationShardReplicas",
+  "description": "Represents a shard and lists the nodes that currently host its replicas.",
+  "type": "object",
+  "properties": {
+    "shard": {
+      "type": "string"
+    },
+    "replicas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

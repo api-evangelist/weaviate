@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-replicate-force-delete-request-structure.json",
+  "title": "ReplicationReplicateForceDeleteRequest",
+  "description": "Specifies the parameters available when force deleting replication operations.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "uuid",
+      "description": "The unique identifier (ID) of the replication operation to be forcefully deleted."
+    },
+    "collection": {
+      "type": "str",
+      "description": "The name of the collection to which the shard being replicated belongs."
+    },
+    "shard": {
+      "type": "str",
+      "description": "The identifier of the shard involved in the replication operations."
+    },
+    "node": {
+      "type": "str",
+      "description": "The name of the target node where the replication operations are registered."
+    },
+    "dryRun": {
+      "type": "bool",
+      "description": "If true, the operation will not actually delete anything but will return the expected outcome of the deletion."
+    }
+  }
+}

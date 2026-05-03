@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-statistics-schema.json",
+  "title": "Statistics",
+  "description": "The definition of node statistics.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the node."
+    },
+    "status": {
+      "type": "string",
+      "description": "Node's status.",
+      "enum": [
+        "HEALTHY",
+        "UNHEALTHY",
+        "UNAVAILABLE",
+        "TIMEOUT"
+      ],
+      "default": "HEALTHY"
+    },
+    "bootstrapped": {
+      "type": "boolean"
+    },
+    "dbLoaded": {
+      "type": "boolean"
+    },
+    "initialLastAppliedIndex": {
+      "type": "number",
+      "format": "uint64"
+    },
+    "lastAppliedIndex": {
+      "type": "number"
+    },
+    "isVoter": {
+      "type": "boolean"
+    },
+    "leaderId": {
+      "type": "object"
+    },
+    "leaderAddress": {
+      "type": "object"
+    },
+    "open": {
+      "type": "boolean"
+    },
+    "ready": {
+      "type": "boolean"
+    },
+    "candidates": {
+      "type": "object"
+    },
+    "raft": {
+      "$ref": "#/components/schemas/RaftStatistics"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-class-schema.json",
+  "title": "Class",
+  "description": "Weaviate Class schema",
+  "type": "object",
+  "properties": {
+    "class": {
+      "type": "string",
+      "description": "Name of the collection (formerly 'class') (required). Multiple words should be concatenated in CamelCase, e.g. `ArticleAuthor`."
+    },
+    "vectorConfig": {
+      "type": "object",
+      "description": "Configure named vectors. Either use this field or `vectorizer`, `vectorIndexType`, and `vectorIndexConfig` fields. Available from `v1.24.0`.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/VectorConfig"
+      }
+    },
+    "vectorIndexType": {
+      "type": "string",
+      "description": "Name of the vector index type to use for the collection (e.g. `hnsw` or `flat`)."
+    },
+    "vectorIndexConfig": {
+      "type": "object",
+      "description": "Vector-index config, that is specific to the type of index selected in vectorIndexType"
+    },
+    "shardingConfig": {
+      "type": "object",
+      "description": "Manage how the index should be sharded and distributed in the cluster"
+    },
+    "replicationConfig": {
+      "$ref": "#/components/schemas/ReplicationConfig"
+    },
+    "invertedIndexConfig": {
+      "$ref": "#/components/schemas/InvertedIndexConfig"
+    },
+    "multiTenancyConfig": {
+      "$ref": "#/components/schemas/MultiTenancyConfig"
+    },
+    "objectTtlConfig": {
+      "$ref": "#/components/schemas/ObjectTtlConfig"
+    },
+    "vectorizer": {
+      "type": "string",
+      "description": "Specify how the vectors for this collection should be determined. The options are either `none` - this means you have to import a vector with each object yourself - or the name of a module that provides vectorization capabilities, such as `text2vec-weaviate`. If left empty, it will use the globally configured default ([`DEFAULT_VECTORIZER_MODULE`](https://docs.weaviate.io/deploy/configuration/env-vars)) which can itself either be `none` or a specific module."
+    },
+    "moduleConfig": {
+      "type": "object",
+      "description": "Configuration specific to modules in a collection context."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the collection for metadata purposes."
+    },
+    "properties": {
+      "type": "array",
+      "description": "Define properties of the collection.",
+      "items": {
+        "$ref": "#/components/schemas/Property"
+      }
+    }
+  }
+}

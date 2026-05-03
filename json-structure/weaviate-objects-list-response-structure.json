@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-objects-list-response-structure.json",
+  "title": "ObjectsListResponse",
+  "description": "List of objects.",
+  "type": "object",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "description": "The actual list of objects."
+    },
+    "deprecations": {
+      "type": "array"
+    },
+    "totalResults": {
+      "type": "int64",
+      "description": "The total number of objects for the query. The number of items in a response may be smaller due to paging."
+    }
+  }
+}

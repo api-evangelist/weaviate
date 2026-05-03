@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-node-shard-status-structure.json",
+  "title": "NodeShardStatus",
+  "description": "The definition of a node shard status response body",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "str",
+      "description": "The name of the shard."
+    },
+    "class": {
+      "type": "str",
+      "description": "The name of shard's collection (class)."
+    },
+    "objectCount": {
+      "type": "float",
+      "description": "The number of objects in shard."
+    },
+    "vectorIndexingStatus": {
+      "type": "str",
+      "description": "The status of the vector indexing process."
+    },
+    "compressed": {
+      "type": "bool",
+      "description": "The status of vector compression/quantization."
+    },
+    "vectorQueueLength": {
+      "type": "float",
+      "description": "The length of the vector indexing queue."
+    },
+    "loaded": {
+      "type": "bool",
+      "description": "The load status of the shard."
+    },
+    "asyncReplicationStatus": {
+      "type": "array",
+      "description": "The status of the async replication."
+    },
+    "numberOfReplicas": {
+      "type": "int64",
+      "description": "Number of replicas for the shard."
+    },
+    "replicationFactor": {
+      "type": "int64",
+      "description": "Minimum number of replicas for the shard."
+    }
+  }
+}

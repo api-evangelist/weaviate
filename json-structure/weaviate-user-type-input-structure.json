@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-user-type-input-structure.json",
+  "title": "UserTypeInput",
+  "description": "The type of the user. `db` users are managed by Weaviate, `oidc` users are managed by an external OIDC provider.",
+  "type": "str"
+}

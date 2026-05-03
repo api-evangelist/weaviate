@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-schema-structure.json",
+  "title": "Schema",
+  "description": "Definitions of semantic schemas (also see: https://github.com/weaviate/weaviate-semantic-schemas).",
+  "type": "object",
+  "properties": {
+    "classes": {
+      "type": "array",
+      "description": "Semantic classes that are available."
+    },
+    "maintainer": {
+      "type": "email",
+      "description": "Email of the maintainer."
+    },
+    "name": {
+      "type": "str",
+      "description": "Name of the schema."
+    }
+  }
+}

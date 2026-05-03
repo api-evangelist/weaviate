@@ -1,0 +1,28 @@
+{
+  "id": "ee722219-b8ec-4db1-8f8d-5150bb1a9e0c",
+  "class": "City",
+  "classifyProperties": [
+    "inCountry"
+  ],
+  "basedOnProperties": [
+    "description"
+  ],
+  "status": "running",
+  "meta": {
+    "id": "example-id"
+  },
+  "type": "example-tegdoblf",
+  "settings": {},
+  "error": "classify xzy: something went wrong",
+  "filters": {
+    "sourceWhere": {
+      "id": "example-id"
+    },
+    "trainingSetWhere": {
+      "id": "example-id"
+    },
+    "targetWhere": {
+      "id": "example-id"
+    }
+  }
+}

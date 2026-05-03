@@ -1,0 +1,29 @@
+{
+  "class": "example-wnpbkvyb",
+  "vectorConfig": {
+    "key": "value"
+  },
+  "vectorIndexType": "example-klpmxjph",
+  "vectorIndexConfig": {},
+  "shardingConfig": {},
+  "replicationConfig": {
+    "id": "example-id"
+  },
+  "invertedIndexConfig": {
+    "id": "example-id"
+  },
+  "multiTenancyConfig": {
+    "id": "example-id"
+  },
+  "objectTtlConfig": {
+    "id": "example-id"
+  },
+  "vectorizer": "example-qmvbvpzh",
+  "moduleConfig": {},
+  "description": "example-wvlulbmm",
+  "properties": [
+    {
+      "id": "example-id"
+    }
+  ]
+}

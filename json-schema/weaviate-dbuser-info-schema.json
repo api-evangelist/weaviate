@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-dbuser-info-schema.json",
+  "title": "DBUserInfo",
+  "description": "Weaviate DBUserInfo schema",
+  "type": "object",
+  "properties": {
+    "roles": {
+      "type": "array",
+      "description": "The roles associated with the user.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "userId": {
+      "type": "string",
+      "description": "The name (ID) of the user."
+    },
+    "dbUserType": {
+      "type": "string",
+      "description": "Type of the returned user.",
+      "enum": [
+        "db_user",
+        "db_env_user"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Activity status of the returned user."
+    },
+    "createdAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+    },
+    "apiKeyFirstLetters": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "First 3 letters of the associated API key.",
+      "maxLength": 3
+    },
+    "lastUsedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+    },
+    "namespace": {
+      "type": "string",
+      "description": "The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise."
+    }
+  },
+  "required": [
+    "userId",
+    "dbUserType",
+    "roles",
+    "active"
+  ]
+}

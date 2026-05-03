@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-stopword-config-structure.json",
+  "title": "StopwordConfig",
+  "description": "Fine-grained control over stopword list usage.",
+  "type": "object",
+  "properties": {
+    "preset": {
+      "type": "str",
+      "description": "Pre-existing list of common words by language (default: `en`). Options: [`en`, `none`]."
+    },
+    "additions": {
+      "type": "array",
+      "description": "Stopwords to be considered additionally (default: []). Can be any array of custom strings."
+    },
+    "removals": {
+      "type": "array",
+      "description": "Stopwords to be removed from consideration (default: []). Can be any array of custom strings."
+    }
+  }
+}

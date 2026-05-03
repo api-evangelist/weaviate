@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-graph-qlqueries-schema.json",
+  "title": "GraphQLQueries",
+  "description": "A list of GraphQL queries.",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/GraphQLQuery"
+  }
+}

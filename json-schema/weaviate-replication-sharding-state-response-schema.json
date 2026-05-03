@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-replication-sharding-state-response-schema.json",
+  "title": "ReplicationShardingStateResponse",
+  "description": "Provides the detailed sharding state for one or more collections, including the distribution of shards and their replicas across the cluster nodes.",
+  "type": "object",
+  "properties": {
+    "shardingState": {
+      "$ref": "#/components/schemas/ReplicationShardingState"
+    }
+  }
+}

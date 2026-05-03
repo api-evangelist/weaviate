@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-c11y-extension-schema.json",
+  "title": "C11yExtension",
+  "description": "A resource describing an extension to the contextinoary, containing both the identifier and the definition of the extension",
+  "type": "object",
+  "properties": {
+    "concept": {
+      "type": "string",
+      "description": "The new concept you want to extend. Must be an all-lowercase single word, or a space delimited compound word. Examples: 'foobarium', 'my custom concept'",
+      "example": "foobarium"
+    },
+    "definition": {
+      "type": "string",
+      "description": "A list of space-delimited words or a sentence describing what the custom concept is about. Avoid using the custom concept itself. An Example definition for the custom concept 'foobarium': would be 'a naturally occurring element which can only be seen by programmers'"
+    },
+    "weight": {
+      "type": "number",
+      "format": "float",
+      "description": "Weight of the definition of the new concept where 1='override existing definition entirely' and 0='ignore custom definition'. Note that if the custom concept is not present in the contextionary yet, the weight cannot be less than 1."
+    }
+  }
+}

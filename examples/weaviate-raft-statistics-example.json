@@ -1,0 +1,20 @@
+{
+  "appliedIndex": "example-wtwszkzo",
+  "commitIndex": "example-rgfdtyhb",
+  "fsmPending": "example-jloiytnx",
+  "lastContact": "example-bpmerqic",
+  "lastLogIndex": "example-hjnnjplc",
+  "lastLogTerm": "example-xkycwfol",
+  "lastSnapshotIndex": "example-lhbdauth",
+  "lastSnapshotTerm": "example-xtbzjudi",
+  "latestConfiguration": {},
+  "latestConfigurationIndex": "example-dhskvqgk",
+  "numPeers": "example-rbzeqtse",
+  "protocolVersion": "example-blhwgjlc",
+  "protocolVersionMax": "example-udzyjtcf",
+  "protocolVersionMin": "example-fjpnyrxp",
+  "snapshotVersionMax": "example-kblzoojt",
+  "snapshotVersionMin": "example-bgwnupqn",
+  "state": "example-frqwsbco",
+  "term": "example-xmxilurv"
+}

@@ -1,0 +1,21 @@
+{
+  "cleanupIntervalSeconds": 98.22,
+  "bm25": {
+    "id": "example-id"
+  },
+  "stopwords": {
+    "id": "example-id"
+  },
+  "indexTimestamps": true,
+  "indexNullState": true,
+  "indexPropertyLength": true,
+  "usingBlockMaxWAND": true,
+  "tokenizerUserDict": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "stopwordPresets": {
+    "key": "value"
+  }
+}

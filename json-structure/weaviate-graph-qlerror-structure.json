@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-graph-qlerror-structure.json",
+  "title": "GraphQLError",
+  "description": "An error response caused by a GraphQL query.",
+  "type": "object",
+  "properties": {
+    "locations": {
+      "type": "array"
+    },
+    "message": {
+      "type": "str"
+    },
+    "path": {
+      "type": "array"
+    }
+  }
+}

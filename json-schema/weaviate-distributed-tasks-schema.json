@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-distributed-tasks-schema.json",
+  "title": "DistributedTasks",
+  "description": "Active distributed tasks by namespace.",
+  "type": "object",
+  "additionalProperties": {
+    "type": "array",
+    "items": {
+      "$ref": "#/components/schemas/DistributedTask"
+    }
+  }
+}

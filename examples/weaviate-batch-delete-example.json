@@ -1,0 +1,11 @@
+{
+  "match": {
+    "class": "City",
+    "where": {
+      "id": "example-id"
+    }
+  },
+  "output": "minimal",
+  "deletionTimeUnixMilli": 20,
+  "dryRun": false
+}

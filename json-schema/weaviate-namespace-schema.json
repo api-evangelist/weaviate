@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-namespace-schema.json",
+  "title": "Namespace",
+  "description": "A cluster-level namespace used to group resources under a common administrative unit. Namespace names must start with a lowercase letter, contain only lowercase letters and digits, be 3-36 characters long, and must not be a reserved name.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the namespace."
+    }
+  }
+}

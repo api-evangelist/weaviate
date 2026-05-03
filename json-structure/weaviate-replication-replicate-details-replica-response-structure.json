@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-replicate-details-replica-response-structure.json",
+  "title": "ReplicationReplicateDetailsReplicaResponse",
+  "description": "Provides a comprehensive overview of a specific replication operation, detailing its unique ID, the involved collection, shard, source and target nodes, transfer type, current status, and optionally, its status history.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "uuid",
+      "description": "The unique identifier (ID) of this specific replication operation."
+    },
+    "shard": {
+      "type": "str",
+      "description": "The name of the shard involved in this replication operation."
+    },
+    "collection": {
+      "type": "str",
+      "description": "The name of the collection to which the shard being replicated belongs."
+    },
+    "sourceNode": {
+      "type": "str",
+      "description": "The identifier of the node from which the replica is being moved or copied (the source node)."
+    },
+    "targetNode": {
+      "type": "str",
+      "description": "The identifier of the node to which the replica is being moved or copied (the target node)."
+    },
+    "type": {
+      "type": "str",
+      "description": "Indicates whether the operation is a `COPY` (source replica remains) or a `MOVE` (source replica is removed after successful transfer)."
+    },
+    "uncancelable": {
+      "type": "bool",
+      "description": "Whether the replica operation can't be cancelled."
+    },
+    "scheduledForCancel": {
+      "type": "bool",
+      "description": "Whether the replica operation is scheduled for cancellation."
+    },
+    "scheduledForDelete": {
+      "type": "bool",
+      "description": "Whether the replica operation is scheduled for deletion."
+    },
+    "status": {
+      "type": "#ReplicationReplicateDetailsReplicaStatus"
+    },
+    "statusHistory": {
+      "type": "array",
+      "description": "An array detailing the historical sequence of statuses the replication operation has transitioned through, if requested and available."
+    },
+    "whenStartedUnixMs": {
+      "type": "int64",
+      "description": "The UNIX timestamp in ms when the replication operation was initiated. This is an approximate time and so should not be used for precise timing."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-tokenize-request-structure.json",
+  "title": "TokenizeRequest",
+  "description": "Request body for the generic tokenize endpoint.",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "str",
+      "description": "The text to tokenize."
+    },
+    "tokenization": {
+      "type": "str",
+      "description": "The tokenization method to apply."
+    },
+    "analyzerConfig": {
+      "type": "#TextAnalyzerConfig"
+    },
+    "stopwords": {
+      "type": "#StopwordConfig"
+    },
+    "stopwordPresets": {
+      "type": "map",
+      "description": "Optional user-defined named stopword presets. Shape matches InvertedIndexConfig.stopwordPresets on a collection: each key is a preset name, each value is a plain list of stopwords. A preset name that matches a built-in ('en', 'none') fully replaces the built-in. Preset names must not be empty or whitespace-only; each word list must contain at least one word; individual words must not be empty or whitespace-only. Mutually exclusive with stopwords \u2014 pass one or the other, not both."
+    }
+  }
+}

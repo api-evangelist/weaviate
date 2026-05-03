@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-error-response-structure.json",
+  "title": "ErrorResponse",
+  "description": "An error response returned by Weaviate endpoints.",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "array"
+    }
+  }
+}

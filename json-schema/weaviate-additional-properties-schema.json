@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-additional-properties-schema.json",
+  "title": "AdditionalProperties",
+  "description": "(Response only) Additional meta information about a single object.",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object"
+  }
+}

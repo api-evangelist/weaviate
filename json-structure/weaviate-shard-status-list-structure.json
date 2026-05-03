@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-shard-status-list-structure.json",
+  "title": "ShardStatusList",
+  "description": "The status of all the shards of a Class",
+  "type": "array"
+}

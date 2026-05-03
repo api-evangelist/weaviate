@@ -1,0 +1,1519 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "weaviate": "https://weaviate.io/api/ontology#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Tenant": {
+      "@id": "weaviate:Tenant",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "weaviate:name",
+      "@type": "xsd:string"
+    },
+    "activityStatus": {
+      "@id": "weaviate:activityStatus",
+      "@type": "xsd:string"
+    },
+    "ReplicationReplicateDetailsReplicaResponse": {
+      "@id": "weaviate:ReplicationReplicateDetailsReplicaResponse",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "weaviate:id",
+      "@type": "xsd:string"
+    },
+    "shard": {
+      "@id": "weaviate:shard",
+      "@type": "xsd:string"
+    },
+    "collection": {
+      "@id": "weaviate:collection",
+      "@type": "xsd:string"
+    },
+    "sourceNode": {
+      "@id": "weaviate:sourceNode",
+      "@type": "xsd:string"
+    },
+    "targetNode": {
+      "@id": "weaviate:targetNode",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "weaviate:type",
+      "@type": "xsd:string"
+    },
+    "uncancelable": {
+      "@id": "weaviate:uncancelable",
+      "@type": "xsd:boolean"
+    },
+    "scheduledForCancel": {
+      "@id": "weaviate:scheduledForCancel",
+      "@type": "xsd:boolean"
+    },
+    "scheduledForDelete": {
+      "@id": "weaviate:scheduledForDelete",
+      "@type": "xsd:boolean"
+    },
+    "status": {
+      "@id": "weaviate:status"
+    },
+    "statusHistory": {
+      "@id": "weaviate:statusHistory"
+    },
+    "whenStartedUnixMs": {
+      "@id": "weaviate:whenStartedUnixMs",
+      "@type": "xsd:long"
+    },
+    "ShardStatusGetResponse": {
+      "@id": "weaviate:ShardStatusGetResponse",
+      "@type": "@id"
+    },
+    "vectorQueueSize": {
+      "@id": "weaviate:vectorQueueSize",
+      "@type": "xsd:integer"
+    },
+    "BatchReferenceResponse": {
+      "@id": "weaviate:BatchReferenceResponse",
+      "@type": "@id"
+    },
+    "NestedProperty": {
+      "@id": "weaviate:NestedProperty",
+      "@type": "@id"
+    },
+    "dataType": {
+      "@id": "weaviate:dataType"
+    },
+    "description": {
+      "@id": "weaviate:description",
+      "@type": "xsd:string"
+    },
+    "indexFilterable": {
+      "@id": "weaviate:indexFilterable",
+      "@type": "xsd:boolean"
+    },
+    "indexSearchable": {
+      "@id": "weaviate:indexSearchable",
+      "@type": "xsd:boolean"
+    },
+    "indexRangeFilters": {
+      "@id": "weaviate:indexRangeFilters",
+      "@type": "xsd:boolean"
+    },
+    "tokenization": {
+      "@id": "weaviate:tokenization",
+      "@type": "xsd:string"
+    },
+    "nestedProperties": {
+      "@id": "weaviate:nestedProperties"
+    },
+    "textAnalyzer": {
+      "@id": "weaviate:textAnalyzer"
+    },
+    "AsyncReplicationStatus": {
+      "@id": "weaviate:AsyncReplicationStatus",
+      "@type": "@id"
+    },
+    "objectsPropagated": {
+      "@id": "weaviate:objectsPropagated",
+      "@type": "xsd:float"
+    },
+    "startDiffTimeUnixMillis": {
+      "@id": "weaviate:startDiffTimeUnixMillis",
+      "@type": "xsd:float"
+    },
+    "VectorConfig": {
+      "@id": "weaviate:VectorConfig",
+      "@type": "@id"
+    },
+    "vectorizer": {
+      "@id": "weaviate:vectorizer"
+    },
+    "vectorIndexType": {
+      "@id": "weaviate:vectorIndexType",
+      "@type": "xsd:string"
+    },
+    "vectorIndexConfig": {
+      "@id": "weaviate:vectorIndexConfig"
+    },
+    "RestoreConfig": {
+      "@id": "weaviate:RestoreConfig",
+      "@type": "@id"
+    },
+    "Endpoint": {
+      "@id": "weaviate:Endpoint",
+      "@type": "xsd:string"
+    },
+    "Bucket": {
+      "@id": "weaviate:Bucket",
+      "@type": "xsd:string"
+    },
+    "Path": {
+      "@id": "weaviate:Path",
+      "@type": "xsd:string"
+    },
+    "CPUPercentage": {
+      "@id": "weaviate:CPUPercentage",
+      "@type": "xsd:integer"
+    },
+    "rolesOptions": {
+      "@id": "weaviate:rolesOptions",
+      "@type": "xsd:string"
+    },
+    "usersOptions": {
+      "@id": "weaviate:usersOptions",
+      "@type": "xsd:string"
+    },
+    "C11yWordsResponse": {
+      "@id": "weaviate:C11yWordsResponse",
+      "@type": "@id"
+    },
+    "concatenatedWord": {
+      "@id": "weaviate:concatenatedWord"
+    },
+    "individualWords": {
+      "@id": "weaviate:individualWords"
+    },
+    "ReplicationReplicateDetailsReplicaStatus": {
+      "@id": "weaviate:ReplicationReplicateDetailsReplicaStatus",
+      "@type": "@id"
+    },
+    "state": {
+      "@id": "weaviate:state",
+      "@type": "xsd:string"
+    },
+    "errors": {
+      "@id": "weaviate:errors"
+    },
+    "VectorWeights": {
+      "@id": "weaviate:VectorWeights",
+      "@type": "@id"
+    },
+    "TokenizeResponse": {
+      "@id": "weaviate:TokenizeResponse",
+      "@type": "@id"
+    },
+    "indexed": {
+      "@id": "weaviate:indexed"
+    },
+    "query": {
+      "@id": "weaviate:query"
+    },
+    "Statistics": {
+      "@id": "weaviate:Statistics",
+      "@type": "@id"
+    },
+    "bootstrapped": {
+      "@id": "weaviate:bootstrapped",
+      "@type": "xsd:boolean"
+    },
+    "dbLoaded": {
+      "@id": "weaviate:dbLoaded",
+      "@type": "xsd:boolean"
+    },
+    "initialLastAppliedIndex": {
+      "@id": "weaviate:initialLastAppliedIndex",
+      "@type": "xsd:float"
+    },
+    "lastAppliedIndex": {
+      "@id": "weaviate:lastAppliedIndex",
+      "@type": "xsd:float"
+    },
+    "isVoter": {
+      "@id": "weaviate:isVoter",
+      "@type": "xsd:boolean"
+    },
+    "leaderId": {
+      "@id": "weaviate:leaderId"
+    },
+    "leaderAddress": {
+      "@id": "weaviate:leaderAddress"
+    },
+    "open": {
+      "@id": "weaviate:open",
+      "@type": "xsd:boolean"
+    },
+    "ready": {
+      "@id": "weaviate:ready",
+      "@type": "xsd:boolean"
+    },
+    "candidates": {
+      "@id": "weaviate:candidates"
+    },
+    "raft": {
+      "@id": "weaviate:raft"
+    },
+    "C11yVector": {
+      "@id": "weaviate:C11yVector",
+      "@type": "@id"
+    },
+    "SingleRef": {
+      "@id": "weaviate:SingleRef",
+      "@type": "@id"
+    },
+    "class": {
+      "@id": "weaviate:class",
+      "@type": "xsd:anyURI"
+    },
+    "schema": {
+      "@id": "weaviate:schema"
+    },
+    "beacon": {
+      "@id": "weaviate:beacon",
+      "@type": "xsd:anyURI"
+    },
+    "href": {
+      "@id": "weaviate:href",
+      "@type": "xsd:anyURI"
+    },
+    "classification": {
+      "@id": "weaviate:classification"
+    },
+    "PropertyTokenizeRequest": {
+      "@id": "weaviate:PropertyTokenizeRequest",
+      "@type": "@id"
+    },
+    "text": {
+      "@id": "weaviate:text",
+      "@type": "xsd:string"
+    },
+    "PropertySchema": {
+      "@id": "weaviate:PropertySchema",
+      "@type": "@id"
+    },
+    "WhereFilter": {
+      "@id": "weaviate:WhereFilter",
+      "@type": "@id"
+    },
+    "operands": {
+      "@id": "weaviate:operands"
+    },
+    "operator": {
+      "@id": "weaviate:operator",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "weaviate:path"
+    },
+    "valueInt": {
+      "@id": "weaviate:valueInt",
+      "@type": "xsd:long"
+    },
+    "valueNumber": {
+      "@id": "weaviate:valueNumber",
+      "@type": "xsd:float"
+    },
+    "valueBoolean": {
+      "@id": "weaviate:valueBoolean",
+      "@type": "xsd:boolean"
+    },
+    "valueString": {
+      "@id": "weaviate:valueString",
+      "@type": "xsd:string"
+    },
+    "valueText": {
+      "@id": "weaviate:valueText",
+      "@type": "xsd:string"
+    },
+    "valueDate": {
+      "@id": "weaviate:valueDate",
+      "@type": "xsd:string"
+    },
+    "valueIntArray": {
+      "@id": "weaviate:valueIntArray"
+    },
+    "valueNumberArray": {
+      "@id": "weaviate:valueNumberArray"
+    },
+    "valueBooleanArray": {
+      "@id": "weaviate:valueBooleanArray"
+    },
+    "valueStringArray": {
+      "@id": "weaviate:valueStringArray"
+    },
+    "valueTextArray": {
+      "@id": "weaviate:valueTextArray"
+    },
+    "valueDateArray": {
+      "@id": "weaviate:valueDateArray"
+    },
+    "valueGeoRange": {
+      "@id": "weaviate:valueGeoRange"
+    },
+    "Deprecation": {
+      "@id": "weaviate:Deprecation",
+      "@type": "@id"
+    },
+    "apiType": {
+      "@id": "weaviate:apiType",
+      "@type": "xsd:string"
+    },
+    "msg": {
+      "@id": "weaviate:msg",
+      "@type": "xsd:string"
+    },
+    "mitigation": {
+      "@id": "weaviate:mitigation",
+      "@type": "xsd:string"
+    },
+    "sinceVersion": {
+      "@id": "weaviate:sinceVersion",
+      "@type": "xsd:string"
+    },
+    "plannedRemovalVersion": {
+      "@id": "weaviate:plannedRemovalVersion",
+      "@type": "xsd:string"
+    },
+    "removedIn": {
+      "@id": "weaviate:removedIn",
+      "@type": "xsd:string"
+    },
+    "removedTime": {
+      "@id": "weaviate:removedTime",
+      "@type": "xsd:dateTime"
+    },
+    "sinceTime": {
+      "@id": "weaviate:sinceTime",
+      "@type": "xsd:dateTime"
+    },
+    "locations": {
+      "@id": "weaviate:locations"
+    },
+    "AdditionalProperties": {
+      "@id": "weaviate:AdditionalProperties",
+      "@type": "@id"
+    },
+    "WhereFilterGeoRange": {
+      "@id": "weaviate:WhereFilterGeoRange",
+      "@type": "@id"
+    },
+    "geoCoordinates": {
+      "@id": "weaviate:geoCoordinates"
+    },
+    "distance": {
+      "@id": "weaviate:distance"
+    },
+    "UserTypeOutput": {
+      "@id": "weaviate:UserTypeOutput",
+      "@type": "@id"
+    },
+    "ReplicationReplicateReplicaRequest": {
+      "@id": "weaviate:ReplicationReplicateReplicaRequest",
+      "@type": "@id"
+    },
+    "BackupRestoreRequest": {
+      "@id": "weaviate:BackupRestoreRequest",
+      "@type": "@id"
+    },
+    "config": {
+      "@id": "weaviate:config"
+    },
+    "include": {
+      "@id": "weaviate:include"
+    },
+    "exclude": {
+      "@id": "weaviate:exclude"
+    },
+    "node_mapping": {
+      "@id": "weaviate:node_mapping"
+    },
+    "overwriteAlias": {
+      "@id": "weaviate:overwriteAlias",
+      "@type": "xsd:boolean"
+    },
+    "ClassificationMeta": {
+      "@id": "weaviate:ClassificationMeta",
+      "@type": "@id"
+    },
+    "started": {
+      "@id": "weaviate:started",
+      "@type": "xsd:dateTime"
+    },
+    "completed": {
+      "@id": "weaviate:completed",
+      "@type": "xsd:dateTime"
+    },
+    "count": {
+      "@id": "weaviate:count",
+      "@type": "xsd:integer"
+    },
+    "countSucceeded": {
+      "@id": "weaviate:countSucceeded",
+      "@type": "xsd:integer"
+    },
+    "countFailed": {
+      "@id": "weaviate:countFailed",
+      "@type": "xsd:integer"
+    },
+    "GraphQLError": {
+      "@id": "weaviate:GraphQLError",
+      "@type": "@id"
+    },
+    "message": {
+      "@id": "weaviate:message",
+      "@type": "xsd:string"
+    },
+    "RaftStatistics": {
+      "@id": "weaviate:RaftStatistics",
+      "@type": "@id"
+    },
+    "appliedIndex": {
+      "@id": "weaviate:appliedIndex",
+      "@type": "xsd:string"
+    },
+    "commitIndex": {
+      "@id": "weaviate:commitIndex",
+      "@type": "xsd:string"
+    },
+    "fsmPending": {
+      "@id": "weaviate:fsmPending",
+      "@type": "xsd:string"
+    },
+    "lastContact": {
+      "@id": "weaviate:lastContact",
+      "@type": "xsd:string"
+    },
+    "lastLogIndex": {
+      "@id": "weaviate:lastLogIndex",
+      "@type": "xsd:string"
+    },
+    "lastLogTerm": {
+      "@id": "weaviate:lastLogTerm",
+      "@type": "xsd:string"
+    },
+    "lastSnapshotIndex": {
+      "@id": "weaviate:lastSnapshotIndex",
+      "@type": "xsd:string"
+    },
+    "lastSnapshotTerm": {
+      "@id": "weaviate:lastSnapshotTerm",
+      "@type": "xsd:string"
+    },
+    "latestConfiguration": {
+      "@id": "weaviate:latestConfiguration"
+    },
+    "latestConfigurationIndex": {
+      "@id": "weaviate:latestConfigurationIndex",
+      "@type": "xsd:string"
+    },
+    "numPeers": {
+      "@id": "weaviate:numPeers",
+      "@type": "xsd:string"
+    },
+    "protocolVersion": {
+      "@id": "weaviate:protocolVersion",
+      "@type": "xsd:string"
+    },
+    "protocolVersionMax": {
+      "@id": "weaviate:protocolVersionMax",
+      "@type": "xsd:string"
+    },
+    "protocolVersionMin": {
+      "@id": "weaviate:protocolVersionMin",
+      "@type": "xsd:string"
+    },
+    "snapshotVersionMax": {
+      "@id": "weaviate:snapshotVersionMax",
+      "@type": "xsd:string"
+    },
+    "snapshotVersionMin": {
+      "@id": "weaviate:snapshotVersionMin",
+      "@type": "xsd:string"
+    },
+    "term": {
+      "@id": "weaviate:term",
+      "@type": "xsd:string"
+    },
+    "NamespaceListResponse": {
+      "@id": "weaviate:NamespaceListResponse",
+      "@type": "@id"
+    },
+    "Alias": {
+      "@id": "weaviate:Alias",
+      "@type": "@id"
+    },
+    "alias": {
+      "@id": "weaviate:alias",
+      "@type": "xsd:string"
+    },
+    "Class": {
+      "@id": "weaviate:Class",
+      "@type": "@id"
+    },
+    "vectorConfig": {
+      "@id": "weaviate:vectorConfig"
+    },
+    "shardingConfig": {
+      "@id": "weaviate:shardingConfig"
+    },
+    "replicationConfig": {
+      "@id": "weaviate:replicationConfig"
+    },
+    "invertedIndexConfig": {
+      "@id": "weaviate:invertedIndexConfig"
+    },
+    "multiTenancyConfig": {
+      "@id": "weaviate:multiTenancyConfig"
+    },
+    "objectTtlConfig": {
+      "@id": "weaviate:objectTtlConfig"
+    },
+    "moduleConfig": {
+      "@id": "weaviate:moduleConfig"
+    },
+    "properties": {
+      "@id": "weaviate:properties"
+    },
+    "BM25Config": {
+      "@id": "weaviate:BM25Config",
+      "@type": "@id"
+    },
+    "k1": {
+      "@id": "weaviate:k1",
+      "@type": "xsd:float"
+    },
+    "b": {
+      "@id": "weaviate:b",
+      "@type": "xsd:float"
+    },
+    "GraphQLResponses": {
+      "@id": "weaviate:GraphQLResponses",
+      "@type": "@id"
+    },
+    "Schema": {
+      "@id": "weaviate:Schema",
+      "@type": "@id"
+    },
+    "classes": {
+      "@id": "weaviate:classes"
+    },
+    "maintainer": {
+      "@id": "weaviate:maintainer",
+      "@type": "xsd:string"
+    },
+    "Classification": {
+      "@id": "weaviate:Classification",
+      "@type": "@id"
+    },
+    "classifyProperties": {
+      "@id": "weaviate:classifyProperties"
+    },
+    "basedOnProperties": {
+      "@id": "weaviate:basedOnProperties"
+    },
+    "meta": {
+      "@id": "weaviate:meta"
+    },
+    "settings": {
+      "@id": "weaviate:settings"
+    },
+    "error": {
+      "@id": "weaviate:error",
+      "@type": "xsd:string"
+    },
+    "filters": {
+      "@id": "weaviate:filters"
+    },
+    "Object": {
+      "@id": "weaviate:Object",
+      "@type": "@id"
+    },
+    "vectorWeights": {
+      "@id": "weaviate:vectorWeights"
+    },
+    "creationTimeUnix": {
+      "@id": "weaviate:creationTimeUnix",
+      "@type": "xsd:long"
+    },
+    "lastUpdateTimeUnix": {
+      "@id": "weaviate:lastUpdateTimeUnix",
+      "@type": "xsd:long"
+    },
+    "vector": {
+      "@id": "weaviate:vector"
+    },
+    "vectors": {
+      "@id": "weaviate:vectors"
+    },
+    "tenant": {
+      "@id": "weaviate:tenant",
+      "@type": "xsd:string"
+    },
+    "additional": {
+      "@id": "weaviate:additional"
+    },
+    "RolesListResponse": {
+      "@id": "weaviate:RolesListResponse",
+      "@type": "@id"
+    },
+    "MultipleRef": {
+      "@id": "weaviate:MultipleRef",
+      "@type": "@id"
+    },
+    "BatchDelete": {
+      "@id": "weaviate:BatchDelete",
+      "@type": "@id"
+    },
+    "match": {
+      "@id": "weaviate:match"
+    },
+    "output": {
+      "@id": "weaviate:output",
+      "@type": "xsd:string"
+    },
+    "deletionTimeUnixMilli": {
+      "@id": "weaviate:deletionTimeUnixMilli",
+      "@type": "xsd:long"
+    },
+    "dryRun": {
+      "@id": "weaviate:dryRun",
+      "@type": "xsd:boolean"
+    },
+    "DistributedTasks": {
+      "@id": "weaviate:DistributedTasks",
+      "@type": "@id"
+    },
+    "ClusterStatisticsResponse": {
+      "@id": "weaviate:ClusterStatisticsResponse",
+      "@type": "@id"
+    },
+    "statistics": {
+      "@id": "weaviate:statistics"
+    },
+    "synchronized": {
+      "@id": "weaviate:synchronized",
+      "@type": "xsd:boolean"
+    },
+    "ReferenceMetaClassification": {
+      "@id": "weaviate:ReferenceMetaClassification",
+      "@type": "@id"
+    },
+    "overallCount": {
+      "@id": "weaviate:overallCount",
+      "@type": "xsd:float"
+    },
+    "winningCount": {
+      "@id": "weaviate:winningCount",
+      "@type": "xsd:float"
+    },
+    "losingCount": {
+      "@id": "weaviate:losingCount",
+      "@type": "xsd:float"
+    },
+    "closestOverallDistance": {
+      "@id": "weaviate:closestOverallDistance",
+      "@type": "xsd:float"
+    },
+    "winningDistance": {
+      "@id": "weaviate:winningDistance",
+      "@type": "xsd:float"
+    },
+    "meanWinningDistance": {
+      "@id": "weaviate:meanWinningDistance",
+      "@type": "xsd:float"
+    },
+    "closestWinningDistance": {
+      "@id": "weaviate:closestWinningDistance",
+      "@type": "xsd:float"
+    },
+    "closestLosingDistance": {
+      "@id": "weaviate:closestLosingDistance",
+      "@type": "xsd:float"
+    },
+    "losingDistance": {
+      "@id": "weaviate:losingDistance",
+      "@type": "xsd:float"
+    },
+    "meanLosingDistance": {
+      "@id": "weaviate:meanLosingDistance",
+      "@type": "xsd:float"
+    },
+    "ShardProgress": {
+      "@id": "weaviate:ShardProgress",
+      "@type": "@id"
+    },
+    "objectsExported": {
+      "@id": "weaviate:objectsExported",
+      "@type": "xsd:long"
+    },
+    "skipReason": {
+      "@id": "weaviate:skipReason",
+      "@type": "xsd:string"
+    },
+    "BackupConfig": {
+      "@id": "weaviate:BackupConfig",
+      "@type": "@id"
+    },
+    "ChunkSize": {
+      "@id": "weaviate:ChunkSize",
+      "@type": "xsd:integer"
+    },
+    "CompressionLevel": {
+      "@id": "weaviate:CompressionLevel",
+      "@type": "xsd:string"
+    },
+    "ReplicationReplicateForceDeleteRequest": {
+      "@id": "weaviate:ReplicationReplicateForceDeleteRequest",
+      "@type": "@id"
+    },
+    "node": {
+      "@id": "weaviate:node",
+      "@type": "xsd:string"
+    },
+    "UserTypeInput": {
+      "@id": "weaviate:UserTypeInput",
+      "@type": "@id"
+    },
+    "Property": {
+      "@id": "weaviate:Property",
+      "@type": "@id"
+    },
+    "indexInverted": {
+      "@id": "weaviate:indexInverted",
+      "@type": "xsd:boolean"
+    },
+    "disableDuplicatedReferences": {
+      "@id": "weaviate:disableDuplicatedReferences",
+      "@type": "xsd:boolean"
+    },
+    "ExportCreateRequest": {
+      "@id": "weaviate:ExportCreateRequest",
+      "@type": "@id"
+    },
+    "file_format": {
+      "@id": "weaviate:file_format",
+      "@type": "xsd:string"
+    },
+    "ReplicationReplicateReplicaResponse": {
+      "@id": "weaviate:ReplicationReplicateReplicaResponse",
+      "@type": "@id"
+    },
+    "JsonObject": {
+      "@id": "weaviate:JsonObject",
+      "@type": "@id"
+    },
+    "AliasResponse": {
+      "@id": "weaviate:AliasResponse",
+      "@type": "@id"
+    },
+    "aliases": {
+      "@id": "weaviate:aliases"
+    },
+    "TextAnalyzerConfig": {
+      "@id": "weaviate:TextAnalyzerConfig",
+      "@type": "@id"
+    },
+    "asciiFold": {
+      "@id": "weaviate:asciiFold",
+      "@type": "xsd:boolean"
+    },
+    "asciiFoldIgnore": {
+      "@id": "weaviate:asciiFoldIgnore"
+    },
+    "stopwordPreset": {
+      "@id": "weaviate:stopwordPreset",
+      "@type": "xsd:string"
+    },
+    "PeerUpdate": {
+      "@id": "weaviate:PeerUpdate",
+      "@type": "@id"
+    },
+    "uri": {
+      "@id": "weaviate:uri",
+      "@type": "xsd:anyURI"
+    },
+    "schemaHash": {
+      "@id": "weaviate:schemaHash",
+      "@type": "xsd:string"
+    },
+    "BackupCreateStatusResponse": {
+      "@id": "weaviate:BackupCreateStatusResponse",
+      "@type": "@id"
+    },
+    "backend": {
+      "@id": "weaviate:backend",
+      "@type": "xsd:string"
+    },
+    "startedAt": {
+      "@id": "weaviate:startedAt",
+      "@type": "xsd:dateTime"
+    },
+    "completedAt": {
+      "@id": "weaviate:completedAt",
+      "@type": "xsd:dateTime"
+    },
+    "size": {
+      "@id": "weaviate:size",
+      "@type": "xsd:float"
+    },
+    "DistributedTaskUnit": {
+      "@id": "weaviate:DistributedTaskUnit",
+      "@type": "@id"
+    },
+    "nodeId": {
+      "@id": "weaviate:nodeId",
+      "@type": "xsd:string"
+    },
+    "progress": {
+      "@id": "weaviate:progress",
+      "@type": "xsd:float"
+    },
+    "updatedAt": {
+      "@id": "weaviate:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "finishedAt": {
+      "@id": "weaviate:finishedAt",
+      "@type": "xsd:dateTime"
+    },
+    "NodesStatusResponse": {
+      "@id": "weaviate:NodesStatusResponse",
+      "@type": "@id"
+    },
+    "nodes": {
+      "@id": "weaviate:nodes"
+    },
+    "ShardStatusList": {
+      "@id": "weaviate:ShardStatusList",
+      "@type": "@id"
+    },
+    "DBUserInfo": {
+      "@id": "weaviate:DBUserInfo",
+      "@type": "@id"
+    },
+    "roles": {
+      "@id": "weaviate:roles"
+    },
+    "userId": {
+      "@id": "weaviate:userId",
+      "@type": "xsd:string"
+    },
+    "dbUserType": {
+      "@id": "weaviate:dbUserType",
+      "@type": "xsd:string"
+    },
+    "active": {
+      "@id": "weaviate:active",
+      "@type": "xsd:boolean"
+    },
+    "createdAt": {
+      "@id": "weaviate:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "apiKeyFirstLetters": {
+      "@id": "weaviate:apiKeyFirstLetters",
+      "@type": "xsd:string"
+    },
+    "lastUsedAt": {
+      "@id": "weaviate:lastUsedAt",
+      "@type": "xsd:dateTime"
+    },
+    "namespace": {
+      "@id": "weaviate:namespace",
+      "@type": "xsd:string"
+    },
+    "ObjectsGetResponse": {
+      "@id": "weaviate:ObjectsGetResponse",
+      "@type": "@id"
+    },
+    "ExportStatusResponse": {
+      "@id": "weaviate:ExportStatusResponse",
+      "@type": "@id"
+    },
+    "tookInMs": {
+      "@id": "weaviate:tookInMs",
+      "@type": "xsd:long"
+    },
+    "shardStatus": {
+      "@id": "weaviate:shardStatus"
+    },
+    "ReplicationShardingStateResponse": {
+      "@id": "weaviate:ReplicationShardingStateResponse",
+      "@type": "@id"
+    },
+    "shardingState": {
+      "@id": "weaviate:shardingState"
+    },
+    "BackupCreateRequest": {
+      "@id": "weaviate:BackupCreateRequest",
+      "@type": "@id"
+    },
+    "incremental_base_backup_id": {
+      "@id": "weaviate:incremental_base_backup_id",
+      "@type": "xsd:string"
+    },
+    "NodeShardStatus": {
+      "@id": "weaviate:NodeShardStatus",
+      "@type": "@id"
+    },
+    "objectCount": {
+      "@id": "weaviate:objectCount",
+      "@type": "xsd:float"
+    },
+    "vectorIndexingStatus": {
+      "@id": "weaviate:vectorIndexingStatus",
+      "@type": "xsd:string"
+    },
+    "compressed": {
+      "@id": "weaviate:compressed",
+      "@type": "xsd:boolean"
+    },
+    "vectorQueueLength": {
+      "@id": "weaviate:vectorQueueLength",
+      "@type": "xsd:float"
+    },
+    "loaded": {
+      "@id": "weaviate:loaded",
+      "@type": "xsd:boolean"
+    },
+    "asyncReplicationStatus": {
+      "@id": "weaviate:asyncReplicationStatus"
+    },
+    "numberOfReplicas": {
+      "@id": "weaviate:numberOfReplicas",
+      "@type": "xsd:long"
+    },
+    "replicationFactor": {
+      "@id": "weaviate:replicationFactor",
+      "@type": "xsd:long"
+    },
+    "BatchDeleteResponse": {
+      "@id": "weaviate:BatchDeleteResponse",
+      "@type": "@id"
+    },
+    "results": {
+      "@id": "weaviate:results"
+    },
+    "Vector": {
+      "@id": "weaviate:Vector",
+      "@type": "@id"
+    },
+    "ReplicationConfig": {
+      "@id": "weaviate:ReplicationConfig",
+      "@type": "@id"
+    },
+    "factor": {
+      "@id": "weaviate:factor",
+      "@type": "xsd:integer"
+    },
+    "asyncEnabled": {
+      "@id": "weaviate:asyncEnabled",
+      "@type": "xsd:boolean"
+    },
+    "asyncConfig": {
+      "@id": "weaviate:asyncConfig"
+    },
+    "deletionStrategy": {
+      "@id": "weaviate:deletionStrategy",
+      "@type": "xsd:string"
+    },
+    "ErrorResponse": {
+      "@id": "weaviate:ErrorResponse",
+      "@type": "@id"
+    },
+    "Permission": {
+      "@id": "weaviate:Permission",
+      "@type": "@id"
+    },
+    "backups": {
+      "@id": "weaviate:backups"
+    },
+    "data": {
+      "@id": "weaviate:data"
+    },
+    "users": {
+      "@id": "weaviate:users"
+    },
+    "groups": {
+      "@id": "weaviate:groups"
+    },
+    "tenants": {
+      "@id": "weaviate:tenants"
+    },
+    "collections": {
+      "@id": "weaviate:collections"
+    },
+    "replicate": {
+      "@id": "weaviate:replicate"
+    },
+    "namespaces": {
+      "@id": "weaviate:namespaces"
+    },
+    "action": {
+      "@id": "weaviate:action",
+      "@type": "xsd:string"
+    },
+    "MultiTenancyConfig": {
+      "@id": "weaviate:MultiTenancyConfig",
+      "@type": "@id"
+    },
+    "enabled": {
+      "@id": "weaviate:enabled",
+      "@type": "xsd:boolean"
+    },
+    "autoTenantCreation": {
+      "@id": "weaviate:autoTenantCreation",
+      "@type": "xsd:boolean"
+    },
+    "autoTenantActivation": {
+      "@id": "weaviate:autoTenantActivation",
+      "@type": "xsd:boolean"
+    },
+    "Namespace": {
+      "@id": "weaviate:Namespace",
+      "@type": "@id"
+    },
+    "ReplicationScalePlan": {
+      "@id": "weaviate:ReplicationScalePlan",
+      "@type": "@id"
+    },
+    "planId": {
+      "@id": "weaviate:planId",
+      "@type": "xsd:string"
+    },
+    "shardScaleActions": {
+      "@id": "weaviate:shardScaleActions"
+    },
+    "Meta": {
+      "@id": "weaviate:Meta",
+      "@type": "@id"
+    },
+    "hostname": {
+      "@id": "weaviate:hostname",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "weaviate:version",
+      "@type": "xsd:string"
+    },
+    "modules": {
+      "@id": "weaviate:modules"
+    },
+    "grpcMaxMessageSize": {
+      "@id": "weaviate:grpcMaxMessageSize",
+      "@type": "xsd:integer"
+    },
+    "BackupRestoreStatusResponse": {
+      "@id": "weaviate:BackupRestoreStatusResponse",
+      "@type": "@id"
+    },
+    "C11yExtension": {
+      "@id": "weaviate:C11yExtension",
+      "@type": "@id"
+    },
+    "concept": {
+      "@id": "weaviate:concept",
+      "@type": "xsd:string"
+    },
+    "definition": {
+      "@id": "weaviate:definition",
+      "@type": "xsd:string"
+    },
+    "weight": {
+      "@id": "weaviate:weight",
+      "@type": "xsd:float"
+    },
+    "Link": {
+      "@id": "weaviate:Link",
+      "@type": "@id"
+    },
+    "rel": {
+      "@id": "weaviate:rel",
+      "@type": "xsd:string"
+    },
+    "documentationHref": {
+      "@id": "weaviate:documentationHref",
+      "@type": "xsd:string"
+    },
+    "ReplicationShardReplicas": {
+      "@id": "weaviate:ReplicationShardReplicas",
+      "@type": "@id"
+    },
+    "replicas": {
+      "@id": "weaviate:replicas"
+    },
+    "ReplicationScaleApplyResponse": {
+      "@id": "weaviate:ReplicationScaleApplyResponse",
+      "@type": "@id"
+    },
+    "operationIds": {
+      "@id": "weaviate:operationIds"
+    },
+    "UserApiKey": {
+      "@id": "weaviate:UserApiKey",
+      "@type": "@id"
+    },
+    "apikey": {
+      "@id": "weaviate:apikey",
+      "@type": "xsd:string"
+    },
+    "GraphQLQuery": {
+      "@id": "weaviate:GraphQLQuery",
+      "@type": "@id"
+    },
+    "operationName": {
+      "@id": "weaviate:operationName",
+      "@type": "xsd:string"
+    },
+    "variables": {
+      "@id": "weaviate:variables"
+    },
+    "GraphQLQueries": {
+      "@id": "weaviate:GraphQLQueries",
+      "@type": "@id"
+    },
+    "BackupListResponse": {
+      "@id": "weaviate:BackupListResponse",
+      "@type": "@id"
+    },
+    "StopwordConfig": {
+      "@id": "weaviate:StopwordConfig",
+      "@type": "@id"
+    },
+    "preset": {
+      "@id": "weaviate:preset",
+      "@type": "xsd:string"
+    },
+    "additions": {
+      "@id": "weaviate:additions"
+    },
+    "removals": {
+      "@id": "weaviate:removals"
+    },
+    "BackupRestoreResponse": {
+      "@id": "weaviate:BackupRestoreResponse",
+      "@type": "@id"
+    },
+    "ShardStatus": {
+      "@id": "weaviate:ShardStatus",
+      "@type": "@id"
+    },
+    "GroupType": {
+      "@id": "weaviate:GroupType",
+      "@type": "@id"
+    },
+    "BatchReference": {
+      "@id": "weaviate:BatchReference",
+      "@type": "@id"
+    },
+    "from": {
+      "@id": "weaviate:from",
+      "@type": "xsd:anyURI"
+    },
+    "to": {
+      "@id": "weaviate:to",
+      "@type": "xsd:anyURI"
+    },
+    "UserOwnInfo": {
+      "@id": "weaviate:UserOwnInfo",
+      "@type": "@id"
+    },
+    "username": {
+      "@id": "weaviate:username",
+      "@type": "xsd:string"
+    },
+    "ObjectTtlConfig": {
+      "@id": "weaviate:ObjectTtlConfig",
+      "@type": "@id"
+    },
+    "defaultTtl": {
+      "@id": "weaviate:defaultTtl",
+      "@type": "xsd:integer"
+    },
+    "deleteOn": {
+      "@id": "weaviate:deleteOn",
+      "@type": "xsd:string"
+    },
+    "filterExpiredObjects": {
+      "@id": "weaviate:filterExpiredObjects",
+      "@type": "xsd:boolean"
+    },
+    "ObjectsListResponse": {
+      "@id": "weaviate:ObjectsListResponse",
+      "@type": "@id"
+    },
+    "objects": {
+      "@id": "weaviate:objects"
+    },
+    "deprecations": {
+      "@id": "weaviate:deprecations"
+    },
+    "totalResults": {
+      "@id": "weaviate:totalResults",
+      "@type": "xsd:long"
+    },
+    "TokenizeRequest": {
+      "@id": "weaviate:TokenizeRequest",
+      "@type": "@id"
+    },
+    "analyzerConfig": {
+      "@id": "weaviate:analyzerConfig"
+    },
+    "stopwords": {
+      "@id": "weaviate:stopwords"
+    },
+    "stopwordPresets": {
+      "@id": "weaviate:stopwordPresets"
+    },
+    "InvertedIndexConfig": {
+      "@id": "weaviate:InvertedIndexConfig",
+      "@type": "@id"
+    },
+    "cleanupIntervalSeconds": {
+      "@id": "weaviate:cleanupIntervalSeconds",
+      "@type": "xsd:float"
+    },
+    "bm25": {
+      "@id": "weaviate:bm25"
+    },
+    "indexTimestamps": {
+      "@id": "weaviate:indexTimestamps",
+      "@type": "xsd:boolean"
+    },
+    "indexNullState": {
+      "@id": "weaviate:indexNullState",
+      "@type": "xsd:boolean"
+    },
+    "indexPropertyLength": {
+      "@id": "weaviate:indexPropertyLength",
+      "@type": "xsd:boolean"
+    },
+    "usingBlockMaxWAND": {
+      "@id": "weaviate:usingBlockMaxWAND",
+      "@type": "xsd:boolean"
+    },
+    "tokenizerUserDict": {
+      "@id": "weaviate:tokenizerUserDict"
+    },
+    "NodeStatus": {
+      "@id": "weaviate:NodeStatus",
+      "@type": "@id"
+    },
+    "gitHash": {
+      "@id": "weaviate:gitHash",
+      "@type": "xsd:string"
+    },
+    "stats": {
+      "@id": "weaviate:stats"
+    },
+    "batchStats": {
+      "@id": "weaviate:batchStats"
+    },
+    "shards": {
+      "@id": "weaviate:shards"
+    },
+    "operationalMode": {
+      "@id": "weaviate:operationalMode",
+      "@type": "xsd:string"
+    },
+    "Vectors": {
+      "@id": "weaviate:Vectors",
+      "@type": "@id"
+    },
+    "GeoCoordinates": {
+      "@id": "weaviate:GeoCoordinates",
+      "@type": "@id"
+    },
+    "latitude": {
+      "@id": "weaviate:latitude",
+      "@type": "xsd:float"
+    },
+    "longitude": {
+      "@id": "weaviate:longitude",
+      "@type": "xsd:float"
+    },
+    "NodeStats": {
+      "@id": "weaviate:NodeStats",
+      "@type": "@id"
+    },
+    "shardCount": {
+      "@id": "weaviate:shardCount",
+      "@type": "xsd:float"
+    },
+    "ReplicationReplicateDetailsReplicaStatusError": {
+      "@id": "weaviate:ReplicationReplicateDetailsReplicaStatusError",
+      "@type": "@id"
+    },
+    "whenErroredUnixMs": {
+      "@id": "weaviate:whenErroredUnixMs",
+      "@type": "xsd:long"
+    },
+    "GraphQLResponse": {
+      "@id": "weaviate:GraphQLResponse",
+      "@type": "@id"
+    },
+    "BatchStats": {
+      "@id": "weaviate:BatchStats",
+      "@type": "@id"
+    },
+    "queueLength": {
+      "@id": "weaviate:queueLength",
+      "@type": "xsd:float"
+    },
+    "ratePerSecond": {
+      "@id": "weaviate:ratePerSecond",
+      "@type": "xsd:float"
+    },
+    "ReplicationShardingState": {
+      "@id": "weaviate:ReplicationShardingState",
+      "@type": "@id"
+    },
+    "C11yNearestNeighbors": {
+      "@id": "weaviate:C11yNearestNeighbors",
+      "@type": "@id"
+    },
+    "TokenizerUserDictConfig": {
+      "@id": "weaviate:TokenizerUserDictConfig",
+      "@type": "@id"
+    },
+    "tokenizer": {
+      "@id": "weaviate:tokenizer",
+      "@type": "xsd:string"
+    },
+    "replacements": {
+      "@id": "weaviate:replacements"
+    },
+    "ReplicationReplicateForceDeleteResponse": {
+      "@id": "weaviate:ReplicationReplicateForceDeleteResponse",
+      "@type": "@id"
+    },
+    "deleted": {
+      "@id": "weaviate:deleted"
+    },
+    "DistributedTask": {
+      "@id": "weaviate:DistributedTask",
+      "@type": "@id"
+    },
+    "finishedNodes": {
+      "@id": "weaviate:finishedNodes"
+    },
+    "payload": {
+      "@id": "weaviate:payload"
+    },
+    "units": {
+      "@id": "weaviate:units"
+    },
+    "ReplicationAsyncConfig": {
+      "@id": "weaviate:ReplicationAsyncConfig",
+      "@type": "@id"
+    },
+    "maxWorkers": {
+      "@id": "weaviate:maxWorkers",
+      "@type": "xsd:long"
+    },
+    "hashtreeHeight": {
+      "@id": "weaviate:hashtreeHeight",
+      "@type": "xsd:long"
+    },
+    "frequency": {
+      "@id": "weaviate:frequency",
+      "@type": "xsd:long"
+    },
+    "frequencyWhilePropagating": {
+      "@id": "weaviate:frequencyWhilePropagating",
+      "@type": "xsd:long"
+    },
+    "aliveNodesCheckingFrequency": {
+      "@id": "weaviate:aliveNodesCheckingFrequency",
+      "@type": "xsd:long"
+    },
+    "loggingFrequency": {
+      "@id": "weaviate:loggingFrequency",
+      "@type": "xsd:long"
+    },
+    "diffBatchSize": {
+      "@id": "weaviate:diffBatchSize",
+      "@type": "xsd:long"
+    },
+    "diffPerNodeTimeout": {
+      "@id": "weaviate:diffPerNodeTimeout",
+      "@type": "xsd:long"
+    },
+    "prePropagationTimeout": {
+      "@id": "weaviate:prePropagationTimeout",
+      "@type": "xsd:long"
+    },
+    "propagationTimeout": {
+      "@id": "weaviate:propagationTimeout",
+      "@type": "xsd:long"
+    },
+    "propagationLimit": {
+      "@id": "weaviate:propagationLimit",
+      "@type": "xsd:long"
+    },
+    "propagationDelay": {
+      "@id": "weaviate:propagationDelay",
+      "@type": "xsd:long"
+    },
+    "propagationConcurrency": {
+      "@id": "weaviate:propagationConcurrency",
+      "@type": "xsd:long"
+    },
+    "propagationBatchSize": {
+      "@id": "weaviate:propagationBatchSize",
+      "@type": "xsd:long"
+    },
+    "BackupCreateResponse": {
+      "@id": "weaviate:BackupCreateResponse",
+      "@type": "@id"
+    },
+    "bucket": {
+      "@id": "weaviate:bucket",
+      "@type": "xsd:string"
+    },
+    "Principal": {
+      "@id": "weaviate:Principal",
+      "@type": "@id"
+    },
+    "userType": {
+      "@id": "weaviate:userType"
+    },
+    "isGlobalOperator": {
+      "@id": "weaviate:isGlobalOperator",
+      "@type": "xsd:boolean"
+    },
+    "Role": {
+      "@id": "weaviate:Role",
+      "@type": "@id"
+    },
+    "permissions": {
+      "@id": "weaviate:permissions"
+    },
+    "ExportCreateResponse": {
+      "@id": "weaviate:ExportCreateResponse",
+      "@type": "@id"
+    },
+    "PhoneNumber": {
+      "@id": "weaviate:PhoneNumber",
+      "@type": "@id"
+    },
+    "input": {
+      "@id": "weaviate:input",
+      "@type": "xsd:string"
+    },
+    "internationalFormatted": {
+      "@id": "weaviate:internationalFormatted",
+      "@type": "xsd:string"
+    },
+    "defaultCountry": {
+      "@id": "weaviate:defaultCountry",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "weaviate:countryCode",
+      "@type": "xsd:float"
+    },
+    "national": {
+      "@id": "weaviate:national",
+      "@type": "xsd:float"
+    },
+    "nationalFormatted": {
+      "@id": "weaviate:nationalFormatted",
+      "@type": "xsd:string"
+    },
+    "valid": {
+      "@id": "weaviate:valid",
+      "@type": "xsd:boolean"
+    }
+  }
+}

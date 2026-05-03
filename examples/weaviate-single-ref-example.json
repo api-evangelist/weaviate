@@ -1,0 +1,11 @@
+{
+  "class": "https://example.com",
+  "schema": {
+    "id": "example-id"
+  },
+  "beacon": "https://example.com",
+  "href": "https://example.com",
+  "classification": {
+    "id": "example-id"
+  }
+}

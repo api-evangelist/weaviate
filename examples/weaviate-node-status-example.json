@@ -1,0 +1,18 @@
+{
+  "name": "example-lsvuuini",
+  "status": "HEALTHY",
+  "version": "example-jxgbylhq",
+  "gitHash": "example-fmyuqlpt",
+  "stats": {
+    "id": "example-id"
+  },
+  "batchStats": {
+    "id": "example-id"
+  },
+  "shards": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "operationalMode": "ReadWrite"
+}

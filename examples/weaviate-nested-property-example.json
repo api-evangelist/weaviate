@@ -1,0 +1,19 @@
+{
+  "dataType": [
+    "example-lfqxvpnj"
+  ],
+  "description": "example-csapzkup",
+  "name": "example-ewqimmof",
+  "indexFilterable": true,
+  "indexSearchable": true,
+  "indexRangeFilters": true,
+  "tokenization": "word",
+  "nestedProperties": [
+    {
+      "id": "example-id"
+    }
+  ],
+  "textAnalyzer": {
+    "id": "example-id"
+  }
+}

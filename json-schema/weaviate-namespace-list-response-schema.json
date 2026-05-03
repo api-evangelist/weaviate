@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-namespace-list-response-schema.json",
+  "title": "NamespaceListResponse",
+  "description": "Response object containing a list of namespaces.",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/Namespace"
+  }
+}

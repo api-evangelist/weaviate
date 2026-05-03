@@ -1,0 +1,17 @@
+{
+  "id": "example-onmcfpaq",
+  "version": 18,
+  "status": "example-uncgrjbt",
+  "startedAt": "2024-01-01T00:00:00Z",
+  "finishedAt": "2024-01-01T00:00:00Z",
+  "finishedNodes": [
+    "example-ibvegqpq"
+  ],
+  "error": "example-spaceegy",
+  "payload": {},
+  "units": [
+    {
+      "id": "example-id"
+    }
+  ]
+}

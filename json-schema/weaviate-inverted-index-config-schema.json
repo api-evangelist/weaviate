@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-inverted-index-config-schema.json",
+  "title": "InvertedIndexConfig",
+  "description": "Configure the inverted index built into Weaviate. See [Reference: Inverted index](https://docs.weaviate.io/weaviate/config-refs/indexing/inverted-index#inverted-index-parameters) for details.",
+  "type": "object",
+  "properties": {
+    "cleanupIntervalSeconds": {
+      "type": "number",
+      "format": "int",
+      "description": "Asynchronous index clean up happens every n seconds (default: 60)."
+    },
+    "bm25": {
+      "$ref": "#/components/schemas/BM25Config"
+    },
+    "stopwords": {
+      "$ref": "#/components/schemas/StopwordConfig"
+    },
+    "indexTimestamps": {
+      "type": "boolean",
+      "description": "Index each object by its internal timestamps (default: `false`)."
+    },
+    "indexNullState": {
+      "type": "boolean",
+      "description": "Index each object with the null state (default: `false`)."
+    },
+    "indexPropertyLength": {
+      "type": "boolean",
+      "description": "Index length of properties (default: `false`)."
+    },
+    "usingBlockMaxWAND": {
+      "type": "boolean",
+      "description": "Using BlockMax WAND for query execution (default: `false`, will be `true` for new collections created after 1.30)."
+    },
+    "tokenizerUserDict": {
+      "type": "array",
+      "description": "User-defined dictionary for tokenization.",
+      "items": {
+        "$ref": "#/components/schemas/TokenizerUserDictConfig"
+      }
+    },
+    "stopwordPresets": {
+      "type": "object",
+      "description": "User-defined named stopword lists. Each key is a preset name that can be referenced by a property's textAnalyzer.stopwordPreset field. The value is an array of stopword strings. Preset names must not be empty or whitespace-only; each list must contain at least one word; individual words must not be empty or whitespace-only.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

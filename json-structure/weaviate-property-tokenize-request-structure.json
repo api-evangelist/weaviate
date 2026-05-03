@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-property-tokenize-request-structure.json",
+  "title": "PropertyTokenizeRequest",
+  "description": "Request body for the property-specific tokenize endpoint.",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "str",
+      "description": "The text to tokenize using the property's configured tokenization."
+    }
+  }
+}

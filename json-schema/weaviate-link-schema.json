@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-link-schema.json",
+  "title": "Link",
+  "description": "Weaviate Link schema",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "description": "Target of the link."
+    },
+    "rel": {
+      "type": "string",
+      "description": "Relationship if both resources are related, e.g. 'next', 'previous', 'parent', etc."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human readable name of the resource group."
+    },
+    "documentationHref": {
+      "type": "string",
+      "description": "Weaviate documentation about this resource group."
+    }
+  }
+}

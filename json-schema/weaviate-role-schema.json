@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-role-schema.json",
+  "title": "Role",
+  "description": "Weaviate Role schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name (ID) of the role."
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Permission"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "permissions"
+  ]
+}

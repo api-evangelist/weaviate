@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-user-type-output-schema.json",
+  "title": "UserTypeOutput",
+  "description": "The type of the user. `db_user` users are created through the `users` API, `db_env_user` users are created through environment variables, and `oidc` users are managed by an external OIDC provider.",
+  "type": "string",
+  "enum": [
+    "db_user",
+    "db_env_user",
+    "oidc"
+  ]
+}

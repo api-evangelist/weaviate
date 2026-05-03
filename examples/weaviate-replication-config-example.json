@@ -1,0 +1,8 @@
+{
+  "factor": 53,
+  "asyncEnabled": true,
+  "asyncConfig": {
+    "id": "example-id"
+  },
+  "deletionStrategy": "NoAutomatedResolution"
+}

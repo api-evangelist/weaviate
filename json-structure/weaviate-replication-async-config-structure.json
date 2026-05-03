@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-async-config-structure.json",
+  "title": "ReplicationAsyncConfig",
+  "description": "Configuration for asynchronous replication.",
+  "type": "object",
+  "properties": {
+    "maxWorkers": {
+      "type": "int64",
+      "description": "Maximum number of async replication workers."
+    },
+    "hashtreeHeight": {
+      "type": "int64",
+      "description": "Height of the hashtree used for diffing."
+    },
+    "frequency": {
+      "type": "int64",
+      "description": "Base frequency in milliseconds at which async replication runs diff calculations."
+    },
+    "frequencyWhilePropagating": {
+      "type": "int64",
+      "description": "Frequency in milliseconds at which async replication runs while propagation is active."
+    },
+    "aliveNodesCheckingFrequency": {
+      "type": "int64",
+      "description": "Interval in milliseconds at which liveness of target nodes is checked."
+    },
+    "loggingFrequency": {
+      "type": "int64",
+      "description": "Interval in seconds at which async replication logs its status."
+    },
+    "diffBatchSize": {
+      "type": "int64",
+      "description": "Maximum number of object keys included in a single diff batch."
+    },
+    "diffPerNodeTimeout": {
+      "type": "int64",
+      "description": "Timeout in seconds for computing a diff against a single node."
+    },
+    "prePropagationTimeout": {
+      "type": "int64",
+      "description": "Overall timeout in seconds for the pre-propagation phase."
+    },
+    "propagationTimeout": {
+      "type": "int64",
+      "description": "Timeout in seconds for propagating batch of changes to a node."
+    },
+    "propagationLimit": {
+      "type": "int64",
+      "description": "Maximum number of objects to propagate in a single async replication run."
+    },
+    "propagationDelay": {
+      "type": "int64",
+      "description": "Delay in milliseconds before newly added or updated objects are propagated."
+    },
+    "propagationConcurrency": {
+      "type": "int64",
+      "description": "Maximum number of concurrent propagation workers."
+    },
+    "propagationBatchSize": {
+      "type": "int64",
+      "description": "Number of objects to include in a single propagation batch."
+    }
+  }
+}

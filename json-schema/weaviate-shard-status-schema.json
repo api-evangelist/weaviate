@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-shard-status-schema.json",
+  "title": "ShardStatus",
+  "description": "The status of a single shard",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Status of the shard"
+    }
+  }
+}

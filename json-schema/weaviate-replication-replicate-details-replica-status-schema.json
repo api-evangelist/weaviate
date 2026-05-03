@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-replication-replicate-details-replica-status-schema.json",
+  "title": "ReplicationReplicateDetailsReplicaStatus",
+  "description": "Represents the current or historical status of a shard replica involved in a replication operation, including its operational state and any associated errors.",
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "description": "The current operational state of the replica during the replication process.",
+      "enum": [
+        "REGISTERED",
+        "HYDRATING",
+        "FINALIZING",
+        "DEHYDRATING",
+        "READY",
+        "CANCELLED"
+      ]
+    },
+    "whenStartedUnixMs": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The UNIX timestamp in ms when this state was first entered. This is an approximate time and so should not be used for precise timing."
+    },
+    "errors": {
+      "type": "array",
+      "description": "A list of error messages encountered by this replica during the replication operation, if any.",
+      "items": {
+        "$ref": "#/components/schemas/ReplicationReplicateDetailsReplicaStatusError"
+      }
+    }
+  }
+}

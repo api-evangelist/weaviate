@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-batch-delete-response-structure.json",
+  "title": "BatchDeleteResponse",
+  "description": "Delete Objects response.",
+  "type": "object",
+  "properties": {
+    "match": {
+      "type": "map",
+      "description": "Outlines how to find the objects to be deleted."
+    },
+    "output": {
+      "type": "str",
+      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+    },
+    "deletionTimeUnixMilli": {
+      "type": "int64",
+      "description": "Timestamp of deletion in milliseconds since epoch UTC."
+    },
+    "dryRun": {
+      "type": "bool",
+      "description": "If true, objects will not be deleted yet, but merely listed. Defaults to false."
+    },
+    "results": {
+      "type": "map"
+    }
+  }
+}

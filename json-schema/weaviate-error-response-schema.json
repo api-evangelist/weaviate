@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-error-response-schema.json",
+  "title": "ErrorResponse",
+  "description": "An error response returned by Weaviate endpoints.",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

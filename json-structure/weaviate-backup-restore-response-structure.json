@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-backup-restore-response-structure.json",
+  "title": "BackupRestoreResponse",
+  "description": "The definition of a backup restore response body.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "str",
+      "description": "The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+    },
+    "classes": {
+      "type": "array",
+      "description": "The list of collections (classes) for which the backup restoration process was started."
+    },
+    "backend": {
+      "type": "str",
+      "description": "Backup backend name e.g. filesystem, gcs, s3."
+    },
+    "path": {
+      "type": "str",
+      "description": "Destination path of backup files valid for the selected backend."
+    },
+    "error": {
+      "type": "str",
+      "description": "Error message if backup restoration failed."
+    },
+    "status": {
+      "type": "str",
+      "description": "Phase of backup restoration process."
+    }
+  }
+}

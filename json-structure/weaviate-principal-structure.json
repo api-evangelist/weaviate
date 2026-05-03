@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-principal-structure.json",
+  "title": "Principal",
+  "description": "Weaviate Principal schema",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "str",
+      "description": "The username that was extracted either from the authentication information"
+    },
+    "groups": {
+      "type": "array"
+    },
+    "userType": {
+      "type": "#UserTypeInput"
+    },
+    "namespace": {
+      "type": "str",
+      "description": "The namespace this principal is bound to. Empty for global principals (e.g. static API keys)."
+    },
+    "isGlobalOperator": {
+      "type": "bool",
+      "description": "True for principals that operate across all namespaces (e.g. static API keys). Authoritative marker for operator-level principals; do not infer from an empty namespace."
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "roles": [
+    "example-bsjszhod"
+  ],
+  "userId": "example-mnagzijo",
+  "dbUserType": "db_user",
+  "active": true,
+  "createdAt": "2024-01-01T00:00:00Z",
+  "apiKeyFirstLetters": "example-l",
+  "lastUsedAt": "2024-01-01T00:00:00Z",
+  "namespace": "example-ojywcvlu"
+}

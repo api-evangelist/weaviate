@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-tenant-structure.json",
+  "title": "Tenant",
+  "description": "Attributes representing a single tenant within Weaviate.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "str",
+      "description": "The name of the tenant (required)."
+    },
+    "activityStatus": {
+      "type": "str",
+      "description": "The activity status of the tenant, which determines if it is queryable and where its data is stored.<br/><br/><b>Available Statuses:</b><br/>- `ACTIVE`: The tenant is fully operational and ready for queries. Data is stored on local, hot storage.<br/>- `INACTIVE`: The tenant is not queryable. Data is stored locally.<br/>- `OFFLOADED`: The tenant is inactive and its data is stored in a remote cloud backend.<br/><br/><b>Usage Rules:</b><br/>- <b>On Create:</b> This field is optional and defaults to `ACTIVE`. Allowed values are `ACTIVE` and `INACTIVE`.<br/>- <b>On Update:</b> This field is required. Allowed values are `ACTIVE`, `INACTIVE`, and `OFFLOADED`.<br/><br/><b>Read-Only Statuses:</b><br/>The following statuses are set by the server and indicate a tenant is transitioning between states:<br/>- `OFFLOADING`<br/>- `ONLOADING`<br/><br/><b>Note on Deprecated Names:</b><br/>For backward compatibility, deprecated names are still accepted and are mapped to their modern equivalents: `HOT` (now `ACTIVE`), `COLD` (now `INACTIVE`), `FROZEN` (now `OFFLOADED`), `FREEZING` (now `OFFLOADING`), `UNFREEZING` (now `ONLOADING`)."
+    }
+  }
+}

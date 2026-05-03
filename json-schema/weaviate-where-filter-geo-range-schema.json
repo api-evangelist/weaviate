@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-where-filter-geo-range-schema.json",
+  "title": "WhereFilterGeoRange",
+  "description": "Filter within a distance of a georange.",
+  "type": "object",
+  "properties": {
+    "geoCoordinates": {
+      "$ref": "#/components/schemas/GeoCoordinates"
+    },
+    "distance": {
+      "type": "object",
+      "properties": {
+        "max": {
+          "type": "number",
+          "format": "float64"
+        }
+      }
+    }
+  }
+}

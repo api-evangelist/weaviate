@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-property-structure.json",
+  "title": "Property",
+  "description": "Weaviate Property schema",
+  "type": "object",
+  "properties": {
+    "dataType": {
+      "type": "array",
+      "description": "Data type of the property (required). If it starts with a capital (for example Person), may be a reference to another type."
+    },
+    "description": {
+      "type": "str",
+      "description": "Description of the property."
+    },
+    "moduleConfig": {
+      "type": "map",
+      "description": "Configuration specific to modules in a collection context."
+    },
+    "name": {
+      "type": "str",
+      "description": "The name of the property (required). Multiple words should be concatenated in camelCase, e.g. `nameOfAuthor`."
+    },
+    "indexInverted": {
+      "type": "bool",
+      "description": "(Deprecated). Whether to include this property in the inverted index. If `false`, this property cannot be used in `where` filters, `bm25` or `hybrid` search. <br/><br/>Unrelated to vectorization behavior (deprecated as of v1.19; use indexFilterable or/and indexSearchable instead)"
+    },
+    "indexFilterable": {
+      "type": "bool",
+      "description": "Whether to include this property in the filterable, Roaring Bitmap index. If `false`, this property cannot be used in `where` filters. <br/><br/>Note: Unrelated to vectorization behavior."
+    },
+    "indexSearchable": {
+      "type": "bool",
+      "description": "Optional. Should this property be indexed in the inverted index. Defaults to true. Applicable only to properties of data type text and text[]. If you choose false, you will not be able to use this property in bm25 or hybrid search. This property has no affect on vectorization decisions done by modules"
+    },
+    "indexRangeFilters": {
+      "type": "bool",
+      "description": "Whether to include this property in the filterable, range-based Roaring Bitmap index. Provides better performance for range queries compared to filterable index in large datasets. Applicable only to properties of data type int, number, date."
+    },
+    "tokenization": {
+      "type": "str",
+      "description": "Determines how a property is indexed. This setting applies to `text` and `text[]` data types. The following tokenization methods are available:<br/><br/>- `word` (default): Splits the text on any non-alphanumeric characters and lowercases the tokens.<br/>- `lowercase`: Splits the text on whitespace and lowercases the tokens.<br/>- `whitespace`: Splits the text on whitespace. This tokenization is case-sensitive.<br/>- `field`: Indexes the entire property value as a single token after trimming whitespace.<br/>- `trigram`: Splits the property into rolling trigrams (three-character sequences).<br/>- `gse`: Uses the `gse` tokenizer, suitable for Chinese language text. [See `gse` docs](https://pkg.go.dev/github.com/go-ego/gse#section-readme).<br/>- `kagome_ja`: Uses the `Kagome` tokenizer with a Japanese (IPA) dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/>- `kagome_kr`: Uses the `Kagome` tokenizer with a Korean dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/><br/>See [Reference: Tokenization](https://docs.weaviate.io/weaviate/config-refs/collections#tokenization) for details."
+    },
+    "nestedProperties": {
+      "type": "array",
+      "description": "The properties of the nested object(s). Applies to object and object[] data types."
+    },
+    "disableDuplicatedReferences": {
+      "type": "bool",
+      "description": "If set to false, allows multiple references to the same target object within this property. Setting it to true will enforce uniqueness of references within this property. By default, this is set to true."
+    },
+    "textAnalyzer": {
+      "type": "#TextAnalyzerConfig"
+    }
+  }
+}

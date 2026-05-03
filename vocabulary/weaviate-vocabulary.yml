@@ -1,0 +1,282 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Weaviate"
+  description: "Vocabulary for Weaviate vector database covering objects, schema, GraphQL search, backups, authentication, and cluster management."
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+operational:
+  apis:
+    - name: "Weaviate REST API"
+      namespace: weaviate
+      version: "1.38.0"
+      baseUrl: http://localhost:8080
+      status: active
+
+  resources:
+    - name: objects
+      api: weaviate
+      description: "Vector objects stored in Weaviate collections"
+      actions: [list, create, get, update, delete, patch, validate]
+    - name: schema
+      api: weaviate
+      description: "Collection class schema definitions"
+      actions: [get, create, update, delete]
+    - name: graphql
+      api: weaviate
+      description: "GraphQL vector search interface"
+      actions: [query]
+    - name: batch
+      api: weaviate
+      description: "Batch operations for bulk data import"
+      actions: [create]
+    - name: backups
+      api: weaviate
+      description: "Data backup and restore operations"
+      actions: [create, list, restore, cancel]
+    - name: nodes
+      api: weaviate
+      description: "Cluster node information"
+      actions: [get]
+    - name: authz-roles
+      api: weaviate
+      description: "Authorization roles and permissions"
+      actions: [list, create, delete, assign, revoke]
+    - name: users
+      api: weaviate
+      description: "User management and API key rotation"
+      actions: [list, create, delete, activate, deactivate]
+    - name: tenants
+      api: weaviate
+      description: "Multi-tenancy tenant management"
+      actions: [create, get, update, delete]
+    - name: aliases
+      api: weaviate
+      description: "Collection alias management"
+      actions: [create, get, update, delete]
+    - name: replication
+      api: weaviate
+      description: "Data replication management"
+      actions: [create, delete, cancel, list]
+    - name: cluster
+      api: weaviate
+      description: "Cluster-wide statistics and management"
+      actions: [get]
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: update
+      httpMethod: PUT
+      pattern: write
+    - name: patch
+      httpMethod: PATCH
+      pattern: write
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+    - name: query
+      httpMethod: POST
+      pattern: read
+    - name: validate
+      httpMethod: POST
+      pattern: read
+    - name: restore
+      httpMethod: POST
+      pattern: write
+    - name: cancel
+      httpMethod: DELETE
+      pattern: destructive
+    - name: assign
+      httpMethod: POST
+      pattern: write
+    - name: revoke
+      httpMethod: POST
+      pattern: write
+    - name: activate
+      httpMethod: POST
+      pattern: write
+    - name: deactivate
+      httpMethod: POST
+      pattern: write
+
+  schemas:
+    core:
+      - name: Object
+        description: "A Weaviate vector object with properties and optional vector"
+        keyProperties: [id, class, properties, vector, creationTimeUnix]
+      - name: WeaviateClass
+        description: "Collection class definition in the schema"
+        keyProperties: [class, description, properties, vectorIndexType, vectorizer]
+      - name: Property
+        description: "A property definition within a collection class"
+        keyProperties: [name, dataType, description, tokenization]
+      - name: GraphQLResponse
+        description: "GraphQL query response"
+        keyProperties: [data, errors]
+      - name: BackupCreateResponse
+        description: "Backup creation response"
+        keyProperties: [id, backend, status, path]
+      - name: NodeStatus
+        description: "Cluster node status information"
+        keyProperties: [name, status, version, shards]
+      - name: Role
+        description: "Authorization role with permissions"
+        keyProperties: [name, permissions]
+
+  parameters:
+    identifiers:
+      - name: id
+        type: string
+        description: "Object UUID"
+      - name: className
+        type: string
+        description: "Collection class name"
+      - name: backend
+        type: string
+        description: "Storage backend for backups (s3, gcs, filesystem, azure)"
+    pagination:
+      - name: limit
+        type: integer
+        description: "Maximum number of results to return"
+      - name: offset
+        type: integer
+        description: "Pagination offset"
+      - name: after
+        type: string
+        description: "UUID-based cursor for keyset pagination"
+    filtering:
+      - name: class
+        type: string
+        description: "Filter objects by collection class name"
+      - name: include
+        type: string
+        description: "Include additional data (classification, interpretation, nearestNeighbors)"
+      - name: consistency_level
+        type: string
+        description: "Read consistency level (ONE, QUORUM, ALL)"
+
+  enums:
+    consistency-level:
+      - ONE
+      - QUORUM
+      - ALL
+    vector-index-type:
+      - hnsw
+      - flat
+      - dynamic
+    node-status:
+      - HEALTHY
+      - UNHEALTHY
+      - UNAVAILABLE
+    backup-status:
+      - STARTED
+      - TRANSFERRING
+      - TRANSFERRED
+      - SUCCESS
+      - FAILED
+      - CANCELED
+    tenant-status:
+      - HOT
+      - COLD
+      - FROZEN
+
+  authentication:
+    - type: apiKey
+      in: header
+      name: Authorization
+      description: "API key authentication"
+    - type: bearer
+      scheme: bearer
+      bearerFormat: JWT
+      description: "OIDC/JWT bearer authentication"
+
+capability:
+  workflows:
+    - name: Vector Database
+      file: capabilities/vector-database.yaml
+      description: "Weaviate vector database management including objects, schema, vector search, and cluster operations"
+      apisUsed: [weaviate]
+      toolCount: 12
+      personas: [AI Engineer, Platform Operator, Data Engineer]
+      domains: [Vector Storage, Schema Management, Vector Search, Cluster Operations]
+
+  personas:
+    - id: ai-engineer
+      name: AI Engineer
+      description: "Builds AI applications using Weaviate for semantic search and vector storage"
+      workflows: [Vector Database]
+    - id: platform-operator
+      name: Platform Operator
+      description: "Manages Weaviate cluster infrastructure, backups, and authentication"
+      workflows: [Vector Database]
+    - id: data-engineer
+      name: Data Engineer
+      description: "Imports and manages large datasets in Weaviate using batch operations"
+      workflows: [Vector Database]
+
+  domains:
+    - name: Vector Storage
+      description: "Storing and retrieving vector objects with embeddings"
+      resources: [objects, batch]
+    - name: Schema Management
+      description: "Defining and managing collection classes and their properties"
+      resources: [schema, tenants, aliases]
+    - name: Vector Search
+      description: "Semantic and vector similarity search via GraphQL"
+      resources: [graphql]
+    - name: Cluster Operations
+      description: "Managing Weaviate cluster nodes, backups, and replication"
+      resources: [nodes, backups, replication, cluster]
+    - name: Security
+      description: "Authentication, authorization roles, and user management"
+      resources: [authz-roles, users]
+
+  namespaces:
+    - name: weaviate
+      type: consumed
+      baseUri: http://localhost:8080
+    - name: vector-database-api
+      type: rest-exposed
+      port: 8083
+    - name: vector-database-mcp
+      type: mcp-exposed
+      port: 9093
+
+  binds:
+    - name: WEAVIATE_HOST
+      description: "Weaviate instance host address (default: localhost:8080)"
+      workflows: [Vector Database]
+    - name: WEAVIATE_API_KEY
+      description: "API key for Weaviate authentication"
+      workflows: [Vector Database]
+
+crossReference:
+  - resource: objects
+    operations: [objects.list, objects.create, objects.get, objects.delete, objects.patch, objects.update]
+    workflows: [Vector Database]
+    personas: [AI Engineer, Data Engineer]
+  - resource: graphql
+    operations: [graphql.batch]
+    workflows: [Vector Database]
+    personas: [AI Engineer]
+  - resource: schema
+    operations: [schema.dump, schema.objects.create, schema.objects.get, schema.objects.delete]
+    workflows: [Vector Database]
+    personas: [AI Engineer, Platform Operator]
+  - resource: backups
+    operations: [backups.create, backups.list, backups.restore]
+    workflows: [Vector Database]
+    personas: [Platform Operator]
+  - resource: nodes
+    operations: [nodes.get]
+    workflows: [Vector Database]
+    personas: [Platform Operator]

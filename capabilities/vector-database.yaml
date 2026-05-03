@@ -1,0 +1,259 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Weaviate Vector Database"
+  description: "Unified vector database workflow for managing Weaviate objects, schemas, vector search via GraphQL, backups, and cluster operations. Used by AI engineers, platform operators, and data engineers to build and manage AI-powered applications."
+  tags:
+    - Vector Database
+    - AI
+    - Machine Learning
+    - Semantic Search
+    - Objects
+    - Schema
+    - GraphQL
+    - DevOps
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WEAVIATE_HOST: WEAVIATE_HOST
+      WEAVIATE_API_KEY: WEAVIATE_API_KEY
+
+capability:
+  consumes:
+    - import: weaviate
+      location: ./shared/weaviate-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8083
+      namespace: vector-database-api
+      description: "Unified REST API for Weaviate vector database management."
+      resources:
+        - path: /v1/health
+          name: health
+          description: "Application health"
+          operations:
+            - method: GET
+              name: check-readiness
+              description: "Check if Weaviate is ready"
+              call: "weaviate.check-readiness"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/objects
+          name: objects
+          description: "Vector object management"
+          operations:
+            - method: GET
+              name: list-objects
+              description: "List objects in Weaviate"
+              call: "weaviate.list-objects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-object
+              description: "Create a new object"
+              call: "weaviate.create-object"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/objects/{id}
+          name: object
+          description: "Individual object operations"
+          operations:
+            - method: GET
+              name: get-object
+              description: "Get an object by ID"
+              call: "weaviate.get-object"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-object
+              description: "Delete an object"
+              call: "weaviate.delete-object"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/graphql
+          name: graphql
+          description: "GraphQL vector search"
+          operations:
+            - method: POST
+              name: graphql-query
+              description: "Execute GraphQL vector search query"
+              call: "weaviate.graphql-query"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/schema
+          name: schema
+          description: "Schema management"
+          operations:
+            - method: GET
+              name: get-schema
+              description: "Get data schema"
+              call: "weaviate.get-schema"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-class
+              description: "Create a collection class"
+              call: "weaviate.create-class"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/batch/objects
+          name: batch-objects
+          description: "Batch object operations"
+          operations:
+            - method: POST
+              name: batch-create-objects
+              description: "Batch create objects"
+              call: "weaviate.batch-create-objects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/nodes
+          name: nodes
+          description: "Cluster nodes"
+          operations:
+            - method: GET
+              name: get-nodes
+              description: "Get cluster node information"
+              call: "weaviate.get-nodes"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9093
+      namespace: vector-database-mcp
+      transport: http
+      description: "MCP server for AI-assisted Weaviate vector database management."
+      tools:
+        - name: check-weaviate-readiness
+          description: "Check if the Weaviate instance is ready to accept requests"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.check-readiness"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-weaviate-objects
+          description: "List objects stored in Weaviate, optionally filtered by collection class"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.list-objects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-weaviate-object
+          description: "Create a new vector object in Weaviate with optional vector embedding"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.create-object"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-weaviate-object
+          description: "Retrieve a specific Weaviate object by its UUID"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.get-object"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-weaviate-object
+          description: "Delete a Weaviate object by UUID"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "weaviate.delete-object"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: vector-search
+          description: "Execute a GraphQL vector similarity search query against Weaviate"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "weaviate.graphql-query"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-schema
+          description: "Get the current data schema including all collection classes"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.get-schema"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-collection-class
+          description: "Create a new collection class in the Weaviate schema"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.create-class"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: batch-import-objects
+          description: "Import multiple objects to Weaviate in a single batch operation"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.batch-create-objects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cluster-nodes
+          description: "Get information about all nodes in the Weaviate cluster"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.get-nodes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-backup
+          description: "Create a backup of Weaviate data to a storage backend (s3, gcs, filesystem, azure)"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "weaviate.create-backup"
+          with:
+            backend: "tools.backend"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-backups
+          description: "List available backups on a storage backend"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "weaviate.list-backups"
+          with:
+            backend: "tools.backend"
+          outputParameters:
+            - type: object
+              mapping: "$."

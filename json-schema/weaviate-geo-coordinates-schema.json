@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-geo-coordinates-schema.json",
+  "title": "GeoCoordinates",
+  "description": "Weaviate GeoCoordinates schema",
+  "type": "object",
+  "properties": {
+    "latitude": {
+      "type": "number",
+      "format": "float",
+      "description": "The latitude of the point on earth in decimal form."
+    },
+    "longitude": {
+      "type": "number",
+      "format": "float",
+      "description": "The longitude of the point on earth in decimal form."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-object-schema.json",
+  "title": "Object",
+  "description": "Weaviate Object schema",
+  "type": "object",
+  "properties": {
+    "class": {
+      "type": "string",
+      "description": "Name of the collection (class) the object belongs to."
+    },
+    "vectorWeights": {
+      "$ref": "#/components/schemas/VectorWeights"
+    },
+    "properties": {
+      "$ref": "#/components/schemas/PropertySchema"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The UUID of the object."
+    },
+    "creationTimeUnix": {
+      "type": "integer",
+      "format": "int64",
+      "description": "(Response only) Timestamp of creation of this object in milliseconds since epoch UTC."
+    },
+    "lastUpdateTimeUnix": {
+      "type": "integer",
+      "format": "int64",
+      "description": "(Response only) Timestamp of the last object update in milliseconds since epoch UTC."
+    },
+    "vector": {
+      "$ref": "#/components/schemas/C11yVector"
+    },
+    "vectors": {
+      "$ref": "#/components/schemas/Vectors"
+    },
+    "tenant": {
+      "type": "string",
+      "description": "The name of the tenant the object belongs to."
+    },
+    "additional": {
+      "$ref": "#/components/schemas/AdditionalProperties"
+    }
+  }
+}

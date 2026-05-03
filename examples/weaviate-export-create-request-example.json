@@ -1,0 +1,10 @@
+{
+  "id": "example-abslyaog",
+  "file_format": "parquet",
+  "include": [
+    "example-tzqvijqe"
+  ],
+  "exclude": [
+    "example-glzwzmeq"
+  ]
+}

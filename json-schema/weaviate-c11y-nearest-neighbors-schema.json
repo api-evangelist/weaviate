@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-c11y-nearest-neighbors-schema.json",
+  "title": "C11yNearestNeighbors",
+  "description": "C11y function to show the nearest neighbors to a word.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "word": {
+        "type": "string"
+      },
+      "distance": {
+        "type": "number",
+        "format": "float"
+      }
+    }
+  }
+}

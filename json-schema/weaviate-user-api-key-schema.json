@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-user-api-key-schema.json",
+  "title": "UserApiKey",
+  "description": "Weaviate UserApiKey schema",
+  "type": "object",
+  "properties": {
+    "apikey": {
+      "type": "string",
+      "description": "The API key associated with the user."
+    }
+  },
+  "required": [
+    "apikey"
+  ]
+}

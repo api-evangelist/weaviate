@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-shard-status-get-response-schema.json",
+  "title": "ShardStatusGetResponse",
+  "description": "Response body of shard status get request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the shard"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the shard"
+    },
+    "vectorQueueSize": {
+      "type": "integer",
+      "description": "Size of the vector queue of the shard"
+    }
+  }
+}

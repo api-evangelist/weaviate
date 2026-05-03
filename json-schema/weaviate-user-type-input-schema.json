@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-user-type-input-schema.json",
+  "title": "UserTypeInput",
+  "description": "The type of the user. `db` users are managed by Weaviate, `oidc` users are managed by an external OIDC provider.",
+  "type": "string",
+  "enum": [
+    "db",
+    "oidc"
+  ]
+}

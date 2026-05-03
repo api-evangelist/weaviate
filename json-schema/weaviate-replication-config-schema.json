@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-replication-config-schema.json",
+  "title": "ReplicationConfig",
+  "description": "Configure how replication is executed in a cluster",
+  "type": "object",
+  "properties": {
+    "factor": {
+      "type": "integer",
+      "description": "Number of times a collection (class) is replicated (default: 1)."
+    },
+    "asyncEnabled": {
+      "type": "boolean",
+      "description": "Enable asynchronous replication (default: `false`)."
+    },
+    "asyncConfig": {
+      "$ref": "#/components/schemas/ReplicationAsyncConfig"
+    },
+    "deletionStrategy": {
+      "type": "string",
+      "description": "Conflict resolution strategy for deleted objects.",
+      "enum": [
+        "NoAutomatedResolution",
+        "DeleteOnConflict",
+        "TimeBasedResolution"
+      ]
+    }
+  }
+}

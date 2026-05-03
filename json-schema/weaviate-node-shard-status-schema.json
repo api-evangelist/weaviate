@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-node-shard-status-schema.json",
+  "title": "NodeShardStatus",
+  "description": "The definition of a node shard status response body",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the shard."
+    },
+    "class": {
+      "type": "string",
+      "description": "The name of shard's collection (class)."
+    },
+    "objectCount": {
+      "type": "number",
+      "format": "int64",
+      "description": "The number of objects in shard."
+    },
+    "vectorIndexingStatus": {
+      "type": "string",
+      "description": "The status of the vector indexing process."
+    },
+    "compressed": {
+      "type": "boolean",
+      "description": "The status of vector compression/quantization."
+    },
+    "vectorQueueLength": {
+      "type": "number",
+      "format": "int64",
+      "description": "The length of the vector indexing queue."
+    },
+    "loaded": {
+      "type": "boolean",
+      "description": "The load status of the shard."
+    },
+    "asyncReplicationStatus": {
+      "type": "array",
+      "description": "The status of the async replication.",
+      "items": {
+        "$ref": "#/components/schemas/AsyncReplicationStatus"
+      }
+    },
+    "numberOfReplicas": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64",
+      "description": "Number of replicas for the shard."
+    },
+    "replicationFactor": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64",
+      "description": "Minimum number of replicas for the shard."
+    }
+  }
+}

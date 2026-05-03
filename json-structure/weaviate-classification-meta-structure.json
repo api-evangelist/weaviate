@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-classification-meta-structure.json",
+  "title": "ClassificationMeta",
+  "description": "Additional information to a specific classification.",
+  "type": "object",
+  "properties": {
+    "started": {
+      "type": "datetime",
+      "description": "Time when this classification was started."
+    },
+    "completed": {
+      "type": "datetime",
+      "description": "Time when this classification finished."
+    },
+    "count": {
+      "type": "int32",
+      "description": "Number of objects which were taken into consideration for classification."
+    },
+    "countSucceeded": {
+      "type": "int32",
+      "description": "Number of objects successfully classified."
+    },
+    "countFailed": {
+      "type": "int32",
+      "description": "Number of objects which could not be classified - see error message for details."
+    }
+  }
+}

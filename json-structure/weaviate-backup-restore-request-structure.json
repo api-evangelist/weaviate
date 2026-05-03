@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-backup-restore-request-structure.json",
+  "title": "BackupRestoreRequest",
+  "description": "Request body for restoring a backup for a set of collections (classes).",
+  "type": "object",
+  "properties": {
+    "config": {
+      "type": "#RestoreConfig"
+    },
+    "include": {
+      "type": "array",
+      "description": "List of collections (classes) to include in the backup restoration process."
+    },
+    "exclude": {
+      "type": "array",
+      "description": "List of collections (classes) to exclude from the backup restoration process."
+    },
+    "node_mapping": {
+      "type": "map",
+      "description": "Allows overriding the node names stored in the backup with different ones. Useful when restoring backups to a different environment."
+    },
+    "overwriteAlias": {
+      "type": "bool",
+      "description": "Allows ovewriting the collection alias if there is a conflict"
+    }
+  }
+}

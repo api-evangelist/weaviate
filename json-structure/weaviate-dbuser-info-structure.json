@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-dbuser-info-structure.json",
+  "title": "DBUserInfo",
+  "description": "Weaviate DBUserInfo schema",
+  "type": "object",
+  "properties": {
+    "roles": {
+      "type": "array",
+      "description": "The roles associated with the user."
+    },
+    "userId": {
+      "type": "str",
+      "description": "The name (ID) of the user."
+    },
+    "dbUserType": {
+      "type": "str",
+      "description": "Type of the returned user."
+    },
+    "active": {
+      "type": "bool",
+      "description": "Activity status of the returned user."
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+    },
+    "apiKeyFirstLetters": {
+      "type": "str",
+      "description": "First 3 letters of the associated API key."
+    },
+    "lastUsedAt": {
+      "type": "datetime",
+      "description": "Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+    },
+    "namespace": {
+      "type": "str",
+      "description": "The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise."
+    }
+  }
+}

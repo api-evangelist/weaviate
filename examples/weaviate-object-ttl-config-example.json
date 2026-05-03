@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "defaultTtl": 83,
+  "deleteOn": "example-krrfblqj",
+  "filterExpiredObjects": true
+}

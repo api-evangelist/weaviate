@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-phone-number-schema.json",
+  "title": "PhoneNumber",
+  "description": "Weaviate PhoneNumber schema",
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": "string",
+      "description": "The raw input as the phone number is present in your raw data set. It will be parsed into the standardized formats if valid."
+    },
+    "internationalFormatted": {
+      "type": "string",
+      "description": "Read-only. Parsed result in the international format (e.g. `+49 123 456789`)."
+    },
+    "defaultCountry": {
+      "type": "string",
+      "description": "Optional. The ISO 3166-1 alpha-2 country code. This is used to figure out the correct `countryCode` and international format if only a national number (e.g. `0123 4567`) is provided."
+    },
+    "countryCode": {
+      "type": "number",
+      "format": "uint64",
+      "description": "Read-only. The numerical country code (e.g. `49`)."
+    },
+    "national": {
+      "type": "number",
+      "format": "uint64",
+      "description": "Read-only. The numerical representation of the national part."
+    },
+    "nationalFormatted": {
+      "type": "string",
+      "description": "Read-only. Parsed result in the national format (e.g. `0123 456789`)."
+    },
+    "valid": {
+      "type": "boolean",
+      "description": "Read-only. Indicates whether the parsed number is a valid phone number."
+    }
+  }
+}

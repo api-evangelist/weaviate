@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-graph-qlresponse-schema.json",
+  "title": "GraphQLResponse",
+  "description": "GraphQL based response: http://facebook.github.io/graphql/.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "GraphQL data object.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/JsonObject"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "Array with errors.",
+      "items": {
+        "$ref": "#/components/schemas/GraphQLError"
+      }
+    }
+  }
+}

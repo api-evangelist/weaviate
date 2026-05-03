@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-export-create-response-structure.json",
+  "title": "ExportCreateResponse",
+  "description": "Response from creating an export operation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "str",
+      "description": "Unique identifier for this export"
+    },
+    "backend": {
+      "type": "str",
+      "description": "The backend storage system used"
+    },
+    "path": {
+      "type": "str",
+      "description": "Full path where the export is being written"
+    },
+    "status": {
+      "type": "str",
+      "description": "Current status of the export"
+    },
+    "startedAt": {
+      "type": "datetime",
+      "description": "When the export started"
+    },
+    "classes": {
+      "type": "array",
+      "description": "List of collections being exported"
+    }
+  }
+}

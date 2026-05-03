@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-replication-replicate-replica-request-structure.json",
+  "title": "ReplicationReplicateReplicaRequest",
+  "description": "Specifies the parameters required to initiate a shard replica movement operation between two nodes for a given collection and shard. This request defines the source and target node, the collection and type of transfer.",
+  "type": "object",
+  "properties": {
+    "sourceNode": {
+      "type": "str",
+      "description": "The name of the Weaviate node currently hosting the shard replica that needs to be moved or copied."
+    },
+    "targetNode": {
+      "type": "str",
+      "description": "The name of the Weaviate node where the new shard replica will be created as part of the movement or copy operation."
+    },
+    "collection": {
+      "type": "str",
+      "description": "The name of the collection to which the target shard belongs."
+    },
+    "shard": {
+      "type": "str",
+      "description": "The name of the shard whose replica is to be moved or copied."
+    },
+    "type": {
+      "type": "str",
+      "description": "Specifies the type of replication operation to perform. `COPY` creates a new replica on the target node while keeping the source replica. `MOVE` creates a new replica on the target node and then removes the source replica upon successful completion. Defaults to `COPY` if omitted."
+    }
+  }
+}

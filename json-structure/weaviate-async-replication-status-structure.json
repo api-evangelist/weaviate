@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-async-replication-status-structure.json",
+  "title": "AsyncReplicationStatus",
+  "description": "The status of the async replication.",
+  "type": "object",
+  "properties": {
+    "objectsPropagated": {
+      "type": "float",
+      "description": "The number of objects propagated in the most recent iteration."
+    },
+    "startDiffTimeUnixMillis": {
+      "type": "float",
+      "description": "The start time of the most recent iteration."
+    },
+    "targetNode": {
+      "type": "str",
+      "description": "The target node of the replication, if set, otherwise empty."
+    }
+  }
+}

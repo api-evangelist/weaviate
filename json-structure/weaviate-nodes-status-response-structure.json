@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-nodes-status-response-structure.json",
+  "title": "NodesStatusResponse",
+  "description": "The status of all of the Weaviate nodes",
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "array"
+    }
+  }
+}

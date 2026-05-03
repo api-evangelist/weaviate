@@ -1,0 +1,9 @@
+{
+  "id": "example-id",
+  "result": {
+    "status": "SUCCESS",
+    "errors": {
+      "id": "example-id"
+    }
+  }
+}

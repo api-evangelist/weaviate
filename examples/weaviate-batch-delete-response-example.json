@@ -1,0 +1,24 @@
+{
+  "match": {
+    "class": "City",
+    "where": {
+      "id": "example-id"
+    }
+  },
+  "output": "minimal",
+  "deletionTimeUnixMilli": 55,
+  "dryRun": false,
+  "results": {
+    "matches": 44.48,
+    "limit": 57.04,
+    "successful": 60.0,
+    "failed": 21.9,
+    "objects": [
+      {
+        "id": null,
+        "status": null,
+        "errors": null
+      }
+    ]
+  }
+}

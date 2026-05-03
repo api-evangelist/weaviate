@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-classification-schema.json",
+  "title": "Classification",
+  "description": "Manage classifications, trigger them and view status of past classifications.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID to uniquely identify this classification run.",
+      "example": "ee722219-b8ec-4db1-8f8d-5150bb1a9e0c"
+    },
+    "class": {
+      "type": "string",
+      "description": "The name of the collection (class) which is used in this classification.",
+      "example": "City"
+    },
+    "classifyProperties": {
+      "type": "array",
+      "description": "Which ref-property to set as part of the classification.",
+      "example": [
+        "inCountry"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "basedOnProperties": {
+      "type": "array",
+      "description": "Base the text-based classification on these fields (of type text).",
+      "example": [
+        "description"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of this classification.",
+      "enum": [
+        "running",
+        "completed",
+        "failed"
+      ],
+      "example": "running"
+    },
+    "meta": {
+      "$ref": "#/components/schemas/ClassificationMeta"
+    },
+    "type": {
+      "type": "string",
+      "description": "Which algorithm to use for classifications."
+    },
+    "settings": {
+      "type": "object",
+      "description": "Classification-type specific settings."
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if status == failed.",
+      "default": "",
+      "example": "classify xzy: something went wrong"
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "sourceWhere": {
+          "$ref": "#/components/schemas/WhereFilter"
+        },
+        "trainingSetWhere": {
+          "$ref": "#/components/schemas/WhereFilter"
+        },
+        "targetWhere": {
+          "$ref": "#/components/schemas/WhereFilter"
+        }
+      }
+    }
+  }
+}

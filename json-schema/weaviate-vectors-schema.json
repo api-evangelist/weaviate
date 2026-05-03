@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-vectors-schema.json",
+  "title": "Vectors",
+  "description": "A map of named vectors for multi-vector representations.",
+  "type": "object",
+  "additionalProperties": {
+    "$ref": "#/components/schemas/Vector"
+  }
+}

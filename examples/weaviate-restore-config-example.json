@@ -1,0 +1,8 @@
+{
+  "Endpoint": "example-hyekjmyo",
+  "Bucket": "example-twqgrgql",
+  "Path": "example-hklnjgrb",
+  "CPUPercentage": 50,
+  "rolesOptions": "noRestore",
+  "usersOptions": "noRestore"
+}

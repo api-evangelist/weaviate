@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-replication-replicate-replica-response-schema.json",
+  "title": "ReplicationReplicateReplicaResponse",
+  "description": "Contains the unique identifier for a successfully initiated asynchronous replica movement operation. This ID can be used to track the progress of the operation.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (ID) assigned to the registered replication operation."
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

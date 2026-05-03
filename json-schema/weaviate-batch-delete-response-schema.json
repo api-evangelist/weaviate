@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-batch-delete-response-schema.json",
+  "title": "BatchDeleteResponse",
+  "description": "Delete Objects response.",
+  "type": "object",
+  "properties": {
+    "match": {
+      "type": "object",
+      "description": "Outlines how to find the objects to be deleted.",
+      "properties": {
+        "class": {
+          "type": "string",
+          "description": "The name of the collection (class) from which to delete objects.",
+          "example": "City"
+        },
+        "where": {
+          "$ref": "#/components/schemas/WhereFilter"
+        }
+      }
+    },
+    "output": {
+      "type": "string",
+      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+      "default": "minimal"
+    },
+    "deletionTimeUnixMilli": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Timestamp of deletion in milliseconds since epoch UTC."
+    },
+    "dryRun": {
+      "type": "boolean",
+      "description": "If true, objects will not be deleted yet, but merely listed. Defaults to false.",
+      "default": false
+    },
+    "results": {
+      "type": "object",
+      "properties": {
+        "matches": {
+          "type": "number",
+          "format": "int64",
+          "description": "How many objects were matched by the filter."
+        },
+        "limit": {
+          "type": "number",
+          "format": "int64",
+          "description": "The most amount of objects that can be deleted in a single query, equals [`QUERY_MAXIMUM_RESULTS`](https://docs.weaviate.io/deploy/configuration/env-vars#QUERY_MAXIMUM_RESULTS)."
+        },
+        "successful": {
+          "type": "number",
+          "format": "int64",
+          "description": "How many objects were successfully deleted in this round."
+        },
+        "failed": {
+          "type": "number",
+          "format": "int64",
+          "description": "How many objects should have been deleted but could not be deleted."
+        },
+        "objects": {
+          "type": "array",
+          "description": "With output set to `minimal` only objects with error occurred will the be described. Successfully deleted objects would be omitted. Output set to `verbose` will list all of the objects with their respective statuses.",
+          "items": {
+            "format": "object",
+            "description": "Results for this specific Object.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "The UUID of the object."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "SUCCESS",
+                  "DRYRUN",
+                  "FAILED"
+                ],
+                "default": "SUCCESS"
+              },
+              "errors": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

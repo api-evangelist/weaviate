@@ -1,0 +1,10 @@
+{
+  "data": {
+    "key": "value"
+  },
+  "errors": [
+    {
+      "id": "example-id"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-restore-config-structure.json",
+  "title": "RestoreConfig",
+  "description": "Backup custom configuration",
+  "type": "object",
+  "properties": {
+    "Endpoint": {
+      "type": "str",
+      "description": "name of the endpoint, e.g. s3.amazonaws.com"
+    },
+    "Bucket": {
+      "type": "str",
+      "description": "Name of the bucket, container, volume, etc"
+    },
+    "Path": {
+      "type": "str",
+      "description": "Path within the bucket"
+    },
+    "CPUPercentage": {
+      "type": "int32",
+      "description": "Desired CPU core utilization ranging from 1%-80%"
+    },
+    "rolesOptions": {
+      "type": "str",
+      "description": "How roles should be restored"
+    },
+    "usersOptions": {
+      "type": "str",
+      "description": "How users should be restored"
+    }
+  }
+}

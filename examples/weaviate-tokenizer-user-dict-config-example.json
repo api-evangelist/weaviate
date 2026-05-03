@@ -1,0 +1,9 @@
+{
+  "tokenizer": "example-ropepudo",
+  "replacements": [
+    {
+      "source": "example-fwpcolvg",
+      "target": "example-lvrytcnn"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "example-xtnbixtu",
+  "status": "HEALTHY",
+  "bootstrapped": true,
+  "dbLoaded": true,
+  "initialLastAppliedIndex": 25.16,
+  "lastAppliedIndex": 7.31,
+  "isVoter": true,
+  "leaderId": {},
+  "leaderAddress": {},
+  "open": true,
+  "ready": true,
+  "candidates": {},
+  "raft": {
+    "id": "example-id"
+  }
+}

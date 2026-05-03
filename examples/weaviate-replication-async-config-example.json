@@ -1,0 +1,16 @@
+{
+  "maxWorkers": 27,
+  "hashtreeHeight": 25,
+  "frequency": 95,
+  "frequencyWhilePropagating": 11,
+  "aliveNodesCheckingFrequency": 65,
+  "loggingFrequency": 39,
+  "diffBatchSize": 8,
+  "diffPerNodeTimeout": 40,
+  "prePropagationTimeout": 98,
+  "propagationTimeout": 93,
+  "propagationLimit": 60,
+  "propagationDelay": 65,
+  "propagationConcurrency": 27,
+  "propagationBatchSize": 99
+}

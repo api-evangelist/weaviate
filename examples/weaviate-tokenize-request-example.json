@@ -1,0 +1,13 @@
+{
+  "text": "example-ffehzibv",
+  "tokenization": "word",
+  "analyzerConfig": {
+    "id": "example-id"
+  },
+  "stopwords": {
+    "id": "example-id"
+  },
+  "stopwordPresets": {
+    "key": "value"
+  }
+}

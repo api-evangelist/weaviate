@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-object-structure.json",
+  "title": "Object",
+  "description": "Weaviate Object schema",
+  "type": "object",
+  "properties": {
+    "class": {
+      "type": "str",
+      "description": "Name of the collection (class) the object belongs to."
+    },
+    "vectorWeights": {
+      "type": "#VectorWeights"
+    },
+    "properties": {
+      "type": "#PropertySchema"
+    },
+    "id": {
+      "type": "uuid",
+      "description": "The UUID of the object."
+    },
+    "creationTimeUnix": {
+      "type": "int64",
+      "description": "(Response only) Timestamp of creation of this object in milliseconds since epoch UTC."
+    },
+    "lastUpdateTimeUnix": {
+      "type": "int64",
+      "description": "(Response only) Timestamp of the last object update in milliseconds since epoch UTC."
+    },
+    "vector": {
+      "type": "#C11yVector"
+    },
+    "vectors": {
+      "type": "#Vectors"
+    },
+    "tenant": {
+      "type": "str",
+      "description": "The name of the tenant the object belongs to."
+    },
+    "additional": {
+      "type": "#AdditionalProperties"
+    }
+  }
+}

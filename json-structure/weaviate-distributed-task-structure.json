@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-distributed-task-structure.json",
+  "title": "DistributedTask",
+  "description": "Distributed task metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "str",
+      "description": "The ID of the task."
+    },
+    "version": {
+      "type": "int32",
+      "description": "The version of the task."
+    },
+    "status": {
+      "type": "str",
+      "description": "The status of the task."
+    },
+    "startedAt": {
+      "type": "datetime",
+      "description": "The time when the task was created."
+    },
+    "finishedAt": {
+      "type": "datetime",
+      "description": "The time when the task was finished."
+    },
+    "finishedNodes": {
+      "type": "array",
+      "description": "The nodes that finished the task."
+    },
+    "error": {
+      "type": "str",
+      "description": "The high level reason why the task failed."
+    },
+    "payload": {
+      "type": "map",
+      "description": "The payload of the task."
+    },
+    "units": {
+      "type": "array",
+      "description": "Units of the task. Only present for tasks that use unit tracking."
+    }
+  }
+}

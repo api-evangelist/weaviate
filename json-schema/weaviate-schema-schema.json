@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-schema-schema.json",
+  "title": "Schema",
+  "description": "Definitions of semantic schemas (also see: https://github.com/weaviate/weaviate-semantic-schemas).",
+  "type": "object",
+  "properties": {
+    "classes": {
+      "type": "array",
+      "description": "Semantic classes that are available.",
+      "items": {
+        "$ref": "#/components/schemas/Class"
+      }
+    },
+    "maintainer": {
+      "type": "string",
+      "format": "email",
+      "description": "Email of the maintainer."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the schema."
+    }
+  }
+}

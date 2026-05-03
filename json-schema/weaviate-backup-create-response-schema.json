@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/weaviate/json-schema/weaviate-backup-create-response-schema.json",
+  "title": "BackupCreateResponse",
+  "description": "The definition of a backup create response body",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+    },
+    "classes": {
+      "type": "array",
+      "description": "The list of collections (classes) for which the backup creation process was started.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "backend": {
+      "type": "string",
+      "description": "Backup backend name e.g. filesystem, gcs, s3."
+    },
+    "bucket": {
+      "type": "string",
+      "description": "Name of the bucket, container, volume, etc"
+    },
+    "path": {
+      "type": "string",
+      "description": "Path within bucket of backup"
+    },
+    "error": {
+      "type": "string",
+      "description": "error message if creation failed"
+    },
+    "status": {
+      "type": "string",
+      "description": "phase of backup creation process",
+      "enum": [
+        "STARTED",
+        "TRANSFERRING",
+        "TRANSFERRED",
+        "FINALIZING",
+        "SUCCESS",
+        "FAILED",
+        "CANCELLING",
+        "CANCELED"
+      ],
+      "default": "STARTED"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/weaviate/json-structure/weaviate-batch-reference-structure.json",
+  "title": "BatchReference",
+  "description": "Weaviate BatchReference schema",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "uri",
+      "description": "Long-form beacon-style URI to identify the source of the cross-reference, including the property name. Should be in the form of `weaviate://localhost/objects/<uuid>/<className>/<propertyName>`, where `<className>` and `<propertyName>` must represent the cross-reference property of the source class to be used."
+    },
+    "to": {
+      "type": "uri",
+      "description": "Short-form URI to point to the cross-reference. Should be in the form of `weaviate://localhost/<uuid>` for the example of a local cross-reference to an object."
+    },
+    "tenant": {
+      "type": "str",
+      "description": "Name of the reference tenant."
+    }
+  }
+}
