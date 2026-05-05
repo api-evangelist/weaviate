@@ -1,0 +1,13 @@
+{
+  "repo": "weaviate",
+  "feeds": [
+    {
+      "source": "https://weaviate.io/blog",
+      "feed_url": "https://weaviate.io/blog/rss.xml",
+      "saved": 10,
+      "title": "Weaviate Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:38:14Z"
+}
