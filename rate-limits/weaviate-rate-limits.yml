@@ -1,0 +1,37 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Weaviate
+providerId: weaviate
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Vector Database
+description: Weaviate Cloud per-cluster throughput limits.
+sources:
+  - https://weaviate.io/pricing
+  - https://weaviate.io/developers/wcs/quickstart
+headers: {}
+responseCodes:
+  throttled: 429
+limits:
+  - name: REST + GraphQL throughput
+    scope: cluster
+    metric: requests_per_second
+    limit: scales with cluster size
+  - name: gRPC throughput
+    scope: cluster
+    metric: requests_per_second
+    limit: scales with cluster size
+  - name: Concurrent connections
+    scope: cluster
+    metric: concurrent
+    limit: varies
+  - name: Batch import size
+    scope: request
+    metric: objects
+    limit: 100
+    timeFrame: request
+    notes: Recommended; can go higher with tuning.

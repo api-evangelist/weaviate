@@ -1,0 +1,119 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Weaviate
+providerId: weaviate
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Vector Database
+  - AI Infrastructure
+description: Weaviate Cloud (WCD) tiers across Free Trial / Flex / Premium.
+sources:
+  - https://weaviate.io/pricing
+plans:
+  - id: weaviate-free-trial
+    name: Free Trial
+    type: freemium
+    description: Free for 14 days, then pay-as-you-go.
+    entries:
+      - label: Trial duration
+        name: trial
+        type: quota
+        metric: day
+        limit: 14
+        timeFrame: one-time
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Fully managed in shared cloud
+      - name: Hybrid search, dynamic index, compression
+      - name: Multi-tenancy
+      - name: RBAC baseline security
+      - name: Forum support
+  - id: weaviate-flex
+    name: Flex
+    type: paid
+    description: Starts $45/month; pay-as-you-go monthly.
+    entries:
+      - label: Monthly minimum
+        name: monthly_min
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '45.00'
+        userMultiplied: false
+      - label: Storage per GiB
+        name: storage
+        type: metered
+        metric: GiB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.255'
+        userMultiplied: false
+      - label: Backup per GiB
+        name: backup
+        type: metered
+        metric: GiB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.0264'
+        userMultiplied: false
+    elements:
+      - name: Pay-as-you-go monthly
+      - name: No commit
+      - name: Shared cloud
+      - name: RBAC
+      - name: 99.5% SLA
+      - name: Email support, NBD Sev 1
+  - id: weaviate-premium
+    name: Premium
+    type: enterprise
+    description: Starts $400/month; prepaid contract.
+    entries:
+      - label: Monthly minimum
+        name: monthly_min
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '400.00'
+        userMultiplied: false
+      - label: Storage per GiB
+        name: storage
+        type: metered
+        metric: GiB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.31875'
+        userMultiplied: false
+      - label: Backup per GiB
+        name: backup
+        type: metered
+        metric: GiB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.033'
+        userMultiplied: false
+    elements:
+      - name: Predictable spend
+      - name: Shared or dedicated
+      - name: Up to 99.95% SLA
+      - name: AWS/GCP/Azure global
+      - name: Enterprise support 1-hr Sev 1
