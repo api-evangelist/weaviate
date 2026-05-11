@@ -118,6 +118,13 @@ common:
       - name: AI-Powered Recommendations
         description: Build recommendation engines using object similarity search to find related items
           based on vector proximity.
+  - type: Integrations
+    url: https://weaviate.io/partners
+integrations:
+  - name: AWS
+  - name: Google
+  - name: Snowflake
+  - name: Databricks
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
