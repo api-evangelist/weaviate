@@ -1,0 +1,369 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — users
+  description: 'Weaviate REST API — users. 8 operations. Lead operation: Weaviate List All Users. Self-contained Naftiko capability
+    covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-users
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — users business capability. Self-contained, no shared references.
+    resources:
+    - name: users-db
+      path: /users/db
+      operations:
+      - name: listallusers
+        method: GET
+        description: Weaviate List All Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: includeLastUsedTime
+          in: query
+          type: boolean
+          description: Whether to include the last time the users were utilized.
+    - name: users-db-user_id
+      path: /users/db/{user_id}
+      operations:
+      - name: getuserinfo
+        method: GET
+        description: Weaviate Get User Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The name of the user.
+          required: true
+        - name: includeLastUsedTime
+          in: query
+          type: boolean
+          description: Whether to include the last used time of the given user
+      - name: createuser
+        method: POST
+        description: Weaviate Create A New User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The name of the user.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteuser
+        method: DELETE
+        description: Weaviate Delete A User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The name of the user.
+          required: true
+    - name: users-db-user_id-activate
+      path: /users/db/{user_id}/activate
+      operations:
+      - name: activateuser
+        method: POST
+        description: Weaviate Activate A User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The name of the user.
+          required: true
+    - name: users-db-user_id-deactivate
+      path: /users/db/{user_id}/deactivate
+      operations:
+      - name: deactivateuser
+        method: POST
+        description: Weaviate Deactivate A User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The name of the user.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: users-db-user_id-rotate-key
+      path: /users/db/{user_id}/rotate-key
+      operations:
+      - name: rotateuserapikey
+        method: POST
+        description: Weaviate Rotate API Key Of A User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The name of the user.
+          required: true
+    - name: users-own-info
+      path: /users/own-info
+      operations:
+      - name: getowninfo
+        method: GET
+        description: Weaviate Get Current User Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-users-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — users. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/users/db
+      name: users-db
+      description: REST surface for users-db.
+      operations:
+      - method: GET
+        name: listallusers
+        description: Weaviate List All Users
+        call: weaviate-users.listallusers
+        with:
+          includeLastUsedTime: rest.includeLastUsedTime
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/db/{user-id}
+      name: users-db-user-id
+      description: REST surface for users-db-user_id.
+      operations:
+      - method: GET
+        name: getuserinfo
+        description: Weaviate Get User Info
+        call: weaviate-users.getuserinfo
+        with:
+          user_id: rest.user_id
+          includeLastUsedTime: rest.includeLastUsedTime
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuser
+        description: Weaviate Create A New User
+        call: weaviate-users.createuser
+        with:
+          user_id: rest.user_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuser
+        description: Weaviate Delete A User
+        call: weaviate-users.deleteuser
+        with:
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/db/{user-id}/activate
+      name: users-db-user-id-activate
+      description: REST surface for users-db-user_id-activate.
+      operations:
+      - method: POST
+        name: activateuser
+        description: Weaviate Activate A User
+        call: weaviate-users.activateuser
+        with:
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/db/{user-id}/deactivate
+      name: users-db-user-id-deactivate
+      description: REST surface for users-db-user_id-deactivate.
+      operations:
+      - method: POST
+        name: deactivateuser
+        description: Weaviate Deactivate A User
+        call: weaviate-users.deactivateuser
+        with:
+          user_id: rest.user_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/db/{user-id}/rotate-key
+      name: users-db-user-id-rotate-key
+      description: REST surface for users-db-user_id-rotate-key.
+      operations:
+      - method: POST
+        name: rotateuserapikey
+        description: Weaviate Rotate API Key Of A User
+        call: weaviate-users.rotateuserapikey
+        with:
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/own-info
+      name: users-own-info
+      description: REST surface for users-own-info.
+      operations:
+      - method: GET
+        name: getowninfo
+        description: Weaviate Get Current User Info
+        call: weaviate-users.getowninfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — users. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: weaviate-list-all-users
+      description: Weaviate List All Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-users.listallusers
+      with:
+        includeLastUsedTime: tools.includeLastUsedTime
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-user-info
+      description: Weaviate Get User Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-users.getuserinfo
+      with:
+        user_id: tools.user_id
+        includeLastUsedTime: tools.includeLastUsedTime
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-create-new-user
+      description: Weaviate Create A New User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-users.createuser
+      with:
+        user_id: tools.user_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-user
+      description: Weaviate Delete A User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-users.deleteuser
+      with:
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-activate-user
+      description: Weaviate Activate A User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-users.activateuser
+      with:
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-deactivate-user
+      description: Weaviate Deactivate A User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-users.deactivateuser
+      with:
+        user_id: tools.user_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-rotate-api-key-user
+      description: Weaviate Rotate API Key Of A User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-users.rotateuserapikey
+      with:
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-current-user-info
+      description: Weaviate Get Current User Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-users.getowninfo
+      outputParameters:
+      - type: object
+        mapping: $.

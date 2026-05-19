@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — cluster
+  description: 'Weaviate REST API — cluster. 1 operations. Lead operation: Weaviate Get Cluster Statistics. Self-contained
+    Naftiko capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - cluster
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-cluster
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — cluster business capability. Self-contained, no shared references.
+    resources:
+    - name: cluster-statistics
+      path: /cluster/statistics
+      operations:
+      - name: clustergetstatistics
+        method: GET
+        description: Weaviate Get Cluster Statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-cluster-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — cluster. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/cluster/statistics
+      name: cluster-statistics
+      description: REST surface for cluster-statistics.
+      operations:
+      - method: GET
+        name: clustergetstatistics
+        description: Weaviate Get Cluster Statistics
+        call: weaviate-cluster.clustergetstatistics
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-cluster-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — cluster. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: weaviate-get-cluster-statistics
+      description: Weaviate Get Cluster Statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-cluster.clustergetstatistics
+      outputParameters:
+      - type: object
+        mapping: $.

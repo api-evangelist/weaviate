@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — meta
+  description: 'Weaviate REST API — meta. 1 operations. Lead operation: Weaviate Get Instance Metadata. Self-contained Naftiko
+    capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - meta
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-meta
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — meta business capability. Self-contained, no shared references.
+    resources:
+    - name: meta
+      path: /meta
+      operations:
+      - name: metaget
+        method: GET
+        description: Weaviate Get Instance Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-meta-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — meta. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/meta
+      name: meta
+      description: REST surface for meta.
+      operations:
+      - method: GET
+        name: metaget
+        description: Weaviate Get Instance Metadata
+        call: weaviate-meta.metaget
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-meta-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — meta. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: weaviate-get-instance-metadata
+      description: Weaviate Get Instance Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-meta.metaget
+      outputParameters:
+      - type: object
+        mapping: $.

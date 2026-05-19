@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API
+  description: 'Weaviate REST API. 3 operations. Lead operation: Weaviate List Available Endpoints. Self-contained Naftiko
+    capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-general
+    baseUri: http://localhost:8080
+    description: Weaviate REST API business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: weaviateroot
+        method: GET
+        description: Weaviate List Available Endpoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: .well-known-live
+      path: /.well-known/live
+      operations:
+      - name: weaviatewellknownliveness
+        method: GET
+        description: Weaviate Check Application Liveness
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: .well-known-ready
+      path: /.well-known/ready
+      operations:
+      - name: weaviatewellknownreadiness
+        method: GET
+        description: Weaviate Check Application Readiness
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-general-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: weaviateroot
+        description: Weaviate List Available Endpoints
+        call: weaviate-general.weaviateroot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/well-known/live
+      name: well-known-live
+      description: REST surface for .well-known-live.
+      operations:
+      - method: GET
+        name: weaviatewellknownliveness
+        description: Weaviate Check Application Liveness
+        call: weaviate-general.weaviatewellknownliveness
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/well-known/ready
+      name: well-known-ready
+      description: REST surface for .well-known-ready.
+      operations:
+      - method: GET
+        name: weaviatewellknownreadiness
+        description: Weaviate Check Application Readiness
+        call: weaviate-general.weaviatewellknownreadiness
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: weaviate-list-available-endpoints
+      description: Weaviate List Available Endpoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-general.weaviateroot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-check-application-liveness
+      description: Weaviate Check Application Liveness
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-general.weaviatewellknownliveness
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-check-application-readiness
+      description: Weaviate Check Application Readiness
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-general.weaviatewellknownreadiness
+      outputParameters:
+      - type: object
+        mapping: $.

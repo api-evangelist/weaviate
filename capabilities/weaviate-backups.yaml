@@ -1,0 +1,413 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — backups
+  description: 'Weaviate REST API — backups. 7 operations. Lead operation: Weaviate Create A Backup. Self-contained Naftiko
+    capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - backups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-backups
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — backups business capability. Self-contained, no shared references.
+    resources:
+    - name: backups-backend
+      path: /backups/{backend}
+      operations:
+      - name: backupscreate
+        method: POST
+        description: Weaviate Create A Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system where the backup will be stored (e.g., `filesystem`, `gcs`, `s3`,
+            `azure`).
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: backupslist
+        method: GET
+        description: Weaviate List All Created Backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system to list backups from (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+          required: true
+        - name: order
+          in: query
+          type: string
+          description: Order of returned list of backups based on creation time. (asc or desc)
+    - name: backups-backend-id
+      path: /backups/{backend}/{id}
+      operations:
+      - name: backupscreatestatus
+        method: GET
+        description: Weaviate Get Backup Creation Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the backup. Must be URL-safe and compatible with filesystem paths (only lowercase,
+            numbers, underscore, minus characters allowed).
+          required: true
+        - name: bucket
+          in: query
+          type: string
+          description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        - name: path
+          in: query
+          type: string
+          description: 'Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.'
+      - name: backupscancel
+        method: DELETE
+        description: Weaviate Cancel A Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the backup to cancel. Must be URL-safe and compatible with filesystem paths
+            (only lowercase, numbers, underscore, minus characters allo
+          required: true
+        - name: bucket
+          in: query
+          type: string
+          description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        - name: path
+          in: query
+          type: string
+          description: 'Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.'
+    - name: backups-backend-id-restore
+      path: /backups/{backend}/{id}/restore
+      operations:
+      - name: backupsrestore
+        method: POST
+        description: Weaviate Restore From A Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the backup to restore from. Must be URL-safe and compatible with filesystem
+            paths (only lowercase, numbers, underscore, minus character
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: backupsrestorestatus
+        method: GET
+        description: Weaviate Get Backup Restoration Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the backup being restored. Must be URL-safe and compatible with filesystem
+            paths (only lowercase, numbers, underscore, minus characters
+          required: true
+        - name: bucket
+          in: query
+          type: string
+          description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        - name: path
+          in: query
+          type: string
+          description: 'Optional: Specifies the path within the bucket.'
+      - name: backupsrestorecancel
+        method: DELETE
+        description: Weaviate Cancel A Backup Restoration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backend
+          in: path
+          type: string
+          description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the backup restoration to cancel. Must be URL-safe and compatible with filesystem
+            paths (only lowercase, numbers, underscore, minus cha
+          required: true
+        - name: bucket
+          in: query
+          type: string
+          description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        - name: path
+          in: query
+          type: string
+          description: 'Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.'
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-backups-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — backups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/backups/{backend}
+      name: backups-backend
+      description: REST surface for backups-backend.
+      operations:
+      - method: POST
+        name: backupscreate
+        description: Weaviate Create A Backup
+        call: weaviate-backups.backupscreate
+        with:
+          backend: rest.backend
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: backupslist
+        description: Weaviate List All Created Backups
+        call: weaviate-backups.backupslist
+        with:
+          backend: rest.backend
+          order: rest.order
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/backups/{backend}/{id}
+      name: backups-backend-id
+      description: REST surface for backups-backend-id.
+      operations:
+      - method: GET
+        name: backupscreatestatus
+        description: Weaviate Get Backup Creation Status
+        call: weaviate-backups.backupscreatestatus
+        with:
+          backend: rest.backend
+          id: rest.id
+          bucket: rest.bucket
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: backupscancel
+        description: Weaviate Cancel A Backup
+        call: weaviate-backups.backupscancel
+        with:
+          backend: rest.backend
+          id: rest.id
+          bucket: rest.bucket
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/backups/{backend}/{id}/restore
+      name: backups-backend-id-restore
+      description: REST surface for backups-backend-id-restore.
+      operations:
+      - method: POST
+        name: backupsrestore
+        description: Weaviate Restore From A Backup
+        call: weaviate-backups.backupsrestore
+        with:
+          backend: rest.backend
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: backupsrestorestatus
+        description: Weaviate Get Backup Restoration Status
+        call: weaviate-backups.backupsrestorestatus
+        with:
+          backend: rest.backend
+          id: rest.id
+          bucket: rest.bucket
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: backupsrestorecancel
+        description: Weaviate Cancel A Backup Restoration
+        call: weaviate-backups.backupsrestorecancel
+        with:
+          backend: rest.backend
+          id: rest.id
+          bucket: rest.bucket
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-backups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — backups. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: weaviate-create-backup
+      description: Weaviate Create A Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-backups.backupscreate
+      with:
+        backend: tools.backend
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-list-all-created-backups
+      description: Weaviate List All Created Backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-backups.backupslist
+      with:
+        backend: tools.backend
+        order: tools.order
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-backup-creation-status
+      description: Weaviate Get Backup Creation Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-backups.backupscreatestatus
+      with:
+        backend: tools.backend
+        id: tools.id
+        bucket: tools.bucket
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-cancel-backup
+      description: Weaviate Cancel A Backup
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-backups.backupscancel
+      with:
+        backend: tools.backend
+        id: tools.id
+        bucket: tools.bucket
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-restore-backup
+      description: Weaviate Restore From A Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-backups.backupsrestore
+      with:
+        backend: tools.backend
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-backup-restoration-status
+      description: Weaviate Get Backup Restoration Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-backups.backupsrestorestatus
+      with:
+        backend: tools.backend
+        id: tools.id
+        bucket: tools.bucket
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-cancel-backup-restoration
+      description: Weaviate Cancel A Backup Restoration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-backups.backupsrestorecancel
+      with:
+        backend: tools.backend
+        id: tools.id
+        bucket: tools.bucket
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.

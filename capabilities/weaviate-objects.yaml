@@ -1,0 +1,1207 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — objects
+  description: 'Weaviate REST API — objects. 21 operations. Lead operation: Weaviate Create Objects In Batch. Self-contained
+    Naftiko capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - objects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-objects
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — objects business capability. Self-contained, no shared references.
+    resources:
+    - name: batch-objects
+      path: /batch/objects
+      operations:
+      - name: batchobjectscreate
+        method: POST
+        description: Weaviate Create Objects In Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: batchobjectsdelete
+        method: DELETE
+        description: Weaviate Delete Objects In Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: objects
+      path: /objects
+      operations:
+      - name: objectslist
+        method: GET
+        description: Weaviate List Objects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after
+          in: query
+          type: string
+          description: A threshold UUID of the objects to retrieve after, using an UUID-based ordering. This object is not
+            part of the set. <br/><br/>Must be used with collection name
+        - name: offset
+          in: query
+          type: integer
+          description: The starting index of the result window. Note `offset` will retrieve `offset+limit` results and return
+            `limit` results from the object with index `offset` onwar
+        - name: limit
+          in: query
+          type: integer
+          description: The maximum number of items to be returned per page. The default is 25 unless set otherwise as an environment
+            variable.
+        - name: include
+          in: query
+          type: string
+          description: 'Include additional information, such as classification information. Allowed values include: `classification`,
+            `vector` and `interpretation`.'
+        - name: sort
+          in: query
+          type: string
+          description: Name(s) of the property to sort by - e.g. `city`, or `country,city`.
+        - name: order
+          in: query
+          type: string
+          description: Order parameter to tell how to order (asc or desc) data within given field. Should be used in conjunction
+            with `sort` parameter. If providing multiple `sort` va
+        - name: class
+          in: query
+          type: string
+          description: The collection from which to query objects.  <br/><br/>Note that if the collection name (`class`) is
+            not provided, the response will not include any objects.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+      - name: objectscreate
+        method: POST
+        description: Weaviate Create An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: objects-validate
+      path: /objects/validate
+      operations:
+      - name: objectsvalidate
+        method: POST
+        description: Weaviate Validate An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: objects-className-id
+      path: /objects/{className}/{id}
+      operations:
+      - name: objectsclassget
+        method: GET
+        description: Weaviate Get An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be retrieved.
+          required: true
+        - name: include
+          in: query
+          type: string
+          description: 'Include additional information, such as classification information. Allowed values include: `classification`,
+            `vector` and `interpretation`.'
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: node_name
+          in: query
+          type: string
+          description: The target node which should fulfill the request.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+      - name: objectsclassdelete
+        method: DELETE
+        description: Weaviate Delete An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be deleted.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+      - name: objectsclassput
+        method: PUT
+        description: Weaviate Replace An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be replaced.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsclasspatch
+        method: PATCH
+        description: Weaviate Patch An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be patched.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsclasshead
+        method: HEAD
+        description: Weaviate Check If An Object Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to check.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+    - name: objects-className-id-references-propertyName
+      path: /objects/{className}/{id}/references/{propertyName}
+      operations:
+      - name: objectsclassreferencescreate
+        method: POST
+        description: Weaviate Add An Object Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the source object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the source object.
+          required: true
+        - name: propertyName
+          in: path
+          type: string
+          description: Unique name of the reference property of the source object.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsclassreferencesput
+        method: PUT
+        description: Weaviate Replace Object References
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the source object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the source object.
+          required: true
+        - name: propertyName
+          in: path
+          type: string
+          description: Unique name of the reference property of the source object.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsclassreferencesdelete
+        method: DELETE
+        description: Weaviate Delete An Object Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: className
+          in: path
+          type: string
+          description: Name of the collection (class) the source object belongs to.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the source object.
+          required: true
+        - name: propertyName
+          in: path
+          type: string
+          description: Unique name of the reference property of the source object.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: objects-id
+      path: /objects/{id}
+      operations:
+      - name: objectsdelete
+        method: DELETE
+        description: Weaviate Delete An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be deleted.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+      - name: objectsget
+        method: GET
+        description: Weaviate Get An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be retrieved.
+          required: true
+        - name: include
+          in: query
+          type: string
+          description: 'Include additional information, such as classification information. Allowed values include: `classification`,
+            `vector` and `interpretation`.'
+      - name: objectspatch
+        method: PATCH
+        description: Weaviate Patch An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be patched.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsupdate
+        method: PUT
+        description: Weaviate Update An Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to be replaced.
+          required: true
+        - name: consistency_level
+          in: query
+          type: string
+          description: Determines how many replicas must acknowledge a request before it is considered successful.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectshead
+        method: HEAD
+        description: Weaviate Check If An Object Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the object to check.
+          required: true
+    - name: objects-id-references-propertyName
+      path: /objects/{id}/references/{propertyName}
+      operations:
+      - name: objectsreferencescreate
+        method: POST
+        description: Weaviate Add An Object Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the source object.
+          required: true
+        - name: propertyName
+          in: path
+          type: string
+          description: Unique name of the reference property of the source object.
+          required: true
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsreferencesupdate
+        method: PUT
+        description: Weaviate Replace Object References
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the source object.
+          required: true
+        - name: propertyName
+          in: path
+          type: string
+          description: Unique name of the reference property of the source object.
+          required: true
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: objectsreferencesdelete
+        method: DELETE
+        description: Weaviate Delete An Object Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Unique UUID of the source object.
+          required: true
+        - name: propertyName
+          in: path
+          type: string
+          description: Unique name of the reference property of the source object.
+          required: true
+        - name: tenant
+          in: query
+          type: string
+          description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-objects-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — objects. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/batch/objects
+      name: batch-objects
+      description: REST surface for batch-objects.
+      operations:
+      - method: POST
+        name: batchobjectscreate
+        description: Weaviate Create Objects In Batch
+        call: weaviate-objects.batchobjectscreate
+        with:
+          consistency_level: rest.consistency_level
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: batchobjectsdelete
+        description: Weaviate Delete Objects In Batch
+        call: weaviate-objects.batchobjectsdelete
+        with:
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects
+      name: objects
+      description: REST surface for objects.
+      operations:
+      - method: GET
+        name: objectslist
+        description: Weaviate List Objects
+        call: weaviate-objects.objectslist
+        with:
+          after: rest.after
+          offset: rest.offset
+          limit: rest.limit
+          include: rest.include
+          sort: rest.sort
+          order: rest.order
+          class: rest.class
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: objectscreate
+        description: Weaviate Create An Object
+        call: weaviate-objects.objectscreate
+        with:
+          consistency_level: rest.consistency_level
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects/validate
+      name: objects-validate
+      description: REST surface for objects-validate.
+      operations:
+      - method: POST
+        name: objectsvalidate
+        description: Weaviate Validate An Object
+        call: weaviate-objects.objectsvalidate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects/{classname}/{id}
+      name: objects-classname-id
+      description: REST surface for objects-className-id.
+      operations:
+      - method: GET
+        name: objectsclassget
+        description: Weaviate Get An Object
+        call: weaviate-objects.objectsclassget
+        with:
+          className: rest.className
+          id: rest.id
+          include: rest.include
+          consistency_level: rest.consistency_level
+          node_name: rest.node_name
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: objectsclassdelete
+        description: Weaviate Delete An Object
+        call: weaviate-objects.objectsclassdelete
+        with:
+          className: rest.className
+          id: rest.id
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: objectsclassput
+        description: Weaviate Replace An Object
+        call: weaviate-objects.objectsclassput
+        with:
+          className: rest.className
+          id: rest.id
+          consistency_level: rest.consistency_level
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: objectsclasspatch
+        description: Weaviate Patch An Object
+        call: weaviate-objects.objectsclasspatch
+        with:
+          className: rest.className
+          id: rest.id
+          consistency_level: rest.consistency_level
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: objectsclasshead
+        description: Weaviate Check If An Object Exists
+        call: weaviate-objects.objectsclasshead
+        with:
+          className: rest.className
+          id: rest.id
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects/{classname}/{id}/references/{propertyname}
+      name: objects-classname-id-references-propertyname
+      description: REST surface for objects-className-id-references-propertyName.
+      operations:
+      - method: POST
+        name: objectsclassreferencescreate
+        description: Weaviate Add An Object Reference
+        call: weaviate-objects.objectsclassreferencescreate
+        with:
+          className: rest.className
+          id: rest.id
+          propertyName: rest.propertyName
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: objectsclassreferencesput
+        description: Weaviate Replace Object References
+        call: weaviate-objects.objectsclassreferencesput
+        with:
+          className: rest.className
+          id: rest.id
+          propertyName: rest.propertyName
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: objectsclassreferencesdelete
+        description: Weaviate Delete An Object Reference
+        call: weaviate-objects.objectsclassreferencesdelete
+        with:
+          className: rest.className
+          id: rest.id
+          propertyName: rest.propertyName
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects/{id}
+      name: objects-id
+      description: REST surface for objects-id.
+      operations:
+      - method: DELETE
+        name: objectsdelete
+        description: Weaviate Delete An Object
+        call: weaviate-objects.objectsdelete
+        with:
+          id: rest.id
+          consistency_level: rest.consistency_level
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: objectsget
+        description: Weaviate Get An Object
+        call: weaviate-objects.objectsget
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: objectspatch
+        description: Weaviate Patch An Object
+        call: weaviate-objects.objectspatch
+        with:
+          id: rest.id
+          consistency_level: rest.consistency_level
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: objectsupdate
+        description: Weaviate Update An Object
+        call: weaviate-objects.objectsupdate
+        with:
+          id: rest.id
+          consistency_level: rest.consistency_level
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: objectshead
+        description: Weaviate Check If An Object Exists
+        call: weaviate-objects.objectshead
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects/{id}/references/{propertyname}
+      name: objects-id-references-propertyname
+      description: REST surface for objects-id-references-propertyName.
+      operations:
+      - method: POST
+        name: objectsreferencescreate
+        description: Weaviate Add An Object Reference
+        call: weaviate-objects.objectsreferencescreate
+        with:
+          id: rest.id
+          propertyName: rest.propertyName
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: objectsreferencesupdate
+        description: Weaviate Replace Object References
+        call: weaviate-objects.objectsreferencesupdate
+        with:
+          id: rest.id
+          propertyName: rest.propertyName
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: objectsreferencesdelete
+        description: Weaviate Delete An Object Reference
+        call: weaviate-objects.objectsreferencesdelete
+        with:
+          id: rest.id
+          propertyName: rest.propertyName
+          tenant: rest.tenant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-objects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — objects. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: weaviate-create-objects-batch
+      description: Weaviate Create Objects In Batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.batchobjectscreate
+      with:
+        consistency_level: tools.consistency_level
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-objects-batch
+      description: Weaviate Delete Objects In Batch
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-objects.batchobjectsdelete
+      with:
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-list-objects
+      description: Weaviate List Objects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectslist
+      with:
+        after: tools.after
+        offset: tools.offset
+        limit: tools.limit
+        include: tools.include
+        sort: tools.sort
+        order: tools.order
+        class: tools.class
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-create-object
+      description: Weaviate Create An Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.objectscreate
+      with:
+        consistency_level: tools.consistency_level
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-validate-object
+      description: Weaviate Validate An Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.objectsvalidate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-object
+      description: Weaviate Get An Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsclassget
+      with:
+        className: tools.className
+        id: tools.id
+        include: tools.include
+        consistency_level: tools.consistency_level
+        node_name: tools.node_name
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-object
+      description: Weaviate Delete An Object
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-objects.objectsclassdelete
+      with:
+        className: tools.className
+        id: tools.id
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-replace-object
+      description: Weaviate Replace An Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsclassput
+      with:
+        className: tools.className
+        id: tools.id
+        consistency_level: tools.consistency_level
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-patch-object
+      description: Weaviate Patch An Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsclasspatch
+      with:
+        className: tools.className
+        id: tools.id
+        consistency_level: tools.consistency_level
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-check-if-object-exists
+      description: Weaviate Check If An Object Exists
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.objectsclasshead
+      with:
+        className: tools.className
+        id: tools.id
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-add-object-reference
+      description: Weaviate Add An Object Reference
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.objectsclassreferencescreate
+      with:
+        className: tools.className
+        id: tools.id
+        propertyName: tools.propertyName
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-replace-object-references
+      description: Weaviate Replace Object References
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsclassreferencesput
+      with:
+        className: tools.className
+        id: tools.id
+        propertyName: tools.propertyName
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-object-reference
+      description: Weaviate Delete An Object Reference
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-objects.objectsclassreferencesdelete
+      with:
+        className: tools.className
+        id: tools.id
+        propertyName: tools.propertyName
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-object-2
+      description: Weaviate Delete An Object
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-objects.objectsdelete
+      with:
+        id: tools.id
+        consistency_level: tools.consistency_level
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-object-2
+      description: Weaviate Get An Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsget
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-patch-object-2
+      description: Weaviate Patch An Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectspatch
+      with:
+        id: tools.id
+        consistency_level: tools.consistency_level
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-update-object
+      description: Weaviate Update An Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsupdate
+      with:
+        id: tools.id
+        consistency_level: tools.consistency_level
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-check-if-object-exists-2
+      description: Weaviate Check If An Object Exists
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.objectshead
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-add-object-reference-2
+      description: Weaviate Add An Object Reference
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-objects.objectsreferencescreate
+      with:
+        id: tools.id
+        propertyName: tools.propertyName
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-replace-object-references-2
+      description: Weaviate Replace Object References
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: weaviate-objects.objectsreferencesupdate
+      with:
+        id: tools.id
+        propertyName: tools.propertyName
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-object-reference-2
+      description: Weaviate Delete An Object Reference
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-objects.objectsreferencesdelete
+      with:
+        id: tools.id
+        propertyName: tools.propertyName
+        tenant: tools.tenant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

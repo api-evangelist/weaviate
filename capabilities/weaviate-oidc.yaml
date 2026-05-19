@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — oidc
+  description: 'Weaviate REST API — oidc. 1 operations. Lead operation: Weaviate Get OIDC Configuration. Self-contained Naftiko
+    capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - oidc
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-oidc
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — oidc business capability. Self-contained, no shared references.
+    resources:
+    - name: .well-known-openid-configuration
+      path: /.well-known/openid-configuration
+      operations:
+      - name: get
+        method: GET
+        description: Weaviate Get OIDC Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-oidc-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — oidc. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/well-known/openid-configuration
+      name: well-known-openid-configuration
+      description: REST surface for .well-known-openid-configuration.
+      operations:
+      - method: GET
+        name: get
+        description: Weaviate Get OIDC Configuration
+        call: weaviate-oidc.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-oidc-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — oidc. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: weaviate-get-oidc-configuration
+      description: Weaviate Get OIDC Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-oidc.get
+      outputParameters:
+      - type: object
+        mapping: $.

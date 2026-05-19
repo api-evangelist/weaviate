@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Weaviate REST API — namespaces
+  description: 'Weaviate REST API — namespaces. 4 operations. Lead operation: Weaviate List Namespaces. Self-contained Naftiko
+    capability covering one Weaviate business surface.'
+  tags:
+  - Weaviate
+  - namespaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEAVIATE_API_KEY: WEAVIATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: weaviate-namespaces
+    baseUri: http://localhost:8080
+    description: Weaviate REST API — namespaces business capability. Self-contained, no shared references.
+    resources:
+    - name: namespaces
+      path: /namespaces
+      operations:
+      - name: listnamespaces
+        method: GET
+        description: Weaviate List Namespaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: namespaces-namespace_id
+      path: /namespaces/{namespace_id}
+      operations:
+      - name: createnamespace
+        method: POST
+        description: Weaviate Create A New Namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: namespace_id
+          in: path
+          type: string
+          description: The name of the namespace. Must start with a lowercase letter, contain only lowercase letters and digits,
+            length 3-36, and not be a reserved name.
+          required: true
+      - name: getnamespace
+        method: GET
+        description: Weaviate Get A Namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: namespace_id
+          in: path
+          type: string
+          description: The name of the namespace.
+          required: true
+      - name: deletenamespace
+        method: DELETE
+        description: Weaviate Delete A Namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: namespace_id
+          in: path
+          type: string
+          description: The name of the namespace.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WEAVIATE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: weaviate-namespaces-rest
+    port: 8080
+    description: REST adapter for Weaviate REST API — namespaces. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/namespaces
+      name: namespaces
+      description: REST surface for namespaces.
+      operations:
+      - method: GET
+        name: listnamespaces
+        description: Weaviate List Namespaces
+        call: weaviate-namespaces.listnamespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/namespaces/{namespace-id}
+      name: namespaces-namespace-id
+      description: REST surface for namespaces-namespace_id.
+      operations:
+      - method: POST
+        name: createnamespace
+        description: Weaviate Create A New Namespace
+        call: weaviate-namespaces.createnamespace
+        with:
+          namespace_id: rest.namespace_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getnamespace
+        description: Weaviate Get A Namespace
+        call: weaviate-namespaces.getnamespace
+        with:
+          namespace_id: rest.namespace_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletenamespace
+        description: Weaviate Delete A Namespace
+        call: weaviate-namespaces.deletenamespace
+        with:
+          namespace_id: rest.namespace_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: weaviate-namespaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Weaviate REST API — namespaces. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: weaviate-list-namespaces
+      description: Weaviate List Namespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-namespaces.listnamespaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-create-new-namespace
+      description: Weaviate Create A New Namespace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: weaviate-namespaces.createnamespace
+      with:
+        namespace_id: tools.namespace_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-get-namespace
+      description: Weaviate Get A Namespace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: weaviate-namespaces.getnamespace
+      with:
+        namespace_id: tools.namespace_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: weaviate-delete-namespace
+      description: Weaviate Delete A Namespace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: weaviate-namespaces.deletenamespace
+      with:
+        namespace_id: tools.namespace_id
+      outputParameters:
+      - type: object
+        mapping: $.
