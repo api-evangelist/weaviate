@@ -1,10 +1,6 @@
 aid: weaviate
 name: Weaviate
-description: Weaviate is an open-source, AI-native vector database that enables developers to build semantic
-  search and AI-powered applications. It stores data as vector embeddings alongside structured properties,
-  enabling lightning-fast similarity search using HNSW or flat indexes. Weaviate supports multi-tenancy,
-  automatic vectorization via configurable modules, GraphQL and REST APIs, and enterprise features including
-  authentication, authorization, backups, and replication.
+description: Weaviate is an open-source, AI-native vector database that enables developers to build semantic search and AI-powered applications. It stores data as vector embeddings alongside structured properties, enabling lightning-fast similarity search using HNSW or flat indexes. Weaviate supports multi-tenancy, automatic vectorization via configurable modules, GraphQL and REST APIs, and enterprise features including authentication, authorization, backups, and replication.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -19,14 +15,12 @@ tags:
   - Kubernetes
 url: https://raw.githubusercontent.com/api-evangelist/weaviate/refs/heads/main/apis.yml
 created: '2024-06-18'
-modified: '2026-05-04'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - aid: weaviate:weaviate-rest-api
     name: Weaviate REST API
-    description: The Weaviate REST API provides full programmatic access to vector database operations
-      including object CRUD, schema management, GraphQL vector search, multi-tenancy, backups, authentication,
-      authorization, and cluster management.
+    description: The Weaviate REST API provides full programmatic access to vector database operations including object CRUD, schema management, GraphQL vector search, multi-tenancy, backups, authentication, authorization, and cluster management.
     humanURL: https://weaviate.io/developers/weaviate/api/rest
     tags:
       - Vector Database
@@ -108,18 +102,21 @@ common:
   - type: UseCases
     data:
       - name: Semantic Search
-        description: Build semantic and hybrid search applications using vector similarity and BM25 keyword
-          search combined.
+        description: Build semantic and hybrid search applications using vector similarity and BM25 keyword search combined.
       - name: RAG Applications
-        description: Power Retrieval Augmented Generation (RAG) pipelines by storing and retrieving relevant
-          context for large language model prompts.
+        description: Power Retrieval Augmented Generation (RAG) pipelines by storing and retrieving relevant context for large language model prompts.
       - name: Multi-Modal Search
         description: Search across text, images, and other modalities using unified vector representations.
       - name: AI-Powered Recommendations
-        description: Build recommendation engines using object similarity search to find related items
-          based on vector proximity.
+        description: Build recommendation engines using object similarity search to find related items based on vector proximity.
   - type: Integrations
     url: https://weaviate.io/partners
+  - name: MCP Server
+    url: https://github.com/weaviate/mcp-server-weaviate
+    type: MCPServer
+  - name: Agent Skills
+    url: https://github.com/weaviate/agent-skills
+    type: AgentSkill
 integrations:
   - name: AWS
   - name: Google
