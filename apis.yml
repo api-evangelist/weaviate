@@ -9,165 +9,167 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Vector Database
-- AI
-- Machine Learning
-- Semantic Search
-- Open Source
-- GraphQL
-- Kubernetes
+  - Vector Database
+  - AI
+  - Machine Learning
+  - Semantic Search
+  - Open Source
+  - GraphQL
+  - Kubernetes
 url: https://raw.githubusercontent.com/api-evangelist/weaviate/refs/heads/main/apis.yml
 created: '2024-06-18'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: weaviate:weaviate-rest-api
-  name: Weaviate REST API
-  description: The Weaviate REST API provides full programmatic access to vector database operations including object CRUD,
-    schema management, GraphQL vector search, multi-tenancy, backups, authentication, authorization, and cluster management.
-  humanURL: https://weaviate.io/developers/weaviate/api/rest
-  tags:
-  - Vector Database
-  - Objects
-  - Schema
-  - GraphQL
-  - Search
-  - AI
-  properties:
-  - url: openapi/weaviate-openapi.yml
-    type: OpenAPI
+  - aid: weaviate:weaviate-rest-api
+    name: Weaviate REST API
+    description: The Weaviate REST API provides full programmatic access to vector database operations including object CRUD,
+      schema management, GraphQL vector search, multi-tenancy, backups, authentication, authorization, and cluster management.
+    humanURL: https://weaviate.io/developers/weaviate/api/rest
+    tags:
+    - Vector Database
+    - Objects
+    - Schema
+    - GraphQL
+    - Search
+    - AI
+    properties:
+    - url: openapi/weaviate-openapi.yml
+      type: OpenAPI
+    - url: https://weaviate.io/developers/weaviate/api/rest
+      type: Documentation
+    - url: https://weaviate.io/developers/weaviate/quickstart
+      type: GettingStarted
+    - type: NaftikoCapability
+      url: capabilities/weaviate-general.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-authz.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-backups.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-batch.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-classifications.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-cluster.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-discovery.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-distributedtasks.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-export.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-graphql.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-mcp.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-meta.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-namespaces.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-nodes.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-objects.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-oidc.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-references.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-replication.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-schema.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-tokenize.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-users.yaml
+    - type: NaftikoCapability
+      url: capabilities/weaviate-well-known.yaml
+common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/weaviate-io
   - url: https://weaviate.io/developers/weaviate/api/rest
     type: Documentation
+  - url: https://github.com/weaviate/weaviate
+    type: GitHubRepository
+  - url: https://github.com/weaviate
+    type: GitHubOrganization
   - url: https://weaviate.io/developers/weaviate/quickstart
     type: GettingStarted
-  - type: NaftikoCapability
-    url: capabilities/weaviate-general.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-authz.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-backups.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-batch.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-classifications.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-cluster.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-discovery.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-distributedtasks.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-export.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-graphql.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-mcp.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-meta.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-namespaces.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-nodes.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-objects.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-oidc.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-references.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-replication.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-schema.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-tokenize.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-users.yaml
-  - type: NaftikoCapability
-    url: capabilities/weaviate-well-known.yaml
-common:
-- url: https://weaviate.io/developers/weaviate/api/rest
-  type: Documentation
-- url: https://github.com/weaviate/weaviate
-  type: GitHubRepository
-- url: https://github.com/weaviate
-  type: GitHubOrganization
-- url: https://weaviate.io/developers/weaviate/quickstart
-  type: GettingStarted
-- url: https://weaviate.io/developers/academy
-  type: Learn
-- url: https://weaviate.io/blog
-  type: Blog
-- url: https://weaviate.io/community
-  type: Community
-- url: https://forum.weaviate.io/
-  type: Forum
-- url: https://weaviate.io/slack
-  type: Slack
-- url: https://weaviate.io/pricing
-  type: Pricing
-- url: https://weaviate.io/podcast
-  type: Podcast
-- url: https://newsletter.weaviate.io/
-  type: Newsletter
-- url: https://weaviate.io/community/events
-  type: Events
-- url: https://github.com/weaviate/weaviate/blob/master/LICENSE
-  type: TermsOfService
-- url: https://weaviate.io/security
-  type: Security
-- url: https://github.com/weaviate/weaviate/blob/master/CHANGELOG.md
-  type: ChangeLog
-- url: https://github.com/weaviate/weaviate/issues
-  type: Support
-- type: SpectralRules
-  url: rules/weaviate-spectral-rules.yml
-- type: Vocabulary
-  url: vocabulary/weaviate-vocabulary.yml
-- type: Features
-  data:
-  - Free Trial 14 days then pay-as-you-go
-  - 'Flex from $45/mo: $0.255/GiB storage, $0.0264/GiB backup'
-  - 'Premium from $400/mo: $0.31875/GiB storage, $0.033/GiB backup'
-  - Hybrid search (vector + BM25)
-  - Dynamic index, compression, multi-tenancy
-  - REST, GraphQL, and gRPC APIs
-  - Throughput scales with cluster size
-  - Batch import recommended at 100 objects/request
-  - Built-in modules for OpenAI, Cohere, HuggingFace embeddings
-  - Generative search modules (RAG-style)
-  - Multi-tenancy with strict isolation
-  - Bring Your Own Vectors (BYOV)
-  - RBAC baseline security
-  - 99.5% SLA Flex, up to 99.95% Premium
-  - Available on AWS, GCP, Azure
-  - Open-source self-hosted alternative
-  sources:
-  - https://weaviate.io/pricing
-  updated: '2026-05-04'
-- type: UseCases
-  data:
-  - name: Semantic Search
-    description: Build semantic and hybrid search applications using vector similarity and BM25 keyword search combined.
-  - name: RAG Applications
-    description: Power Retrieval Augmented Generation (RAG) pipelines by storing and retrieving relevant context for large
-      language model prompts.
-  - name: Multi-Modal Search
-    description: Search across text, images, and other modalities using unified vector representations.
-  - name: AI-Powered Recommendations
-    description: Build recommendation engines using object similarity search to find related items based on vector proximity.
-- type: Integrations
-  url: https://weaviate.io/partners
-- name: MCP Server
-  url: https://github.com/weaviate/mcp-server-weaviate
-  type: MCPServer
-- name: Agent Skills
-  url: https://github.com/weaviate/agent-skills
-  type: AgentSkill
+  - url: https://weaviate.io/developers/academy
+    type: Learn
+  - url: https://weaviate.io/blog
+    type: Blog
+  - url: https://weaviate.io/community
+    type: Community
+  - url: https://forum.weaviate.io/
+    type: Forum
+  - url: https://weaviate.io/slack
+    type: Slack
+  - url: https://weaviate.io/pricing
+    type: Pricing
+  - url: https://weaviate.io/podcast
+    type: Podcast
+  - url: https://newsletter.weaviate.io/
+    type: Newsletter
+  - url: https://weaviate.io/community/events
+    type: Events
+  - url: https://github.com/weaviate/weaviate/blob/master/LICENSE
+    type: TermsOfService
+  - url: https://weaviate.io/security
+    type: Security
+  - url: https://github.com/weaviate/weaviate/blob/master/CHANGELOG.md
+    type: ChangeLog
+  - url: https://github.com/weaviate/weaviate/issues
+    type: Support
+  - type: SpectralRules
+    url: rules/weaviate-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/weaviate-vocabulary.yml
+  - type: Features
+    data:
+    - Free Trial 14 days then pay-as-you-go
+    - 'Flex from $45/mo: $0.255/GiB storage, $0.0264/GiB backup'
+    - 'Premium from $400/mo: $0.31875/GiB storage, $0.033/GiB backup'
+    - Hybrid search (vector + BM25)
+    - Dynamic index, compression, multi-tenancy
+    - REST, GraphQL, and gRPC APIs
+    - Throughput scales with cluster size
+    - Batch import recommended at 100 objects/request
+    - Built-in modules for OpenAI, Cohere, HuggingFace embeddings
+    - Generative search modules (RAG-style)
+    - Multi-tenancy with strict isolation
+    - Bring Your Own Vectors (BYOV)
+    - RBAC baseline security
+    - 99.5% SLA Flex, up to 99.95% Premium
+    - Available on AWS, GCP, Azure
+    - Open-source self-hosted alternative
+    sources:
+    - https://weaviate.io/pricing
+    updated: '2026-05-04'
+  - type: UseCases
+    data:
+    - name: Semantic Search
+      description: Build semantic and hybrid search applications using vector similarity and BM25 keyword search combined.
+    - name: RAG Applications
+      description: Power Retrieval Augmented Generation (RAG) pipelines by storing and retrieving relevant context for large
+        language model prompts.
+    - name: Multi-Modal Search
+      description: Search across text, images, and other modalities using unified vector representations.
+    - name: AI-Powered Recommendations
+      description: Build recommendation engines using object similarity search to find related items based on vector proximity.
+  - type: Integrations
+    url: https://weaviate.io/partners
+  - name: MCP Server
+    url: https://github.com/weaviate/mcp-server-weaviate
+    type: MCPServer
+  - name: Agent Skills
+    url: https://github.com/weaviate/agent-skills
+    type: AgentSkill
 integrations:
-- name: AWS
-- name: Google
-- name: Snowflake
-- name: Databricks
+  - name: AWS
+  - name: Google
+  - name: Snowflake
+  - name: Databricks
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
