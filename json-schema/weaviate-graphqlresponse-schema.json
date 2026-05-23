@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GraphQLResponse",
+  "title": "GraphQLResponse",
+  "description": "GraphQL based response: http://facebook.github.io/graphql/.",
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "GraphQL data object.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/JsonObject"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "Array with errors.",
+      "items": {
+        "$ref": "#/components/schemas/GraphQLError"
+      }
+    }
+  }
+}

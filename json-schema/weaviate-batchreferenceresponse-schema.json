@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BatchReferenceResponse",
+  "title": "BatchReferenceResponse",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/BatchReference"
+    },
+    {
+      "properties": {
+        "result": {
+          "format": "object",
+          "description": "Results for this specific reference.",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "SUCCESS",
+                "FAILED"
+              ],
+              "default": "SUCCESS"
+            },
+            "errors": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

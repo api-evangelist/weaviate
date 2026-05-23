@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WhereFilterGeoRange",
+  "title": "WhereFilterGeoRange",
+  "type": "object",
+  "description": "Filter within a distance of a georange.",
+  "properties": {
+    "geoCoordinates": {
+      "$ref": "#/components/schemas/GeoCoordinates"
+    },
+    "distance": {
+      "type": "object",
+      "properties": {
+        "max": {
+          "type": "number",
+          "format": "float64"
+        }
+      }
+    }
+  }
+}

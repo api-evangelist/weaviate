@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationShardReplicas",
+  "title": "ReplicationShardReplicas",
+  "type": "object",
+  "description": "Represents a shard and lists the nodes that currently host its replicas.",
+  "properties": {
+    "shard": {
+      "type": "string"
+    },
+    "replicas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

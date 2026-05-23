@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SingleRef",
+  "title": "SingleRef",
+  "description": "Either set beacon (direct reference) or set collection (class) and schema (concept reference)",
+  "properties": {
+    "class": {
+      "type": "string",
+      "format": "uri",
+      "description": "If using a concept reference (rather than a direct reference), specify the desired collection (class) name here."
+    },
+    "schema": {
+      "$ref": "#/components/schemas/PropertySchema"
+    },
+    "beacon": {
+      "type": "string",
+      "format": "uri",
+      "description": "If using a direct reference, specify the URI to point to the cross-reference here. Should be in the form of weaviate://localhost/<uuid> for the example of a local cross-reference to an object"
+    },
+    "href": {
+      "type": "string",
+      "format": "uri",
+      "description": "If using a direct reference, this read-only fields provides a link to the referenced resource. If 'origin' is globally configured, an absolute URI is shown - a relative URI otherwise."
+    },
+    "classification": {
+      "$ref": "#/components/schemas/ReferenceMetaClassification"
+    }
+  }
+}

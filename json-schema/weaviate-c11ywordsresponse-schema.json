@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/C11yWordsResponse",
+  "title": "C11yWordsResponse",
+  "description": "An array of available words and contexts.",
+  "properties": {
+    "concatenatedWord": {
+      "type": "object",
+      "description": "Weighted results for all words",
+      "properties": {
+        "concatenatedWord": {
+          "type": "string"
+        },
+        "singleWords": {
+          "type": "array",
+          "items": {
+            "format": "string"
+          }
+        },
+        "concatenatedVector": {
+          "$ref": "#/components/schemas/C11yVector"
+        },
+        "concatenatedNearestNeighbors": {
+          "$ref": "#/components/schemas/C11yNearestNeighbors"
+        }
+      }
+    },
+    "individualWords": {
+      "type": "array",
+      "description": "Weighted results for per individual word",
+      "items": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "string"
+          },
+          "present": {
+            "type": "boolean"
+          },
+          "info": {
+            "type": "object",
+            "properties": {
+              "vector": {
+                "$ref": "#/components/schemas/C11yVector"
+              },
+              "nearestNeighbors": {
+                "$ref": "#/components/schemas/C11yNearestNeighbors"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserApiKey",
+  "title": "UserApiKey",
+  "type": "object",
+  "required": [
+    "apikey"
+  ],
+  "properties": {
+    "apikey": {
+      "type": "string",
+      "description": "The API key associated with the user."
+    }
+  }
+}

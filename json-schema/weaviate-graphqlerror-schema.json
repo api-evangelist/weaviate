@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GraphQLError",
+  "title": "GraphQLError",
+  "description": "An error response caused by a GraphQL query.",
+  "properties": {
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "line": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "message": {
+      "type": "string"
+    },
+    "path": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

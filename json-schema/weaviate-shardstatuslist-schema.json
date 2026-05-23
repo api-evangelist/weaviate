@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ShardStatusList",
+  "title": "ShardStatusList",
+  "type": "array",
+  "description": "The status of all the shards of a Class",
+  "items": {
+    "$ref": "#/components/schemas/ShardStatusGetResponse"
+  }
+}

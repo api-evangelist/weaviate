@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TokenizerUserDictConfig",
+  "title": "TokenizerUserDictConfig",
+  "type": "object",
+  "description": "A list of pairs of strings that should be replaced with another string during tokenization.",
+  "properties": {
+    "tokenizer": {
+      "type": "string",
+      "description": "The tokenizer to which the user dictionary should be applied. Currently, only the `kagame` ja and kr tokenizers supports user dictionaries."
+    },
+    "replacements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "target"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "The string to be replaced."
+          },
+          "target": {
+            "type": "string",
+            "description": "The string to replace with."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/C11yNearestNeighbors",
+  "title": "C11yNearestNeighbors",
+  "type": "array",
+  "description": "C11y function to show the nearest neighbors to a word.",
+  "items": {
+    "type": "object",
+    "properties": {
+      "word": {
+        "type": "string"
+      },
+      "distance": {
+        "type": "number",
+        "format": "float"
+      }
+    }
+  }
+}

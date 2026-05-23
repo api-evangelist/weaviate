@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BackupCreateStatusResponse",
+  "title": "BackupCreateStatusResponse",
+  "description": "The definition of a backup create metadata",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+    },
+    "backend": {
+      "type": "string",
+      "description": "Backup backend name e.g. filesystem, gcs, s3."
+    },
+    "path": {
+      "type": "string",
+      "description": "Destination path of backup files valid for the selected backend."
+    },
+    "error": {
+      "type": "string",
+      "description": "error message if creation failed"
+    },
+    "status": {
+      "type": "string",
+      "description": "phase of backup creation process",
+      "enum": [
+        "STARTED",
+        "TRANSFERRING",
+        "TRANSFERRED",
+        "FINALIZING",
+        "SUCCESS",
+        "FAILED",
+        "CANCELLING",
+        "CANCELED"
+      ],
+      "default": "STARTED"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the backup process started"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the backup process completed (successfully or with failure)"
+    },
+    "size": {
+      "type": "number",
+      "format": "float64",
+      "description": "Size of the backup in Gibs"
+    }
+  }
+}

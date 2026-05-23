@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BackupRestoreStatusResponse",
+  "title": "BackupRestoreStatusResponse",
+  "description": "The definition of a backup restore metadata.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+    },
+    "backend": {
+      "type": "string",
+      "description": "Backup backend name e.g. filesystem, gcs, s3."
+    },
+    "path": {
+      "type": "string",
+      "description": "Destination path of backup files valid for the selected backup backend, contains bucket and path."
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if backup restoration failed."
+    },
+    "status": {
+      "type": "string",
+      "description": "Phase of backup restoration process.",
+      "enum": [
+        "STARTED",
+        "TRANSFERRING",
+        "TRANSFERRED",
+        "FINALIZING",
+        "SUCCESS",
+        "FAILED",
+        "CANCELLING",
+        "CANCELED"
+      ],
+      "default": "STARTED"
+    }
+  }
+}

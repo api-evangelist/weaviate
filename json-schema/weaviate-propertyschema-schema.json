@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PropertySchema",
+  "title": "PropertySchema",
+  "type": "object",
+  "description": "Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection."
+}

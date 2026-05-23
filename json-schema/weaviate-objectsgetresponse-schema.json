@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ObjectsGetResponse",
+  "title": "ObjectsGetResponse",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Object"
+    },
+    {
+      "properties": {
+        "deprecations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Deprecation"
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "result": {
+          "format": "object",
+          "description": "Results for this specific object.",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "SUCCESS",
+                "FAILED"
+              ],
+              "default": "SUCCESS"
+            },
+            "errors": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

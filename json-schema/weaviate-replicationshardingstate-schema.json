@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationShardingState",
+  "title": "ReplicationShardingState",
+  "type": "object",
+  "description": "Details the sharding layout for a specific collection, mapping each shard to its set of replicas across the cluster.",
+  "properties": {
+    "collection": {
+      "type": "string",
+      "description": "The name of the collection."
+    },
+    "shards": {
+      "type": "array",
+      "description": "An array detailing each shard within the collection and the nodes hosting its replicas.",
+      "items": {
+        "$ref": "#/components/schemas/ReplicationShardReplicas"
+      }
+    }
+  }
+}

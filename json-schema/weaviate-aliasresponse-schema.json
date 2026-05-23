@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AliasResponse",
+  "title": "AliasResponse",
+  "type": "object",
+  "description": "Response object containing a list of alias mappings.",
+  "properties": {
+    "aliases": {
+      "type": "array",
+      "description": "Array of alias objects, each containing an alias-to-collection mapping.",
+      "items": {
+        "$ref": "#/components/schemas/Alias"
+      }
+    }
+  }
+}

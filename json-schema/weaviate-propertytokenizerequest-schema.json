@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PropertyTokenizeRequest",
+  "title": "PropertyTokenizeRequest",
+  "type": "object",
+  "description": "Request body for the property-specific tokenize endpoint.",
+  "required": [
+    "text"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "The text to tokenize using the property's configured tokenization."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NodesStatusResponse",
+  "title": "NodesStatusResponse",
+  "type": "object",
+  "description": "The status of all of the Weaviate nodes",
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/NodeStatus"
+      }
+    }
+  }
+}

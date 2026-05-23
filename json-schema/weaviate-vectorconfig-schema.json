@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VectorConfig",
+  "title": "VectorConfig",
+  "type": "object",
+  "properties": {
+    "vectorizer": {
+      "type": "object",
+      "description": "Configuration of a specific vectorizer used by this vector"
+    },
+    "vectorIndexType": {
+      "type": "string",
+      "description": "Name of the vector index to use, eg. (HNSW)"
+    },
+    "vectorIndexConfig": {
+      "type": "object",
+      "description": "Vector-index config, that is specific to the type of index selected in vectorIndexType"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BackupCreateRequest",
+  "title": "BackupCreateRequest",
+  "description": "Request body for creating a backup for a set of collections.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the backup (required). Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+    },
+    "config": {
+      "$ref": "#/components/schemas/BackupConfig"
+    },
+    "include": {
+      "type": "array",
+      "description": "List of collections to include in the backup creation process. If not set, all collections are included. Cannot be used together with `exclude`.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exclude": {
+      "type": "array",
+      "description": "List of collections to exclude from the backup creation process. If not set, all collections are included. Cannot be used together with `include`.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "incremental_base_backup_id": {
+      "type": "string",
+      "description": "The ID of an existing backup to use as the base for a file-based incremental backup. If set, only files that have changed since the base backup will be included in the new backup.",
+      "default": null
+    }
+  }
+}

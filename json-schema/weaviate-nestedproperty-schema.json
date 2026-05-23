@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NestedProperty",
+  "title": "NestedProperty",
+  "type": "object",
+  "properties": {
+    "dataType": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "indexFilterable": {
+      "type": "boolean"
+    },
+    "indexSearchable": {
+      "type": "boolean"
+    },
+    "indexRangeFilters": {
+      "type": "boolean"
+    },
+    "tokenization": {
+      "type": "string",
+      "enum": [
+        "word",
+        "lowercase",
+        "whitespace",
+        "field",
+        "trigram",
+        "gse",
+        "kagome_kr",
+        "kagome_ja",
+        "gse_ch"
+      ]
+    },
+    "nestedProperties": {
+      "type": "array",
+      "description": "The properties of the nested object(s). Applies to object and object[] data types.",
+      "items": {
+        "$ref": "#/components/schemas/NestedProperty"
+      }
+    },
+    "textAnalyzer": {
+      "$ref": "#/components/schemas/TextAnalyzerConfig"
+    }
+  }
+}

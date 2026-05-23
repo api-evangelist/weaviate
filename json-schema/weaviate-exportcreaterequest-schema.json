@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExportCreateRequest",
+  "title": "ExportCreateRequest",
+  "type": "object",
+  "description": "Request to create a new export operation",
+  "required": [
+    "id",
+    "file_format"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this export. Must be URL-safe."
+    },
+    "file_format": {
+      "type": "string",
+      "description": "Output file format for the export.",
+      "enum": [
+        "parquet"
+      ]
+    },
+    "include": {
+      "type": "array",
+      "description": "List of collection names to include in the export. Cannot be used with 'exclude'.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exclude": {
+      "type": "array",
+      "description": "List of collection names to exclude from the export. Cannot be used with 'include'.",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

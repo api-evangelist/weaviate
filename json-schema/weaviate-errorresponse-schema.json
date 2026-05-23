@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorResponse",
+  "title": "ErrorResponse",
+  "type": "object",
+  "description": "An error response returned by Weaviate endpoints.",
+  "properties": {
+    "error": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

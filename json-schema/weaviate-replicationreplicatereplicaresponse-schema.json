@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationReplicateReplicaResponse",
+  "title": "ReplicationReplicateReplicaResponse",
+  "type": "object",
+  "description": "Contains the unique identifier for a successfully initiated asynchronous replica movement operation. This ID can be used to track the progress of the operation.",
+  "required": [
+    "id"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (ID) assigned to the registered replication operation."
+    }
+  }
+}

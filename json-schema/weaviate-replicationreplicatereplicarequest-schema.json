@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationReplicateReplicaRequest",
+  "title": "ReplicationReplicateReplicaRequest",
+  "type": "object",
+  "description": "Specifies the parameters required to initiate a shard replica movement operation between two nodes for a given collection and shard. This request defines the source and target node, the collection and type of transfer.",
+  "required": [
+    "sourceNode",
+    "targetNode",
+    "collection",
+    "shard"
+  ],
+  "properties": {
+    "sourceNode": {
+      "type": "string",
+      "description": "The name of the Weaviate node currently hosting the shard replica that needs to be moved or copied."
+    },
+    "targetNode": {
+      "type": "string",
+      "description": "The name of the Weaviate node where the new shard replica will be created as part of the movement or copy operation."
+    },
+    "collection": {
+      "type": "string",
+      "description": "The name of the collection to which the target shard belongs."
+    },
+    "shard": {
+      "type": "string",
+      "description": "The name of the shard whose replica is to be moved or copied."
+    },
+    "type": {
+      "type": "string",
+      "description": "Specifies the type of replication operation to perform. `COPY` creates a new replica on the target node while keeping the source replica. `MOVE` creates a new replica on the target node and then removes the source replica upon successful completion. Defaults to `COPY` if omitted.",
+      "enum": [
+        "COPY",
+        "MOVE"
+      ],
+      "default": "COPY"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NamespaceListResponse",
+  "title": "NamespaceListResponse",
+  "type": "array",
+  "description": "Response object containing a list of namespaces.",
+  "items": {
+    "$ref": "#/components/schemas/Namespace"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TokenizeRequest",
+  "title": "TokenizeRequest",
+  "type": "object",
+  "description": "Request body for the generic tokenize endpoint.",
+  "required": [
+    "text",
+    "tokenization"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "The text to tokenize."
+    },
+    "tokenization": {
+      "type": "string",
+      "description": "The tokenization method to apply.",
+      "enum": [
+        "word",
+        "lowercase",
+        "whitespace",
+        "field",
+        "trigram",
+        "gse",
+        "kagome_kr",
+        "kagome_ja",
+        "gse_ch"
+      ]
+    },
+    "analyzerConfig": {
+      "$ref": "#/components/schemas/TextAnalyzerConfig"
+    },
+    "stopwords": {
+      "$ref": "#/components/schemas/StopwordConfig"
+    },
+    "stopwordPresets": {
+      "type": "object",
+      "description": "Optional user-defined named stopword presets. Shape matches InvertedIndexConfig.stopwordPresets on a collection: each key is a preset name, each value is a plain list of stopwords. A preset name that matches a built-in ('en', 'none') fully replaces the built-in. Preset names must not be empty or whitespace-only; each word list must contain at least one word; individual words must not be empty or whitespace-only. Mutually exclusive with stopwords \u2014 pass one or the other, not both.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

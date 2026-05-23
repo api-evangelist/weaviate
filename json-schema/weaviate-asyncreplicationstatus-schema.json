@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AsyncReplicationStatus",
+  "title": "AsyncReplicationStatus",
+  "description": "The status of the async replication.",
+  "properties": {
+    "objectsPropagated": {
+      "type": "number",
+      "format": "uint64",
+      "description": "The number of objects propagated in the most recent iteration."
+    },
+    "startDiffTimeUnixMillis": {
+      "type": "number",
+      "format": "int64",
+      "description": "The start time of the most recent iteration."
+    },
+    "targetNode": {
+      "type": "string",
+      "description": "The target node of the replication, if set, otherwise empty."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClusterStatisticsResponse",
+  "title": "ClusterStatisticsResponse",
+  "type": "object",
+  "description": "The cluster statistics of all of the Weaviate nodes",
+  "properties": {
+    "statistics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Statistics"
+      }
+    },
+    "synchronized": {
+      "type": "boolean"
+    }
+  }
+}

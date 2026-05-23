@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExportCreateResponse",
+  "title": "ExportCreateResponse",
+  "type": "object",
+  "description": "Response from creating an export operation",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this export"
+    },
+    "backend": {
+      "type": "string",
+      "description": "The backend storage system used"
+    },
+    "path": {
+      "type": "string",
+      "description": "Full path where the export is being written"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the export",
+      "enum": [
+        "STARTED"
+      ]
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the export started"
+    },
+    "classes": {
+      "type": "array",
+      "description": "List of collections being exported",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReferenceMetaClassification",
+  "title": "ReferenceMetaClassification",
+  "description": "This meta field contains additional info about the classified reference property",
+  "properties": {
+    "overallCount": {
+      "type": "number",
+      "format": "int64",
+      "description": "overall neighbors checked as part of the classification. In most cases this will equal k, but could be lower than k - for example if not enough data was present"
+    },
+    "winningCount": {
+      "type": "number",
+      "format": "int64",
+      "description": "size of the winning group, a number between 1..k"
+    },
+    "losingCount": {
+      "type": "number",
+      "format": "int64",
+      "description": "size of the losing group, can be 0 if the winning group size equals k"
+    },
+    "closestOverallDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "The lowest distance of any neighbor, regardless of whether they were in the winning or losing group"
+    },
+    "winningDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "deprecated - do not use, to be removed in 0.23.0"
+    },
+    "meanWinningDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "Mean distance of all neighbors from the winning group"
+    },
+    "closestWinningDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "Closest distance of a neighbor from the winning group"
+    },
+    "closestLosingDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "The lowest distance of a neighbor in the losing group. Optional. If k equals the size of the winning group, there is no losing group"
+    },
+    "losingDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "deprecated - do not use, to be removed in 0.23.0"
+    },
+    "meanLosingDistance": {
+      "type": "number",
+      "format": "float32",
+      "description": "Mean distance of all neighbors from the losing group. Optional. If k equals the size of the winning group, there is no losing group."
+    }
+  }
+}

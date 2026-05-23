@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DistributedTaskUnit",
+  "title": "DistributedTaskUnit",
+  "type": "object",
+  "description": "A unit of a distributed task.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the unit."
+    },
+    "nodeId": {
+      "type": "string",
+      "description": "The node that owns this unit."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the unit."
+    },
+    "progress": {
+      "type": "number",
+      "format": "float",
+      "description": "The progress of the unit (0.0 to 1.0)."
+    },
+    "error": {
+      "type": "string",
+      "description": "The error message if the unit failed."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the unit was last updated."
+    },
+    "finishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the unit finished."
+    }
+  }
+}

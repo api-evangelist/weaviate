@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationReplicateForceDeleteRequest",
+  "title": "ReplicationReplicateForceDeleteRequest",
+  "type": "object",
+  "description": "Specifies the parameters available when force deleting replication operations.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (ID) of the replication operation to be forcefully deleted."
+    },
+    "collection": {
+      "type": "string",
+      "description": "The name of the collection to which the shard being replicated belongs."
+    },
+    "shard": {
+      "type": "string",
+      "description": "The identifier of the shard involved in the replication operations."
+    },
+    "node": {
+      "type": "string",
+      "description": "The name of the target node where the replication operations are registered."
+    },
+    "dryRun": {
+      "type": "boolean",
+      "description": "If true, the operation will not actually delete anything but will return the expected outcome of the deletion.",
+      "default": false
+    }
+  }
+}

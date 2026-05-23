@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BackupRestoreRequest",
+  "title": "BackupRestoreRequest",
+  "description": "Request body for restoring a backup for a set of collections (classes).",
+  "properties": {
+    "config": {
+      "$ref": "#/components/schemas/RestoreConfig"
+    },
+    "include": {
+      "type": "array",
+      "description": "List of collections (classes) to include in the backup restoration process.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exclude": {
+      "type": "array",
+      "description": "List of collections (classes) to exclude from the backup restoration process.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "node_mapping": {
+      "type": "object",
+      "description": "Allows overriding the node names stored in the backup with different ones. Useful when restoring backups to a different environment.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "overwriteAlias": {
+      "type": "boolean",
+      "description": "Allows ovewriting the collection alias if there is a conflict"
+    }
+  }
+}

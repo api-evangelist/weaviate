@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationScalePlan",
+  "title": "ReplicationScalePlan",
+  "type": "object",
+  "description": "Defines a complete plan for scaling replication within a collection. Each shard entry specifies nodes to remove and nodes to add. Added nodes may either be initialized empty (null) or created by replicating data from a source node specified as a string. If a source node is also marked for removal in the same shard, it represents a move operation and can only be used once as a source for that shard. If a source node is not marked for removal, it represents a copy operation and can be used as the source for multiple additions in that shard. Nodes listed in 'removeNodes' cannot also appear as targets in 'addNodes' for the same shard, and the same node cannot be specified for both addition and removal in a single shard.",
+  "required": [
+    "planId",
+    "collection",
+    "shardScaleActions"
+  ],
+  "properties": {
+    "planId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A unique identifier for this replication scaling plan, useful for tracking and auditing purposes."
+    },
+    "collection": {
+      "type": "string",
+      "description": "The name of the collection to which this replication scaling plan applies."
+    },
+    "shardScaleActions": {
+      "type": "object",
+      "description": "A mapping of shard names to their corresponding scaling actions. Each key corresponds to a shard name, and its value defines which nodes should be removed and which should be added for that shard. If a source node listed for an addition is also in 'removeNodes' for the same shard, that addition is treated as a move operation. Such a node can appear only once as a source in that shard. Otherwise, if the source node is not being removed, it represents a copy operation and can be referenced multiple times as a source for additions.",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Scaling actions for a single shard, including which nodes to remove and which to add. Nodes listed in 'removeNodes' cannot appear as targets in 'addNodes' for the same shard. If a source node is also marked for removal, it is treated as a move operation and can only appear once as a source node in that shard. A source node that is not being removed can appear multiple times as a source node for additions in that shard (copy operations).",
+        "properties": {
+          "removeNodes": {
+            "type": "array",
+            "description": "List of node identifiers from which replicas of this shard should be removed. Nodes listed here must not appear in 'addNodes' for the same shard, and cannot be used as a source node for any addition in this shard except in the implicit move case, where they appear as both a source and a node to remove.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "addNodes": {
+            "type": "object",
+            "description": "A mapping of target node identifiers to their addition configuration. Each key represents a target node where a new replica will be added. The value may be null, which means an empty replica will be created, or a string specifying the source node from which shard data will be copied. If the source node is also marked for removal in the same shard, this addition is treated as a move operation, and that source node can only appear once as a source node for that shard. If the source node is not being removed, it can be used as the source for multiple additions (copy operations).",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Defines how the new replica should be created. If null, an empty shard is created. If a string, it specifies the source node from which data for this shard should be replicated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GraphQLQuery",
+  "title": "GraphQLQuery",
+  "type": "object",
+  "description": "GraphQL query based on: http://facebook.github.io/graphql/.",
+  "properties": {
+    "operationName": {
+      "type": "string",
+      "description": "The name of the operation if multiple exist in the query."
+    },
+    "query": {
+      "type": "string",
+      "description": "Query based on GraphQL syntax."
+    },
+    "variables": {
+      "type": "object",
+      "description": "Additional variables for the query."
+    }
+  }
+}

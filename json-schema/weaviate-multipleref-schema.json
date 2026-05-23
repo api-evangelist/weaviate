@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MultipleRef",
+  "title": "MultipleRef",
+  "type": "array",
+  "description": "Multiple instances of references to other objects.",
+  "items": {
+    "$ref": "#/components/schemas/SingleRef"
+  }
+}

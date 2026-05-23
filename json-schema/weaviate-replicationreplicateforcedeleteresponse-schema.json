@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReplicationReplicateForceDeleteResponse",
+  "title": "ReplicationReplicateForceDeleteResponse",
+  "type": "object",
+  "description": "Provides the UUIDs that were successfully force deleted as part of the replication operation. If dryRun is true, this will return the expected outcome without actually deleting anything.",
+  "properties": {
+    "deleted": {
+      "type": "array",
+      "description": "The unique identifiers (IDs) of the replication operations that were forcefully deleted.",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "dryRun": {
+      "type": "boolean",
+      "description": "Indicates whether the operation was a dry run (true) or an actual deletion (false)."
+    }
+  }
+}

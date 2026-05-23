@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RaftStatistics",
+  "title": "RaftStatistics",
+  "description": "The definition of Raft statistics.",
+  "properties": {
+    "appliedIndex": {
+      "type": "string"
+    },
+    "commitIndex": {
+      "type": "string"
+    },
+    "fsmPending": {
+      "type": "string"
+    },
+    "lastContact": {
+      "type": "string"
+    },
+    "lastLogIndex": {
+      "type": "string"
+    },
+    "lastLogTerm": {
+      "type": "string"
+    },
+    "lastSnapshotIndex": {
+      "type": "string"
+    },
+    "lastSnapshotTerm": {
+      "type": "string"
+    },
+    "latestConfiguration": {
+      "type": "object",
+      "description": "Weaviate Raft nodes."
+    },
+    "latestConfigurationIndex": {
+      "type": "string"
+    },
+    "numPeers": {
+      "type": "string"
+    },
+    "protocolVersion": {
+      "type": "string"
+    },
+    "protocolVersionMax": {
+      "type": "string"
+    },
+    "protocolVersionMin": {
+      "type": "string"
+    },
+    "snapshotVersionMax": {
+      "type": "string"
+    },
+    "snapshotVersionMin": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "term": {
+      "type": "string"
+    }
+  }
+}

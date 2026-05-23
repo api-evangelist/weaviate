@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ObjectTtlConfig",
+  "title": "ObjectTtlConfig",
+  "description": "Configuration of objects' time-to-live",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether or not object ttl is enabled for this collection (default: `false`)."
+    },
+    "defaultTtl": {
+      "type": "integer",
+      "description": "Interval (in seconds) to be added to `deleteOn` value, denoting object's expiration time. Has to be positive for `deleteOn` set to `_creationTimeUnix` or `_lastUpdateTimeUnix`, any for custom property (default: `0`)."
+    },
+    "deleteOn": {
+      "type": "string",
+      "description": "Name of the property holding base time to compute object's expiration time (ttl = value of deleteOn property + defaultTtl). Can be set to `_creationTimeUnix`, `_lastUpdateTimeUnix` or custom property of `date` datatype."
+    },
+    "filterExpiredObjects": {
+      "type": "boolean",
+      "description": "Whether remove from resultset expired, but not yet deleted by background process objects (default: `false`)."
+    }
+  }
+}

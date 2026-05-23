@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BackupListResponse",
+  "title": "BackupListResponse",
+  "type": "array",
+  "description": "The definition of a backup create response body.",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed."
+      },
+      "classes": {
+        "type": "array",
+        "description": "The list of collections (classes) for which the backup process was started.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "status": {
+        "type": "string",
+        "description": "Status of backup process.",
+        "enum": [
+          "STARTED",
+          "TRANSFERRING",
+          "TRANSFERRED",
+          "FINALIZING",
+          "SUCCESS",
+          "FAILED",
+          "CANCELLING",
+          "CANCELED"
+        ]
+      },
+      "startedAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the backup process started"
+      },
+      "completedAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the backup process completed (successfully or with failure)"
+      },
+      "size": {
+        "type": "number",
+        "format": "float64",
+        "description": "Size of the backup in Gibs"
+      }
+    }
+  }
+}

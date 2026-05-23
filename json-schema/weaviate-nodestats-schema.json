@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NodeStats",
+  "title": "NodeStats",
+  "description": "The summary of Weaviate's statistics.",
+  "properties": {
+    "shardCount": {
+      "type": "number",
+      "format": "int",
+      "description": "The count of Weaviate's shards. To see this value, set `output` to `verbose`."
+    },
+    "objectCount": {
+      "type": "number",
+      "format": "int64",
+      "description": "The total number of objects in DB."
+    }
+  }
+}

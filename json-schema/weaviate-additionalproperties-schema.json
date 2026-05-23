@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AdditionalProperties",
+  "title": "AdditionalProperties",
+  "type": "object",
+  "description": "(Response only) Additional meta information about a single object.",
+  "additionalProperties": {
+    "type": "object"
+  }
+}

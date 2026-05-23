@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NodeStatus",
+  "title": "NodeStatus",
+  "description": "The definition of a backup node status response body",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the node."
+    },
+    "status": {
+      "type": "string",
+      "description": "Node's status.",
+      "enum": [
+        "HEALTHY",
+        "UNHEALTHY",
+        "UNAVAILABLE",
+        "TIMEOUT"
+      ],
+      "default": "HEALTHY"
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of Weaviate."
+    },
+    "gitHash": {
+      "type": "string",
+      "description": "The gitHash of Weaviate."
+    },
+    "stats": {
+      "$ref": "#/components/schemas/NodeStats"
+    },
+    "batchStats": {
+      "$ref": "#/components/schemas/BatchStats"
+    },
+    "shards": {
+      "type": "array",
+      "description": "The list of the shards with it's statistics.",
+      "items": {
+        "$ref": "#/components/schemas/NodeShardStatus"
+      }
+    },
+    "operationalMode": {
+      "type": "string",
+      "description": "Which mode of operation the node is running in.",
+      "enum": [
+        "ReadWrite",
+        "WriteOnly",
+        "ReadOnly",
+        "ScaleOut"
+      ]
+    }
+  }
+}

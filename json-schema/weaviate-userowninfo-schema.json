@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserOwnInfo",
+  "title": "UserOwnInfo",
+  "type": "object",
+  "required": [
+    "username"
+  ],
+  "properties": {
+    "groups": {
+      "type": "array",
+      "description": "The groups associated with the user.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Role"
+      }
+    },
+    "username": {
+      "type": "string",
+      "description": "The name (ID) of the user."
+    }
+  }
+}

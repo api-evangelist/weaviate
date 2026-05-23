@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ObjectsListResponse",
+  "title": "ObjectsListResponse",
+  "type": "object",
+  "description": "List of objects.",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "description": "The actual list of objects.",
+      "items": {
+        "$ref": "#/components/schemas/Object"
+      }
+    },
+    "deprecations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Deprecation"
+      }
+    },
+    "totalResults": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The total number of objects for the query. The number of items in a response may be smaller due to paging."
+    }
+  }
+}
