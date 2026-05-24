@@ -165,6 +165,8 @@ common:
   - name: Agent Skills
     url: https://github.com/weaviate/agent-skills
     type: AgentSkill
+  - type: LLMsTxt
+    url: https://weaviate.io/llms.txt
 integrations:
   - name: AWS
   - name: Google
