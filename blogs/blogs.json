@@ -2,12 +2,20 @@
   "repo": "weaviate",
   "feeds": [
     {
-      "source": "https://weaviate.io/blog",
+      "source": "https://weaviate.io/blog/atom.xml",
       "feed_url": "https://weaviate.io/blog/atom.xml",
-      "title": "Weaviate Blog",
-      "saved": 12
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://weaviate.io/blog",
+      "feed_url": "https://weaviate.io/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 23,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 25,
+  "fetched": "2026-06-01T23:35:02Z"
 }
