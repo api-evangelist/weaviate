@@ -1,0 +1,2775 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List Available Endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/"
+          },
+          "docs": "Get links to other endpoints to help discover the REST API."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check Application Liveness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/.well-known/live"
+          },
+          "docs": "Indicates if the Weaviate instance is running and responsive to basic HTTP requests. Primarily used for health checks, such as Kubernetes liveness probes."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check Application Readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/.well-known/ready"
+          },
+          "docs": "Indicates if the Weaviate instance has completed its startup routines and is prepared to accept user traffic (data import, queries, etc.). Used for readiness checks, such as Kubernetes readiness probes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "well-known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get OIDC Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/.well-known/openid-configuration"
+          },
+          "docs": "Provides OpenID Connect (OIDC) discovery information if OIDC authentication is configured for Weaviate. Returns details like the token issuer URL, client ID, and required scopes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "replication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Initiate A Replica Movement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/replicate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Begins an asynchronous operation to move or copy a specific shard replica from its current node to a designated target node. The operation involves copying data, synchronizing, and potentially decommissioning the source replica."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete All Replication Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/replication/replicate"
+          },
+          "docs": "Schedules all replication operations for deletion across all collections, shards, and nodes."
+        },
+        {
+          "info": {
+            "name": "Weaviate Force Delete Replication Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/replicate/force-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "USE AT OWN RISK! Synchronously force delete operations from the FSM. This will not perform any checks on which state the operation is in so may lead to data corruption or loss. It is recommended to first scale the number of replication engine workers to 0 before calling this endpoint to ensure no operations are in-flight."
+        },
+        {
+          "info": {
+            "name": "Weaviate Retrieve A Replication Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/replicate/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replication operation to get details for."
+              },
+              {
+                "name": "includeHistory",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the history of the replication operation."
+              }
+            ]
+          },
+          "docs": "Fetches the current status and detailed information for a specific replication operation, identified by its unique ID. Optionally includes historical data of the operation's progress if requested."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Replication Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/replication/replicate/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replication operation to delete."
+              }
+            ]
+          },
+          "docs": "Removes a specific replication operation. If the operation is currently active, it will be cancelled and its resources cleaned up before the operation is deleted."
+        },
+        {
+          "info": {
+            "name": "Weaviate List Replication Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/replicate/list",
+            "params": [
+              {
+                "name": "targetNode",
+                "value": "",
+                "type": "query",
+                "description": "The name of the target node to get details for."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The name of the collection to get details for."
+              },
+              {
+                "name": "shard",
+                "value": "",
+                "type": "query",
+                "description": "The shard to get details for."
+              },
+              {
+                "name": "includeHistory",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the history of the replication operation."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of currently registered replication operations, optionally filtered by collection, shard, or node ID."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel A Replication Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/replicate/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replication operation to cancel."
+              }
+            ]
+          },
+          "docs": "Requests the cancellation of an active replication operation identified by its ID. The operation will be stopped, but its record will remain in the `CANCELLED` state (can't be resumed) and will not be automatically deleted."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Sharding State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/sharding-state",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name to get the sharding state for."
+              },
+              {
+                "name": "shard",
+                "value": "",
+                "type": "query",
+                "description": "The shard to get the sharding state for."
+              }
+            ]
+          },
+          "docs": "Fetches the current sharding state, including replica locations and statuses, for all collections or a specified collection. If a shard name is provided along with a collection, the state for that specific shard is returned."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Replication Scale Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/scale",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name to get the scaling plan for."
+              },
+              {
+                "name": "replicationFactor",
+                "value": "",
+                "type": "query",
+                "description": "The desired replication factor to scale to. Must be a positive integer greater than zero."
+              }
+            ]
+          },
+          "docs": "Computes and returns a replication scale plan for a given collection and desired replication factor. The plan includes, for each shard, a list of nodes to be added and a list of nodes to be removed."
+        },
+        {
+          "info": {
+            "name": "Weaviate Apply Replication Scaling Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/scale",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply a replication scaling plan that specifies nodes to add or remove per shard for a given collection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get Current User Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/users/own-info"
+          },
+          "docs": "Get information about the currently authenticated user, including username and assigned roles."
+        },
+        {
+          "info": {
+            "name": "Weaviate List All Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/users/db",
+            "params": [
+              {
+                "name": "includeLastUsedTime",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the last time the users were utilized."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all database (`db` user type) users with their roles and status information."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get User Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/users/db/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              },
+              {
+                "name": "includeLastUsedTime",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the last used time of the given user"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific database user (`db` user type), including their roles, status, and type."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new database (`db` user type) user with the specified name. Returns an API key for the newly created user."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/users/db/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Delete a database user. You can't delete your current user."
+        },
+        {
+          "info": {
+            "name": "Weaviate Rotate API Key Of A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id/rotate-key",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Revoke the current API key for the specified database user (`db` user type) and generate a new one."
+        },
+        {
+          "info": {
+            "name": "Weaviate Activate A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id/activate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Activate a deactivated database user (`db` user type)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Deactivate A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id/deactivate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivate a database user (`db` user type)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "authz",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get All Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles"
+          },
+          "docs": "Get all roles and their assigned permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create New Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new role with the specified permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add Permissions To A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles/:id/add-permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name (ID) of the role being modified."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add new permissions to an existing role without affecting current permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Remove Permissions From A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles/:id/remove-permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role being modified."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permissions can be revoked from a specified role. Removing all permissions from a role will delete the role itself."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ]
+          },
+          "docs": "Fetch a role by its name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/authz/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ]
+          },
+          "docs": "Deleting a role will remove it from the system, and revoke the associated permissions from all users who had this role."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check Whether A Role Possesses A Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles/:id/has-permission",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check whether a role has the specified permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Users Assigned To A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ]
+          },
+          "docs": "Get all the users (`db` + `oidc`) who have been assigned a specific role. Deprecated, will be removed when v1.29 is not supported anymore."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Users Assigned To A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id/user-assignments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name (ID) of the role."
+              }
+            ]
+          },
+          "docs": "Fetch a list of users which have the specified role."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Groups That Have A Specific Role Assigned",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id/group-assignments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the role."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all groups that have been assigned a specific role, identified by its name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Roles Assigned To A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/users/:id/roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Retrieve the roles assigned to a specific user (`db` + `oidc`). Deprecated, will be removed when 1.29 is not supported anymore"
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Roles Assigned To A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/users/:id/roles/:userType",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              },
+              {
+                "name": "userType",
+                "value": "",
+                "type": "path",
+                "description": "The type of the user."
+              },
+              {
+                "name": "includeFullRoles",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include detailed role information like its assigned permissions."
+              }
+            ]
+          },
+          "docs": "Get all the roles for a specific user (`db` or `oidc`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Assign A Role To A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/users/:id/assign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign one or more roles to a user. Users can have multiple roles."
+        },
+        {
+          "info": {
+            "name": "Weaviate Revoke A Role From A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/users/:id/revoke",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove one or more roles from a user."
+        },
+        {
+          "info": {
+            "name": "Weaviate Assign A Role To A Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/groups/:id/assign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign roles to the specified group."
+        },
+        {
+          "info": {
+            "name": "Weaviate Revoke A Role From A Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/groups/:id/revoke",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke roles from the specified group."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Roles Assigned To A Specific Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/groups/:id/roles/:groupType",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the group."
+              },
+              {
+                "name": "groupType",
+                "value": "",
+                "type": "path",
+                "description": "The type of the group."
+              },
+              {
+                "name": "includeFullRoles",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response will include the full role definitions with all associated permissions. If false, only role names are returned."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all roles assigned to a specific group. The group must be identified by both its name (`id`) and its type (`db` or `oidc`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate List All Groups Of A Specific Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/groups/:groupType",
+            "params": [
+              {
+                "name": "groupType",
+                "value": "",
+                "type": "path",
+                "description": "The type of group to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all available group names for a specified group type (`oidc` or `db`)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/objects",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "A threshold UUID of the objects to retrieve after, using an UUID-based ordering. This object is not part of the set. <br/><br/>Must be used with collection name (`class`), typically in conjunction with `limit`. <br/><br/>Note `after` cannot be used with `offset` or `sort`. <br/><br/>For a null value similar to offset=0, set an empty string in the request, i.e. `after=` or `after`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the result window. Note `offset` will retrieve `offset+limit` results and return `limit` results from the object with index `offset` onwards. Limited by the value of `QUERY_MAXIMUM_RESULTS`. <br/><br/>Should be used in conjunction with `limit`. <br/><br/>Cannot be used with `after`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to be returned per page. The default is 25 unless set otherwise as an environment variable."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Name(s) of the property to sort by - e.g. `city`, or `country,city`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order parameter to tell how to order (asc or desc) data within given field. Should be used in conjunction with `sort` parameter. If providing multiple `sort` values, provide multiple `order` values in corresponding order, e.g.: `sort=author_name,title&order=desc,asc`."
+              },
+              {
+                "name": "class",
+                "value": "",
+                "type": "query",
+                "description": "The collection from which to query objects.  <br/><br/>Note that if the collection name (`class`) is not provided, the response will not include any objects."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of data objects. By default, objects are returned in reverse order of creation. Requires a collection name (`class`) parameter to specify which collection's objects to list, otherwise, returns an empty list."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data object. The object's metadata and schema values are validated before creation.<br/><br/>**Note (batch import)**:<br/>If you plan on importing a large number of objects, using the `/batch/objects` endpoint is significantly more efficient than sending multiple single requests.<br/><br/>**Note (idempotence)**:<br/>This operation (POST) fails if an object with the provided ID already exists. To update an existing object, use the PUT or PATCH methods."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be retrieved."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`."
+              }
+            ]
+          },
+          "docs": "Get a specific object based on its UUID. Also available as Websocket bus. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be replaced."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an object based on its UUID. Given meta-data and schema values are validated. `lastUpdateTimeUnix` is set to the time this function is called. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Patch An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be patched."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an object based on its UUID (using patch semantics). This method supports json-merge style patch semantics (RFC 7396). Provided meta-data and schema values are validated. `lastUpdateTimeUnix` is set to the time this function is called. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be deleted."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Deletes an object from the database based on its UUID. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check If An Object Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to check."
+              }
+            ]
+          },
+          "docs": "Checks if an object exists in the system based on its UUID. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be retrieved."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "node_name",
+                "value": "",
+                "type": "query",
+                "description": "The target node which should fulfill the request."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Get a data object based on its collection name (`className`) and UUID (`id`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Replace An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be replaced."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces properties of an existing data object. The object is identified by its collection name (`className`) and UUID (`id`). The request body must contain the complete object definition with the new property values."
+        },
+        {
+          "info": {
+            "name": "Weaviate Patch An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be patched."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific properties of an existing data object using JSON merge patch semantics (RFC 7396). The object is identified by its collection name (`className`) and UUID (`id`). Only the fields provided in the request body are modified. Metadata and schema values are validated, and the object's `lastUpdateTimeUnix` is updated."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be deleted."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Removes a data object from a specific collection, identified by its collection name (`className`) and UUID (`id`).<br/><br/>**Note on deleting references (legacy format):**<br/>For backward compatibility with older beacon formats (lacking a collection name), deleting a reference requires the beacon in the request to exactly match the stored format. Beacons always use `localhost` as the host, indicating the target is within the same Weaviate instance."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check If An Object Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to check."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Verifies the existence of a specific data object within a collection (class), identified by its collection name (`className`) and UUID (`id`), without returning the object itself.<br/><br/>This is faster than a GET request as it avoids retrieving and processing object data. Existence is confirmed by a 204 No Content status code, while non-existence results in a 404 Not Found."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a reference to a specific property of a data object. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Replace Object References",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all references in cross-reference property of an object. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete the single reference that is given in the body from the list of references that this property has. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects/:className/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the source object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new reference to a reference property (`propertyName`) on a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The reference to add is specified in the request body."
+        },
+        {
+          "info": {
+            "name": "Weaviate Replace Object References",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:className/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the source object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces all existing references for a specific reference property (`propertyName`) on a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The new set of references is provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:className/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the source object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a specific reference from a reference property (`propertyName`) of a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The reference to remove is specified in the request body."
+        },
+        {
+          "info": {
+            "name": "Weaviate Validate An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks if a data object's structure conforms to the specified collection schema and metadata rules without actually storing the object.<br/><br/>A successful validation returns a 200 OK status code with no body. If validation fails, an error response with details is returned."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "batch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Create Objects In Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/batch/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete Objects In Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/batch/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are f"
+        },
+        {
+          "info": {
+            "name": "Weaviate Create Cross-References In Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/batch/references",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch create cross-references between collection items in bulk."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "graphql",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Perform A GraphQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/graphql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a single GraphQL query provided in the request body. Use this endpoint for all Weaviate data queries and exploration."
+        },
+        {
+          "info": {
+            "name": "Weaviate Perform Batched GraphQL Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/graphql/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes multiple GraphQL queries provided in the request body as an array. Allows performing several queries in a single network request for efficiency."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "meta",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get Instance Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/meta"
+          },
+          "docs": "Provides meta-information about the running Weaviate instance, including its version, loaded modules, and network hostname. This information can be useful for monitoring, compatibility checks, or inter-instance communication."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "tokenize",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Tokenize Text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/tokenize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tokenizes the provided text using the specified tokenization method. This is a stateless utility endpoint useful for debugging and understanding how text will be processed during indexing and querying. The response includes both the indexed tokens (as stored in the inverted index) and query tokens (after optional stopword removal)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get All Collection Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the definitions of all collections (classes) currently in the database schema."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines and creates a new collection (class).<br/><br/>If [`AutoSchema`](https://docs.weaviate.io/weaviate/config-refs/collections#auto-schema) is enabled (not recommended for production), Weaviate might attempt to infer schema from data during import. Manual definition via this endpoint provides explicit control."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Single Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the definition of a specific collection (`className`), including its properties, configuration, and vectorizer settings."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update Collection Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/schema/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration settings of an existing collection (`className`) based on the provided definition. Note: This operation modifies mutable settings specified in the request body. It does not add properties (use `POST /schema/{className}/properties` for that) or change the collection name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Collection (And All Associated Data)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to delete."
+              }
+            ]
+          },
+          "docs": "Removes a collection definition from the schema. WARNING: This action permanently deletes all data objects stored within the collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add A Property To A Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema/:className/properties",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to add the property to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new property definition to an existing collection (`className`) definition."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Property'S Inverted Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className/properties/:propertyName/index/:indexName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the property."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the property whose inverted index should be deleted."
+              },
+              {
+                "name": "indexName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the inverted index to delete from the property."
+              }
+            ]
+          },
+          "docs": "Deletes an inverted index of a specific property within a collection (`className`). The index to delete is identified by `indexName` and must be one of `filterable`, `searchable`, or `rangeFilters`."
+        },
+        {
+          "info": {
+            "name": "Weaviate Tokenize Text Using A Property'S Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema/:className/properties/:propertyName/tokenize",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the property."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the property whose tokenization configuration should be used."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tokenizes the provided text using the tokenization method configured for the specified property. This endpoint automatically applies the property's tokenization setting and the collection's stopword configuration, making it useful for understanding exactly how text will be processed for a given property during indexing and querying."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Collection'S Vector Index.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className/vectors/:vectorIndexName/index",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the property."
+              },
+              {
+                "name": "vectorIndexName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vector index."
+              }
+            ]
+          },
+          "docs": "Deletes a specific vector index within a collection (`className`). The vector index to delete is identified by `vectorIndexName`."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get The Shards Status Of A Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className/shards",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) whose shards to query."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "The name of the tenant for which to retrieve shard statuses (only applicable for multi-tenant collections)."
+              }
+            ]
+          },
+          "docs": "Retrieves the status of all shards associated with the specified collection (`className`). For multi-tenant collections, use the `tenant` query parameter to retrieve status for a specific tenant's shards."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update A Shard Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/schema/:className/shards/:shardName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the shard."
+              },
+              {
+                "name": "shardName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the shard to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of a specific shard within a collection (e.g., sets it to `READY` or `READONLY`). This is typically used after resolving an underlying issue (like disk space) that caused a shard to become non-operational. There is also a convenience function in each client to set the status of all shards of a collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get The List Of Tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) whose tenants to list."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all tenants currently associated with the specified collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the multi-tenant enabled collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates one or more new tenants for a specified collection (`className`). Multi-tenancy must be enabled for the collection via its definition."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update A Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the tenants."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the activity status (e.g., `ACTIVE`, `INACTIVE`, etc.) of one or more specified tenants within a collection (`className`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete Tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) from which to delete tenants."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes one or more specified tenants from a collection (`className`). WARNING: This action permanently deletes all data associated with the specified tenants."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Specific Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className/tenants/:tenantName",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the tenant."
+              },
+              {
+                "name": "tenantName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves details about a specific tenant within the given collection (`className`), such as its current activity status."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check If A Tenant Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:8080/schema/:className/tenants/:tenantName",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to check within."
+              },
+              {
+                "name": "tenantName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant to check for."
+              }
+            ]
+          },
+          "docs": "Checks for the existence of a specific tenant within the given collection (`className`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate List Aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/aliases",
+            "params": [
+              {
+                "name": "class",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to retrieve aliases for a specific collection (class) only. If not provided, returns all aliases."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all aliases in the system. Results can be filtered by specifying a collection (class) name to get aliases for a specific collection only."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/aliases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new alias mapping between an alias name and a collection (class). The alias acts as an alternative name for accessing the collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get An Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/aliases/:aliasName",
+            "params": [
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific alias by its name, including which collection (class) it points to."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update An Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/aliases/:aliasName",
+            "params": [
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing alias to point to a different collection (class). This allows you to redirect an alias from one collection to another without changing the alias name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/aliases/:aliasName",
+            "params": [
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove an existing alias from the system. This will delete the alias mapping but will not affect the underlying collection (class)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "namespaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/namespaces"
+          },
+          "docs": "Retrieve the list of all namespaces the caller has permission to see. Callers without any applicable `manage_namespaces` permission receive an empty list (never 403)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/namespaces/:namespace_id",
+            "params": [
+              {
+                "name": "namespace_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific namespace by its name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/namespaces/:namespace_id",
+            "params": [
+              {
+                "name": "namespace_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace. Must start with a lowercase letter, contain only lowercase letters and digits, length 3-36, and not be a reserved name."
+              }
+            ]
+          },
+          "docs": "Create a new cluster-level namespace with the given name. Names must start with a lowercase letter, contain only lowercase letters and digits, be 3-36 characters long, and must not be a reserved name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/namespaces/:namespace_id",
+            "params": [
+              {
+                "name": "namespace_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Hard-delete a namespace by its name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "backups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List All Created Backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/backups/:backend",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system to list backups from (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order of returned list of backups based on creation time. (asc or desc)"
+              }
+            ]
+          },
+          "docs": "List all created backups IDs, Status"
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/backups/:backend",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup will be stored (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the creation of a backup for specified collections on a designated backend storage.<br/><br/>Notes:<br/>- Backups are compressed using gzip by default.<br/>- Weaviate remains operational during the backup process."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Backup Creation Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/backups/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root."
+              }
+            ]
+          },
+          "docs": "Checks the status of a specific backup creation process identified by its ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel A Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/backups/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing backup operation identified by its ID."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Backup Restoration Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/backups/:backend/:id/restore",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup being restored. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket."
+              }
+            ]
+          },
+          "docs": "Checks the status of a specific backup restoration process identified by the backup ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled."
+        },
+        {
+          "info": {
+            "name": "Weaviate Restore From A Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/backups/:backend/:id/restore",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup to restore from. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the restoration of collections from a specified backup located on a designated backend.<br/><br/>Requirements:<br/>- Target cluster must have the same number of nodes as the source cluster where the backup was created.<br/>- Collections included in the restore must not already exist on the target cluster.<br/>- Node names must match between the backup and the target cluster."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel A Backup Restoration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/backups/:backend/:id/restore",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup restoration to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing backup restoration process identified by its ID on the specified backend storage."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Start A New Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/export/:backend",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "The backend storage system to use for the export (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an export operation on the specified backend storage (S3, GCS, Azure, or filesystem). The output format is controlled by the required 'file_format' field in the request body (currently only 'parquet' is supported). Each collection is exported to a separate file."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Export Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/export/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "The backend storage system where the export is stored."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the export."
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of an export operation, including progress for each collection being exported."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel An Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/export/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "The backend storage system where the export is stored."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the export to cancel."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing export operation identified by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get Cluster Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/cluster/statistics"
+          },
+          "docs": "Provides statistics about the internal Raft consensus protocol state for the Weaviate cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get Node Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/nodes",
+            "params": [
+              {
+                "name": "output",
+                "value": "",
+                "type": "query",
+                "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+              }
+            ]
+          },
+          "docs": "Retrieves status information about all nodes in the cluster. Use the `output` query parameter to control the level of detail."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Node Status By Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/nodes/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) for which to retrieve node status."
+              },
+              {
+                "name": "shardName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "",
+                "type": "query",
+                "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+              }
+            ]
+          },
+          "docs": "Retrieves status information only for the nodes that host shards for the specified collection (`className`). Use the `output` query parameter to control the level of detail."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "distributedTasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Lists All Distributed Tasks In The Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/tasks"
+          },
+          "docs": "Weaviate Lists All Distributed Tasks In The Cluster"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "classifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Start A Classification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/classifications/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a background classification task based on the provided parameters. Use the GET /classifications/{id} endpoint to monitor the status and retrieve results."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Classification Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/classifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the classification task."
+              }
+            ]
+          },
+          "docs": "Retrieves the status, metadata, and results (if completed) of a classification task identified by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "mcp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Opens An SSE Stream For Receiving MCP Server-Sent Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/mcp"
+          },
+          "docs": "Opens an SSE stream for receiving MCP server-sent events."
+        },
+        {
+          "info": {
+            "name": "Weaviate MCP Streamable HTTP Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/mcp"
+          },
+          "docs": "MCP Streamable HTTP endpoint. Handles JSON-RPC requests for tool discovery and invocation."
+        },
+        {
+          "info": {
+            "name": "Weaviate Terminates An MCP Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/mcp"
+          },
+          "docs": "Terminates an MCP session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
