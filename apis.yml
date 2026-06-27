@@ -63,7 +63,7 @@ common:
 - url: https://weaviate.io/community
   type: Community
 - url: https://forum.weaviate.io/
-  type: Forum
+  type: Forums
 - url: https://weaviate.io/slack
   type: Slack
 - url: https://weaviate.io/pricing
@@ -126,8 +126,8 @@ common:
   type: MCPServer
 - name: Agent Skills
   url: https://github.com/weaviate/agent-skills
-  type: AgentSkill
-- type: LLMsTxt
+  type: AgentSkills
+- type: LlmsText
   url: https://weaviate.io/llms.txt
 integrations:
 - name: AWS
