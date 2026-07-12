@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/weaviate-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: API key authentication
+  sources:
+  - openapi/weaviate-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OIDC/JWT bearer authentication
+  sources:
+  - openapi/weaviate-openapi.yml

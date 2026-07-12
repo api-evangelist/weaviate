@@ -46,6 +46,12 @@ apis:
   - url: graphql/weaviate-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/weaviate-trust-center.yml
+- type: DomainSecurity
+  url: security/weaviate-domain-security.yml
+- type: Authentication
+  url: authentication/weaviate-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/weaviate-io
 - url: https://weaviate.io/developers/weaviate/api/rest
