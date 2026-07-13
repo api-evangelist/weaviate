@@ -1,232 +1,305 @@
+# weaviate — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - path-params-casing: snake @ 59% (n=104)
+#   - query-params-casing: snake @ 86% (n=64)
+#   - schema-names-casing: pascal @ 100% (n=108)
+#   - schema-properties-casing: snake @ 54% (n=440)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-401: 93% adherence
+#   - operation-documents-403: 92% adherence
+#   - operation-documents-500: 95% adherence
+#   - pagination params observed: ['limit', 'offset']
+#   - merge: kept 22 existing, added 9 measured, upgraded 0
+#   - added: path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, error-schema-defined, operation-documents-401, operation-documents-403, operation-documents-500, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   weaviate-openapi-version:
     description: Weaviate API specs must use OpenAPI 3.0.x
-    message: "OpenAPI version must be 3.0.x"
+    message: OpenAPI version must be 3.0.x
     severity: error
-    given: "$"
+    given: $
     then:
       field: openapi
       function: pattern
       functionOptions:
-        match: "^3\\.0\\."
-
+        match: ^3\.0\.
   weaviate-info-title:
     description: API must have a title
-    message: "Info object must have a title"
+    message: Info object must have a title
     severity: error
-    given: "$.info"
+    given: $.info
     then:
       field: title
       function: truthy
-
   weaviate-info-description:
     description: API must have a description
-    message: "Info object must have a description"
+    message: Info object must have a description
     severity: warn
-    given: "$.info"
+    given: $.info
     then:
       field: description
       function: truthy
-
   weaviate-info-version:
     description: API must have a version
-    message: "Info object must have a version"
+    message: Info object must have a version
     severity: error
-    given: "$.info"
+    given: $.info
     then:
       field: version
       function: truthy
-
   weaviate-operation-summary:
     description: All operations must have a summary
-    message: "Operation must have a summary"
+    message: Operation must have a summary
     severity: warn
-    given: "$.paths[*][get,post,put,delete,patch,head,options]"
+    given: $.paths[*][get,post,put,delete,patch,head,options]
     then:
       field: summary
       function: truthy
-
   weaviate-operation-description:
     description: All operations should have a description
-    message: "Operation should have a description"
+    message: Operation should have a description
     severity: info
-    given: "$.paths[*][get,post,put,delete,patch,head,options]"
+    given: $.paths[*][get,post,put,delete,patch,head,options]
     then:
       field: description
       function: truthy
-
   weaviate-operation-operationid:
     description: All operations must have an operationId
-    message: "Operation must have an operationId"
+    message: Operation must have an operationId
     severity: error
-    given: "$.paths[*][get,post,put,delete,patch,head,options]"
+    given: $.paths[*][get,post,put,delete,patch,head,options]
     then:
       field: operationId
       function: truthy
-
   weaviate-operation-tags:
     description: All operations must have tags
-    message: "Operation must have tags"
+    message: Operation must have tags
     severity: warn
-    given: "$.paths[*][get,post,put,delete,patch,head,options]"
+    given: $.paths[*][get,post,put,delete,patch,head,options]
     then:
       field: tags
       function: truthy
-
   weaviate-operation-responses:
     description: All operations must have responses
-    message: "Operation must have responses defined"
+    message: Operation must have responses defined
     severity: error
-    given: "$.paths[*][get,post,put,delete,patch,head,options]"
+    given: $.paths[*][get,post,put,delete,patch,head,options]
     then:
       field: responses
       function: truthy
-
   weaviate-response-200:
     description: GET and POST operations should have a 200 response
-    message: "GET/POST operations should define a 200 response"
+    message: GET/POST operations should define a 200 response
     severity: warn
-    given: "$.paths[*][get,post]"
+    given: $.paths[*][get,post]
     then:
       field: responses.200
       function: truthy
-
   weaviate-schema-properties-description:
     description: Schema properties should have descriptions
-    message: "Schema properties should have descriptions"
+    message: Schema properties should have descriptions
     severity: info
-    given: "$.components.schemas[*].properties[*]"
+    given: $.components.schemas[*].properties[*]
     then:
       field: description
       function: truthy
-
   weaviate-path-kebab-case:
     description: Path segments should use kebab-case
-    message: "Path segments should use kebab-case (lowercase with hyphens)"
+    message: Path segments should use kebab-case (lowercase with hyphens)
     severity: info
-    given: "$.paths"
+    given: $.paths
     then:
       function: pattern
       functionOptions:
-        match: "^(/[a-z0-9{}-]+)+/?$"
-
+        match: ^(/[a-z0-9{}-]+)+/?$
   weaviate-parameter-description:
     description: Parameters should have descriptions
-    message: "Parameter should have a description"
+    message: Parameter should have a description
     severity: warn
-    given: "$.paths[*][get,post,put,delete,patch].parameters[*]"
+    given: $.paths[*][get,post,put,delete,patch].parameters[*]
     then:
       field: description
       function: truthy
-
   weaviate-request-body-content:
     description: Request bodies must define content
-    message: "Request body must have content defined"
+    message: Request body must have content defined
     severity: error
-    given: "$.paths[*][post,put,patch].requestBody"
+    given: $.paths[*][post,put,patch].requestBody
     then:
       field: content
       function: truthy
-
   weaviate-security-schemes:
     description: API must define security schemes
-    message: "Security schemes must be defined in components"
+    message: Security schemes must be defined in components
     severity: warn
-    given: "$.components"
+    given: $.components
     then:
       field: securitySchemes
       function: truthy
-
   weaviate-operation-id-camel-case:
     description: OperationIds should use camelCase
-    message: "OperationId should use camelCase naming"
+    message: OperationId should use camelCase naming
     severity: info
-    given: "$.paths[*][get,post,put,delete,patch].operationId"
+    given: $.paths[*][get,post,put,delete,patch].operationId
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
+        match: ^[a-z][a-zA-Z0-9]*$
   weaviate-schema-type:
     description: Schema objects should have a type defined
-    message: "Schema should define a type"
+    message: Schema should define a type
     severity: info
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       function: schema
       functionOptions:
         schema:
           anyOf:
-            - required: [type]
-            - required: [allOf]
-            - required: [anyOf]
-            - required: [oneOf]
-
+          - required:
+            - type
+          - required:
+            - allOf
+          - required:
+            - anyOf
+          - required:
+            - oneOf
   weaviate-no-empty-paths:
     description: Path items must have at least one operation
-    message: "Path item must have at least one HTTP method defined"
+    message: Path item must have at least one HTTP method defined
     severity: error
-    given: "$.paths[*]"
+    given: $.paths[*]
     then:
       function: schema
       functionOptions:
         schema:
           minProperties: 1
-
   weaviate-vector-db-tags:
     description: Vector database operations should be tagged appropriately
-    message: "Operations should use standard Weaviate tags"
+    message: Operations should use standard Weaviate tags
     severity: info
-    given: "$.paths[*][get,post,put,delete,patch].tags[*]"
+    given: $.paths[*][get,post,put,delete,patch].tags[*]
     then:
       function: enumeration
       functionOptions:
         values:
-          - objects
-          - schema
-          - backups
-          - batch
-          - graphql
-          - nodes
-          - oidc
-          - authz
-          - users
-          - replication
-          - tenants
-          - classifications
-          - aliases
-          - namespaces
-          - cluster
-          - mcp
-          - well-known
-
+        - objects
+        - schema
+        - backups
+        - batch
+        - graphql
+        - nodes
+        - oidc
+        - authz
+        - users
+        - replication
+        - tenants
+        - classifications
+        - aliases
+        - namespaces
+        - cluster
+        - mcp
+        - well-known
   weaviate-uuid-format:
     description: Object IDs should use UUID format
-    message: "ID properties should use UUID format"
+    message: ID properties should use UUID format
     severity: info
-    given: "$.components.schemas[*].properties.id"
+    given: $.components.schemas[*].properties.id
     then:
       function: schema
       functionOptions:
         schema:
           properties:
             format:
-              enum: [uuid]
-
+              enum:
+              - uuid
   weaviate-microcks-operation:
     description: Operations should have Microcks extensions for testing
-    message: "Operation should include x-microcks-operation extension"
+    message: Operation should include x-microcks-operation extension
     severity: info
-    given: "$.paths[*][get,post,put,delete,patch]"
+    given: $.paths[*][get,post,put,delete,patch]
     then:
       field: x-microcks-operation
       function: truthy
-
   weaviate-servers-defined:
     description: API must define servers
-    message: "Servers array must be defined"
+    message: Servers array must be defined
     severity: error
-    given: "$"
+    given: $
     then:
       field: servers
+      function: truthy
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^[A-Z][A-Za-z0-9]*$
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  operation-documents-401:
+    description: Operations should document a 401 response (documented on 93% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '401'
+      function: truthy
+  operation-documents-403:
+    description: Operations should document a 403 response (documented on 92% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '403'
+      function: truthy
+  operation-documents-500:
+    description: Operations should document a 500 response (documented on 95% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '500'
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
