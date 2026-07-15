@@ -46,6 +46,8 @@ apis:
   - url: graphql/weaviate-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/weaviate-agentic-access.yml
 - type: TrustCenter
   url: security/weaviate-trust-center.yml
 - type: DomainSecurity
