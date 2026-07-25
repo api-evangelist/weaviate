@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz cluster API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: cluster
+paths:
+  /cluster/statistics:
+    get:
+      summary: Weaviate Get Cluster Statistics
+      description: Provides statistics about the internal Raft consensus protocol state for the Weaviate cluster.
+      tags:
+      - cluster
+      operationId: cluster.get.statistics
+      responses:
+        '200':
+          description: Successfully retrieved Raft cluster statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatisticsResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request for cluster statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while retrieving cluster statistics. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    ClusterStatisticsResponse:
+      type: object
+      description: The cluster statistics of all of the Weaviate nodes
+      properties:
+        statistics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Statistics'
+        synchronized:
+          type: boolean
+    RaftStatistics:
+      description: The definition of Raft statistics.
+      properties:
+        appliedIndex:
+          type: string
+        commitIndex:
+          type: string
+        fsmPending:
+          type: string
+        lastContact:
+          type: string
+        lastLogIndex:
+          type: string
+        lastLogTerm:
+          type: string
+        lastSnapshotIndex:
+          type: string
+        lastSnapshotTerm:
+          type: string
+        latestConfiguration:
+          type: object
+          description: Weaviate Raft nodes.
+        latestConfigurationIndex:
+          type: string
+        numPeers:
+          type: string
+        protocolVersion:
+          type: string
+        protocolVersionMax:
+          type: string
+        protocolVersionMin:
+          type: string
+        snapshotVersionMax:
+          type: string
+        snapshotVersionMin:
+          type: string
+        state:
+          type: string
+        term:
+          type: string
+    Statistics:
+      description: The definition of node statistics.
+      properties:
+        name:
+          type: string
+          description: The name of the node.
+        status:
+          type: string
+          description: Node's status.
+          enum:
+          - HEALTHY
+          - UNHEALTHY
+          - UNAVAILABLE
+          - TIMEOUT
+          default: HEALTHY
+        bootstrapped:
+          type: boolean
+        dbLoaded:
+          type: boolean
+        initialLastAppliedIndex:
+          type: number
+          format: uint64
+        lastAppliedIndex:
+          type: number
+        isVoter:
+          type: boolean
+        leaderId:
+          type: object
+        leaderAddress:
+          type: object
+        open:
+          type: boolean
+        ready:
+          type: boolean
+        candidates:
+          type: object
+        raft:
+          $ref: '#/components/schemas/RaftStatistics'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

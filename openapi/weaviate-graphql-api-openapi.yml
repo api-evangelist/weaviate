@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz graphql API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: graphql
+paths:
+  /graphql:
+    post:
+      summary: Weaviate Perform A GraphQL Query
+      description: Executes a single GraphQL query provided in the request body. Use this endpoint for all Weaviate data queries and exploration.
+      tags:
+      - graphql
+      operationId: graphql.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLQuery'
+      responses:
+        '200':
+          description: Query executed successfully. The response body contains the query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred during query execution. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /graphql/batch:
+    post:
+      summary: Weaviate Perform Batched GraphQL Queries
+      description: Executes multiple GraphQL queries provided in the request body as an array. Allows performing several queries in a single network request for efficiency.
+      tags:
+      - graphql
+      operationId: graphql.batch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLQueries'
+      responses:
+        '200':
+          description: Batch request processed successfully. The response body contains an array of results corresponding to the input queries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponses'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred during batch query execution. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    JsonObject:
+      type: object
+      description: JSON object value.
+    GraphQLError:
+      description: An error response caused by a GraphQL query.
+      properties:
+        locations:
+          type: array
+          items:
+            type: object
+            properties:
+              column:
+                type: integer
+                format: int64
+              line:
+                type: integer
+                format: int64
+        message:
+          type: string
+        path:
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    GraphQLQueries:
+      type: array
+      description: A list of GraphQL queries.
+      items:
+        $ref: '#/components/schemas/GraphQLQuery'
+    GraphQLResponse:
+      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
+      properties:
+        data:
+          type: object
+          description: GraphQL data object.
+          additionalProperties:
+            $ref: '#/components/schemas/JsonObject'
+        errors:
+          type: array
+          description: Array with errors.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
+    GraphQLResponses:
+      type: array
+      description: A list of GraphQL responses.
+      items:
+        $ref: '#/components/schemas/GraphQLResponse'
+    GraphQLQuery:
+      type: object
+      description: 'GraphQL query based on: http://facebook.github.io/graphql/.'
+      properties:
+        operationName:
+          type: string
+          description: The name of the operation if multiple exist in the query.
+        query:
+          type: string
+          description: Query based on GraphQL syntax.
+        variables:
+          type: object
+          description: Additional variables for the query.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

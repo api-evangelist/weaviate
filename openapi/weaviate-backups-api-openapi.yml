@@ -1,0 +1,724 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz backups API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: backups
+paths:
+  /backups/{backend}:
+    post:
+      summary: Weaviate Create A Backup
+      description: Initiates the creation of a backup for specified collections on a designated backend storage.<br/><br/>Notes:<br/>- Backups are compressed using gzip by default.<br/>- Weaviate remains operational during the backup process.
+      tags:
+      - backups
+      operationId: backups.create
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system where the backup will be stored (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupCreateRequest'
+      responses:
+        '200':
+          description: Backup creation process initiated successfully. Check the status endpoint for progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupCreateResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid backup creation request. Check the request body and backend configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred during backup initiation. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    get:
+      summary: Weaviate List All Created Backups
+      description: List all created backups IDs, Status
+      tags:
+      - backups
+      operationId: backups.list
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system to list backups from (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      - name: order
+        in: query
+        required: false
+        description: Order of returned list of backups based on creation time. (asc or desc)
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+      responses:
+        '200':
+          description: Successfully retrieved the list of backups in progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupListResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request to list backups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while listing backups. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /backups/{backend}/{id}:
+    get:
+      summary: Weaviate Get Backup Creation Status
+      description: Checks the status of a specific backup creation process identified by its ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled.
+      tags:
+      - backups
+      operationId: backups.create.status
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the backup. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed).
+        schema:
+          type: string
+      - name: bucket
+        in: query
+        required: false
+        description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        description: 'Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the status of the backup creation process.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupCreateStatusResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Backup not found on the specified backend with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request to check backup creation status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while checking backup status. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Cancel A Backup
+      description: Cancels an ongoing backup operation identified by its ID.
+      tags:
+      - backups
+      operationId: backups.cancel
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the backup to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed).
+        schema:
+          type: string
+      - name: bucket
+        in: query
+        required: false
+        description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        description: 'Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.'
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Backup canceled successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid backup cancellation request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred during backup cancellation. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /backups/{backend}/{id}/restore:
+    post:
+      summary: Weaviate Restore From A Backup
+      description: Initiates the restoration of collections from a specified backup located on a designated backend.<br/><br/>Requirements:<br/>- Target cluster must have the same number of nodes as the source cluster where the backup was created.<br/>- Collections included in the restore must not already exist on the target cluster.<br/>- Node names must match between the backup and the target cluster.
+      tags:
+      - backups
+      operationId: backups.restore
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the backup to restore from. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupRestoreRequest'
+      responses:
+        '200':
+          description: Backup restoration process initiated successfully. Check the status endpoint for progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupRestoreResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Backup not found on the specified backend with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid backup restoration request. Check requirements and request body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred during restore initiation. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    get:
+      summary: Weaviate Get Backup Restoration Status
+      description: Checks the status of a specific backup restoration process identified by the backup ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled.
+      tags:
+      - backups
+      operationId: backups.restore.status
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the backup being restored. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed).
+        schema:
+          type: string
+      - name: bucket
+        in: query
+        required: false
+        description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        description: 'Optional: Specifies the path within the bucket.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the status of the backup restoration process.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupRestoreStatusResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Backup not found on the specified backend with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while checking restore status. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Cancel A Backup Restoration
+      description: Cancels an ongoing backup restoration process identified by its ID on the specified backend storage.
+      tags:
+      - backups
+      operationId: backups.restore.cancel
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the backup restoration to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed).
+        schema:
+          type: string
+      - name: bucket
+        in: query
+        required: false
+        description: 'Optional: Specifies the bucket, container, or volume name if required by the backend.'
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        description: 'Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.'
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Backup restoration cancelled successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid backup restoration cancellation request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred during backup restoration cancellation. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    BackupRestoreStatusResponse:
+      description: The definition of a backup restore metadata.
+      properties:
+        id:
+          type: string
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        backend:
+          type: string
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        path:
+          type: string
+          description: Destination path of backup files valid for the selected backup backend, contains bucket and path.
+        error:
+          type: string
+          description: Error message if backup restoration failed.
+        status:
+          type: string
+          description: Phase of backup restoration process.
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
+    BackupRestoreRequest:
+      description: Request body for restoring a backup for a set of collections (classes).
+      properties:
+        config:
+          $ref: '#/components/schemas/RestoreConfig'
+        include:
+          type: array
+          description: List of collections (classes) to include in the backup restoration process.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collections (classes) to exclude from the backup restoration process.
+          items:
+            type: string
+        node_mapping:
+          type: object
+          description: Allows overriding the node names stored in the backup with different ones. Useful when restoring backups to a different environment.
+          additionalProperties:
+            type: string
+        overwriteAlias:
+          type: boolean
+          description: Allows ovewriting the collection alias if there is a conflict
+    BackupCreateStatusResponse:
+      description: The definition of a backup create metadata
+      properties:
+        id:
+          type: string
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        backend:
+          type: string
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        path:
+          type: string
+          description: Destination path of backup files valid for the selected backend.
+        error:
+          type: string
+          description: error message if creation failed
+        status:
+          type: string
+          description: phase of backup creation process
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
+        startedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the backup process started
+        completedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the backup process completed (successfully or with failure)
+        size:
+          type: number
+          format: float64
+          description: Size of the backup in Gibs
+    BackupCreateRequest:
+      description: Request body for creating a backup for a set of collections.
+      properties:
+        id:
+          type: string
+          description: The ID of the backup (required). Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        config:
+          $ref: '#/components/schemas/BackupConfig'
+        include:
+          type: array
+          description: List of collections to include in the backup creation process. If not set, all collections are included. Cannot be used together with `exclude`.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collections to exclude from the backup creation process. If not set, all collections are included. Cannot be used together with `include`.
+          items:
+            type: string
+        incremental_base_backup_id:
+          type: string
+          description: The ID of an existing backup to use as the base for a file-based incremental backup. If set, only files that have changed since the base backup will be included in the new backup.
+          default: null
+    BackupCreateResponse:
+      description: The definition of a backup create response body
+      properties:
+        id:
+          type: string
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        classes:
+          type: array
+          description: The list of collections (classes) for which the backup creation process was started.
+          items:
+            type: string
+        backend:
+          type: string
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc
+        path:
+          type: string
+          description: Path within bucket of backup
+        error:
+          type: string
+          description: error message if creation failed
+        status:
+          type: string
+          description: phase of backup creation process
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
+    BackupListResponse:
+      type: array
+      description: The definition of a backup create response body.
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+          classes:
+            type: array
+            description: The list of collections (classes) for which the backup process was started.
+            items:
+              type: string
+          status:
+            type: string
+            description: Status of backup process.
+            enum:
+            - STARTED
+            - TRANSFERRING
+            - TRANSFERRED
+            - FINALIZING
+            - SUCCESS
+            - FAILED
+            - CANCELLING
+            - CANCELED
+          startedAt:
+            type: string
+            format: date-time
+            description: Timestamp when the backup process started
+          completedAt:
+            type: string
+            format: date-time
+            description: Timestamp when the backup process completed (successfully or with failure)
+          size:
+            type: number
+            format: float64
+            description: Size of the backup in Gibs
+    RestoreConfig:
+      type: object
+      description: Backup custom configuration
+      properties:
+        Endpoint:
+          type: string
+          description: name of the endpoint, e.g. s3.amazonaws.com
+        Bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc
+        Path:
+          type: string
+          description: Path within the bucket
+        CPUPercentage:
+          type: integer
+          description: Desired CPU core utilization ranging from 1%-80%
+          default: 50
+          minimum: 1
+          maximum: 80
+        rolesOptions:
+          type: string
+          description: How roles should be restored
+          enum:
+          - noRestore
+          - all
+          default: noRestore
+        usersOptions:
+          type: string
+          description: How users should be restored
+          enum:
+          - noRestore
+          - all
+          default: noRestore
+    BackupRestoreResponse:
+      description: The definition of a backup restore response body.
+      properties:
+        id:
+          type: string
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        classes:
+          type: array
+          description: The list of collections (classes) for which the backup restoration process was started.
+          items:
+            type: string
+        backend:
+          type: string
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        path:
+          type: string
+          description: Destination path of backup files valid for the selected backend.
+        error:
+          type: string
+          description: Error message if backup restoration failed.
+        status:
+          type: string
+          description: Phase of backup restoration process.
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    BackupConfig:
+      type: object
+      description: Backup custom configuration.
+      properties:
+        Endpoint:
+          type: string
+          description: Name of the endpoint, e.g. s3.amazonaws.com.
+        Bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc.
+        Path:
+          type: string
+          description: Path or key within the bucket.
+        CPUPercentage:
+          type: integer
+          description: Desired CPU core utilization ranging from 1%-80%
+          default: 50
+          minimum: 1
+          maximum: 80
+        ChunkSize:
+          type: integer
+          description: Deprecated, has no effect.
+        CompressionLevel:
+          type: string
+          description: compression level used by compression algorithm
+          enum:
+          - DefaultCompression
+          - BestSpeed
+          - BestCompression
+          - ZstdDefaultCompression
+          - ZstdBestSpeed
+          - ZstdBestCompression
+          - NoCompression
+          default: DefaultCompression
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

@@ -1,0 +1,1561 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz schema API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: schema
+paths:
+  /schema:
+    get:
+      summary: Weaviate Get All Collection Definitions
+      description: Retrieves the definitions of all collections (classes) currently in the database schema.
+      tags:
+      - schema
+      operationId: schema.dump
+      parameters:
+      - name: consistency
+        in: header
+        required: false
+        description: If true, the request is proxied to the cluster leader to ensure strong schema consistency. Default is true.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successfully retrieved the database schema.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while retrieving the schema. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    post:
+      summary: Weaviate Create A New Collection
+      description: Defines and creates a new collection (class).<br/><br/>If [`AutoSchema`](https://docs.weaviate.io/weaviate/config-refs/collections#auto-schema) is enabled (not recommended for production), Weaviate might attempt to infer schema from data during import. Manual definition via this endpoint provides explicit control.
+      tags:
+      - schema
+      operationId: schema.objects.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Class'
+      responses:
+        '200':
+          description: Collection created successfully and its definition returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid collection definition provided. Check the definition structure and properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred during collection creation. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}:
+    get:
+      summary: Weaviate Get A Single Collection
+      description: Retrieve the definition of a specific collection (`className`), including its properties, configuration, and vectorizer settings.
+      tags:
+      - schema
+      operationId: schema.objects.get
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) to retrieve.
+        schema:
+          type: string
+      - name: consistency
+        in: header
+        required: false
+        description: If true, the request is proxied to the cluster leader to ensure strong schema consistency. Default is true.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successfully retrieved the collection definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Collection not found.
+        '500':
+          description: An error occurred while retrieving the collection definition. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete A Collection (And All Associated Data)
+      description: 'Removes a collection definition from the schema. WARNING: This action permanently deletes all data objects stored within the collection.'
+      tags:
+      - schema
+      operationId: schema.objects.delete
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) to delete.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Collection deleted successfully.
+        '400':
+          description: Could not delete the collection. See the error response for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred during collection deletion. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Update Collection Definition
+      description: 'Updates the configuration settings of an existing collection (`className`) based on the provided definition. Note: This operation modifies mutable settings specified in the request body. It does not add properties (use `POST /schema/{className}/properties` for that) or change the collection name.'
+      tags:
+      - schema
+      operationId: schema.objects.update
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) to update.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Class'
+      responses:
+        '200':
+          description: Collection settings updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid update attempt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while updating the collection. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/properties:
+    post:
+      summary: Weaviate Add A Property To A Collection
+      description: Adds a new property definition to an existing collection (`className`) definition.
+      tags:
+      - schema
+      operationId: schema.objects.properties.add
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) to add the property to.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+      responses:
+        '200':
+          description: Property added successfully and its definition returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid property definition provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while adding the property. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/properties/{propertyName}/index/{indexName}:
+    delete:
+      summary: Weaviate Delete A Property'S Inverted Index
+      description: Deletes an inverted index of a specific property within a collection (`className`). The index to delete is identified by `indexName` and must be one of `filterable`, `searchable`, or `rangeFilters`.
+      tags:
+      - schema
+      operationId: schema.objects.properties.delete
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) containing the property.
+        schema:
+          type: string
+      - name: propertyName
+        in: path
+        required: true
+        description: The name of the property whose inverted index should be deleted.
+        schema:
+          type: string
+      - name: indexName
+        in: path
+        required: true
+        description: The name of the inverted index to delete from the property.
+        schema:
+          type: string
+          enum:
+          - filterable
+          - searchable
+          - rangeFilters
+      responses:
+        '200':
+          description: Index deleted successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid index, property or collection provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while deleting the index. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/properties/{propertyName}/tokenize:
+    post:
+      summary: Weaviate Tokenize Text Using A Property'S Configuration
+      description: Tokenizes the provided text using the tokenization method configured for the specified property. This endpoint automatically applies the property's tokenization setting and the collection's stopword configuration, making it useful for understanding exactly how text will be processed for a given property during indexing and querying.
+      tags:
+      - schema
+      operationId: schema.objects.properties.tokenize
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) containing the property.
+        schema:
+          type: string
+      - name: propertyName
+        in: path
+        required: true
+        description: The name of the property whose tokenization configuration should be used.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyTokenizeRequest'
+      responses:
+        '200':
+          description: Successfully tokenized the text using the property's configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenizeResponse'
+        '400':
+          description: Invalid request body, missing required fields, or property does not have tokenization configured.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Collection or property not found.
+        '422':
+          description: Validation error, such as invalid class or property configuration for tokenization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Unexpected server error while tokenizing the text.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/vectors/{vectorIndexName}/index:
+    delete:
+      summary: Weaviate Delete A Collection'S Vector Index.
+      description: Deletes a specific vector index within a collection (`className`). The vector index to delete is identified by `vectorIndexName`.
+      tags:
+      - schema
+      operationId: schema.objects.vectors.delete
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) containing the property.
+        schema:
+          type: string
+      - name: vectorIndexName
+        in: path
+        required: true
+        description: The name of the vector index.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Vector index deleted successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid vector index or collection provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while deleting the vector index. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/shards:
+    get:
+      summary: Weaviate Get The Shards Status Of A Collection
+      description: Retrieves the status of all shards associated with the specified collection (`className`). For multi-tenant collections, use the `tenant` query parameter to retrieve status for a specific tenant's shards.
+      tags:
+      - schema
+      operationId: schema.objects.shards.get
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) whose shards to query.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: The name of the tenant for which to retrieve shard statuses (only applicable for multi-tenant collections).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Shard statuses retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShardStatusList'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while retrieving shard statuses. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/shards/{shardName}:
+    put:
+      summary: Weaviate Update A Shard Status
+      description: Updates the status of a specific shard within a collection (e.g., sets it to `READY` or `READONLY`). This is typically used after resolving an underlying issue (like disk space) that caused a shard to become non-operational. There is also a convenience function in each client to set the status of all shards of a collection.
+      tags:
+      - schema
+      operationId: schema.objects.shards.update
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) containing the shard.
+        schema:
+          type: string
+      - name: shardName
+        in: path
+        required: true
+        description: The name of the shard to update.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShardStatus'
+      responses:
+        '200':
+          description: Shard status updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShardStatus'
+        '422':
+          description: Invalid update attempt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Collection or shard not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while updating the shard status. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/tenants:
+    post:
+      summary: Weaviate Create A New Tenant
+      description: Creates one or more new tenants for a specified collection (`className`). Multi-tenancy must be enabled for the collection via its definition.
+      tags:
+      - schema
+      operationId: tenants.create
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the multi-tenant enabled collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tenant'
+      responses:
+        '200':
+          description: Tenants created successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while creating tenants. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Update A Tenant
+      description: Updates the activity status (e.g., `ACTIVE`, `INACTIVE`, etc.) of one or more specified tenants within a collection (`className`).
+      tags:
+      - schema
+      operationId: tenants.update
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) containing the tenants.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tenant'
+      responses:
+        '200':
+          description: Tenant statuses updated successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid update request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while updating tenants. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete Tenants
+      description: 'Deletes one or more specified tenants from a collection (`className`). WARNING: This action permanently deletes all data associated with the specified tenants.'
+      tags:
+      - schema
+      operationId: tenants.delete
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) from which to delete tenants.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Name of a tenant to delete.
+      responses:
+        '200':
+          description: Tenants deleted successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while deleting tenants. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    get:
+      summary: Weaviate Get The List Of Tenants
+      description: Retrieves a list of all tenants currently associated with the specified collection.
+      tags:
+      - schema
+      operationId: tenants.get
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) whose tenants to list.
+        schema:
+          type: string
+      - name: consistency
+        in: header
+        required: false
+        description: If true, the request is proxied to the cluster leader to ensure strong schema consistency. Default is true.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successfully retrieved tenants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while listing tenants. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /schema/{className}/tenants/{tenantName}:
+    head:
+      summary: Weaviate Check If A Tenant Exists
+      description: Checks for the existence of a specific tenant within the given collection (`className`).
+      tags:
+      - schema
+      operationId: tenant.exists
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) to check within.
+        schema:
+          type: string
+      - name: tenantName
+        in: path
+        required: true
+        description: The name of the tenant to check for.
+        schema:
+          type: string
+      - name: consistency
+        in: header
+        required: false
+        description: If true, the request is proxied to the cluster leader to ensure strong schema consistency. Default is true.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: The tenant exists in the specified collection.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Tenant or collection not found.
+        '422':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred during the check. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    get:
+      summary: Weaviate Get A Specific Tenant
+      description: Retrieves details about a specific tenant within the given collection (`className`), such as its current activity status.
+      tags:
+      - schema
+      operationId: tenants.get.one
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) containing the tenant.
+        schema:
+          type: string
+      - name: tenantName
+        in: path
+        required: true
+        description: The name of the tenant to retrieve.
+        schema:
+          type: string
+      - name: consistency
+        in: header
+        required: false
+        description: If true, the request is proxied to the cluster leader to ensure strong schema consistency. Default is true.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successfully retrieved tenant details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Tenant or collection not found.
+        '422':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while retrieving the tenant. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /aliases:
+    get:
+      summary: Weaviate List Aliases
+      description: Retrieve a list of all aliases in the system. Results can be filtered by specifying a collection (class) name to get aliases for a specific collection only.
+      tags:
+      - schema
+      operationId: aliases.get
+      parameters:
+      - name: class
+        in: query
+        required: false
+        description: Optional filter to retrieve aliases for a specific collection (class) only. If not provided, returns all aliases.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the list of aliases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AliasResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid collection (class) parameter provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    post:
+      summary: Weaviate Create A New Alias
+      description: Create a new alias mapping between an alias name and a collection (class). The alias acts as an alternative name for accessing the collection.
+      tags:
+      - schema
+      operationId: aliases.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Alias'
+      responses:
+        '200':
+          description: Successfully created a new alias for the specified collection (class)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alias'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid create alias request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /aliases/{aliasName}:
+    get:
+      summary: Weaviate Get An Alias
+      description: Retrieve details about a specific alias by its name, including which collection (class) it points to.
+      tags:
+      - schema
+      operationId: aliases.get.alias
+      parameters:
+      - name: aliasName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the alias details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alias'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found - Alias does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid alias name provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Update An Alias
+      description: Update an existing alias to point to a different collection (class). This allows you to redirect an alias from one collection to another without changing the alias name.
+      tags:
+      - schema
+      operationId: aliases.update
+      parameters:
+      - name: aliasName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                class:
+                  type: string
+                  description: The new collection (class) that the alias should point to.
+      responses:
+        '200':
+          description: Successfully updated the alias to point to the new collection (class).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alias'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found - Alias does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid update alias request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete An Alias
+      description: Remove an existing alias from the system. This will delete the alias mapping but will not affect the underlying collection (class).
+      tags:
+      - schema
+      operationId: aliases.delete
+      parameters:
+      - name: aliasName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Successfully deleted the alias.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found - Alias does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid delete alias request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    NestedProperty:
+      type: object
+      properties:
+        dataType:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        name:
+          type: string
+        indexFilterable:
+          type: boolean
+        indexSearchable:
+          type: boolean
+        indexRangeFilters:
+          type: boolean
+        tokenization:
+          type: string
+          enum:
+          - word
+          - lowercase
+          - whitespace
+          - field
+          - trigram
+          - gse
+          - kagome_kr
+          - kagome_ja
+          - gse_ch
+        nestedProperties:
+          type: array
+          description: The properties of the nested object(s). Applies to object and object[] data types.
+          items:
+            $ref: '#/components/schemas/NestedProperty'
+        textAnalyzer:
+          $ref: '#/components/schemas/TextAnalyzerConfig'
+    Alias:
+      type: object
+      description: Represents the mapping between an alias name and a collection. An alias provides an alternative name for accessing a collection.
+      properties:
+        alias:
+          type: string
+          description: The unique name of the alias that serves as an alternative identifier for the collection.
+        class:
+          type: string
+          description: The name of the collection (class) to which this alias is mapped.
+    TextAnalyzerConfig:
+      type: object
+      description: Text analysis options for a property. These settings are immutable after the property is created. Applies only to text and text[] data types that use an inverted index (searchable or filterable).
+      properties:
+        asciiFold:
+          type: boolean
+          description: If true, accent/diacritic marks are folded to their base characters during indexing and search. For example, 'école' matches 'ecole'. Defaults to false.
+        asciiFoldIgnore:
+          type: array
+          description: If provided, specifies a list of characters that should be excluded from ascii folding. For example, if ['é'] is provided, then 'é' will not be folded to 'e' during indexing and search. This list is immutable after the property is created.
+          items:
+            type: string
+        stopwordPreset:
+          type: string
+          description: Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets.
+    ReplicationAsyncConfig:
+      type: object
+      description: Configuration for asynchronous replication.
+      properties:
+        maxWorkers:
+          type: integer
+          format: int64
+          description: Maximum number of async replication workers.
+        hashtreeHeight:
+          type: integer
+          format: int64
+          description: Height of the hashtree used for diffing.
+        frequency:
+          type: integer
+          format: int64
+          description: Base frequency in milliseconds at which async replication runs diff calculations.
+        frequencyWhilePropagating:
+          type: integer
+          format: int64
+          description: Frequency in milliseconds at which async replication runs while propagation is active.
+        aliveNodesCheckingFrequency:
+          type: integer
+          format: int64
+          description: Interval in milliseconds at which liveness of target nodes is checked.
+        loggingFrequency:
+          type: integer
+          format: int64
+          description: Interval in seconds at which async replication logs its status.
+        diffBatchSize:
+          type: integer
+          format: int64
+          description: Maximum number of object keys included in a single diff batch.
+        diffPerNodeTimeout:
+          type: integer
+          format: int64
+          description: Timeout in seconds for computing a diff against a single node.
+        prePropagationTimeout:
+          type: integer
+          format: int64
+          description: Overall timeout in seconds for the pre-propagation phase.
+        propagationTimeout:
+          type: integer
+          format: int64
+          description: Timeout in seconds for propagating batch of changes to a node.
+        propagationLimit:
+          type: integer
+          format: int64
+          description: Maximum number of objects to propagate in a single async replication run.
+        propagationDelay:
+          type: integer
+          format: int64
+          description: Delay in milliseconds before newly added or updated objects are propagated.
+        propagationConcurrency:
+          type: integer
+          format: int64
+          description: Maximum number of concurrent propagation workers.
+        propagationBatchSize:
+          type: integer
+          format: int64
+          description: Number of objects to include in a single propagation batch.
+    PropertyTokenizeRequest:
+      type: object
+      description: Request body for the property-specific tokenize endpoint.
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: The text to tokenize using the property's configured tokenization.
+    Class:
+      type: object
+      properties:
+        class:
+          type: string
+          description: Name of the collection (formerly 'class') (required). Multiple words should be concatenated in CamelCase, e.g. `ArticleAuthor`.
+        vectorConfig:
+          type: object
+          description: Configure named vectors. Either use this field or `vectorizer`, `vectorIndexType`, and `vectorIndexConfig` fields. Available from `v1.24.0`.
+          additionalProperties:
+            $ref: '#/components/schemas/VectorConfig'
+        vectorIndexType:
+          type: string
+          description: Name of the vector index type to use for the collection (e.g. `hnsw` or `flat`).
+        vectorIndexConfig:
+          type: object
+          description: Vector-index config, that is specific to the type of index selected in vectorIndexType
+        shardingConfig:
+          type: object
+          description: Manage how the index should be sharded and distributed in the cluster
+        replicationConfig:
+          $ref: '#/components/schemas/ReplicationConfig'
+        invertedIndexConfig:
+          $ref: '#/components/schemas/InvertedIndexConfig'
+        multiTenancyConfig:
+          $ref: '#/components/schemas/MultiTenancyConfig'
+        objectTtlConfig:
+          $ref: '#/components/schemas/ObjectTtlConfig'
+        vectorizer:
+          type: string
+          description: Specify how the vectors for this collection should be determined. The options are either `none` - this means you have to import a vector with each object yourself - or the name of a module that provides vectorization capabilities, such as `text2vec-weaviate`. If left empty, it will use the globally configured default ([`DEFAULT_VECTORIZER_MODULE`](https://docs.weaviate.io/deploy/configuration/env-vars)) which can itself either be `none` or a specific module.
+        moduleConfig:
+          type: object
+          description: Configuration specific to modules in a collection context.
+        description:
+          type: string
+          description: Description of the collection for metadata purposes.
+        properties:
+          type: array
+          description: Define properties of the collection.
+          items:
+            $ref: '#/components/schemas/Property'
+    ReplicationConfig:
+      type: object
+      description: Configure how replication is executed in a cluster
+      properties:
+        factor:
+          type: integer
+          description: 'Number of times a collection (class) is replicated (default: 1).'
+        asyncEnabled:
+          type: boolean
+          description: 'Enable asynchronous replication (default: `false`).'
+        asyncConfig:
+          $ref: '#/components/schemas/ReplicationAsyncConfig'
+        deletionStrategy:
+          type: string
+          description: Conflict resolution strategy for deleted objects.
+          enum:
+          - NoAutomatedResolution
+          - DeleteOnConflict
+          - TimeBasedResolution
+    BM25Config:
+      type: object
+      description: Tuning parameters for the BM25 algorithm.
+      properties:
+        k1:
+          type: number
+          format: float
+          description: 'Calibrates term-weight scaling based on the term frequency within a document (default: 1.2).'
+        b:
+          type: number
+          format: float
+          description: 'Calibrates term-weight scaling based on the document length (default: 0.75).'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    InvertedIndexConfig:
+      type: object
+      description: 'Configure the inverted index built into Weaviate. See [Reference: Inverted index](https://docs.weaviate.io/weaviate/config-refs/indexing/inverted-index#inverted-index-parameters) for details.'
+      properties:
+        cleanupIntervalSeconds:
+          type: number
+          format: int
+          description: 'Asynchronous index clean up happens every n seconds (default: 60).'
+        bm25:
+          $ref: '#/components/schemas/BM25Config'
+        stopwords:
+          $ref: '#/components/schemas/StopwordConfig'
+        indexTimestamps:
+          type: boolean
+          description: 'Index each object by its internal timestamps (default: `false`).'
+        indexNullState:
+          type: boolean
+          description: 'Index each object with the null state (default: `false`).'
+        indexPropertyLength:
+          type: boolean
+          description: 'Index length of properties (default: `false`).'
+        usingBlockMaxWAND:
+          type: boolean
+          description: 'Using BlockMax WAND for query execution (default: `false`, will be `true` for new collections created after 1.30).'
+        tokenizerUserDict:
+          type: array
+          description: User-defined dictionary for tokenization.
+          items:
+            $ref: '#/components/schemas/TokenizerUserDictConfig'
+        stopwordPresets:
+          type: object
+          description: User-defined named stopword lists. Each key is a preset name that can be referenced by a property's textAnalyzer.stopwordPreset field. The value is an array of stopword strings. Preset names must not be empty or whitespace-only; each list must contain at least one word; individual words must not be empty or whitespace-only.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    Schema:
+      type: object
+      description: 'Definitions of semantic schemas (also see: https://github.com/weaviate/weaviate-semantic-schemas).'
+      properties:
+        classes:
+          type: array
+          description: Semantic classes that are available.
+          items:
+            $ref: '#/components/schemas/Class'
+        maintainer:
+          type: string
+          format: email
+          description: Email of the maintainer.
+        name:
+          type: string
+          description: Name of the schema.
+    AliasResponse:
+      type: object
+      description: Response object containing a list of alias mappings.
+      properties:
+        aliases:
+          type: array
+          description: Array of alias objects, each containing an alias-to-collection mapping.
+          items:
+            $ref: '#/components/schemas/Alias'
+    ObjectTtlConfig:
+      description: Configuration of objects' time-to-live
+      properties:
+        enabled:
+          type: boolean
+          description: 'Whether or not object ttl is enabled for this collection (default: `false`).'
+        defaultTtl:
+          type: integer
+          description: 'Interval (in seconds) to be added to `deleteOn` value, denoting object''s expiration time. Has to be positive for `deleteOn` set to `_creationTimeUnix` or `_lastUpdateTimeUnix`, any for custom property (default: `0`).'
+        deleteOn:
+          type: string
+          description: Name of the property holding base time to compute object's expiration time (ttl = value of deleteOn property + defaultTtl). Can be set to `_creationTimeUnix`, `_lastUpdateTimeUnix` or custom property of `date` datatype.
+        filterExpiredObjects:
+          type: boolean
+          description: 'Whether remove from resultset expired, but not yet deleted by background process objects (default: `false`).'
+    Property:
+      type: object
+      properties:
+        dataType:
+          type: array
+          description: Data type of the property (required). If it starts with a capital (for example Person), may be a reference to another type.
+          items:
+            type: string
+        description:
+          type: string
+          description: Description of the property.
+        moduleConfig:
+          type: object
+          description: Configuration specific to modules in a collection context.
+        name:
+          type: string
+          description: The name of the property (required). Multiple words should be concatenated in camelCase, e.g. `nameOfAuthor`.
+        indexInverted:
+          type: boolean
+          description: (Deprecated). Whether to include this property in the inverted index. If `false`, this property cannot be used in `where` filters, `bm25` or `hybrid` search. <br/><br/>Unrelated to vectorization behavior (deprecated as of v1.19; use indexFilterable or/and indexSearchable instead)
+        indexFilterable:
+          type: boolean
+          description: 'Whether to include this property in the filterable, Roaring Bitmap index. If `false`, this property cannot be used in `where` filters. <br/><br/>Note: Unrelated to vectorization behavior.'
+        indexSearchable:
+          type: boolean
+          description: Optional. Should this property be indexed in the inverted index. Defaults to true. Applicable only to properties of data type text and text[]. If you choose false, you will not be able to use this property in bm25 or hybrid search. This property has no affect on vectorization decisions done by modules
+        indexRangeFilters:
+          type: boolean
+          description: Whether to include this property in the filterable, range-based Roaring Bitmap index. Provides better performance for range queries compared to filterable index in large datasets. Applicable only to properties of data type int, number, date.
+        tokenization:
+          type: string
+          description: 'Determines how a property is indexed. This setting applies to `text` and `text[]` data types. The following tokenization methods are available:<br/><br/>- `word` (default): Splits the text on any non-alphanumeric characters and lowercases the tokens.<br/>- `lowercase`: Splits the text on whitespace and lowercases the tokens.<br/>- `whitespace`: Splits the text on whitespace. This tokenization is case-sensitive.<br/>- `field`: Indexes the entire property value as a single token after trimming whitespace.<br/>- `trigram`: Splits the property into rolling trigrams (three-character sequences).<br/>- `gse`: Uses the `gse` tokenizer, suitable for Chinese language text. [See `gse` docs](https://pkg.go.dev/github.com/go-ego/gse#section-readme).<br/>- `kagome_ja`: Uses the `Kagome` tokenizer with a Japanese (IPA) dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/>- `kagome_kr`: Uses the `Kagome` tokenizer with a Korean dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/><br/>See [Reference: Tokenization](https://docs.weaviate.io/weaviate/config-refs/collections#tokenization) for details.'
+          enum:
+          - word
+          - lowercase
+          - whitespace
+          - field
+          - trigram
+          - gse
+          - kagome_kr
+          - kagome_ja
+          - gse_ch
+        nestedProperties:
+          type: array
+          description: The properties of the nested object(s). Applies to object and object[] data types.
+          items:
+            $ref: '#/components/schemas/NestedProperty'
+        disableDuplicatedReferences:
+          type: boolean
+          description: If set to false, allows multiple references to the same target object within this property. Setting it to true will enforce uniqueness of references within this property. By default, this is set to true.
+          default: true
+        textAnalyzer:
+          $ref: '#/components/schemas/TextAnalyzerConfig'
+    ShardStatusGetResponse:
+      description: Response body of shard status get request
+      properties:
+        name:
+          type: string
+          description: Name of the shard
+        status:
+          type: string
+          description: Status of the shard
+        vectorQueueSize:
+          type: integer
+          description: Size of the vector queue of the shard
+    ShardStatusList:
+      type: array
+      description: The status of all the shards of a Class
+      items:
+        $ref: '#/components/schemas/ShardStatusGetResponse'
+    TokenizeResponse:
+      type: object
+      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
+      properties:
+        indexed:
+          type: array
+          description: The tokens as they would be stored in the inverted index.
+          items:
+            type: string
+        query:
+          type: array
+          description: The tokens as they would be used for query matching (e.g., after stopword removal).
+          items:
+            type: string
+    VectorConfig:
+      type: object
+      properties:
+        vectorizer:
+          type: object
+          description: Configuration of a specific vectorizer used by this vector
+        vectorIndexType:
+          type: string
+          description: Name of the vector index to use, eg. (HNSW)
+        vectorIndexConfig:
+          type: object
+          description: Vector-index config, that is specific to the type of index selected in vectorIndexType
+    StopwordConfig:
+      type: object
+      description: Fine-grained control over stopword list usage.
+      properties:
+        preset:
+          type: string
+          description: 'Pre-existing list of common words by language (default: `en`). Options: [`en`, `none`].'
+        additions:
+          type: array
+          description: 'Stopwords to be considered additionally (default: []). Can be any array of custom strings.'
+          items:
+            type: string
+        removals:
+          type: array
+          description: 'Stopwords to be removed from consideration (default: []). Can be any array of custom strings.'
+          items:
+            type: string
+    ShardStatus:
+      description: The status of a single shard
+      properties:
+        status:
+          type: string
+          description: Status of the shard
+    Tenant:
+      type: object
+      description: Attributes representing a single tenant within Weaviate.
+      properties:
+        name:
+          type: string
+          description: The name of the tenant (required).
+        activityStatus:
+          type: string
+          description: 'The activity status of the tenant, which determines if it is queryable and where its data is stored.<br/><br/><b>Available Statuses:</b><br/>- `ACTIVE`: The tenant is fully operational and ready for queries. Data is stored on local, hot storage.<br/>- `INACTIVE`: The tenant is not queryable. Data is stored locally.<br/>- `OFFLOADED`: The tenant is inactive and its data is stored in a remote cloud backend.<br/><br/><b>Usage Rules:</b><br/>- <b>On Create:</b> This field is optional and defaults to `ACTIVE`. Allowed values are `ACTIVE` and `INACTIVE`.<br/>- <b>On Update:</b> This field is required. Allowed values are `ACTIVE`, `INACTIVE`, and `OFFLOADED`.<br/><br/><b>Read-Only Statuses:</b><br/>The following statuses are set by the server and indicate a tenant is transitioning between states:<br/>- `OFFLOADING`<br/>- `ONLOADING`<br/><br/><b>Note on Deprecated Names:</b><br/>For backward compatibility, deprecated names are still accepted and are mapped to their modern equivalents: `HOT` (now `ACTIVE`), `COLD` (now `INACTIVE`), `FROZEN` (now `OFFLOADED`), `FREEZING` (now `OFFLOADING`), `UNFREEZING` (now `ONLOADING`).'
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - OFFLOADED
+          - OFFLOADING
+          - ONLOADING
+          - HOT
+          - COLD
+          - FROZEN
+          - FREEZING
+          - UNFREEZING
+    MultiTenancyConfig:
+      description: Configuration related to multi-tenancy within a collection (class)
+      properties:
+        enabled:
+          type: boolean
+          description: 'Whether or not multi-tenancy is enabled for this collection (class) (default: `false`).'
+        autoTenantCreation:
+          type: boolean
+          description: 'Nonexistent tenants should (not) be created implicitly (default: `false`).'
+        autoTenantActivation:
+          type: boolean
+          description: 'Existing tenants should (not) be turned HOT implicitly when they are accessed and in another activity status (default: `false`).'
+    TokenizerUserDictConfig:
+      type: object
+      description: A list of pairs of strings that should be replaced with another string during tokenization.
+      properties:
+        tokenizer:
+          type: string
+          description: The tokenizer to which the user dictionary should be applied. Currently, only the `kagame` ja and kr tokenizers supports user dictionaries.
+        replacements:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - target
+            properties:
+              source:
+                type: string
+                description: The string to be replaced.
+              target:
+                type: string
+                description: The string to replace with.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

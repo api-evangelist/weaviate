@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz nodes API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: nodes
+paths:
+  /nodes:
+    get:
+      summary: Weaviate Get Node Status
+      description: Retrieves status information about all nodes in the cluster. Use the `output` query parameter to control the level of detail.
+      tags:
+      - nodes
+      operationId: nodes.get
+      parameters:
+      - name: output
+        in: query
+        required: false
+        description: 'Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.'
+        schema:
+          type: string
+          default: minimal
+      responses:
+        '200':
+          description: Successfully retrieved the status for all nodes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodesStatusResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request for node status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while retrieving node status. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /nodes/{className}:
+    get:
+      summary: Weaviate Get Node Status By Collection
+      description: Retrieves status information only for the nodes that host shards for the specified collection (`className`). Use the `output` query parameter to control the level of detail.
+      tags:
+      - nodes
+      operationId: nodes.get.class
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: The name of the collection (class) for which to retrieve node status.
+        schema:
+          type: string
+      - name: shardName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: output
+        in: query
+        required: false
+        description: 'Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.'
+        schema:
+          type: string
+          default: minimal
+      responses:
+        '200':
+          description: Successfully retrieved the status for nodes relevant to the specified collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodesStatusResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request for node status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while retrieving node status for the collection. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    NodesStatusResponse:
+      type: object
+      description: The status of all of the Weaviate nodes
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/NodeStatus'
+    NodeStats:
+      description: The summary of Weaviate's statistics.
+      properties:
+        shardCount:
+          type: number
+          format: int
+          description: The count of Weaviate's shards. To see this value, set `output` to `verbose`.
+        objectCount:
+          type: number
+          format: int64
+          description: The total number of objects in DB.
+    NodeStatus:
+      description: The definition of a backup node status response body
+      properties:
+        name:
+          type: string
+          description: The name of the node.
+        status:
+          type: string
+          description: Node's status.
+          enum:
+          - HEALTHY
+          - UNHEALTHY
+          - UNAVAILABLE
+          - TIMEOUT
+          default: HEALTHY
+        version:
+          type: string
+          description: The version of Weaviate.
+        gitHash:
+          type: string
+          description: The gitHash of Weaviate.
+        stats:
+          $ref: '#/components/schemas/NodeStats'
+        batchStats:
+          $ref: '#/components/schemas/BatchStats'
+        shards:
+          type: array
+          description: The list of the shards with it's statistics.
+          items:
+            $ref: '#/components/schemas/NodeShardStatus'
+        operationalMode:
+          type: string
+          description: Which mode of operation the node is running in.
+          enum:
+          - ReadWrite
+          - WriteOnly
+          - ReadOnly
+          - ScaleOut
+    BatchStats:
+      description: The summary of a nodes batch queue congestion status.
+      properties:
+        queueLength:
+          type: number
+          format: int
+          description: How many objects are currently in the batch queue.
+        ratePerSecond:
+          type: number
+          format: int
+          description: How many objects are approximately processed from the batch queue per second.
+    NodeShardStatus:
+      description: The definition of a node shard status response body
+      properties:
+        name:
+          type: string
+          description: The name of the shard.
+        class:
+          type: string
+          description: The name of shard's collection (class).
+        objectCount:
+          type: number
+          format: int64
+          description: The number of objects in shard.
+        vectorIndexingStatus:
+          type: string
+          description: The status of the vector indexing process.
+        compressed:
+          type: boolean
+          description: The status of vector compression/quantization.
+        vectorQueueLength:
+          type: number
+          format: int64
+          description: The length of the vector indexing queue.
+        loaded:
+          type: boolean
+          description: The load status of the shard.
+        asyncReplicationStatus:
+          type: array
+          description: The status of the async replication.
+          items:
+            $ref: '#/components/schemas/AsyncReplicationStatus'
+        numberOfReplicas:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Number of replicas for the shard.
+        replicationFactor:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Minimum number of replicas for the shard.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    AsyncReplicationStatus:
+      description: The status of the async replication.
+      properties:
+        objectsPropagated:
+          type: number
+          format: uint64
+          description: The number of objects propagated in the most recent iteration.
+        startDiffTimeUnixMillis:
+          type: number
+          format: int64
+          description: The start time of the most recent iteration.
+        targetNode:
+          type: string
+          description: The target node of the replication, if set, otherwise empty.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

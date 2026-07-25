@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz distributedTasks API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: distributedTasks
+paths:
+  /tasks:
+    get:
+      summary: Weaviate Lists All Distributed Tasks In The Cluster
+      tags:
+      - distributedTasks
+      operationId: distributedTasks.get
+      responses:
+        '200':
+          description: Distributed tasks successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributedTasks'
+        '403':
+          description: Unauthorized or invalid credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while retrieving distributed tasks. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    DistributedTasks:
+      type: object
+      description: Active distributed tasks by namespace.
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/DistributedTask'
+    DistributedTask:
+      type: object
+      description: Distributed task metadata.
+      properties:
+        id:
+          type: string
+          description: The ID of the task.
+        version:
+          type: integer
+          description: The version of the task.
+        status:
+          type: string
+          description: The status of the task.
+        startedAt:
+          type: string
+          format: date-time
+          description: The time when the task was created.
+        finishedAt:
+          type: string
+          format: date-time
+          description: The time when the task was finished.
+        finishedNodes:
+          type: array
+          description: The nodes that finished the task.
+          items:
+            type: string
+        error:
+          type: string
+          description: The high level reason why the task failed.
+        payload:
+          type: object
+          description: The payload of the task.
+        units:
+          type: array
+          description: Units of the task. Only present for tasks that use unit tracking.
+          items:
+            $ref: '#/components/schemas/DistributedTaskUnit'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    DistributedTaskUnit:
+      type: object
+      description: A unit of a distributed task.
+      properties:
+        id:
+          type: string
+          description: The ID of the unit.
+        nodeId:
+          type: string
+          description: The node that owns this unit.
+        status:
+          type: string
+          description: The status of the unit.
+        progress:
+          type: number
+          format: float
+          description: The progress of the unit (0.0 to 1.0).
+        error:
+          type: string
+          description: The error message if the unit failed.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The time when the unit was last updated.
+        finishedAt:
+          type: string
+          format: date-time
+          description: The time when the unit finished.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

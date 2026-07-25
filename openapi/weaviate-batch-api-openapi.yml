@@ -1,0 +1,598 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz batch API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: batch
+paths:
+  /batch/objects:
+    post:
+      summary: Weaviate Create Objects In Batch
+      description: Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch).
+      tags:
+      - batch
+      operationId: batch.objects.create
+      parameters:
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  description: Controls which fields are returned in the response for each object. Default is `ALL`.
+                  items:
+                    type: string
+                    enum:
+                    - ALL
+                    - class
+                    - schema
+                    - id
+                    - creationTimeUnix
+                    default: ALL
+                objects:
+                  type: array
+                  description: Array of objects to be created.
+                  items:
+                    $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Request processed successfully. Individual object statuses are provided in the response body.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectsGetResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete Objects In Batch
+      description: Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are found.
+      tags:
+      - batch
+      operationId: batch.objects.delete
+      parameters:
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDelete'
+      responses:
+        '200':
+          description: Request processed successfully. See response body for matching objects and deletion results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid data provided. Please check the values in your request (e.g., invalid filter).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /batch/references:
+    post:
+      summary: Weaviate Create Cross-References In Bulk
+      description: Batch create cross-references between collection items in bulk.
+      tags:
+      - batch
+      operationId: batch.references.create
+      parameters:
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BatchReference'
+      responses:
+        '200':
+          description: 'Request Successful. Warning: A successful request does not guarantee that every batched reference was successfully created. Inspect the response body to see which references succeeded and which failed.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchReferenceResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    AdditionalProperties:
+      type: object
+      description: (Response only) Additional meta information about a single object.
+      additionalProperties:
+        type: object
+    Deprecation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id that uniquely identifies this particular deprecation (mostly used internally).
+        status:
+          type: string
+          description: Whether the problematic API functionality is deprecated (planned to be removed) or already removed.
+        apiType:
+          type: string
+          description: 'Describes which API is affected, usually one of: REST, GraphQL and gRPC.'
+        msg:
+          type: string
+          description: What this deprecation is about.
+        mitigation:
+          type: string
+          description: User-required object to not be affected by the (planned) removal.
+        sinceVersion:
+          type: string
+          description: The deprecation was introduced in this version.
+        plannedRemovalVersion:
+          type: string
+          description: A best-effort guess of which upcoming version will remove the feature entirely.
+        removedIn:
+          type: string
+          description: If the feature has already been removed, it was removed in this version.
+        removedTime:
+          type: string
+          format: date-time
+          description: If the feature has already been removed, it was removed at this timestamp.
+        sinceTime:
+          type: string
+          format: date-time
+          description: The deprecation was introduced at this timestamp.
+        locations:
+          type: array
+          description: The locations within the specified API affected by this deprecation.
+          items:
+            type: string
+    C11yVector:
+      type: array
+      description: A vector representation of the object in the Contextionary. If provided at object creation, this wil take precedence over any vectorizer setting.
+      items:
+        type: number
+        format: float
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
+    BatchDeleteResponse:
+      type: object
+      description: Delete Objects response.
+      properties:
+        match:
+          type: object
+          description: Outlines how to find the objects to be deleted.
+          properties:
+            class:
+              type: string
+              description: The name of the collection (class) from which to delete objects.
+              example: City
+            where:
+              $ref: '#/components/schemas/WhereFilter'
+        output:
+          type: string
+          description: 'Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.'
+          default: minimal
+        deletionTimeUnixMilli:
+          type: integer
+          format: int64
+          description: Timestamp of deletion in milliseconds since epoch UTC.
+        dryRun:
+          type: boolean
+          description: If true, objects will not be deleted yet, but merely listed. Defaults to false.
+          default: false
+        results:
+          type: object
+          properties:
+            matches:
+              type: number
+              format: int64
+              description: How many objects were matched by the filter.
+            limit:
+              type: number
+              format: int64
+              description: The most amount of objects that can be deleted in a single query, equals [`QUERY_MAXIMUM_RESULTS`](https://docs.weaviate.io/deploy/configuration/env-vars#QUERY_MAXIMUM_RESULTS).
+            successful:
+              type: number
+              format: int64
+              description: How many objects were successfully deleted in this round.
+            failed:
+              type: number
+              format: int64
+              description: How many objects should have been deleted but could not be deleted.
+            objects:
+              type: array
+              description: With output set to `minimal` only objects with error occurred will the be described. Successfully deleted objects would be omitted. Output set to `verbose` will list all of the objects with their respective statuses.
+              items:
+                format: object
+                description: Results for this specific Object.
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The UUID of the object.
+                  status:
+                    type: string
+                    enum:
+                    - SUCCESS
+                    - DRYRUN
+                    - FAILED
+                    default: SUCCESS
+                  errors:
+                    $ref: '#/components/schemas/ErrorResponse'
+    Object:
+      type: object
+      properties:
+        class:
+          type: string
+          description: Name of the collection (class) the object belongs to.
+        vectorWeights:
+          $ref: '#/components/schemas/VectorWeights'
+        properties:
+          $ref: '#/components/schemas/PropertySchema'
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the object.
+        creationTimeUnix:
+          type: integer
+          format: int64
+          description: (Response only) Timestamp of creation of this object in milliseconds since epoch UTC.
+        lastUpdateTimeUnix:
+          type: integer
+          format: int64
+          description: (Response only) Timestamp of the last object update in milliseconds since epoch UTC.
+        vector:
+          $ref: '#/components/schemas/C11yVector'
+        vectors:
+          $ref: '#/components/schemas/Vectors'
+        tenant:
+          type: string
+          description: The name of the tenant the object belongs to.
+        additional:
+          $ref: '#/components/schemas/AdditionalProperties'
+    PropertySchema:
+      type: object
+      description: Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection.
+    BatchDelete:
+      type: object
+      properties:
+        match:
+          type: object
+          description: Outlines how to find the objects to be deleted.
+          properties:
+            class:
+              type: string
+              description: The name of the collection (class) from which to delete objects.
+              example: City
+            where:
+              $ref: '#/components/schemas/WhereFilter'
+        output:
+          type: string
+          description: 'Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.'
+          default: minimal
+        deletionTimeUnixMilli:
+          type: integer
+          format: int64
+          description: Timestamp of deletion in milliseconds since epoch UTC.
+        dryRun:
+          type: boolean
+          description: If true, the call will show which objects would be matched using the specified filter without deleting any objects. <br/><br/>Depending on the configured verbosity, you will either receive a count of affected objects, or a list of IDs.
+          default: false
+    GeoCoordinates:
+      properties:
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
+    Vector:
+      type: object
+      description: A vector representation of the object. If provided at object creation, this wil take precedence over any vectorizer setting.
+    VectorWeights:
+      type: object
+      description: 'Allow custom overrides of vector weights as math expressions. E.g. `pancake`: `7` will set the weight for the word pancake to 7 in the vectorization, whereas `w * 3` would triple the originally calculated word. This is an open object, with OpenAPI Specification 3.0 this will be more detailed. See Weaviate docs for more info. In the future this will become a key/value (string/string) object.'
+    WhereFilter:
+      type: object
+      description: Filter search results using a where filter.
+      properties:
+        operands:
+          type: array
+          description: Combine multiple where filters, requires 'And' or 'Or' operator.
+          items:
+            $ref: '#/components/schemas/WhereFilter'
+        operator:
+          type: string
+          description: Operator to use.
+          enum:
+          - And
+          - Or
+          - Equal
+          - Like
+          - NotEqual
+          - GreaterThan
+          - GreaterThanEqual
+          - LessThan
+          - LessThanEqual
+          - WithinGeoRange
+          - IsNull
+          - ContainsAny
+          - ContainsAll
+          - ContainsNone
+          - Not
+          example: GreaterThanEqual
+        path:
+          type: array
+          description: Path to the property currently being filtered.
+          example:
+          - inCity
+          - city
+          - name
+          items:
+            type: string
+        valueInt:
+          type: integer
+          format: int64
+          description: value as integer
+          example: 2000
+        valueNumber:
+          type: number
+          format: float64
+          description: value as number/float
+          example: 3.14
+        valueBoolean:
+          type: boolean
+          description: value as boolean
+          example: false
+        valueString:
+          type: string
+          description: value as text (deprecated as of v1.19; alias for valueText)
+          example: my search term
+        valueText:
+          type: string
+          description: value as text
+          example: my search term
+        valueDate:
+          type: string
+          description: value as date (as string)
+          example: TODO
+        valueIntArray:
+          type: array
+          description: value as integer
+          example: '[100, 200]'
+          items:
+            type: integer
+            format: int64
+        valueNumberArray:
+          type: array
+          description: value as number/float
+          example:
+          - 3.14
+          items:
+            type: number
+            format: float64
+        valueBooleanArray:
+          type: array
+          description: value as boolean
+          example:
+          - true
+          - false
+          items:
+            type: boolean
+        valueStringArray:
+          type: array
+          description: value as text (deprecated as of v1.19; alias for valueText)
+          example:
+          - my search term
+          items:
+            type: string
+        valueTextArray:
+          type: array
+          description: value as text
+          example:
+          - my search term
+          items:
+            type: string
+        valueDateArray:
+          type: array
+          description: value as date (as string)
+          example: TODO
+          items:
+            type: string
+        valueGeoRange:
+          $ref: '#/components/schemas/WhereFilterGeoRange'
+    ObjectsGetResponse:
+      allOf:
+      - $ref: '#/components/schemas/Object'
+      - properties:
+          deprecations:
+            type: array
+            items:
+              $ref: '#/components/schemas/Deprecation'
+      - properties:
+          result:
+            format: object
+            description: Results for this specific object.
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAILED
+                default: SUCCESS
+              errors:
+                $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    BatchReferenceResponse:
+      allOf:
+      - $ref: '#/components/schemas/BatchReference'
+      - properties:
+          result:
+            format: object
+            description: Results for this specific reference.
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAILED
+                default: SUCCESS
+              errors:
+                $ref: '#/components/schemas/ErrorResponse'
+    BatchReference:
+      properties:
+        from:
+          type: string
+          format: uri
+          description: Long-form beacon-style URI to identify the source of the cross-reference, including the property name. Should be in the form of `weaviate://localhost/objects/<uuid>/<className>/<propertyName>`, where `<className>` and `<propertyName>` must represent the cross-reference property of the source class to be used.
+          example: weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals
+        to:
+          type: string
+          format: uri
+          description: Short-form URI to point to the cross-reference. Should be in the form of `weaviate://localhost/<uuid>` for the example of a local cross-reference to an object.
+          example: weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f
+        tenant:
+          type: string
+          description: Name of the reference tenant.
+    Vectors:
+      type: object
+      description: A map of named vectors for multi-vector representations.
+      additionalProperties:
+        $ref: '#/components/schemas/Vector'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

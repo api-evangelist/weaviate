@@ -1,0 +1,1206 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: authz
+paths:
+  /authz/roles:
+    get:
+      summary: Weaviate Get All Roles
+      description: Get all roles and their assigned permissions.
+      tags:
+      - authz
+      operationId: getRoles
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    post:
+      summary: Weaviate Create New Role
+      description: Create a new role with the specified permissions.
+      tags:
+      - authz
+      operationId: createRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        '201':
+          description: Role created successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Role already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}/add-permissions:
+    post:
+      summary: Weaviate Add Permissions To A Role
+      description: Add new permissions to an existing role without affecting current permissions.
+      tags:
+      - authz
+      operationId: addPermissions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name (ID) of the role being modified.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - permissions
+              properties:
+                permissions:
+                  type: array
+                  description: Permissions to be added to the role.
+                  items:
+                    $ref: '#/components/schemas/Permission'
+      responses:
+        '200':
+          description: Permissions added successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No role found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}/remove-permissions:
+    post:
+      summary: Weaviate Remove Permissions From A Role
+      description: Permissions can be revoked from a specified role. Removing all permissions from a role will delete the role itself.
+      tags:
+      - authz
+      operationId: removePermissions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the role being modified.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - permissions
+              properties:
+                permissions:
+                  type: array
+                  description: Permissions to remove from the role.
+                  items:
+                    $ref: '#/components/schemas/Permission'
+      responses:
+        '200':
+          description: Permissions removed successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No role found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}:
+    get:
+      summary: Weaviate Get A Role
+      description: Fetch a role by its name.
+      tags:
+      - authz
+      operationId: getRole
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the role.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No role found.
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete A Role
+      description: Deleting a role will remove it from the system, and revoke the associated permissions from all users who had this role.
+      tags:
+      - authz
+      operationId: deleteRole
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the role.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Successfully deleted.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}/has-permission:
+    post:
+      summary: Weaviate Check Whether A Role Possesses A Permission
+      description: Check whether a role has the specified permissions.
+      tags:
+      - authz
+      operationId: hasPermission
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the role.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+      responses:
+        '200':
+          description: Permission check was successful.
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}/users:
+    get:
+      summary: Weaviate Get Users Assigned To A Role
+      description: Get all the users (`db` + `oidc`) who have been assigned a specific role. Deprecated, will be removed when v1.29 is not supported anymore.
+      tags:
+      - authz
+      operationId: getUsersForRoleDeprecated
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the role.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Users assigned to this role.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No role found.
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}/user-assignments:
+    get:
+      summary: Weaviate Get Users Assigned To A Role
+      description: Fetch a list of users which have the specified role.
+      tags:
+      - authz
+      operationId: getUsersForRole
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name (ID) of the role.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Users assigned to this role.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - name
+                  - userType
+                  properties:
+                    userId:
+                      type: string
+                    userType:
+                      $ref: '#/components/schemas/UserTypeOutput'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No role found.
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/roles/{id}/group-assignments:
+    get:
+      summary: Weaviate Get Groups That Have A Specific Role Assigned
+      description: Retrieves a list of all groups that have been assigned a specific role, identified by its name.
+      tags:
+      - authz
+      operationId: getGroupsForRole
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique name of the role.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the list of groups that have the role assigned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - name
+                  - groupType
+                  properties:
+                    groupId:
+                      type: string
+                    groupType:
+                      $ref: '#/components/schemas/GroupType'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: The specified role was not found.
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/users/{id}/roles:
+    get:
+      summary: Weaviate Get Roles Assigned To A User
+      description: Retrieve the roles assigned to a specific user (`db` + `oidc`). Deprecated, will be removed when 1.29 is not supported anymore
+      tags:
+      - authz
+      operationId: getRolesForUserDeprecated
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the user.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Roles assigned to the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No roles found for specified user.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/users/{id}/roles/{userType}:
+    get:
+      summary: Weaviate Get Roles Assigned To A User
+      description: Get all the roles for a specific user (`db` or `oidc`).
+      tags:
+      - authz
+      operationId: getRolesForUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the user.
+        schema:
+          type: string
+      - name: userType
+        in: path
+        required: true
+        description: The type of the user.
+        schema:
+          type: string
+          enum:
+          - oidc
+          - db
+      - name: includeFullRoles
+        in: query
+        required: false
+        description: Whether to include detailed role information like its assigned permissions.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Roles assigned to the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No roles found for specified user.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/users/{id}/assign:
+    post:
+      summary: Weaviate Assign A Role To A User
+      description: Assign one or more roles to a user. Users can have multiple roles.
+      tags:
+      - authz
+      operationId: assignRoleToUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  description: The roles that are assigned to the specified user.
+                  items:
+                    type: string
+                userType:
+                  $ref: '#/components/schemas/UserTypeInput'
+      responses:
+        '200':
+          description: Role assigned successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Specified role or user not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/users/{id}/revoke:
+    post:
+      summary: Weaviate Revoke A Role From A User
+      description: Remove one or more roles from a user.
+      tags:
+      - authz
+      operationId: revokeRoleFromUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  description: The roles to revoke from the specified user.
+                  items:
+                    type: string
+                userType:
+                  $ref: '#/components/schemas/UserTypeInput'
+      responses:
+        '200':
+          description: Roles revoked successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Specified role or user not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/groups/{id}/assign:
+    post:
+      summary: Weaviate Assign A Role To A Group
+      description: Assign roles to the specified group.
+      tags:
+      - authz
+      operationId: assignRoleToGroup
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the group.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  description: The roles to assign to the specified group.
+                  items:
+                    type: string
+                groupType:
+                  $ref: '#/components/schemas/GroupType'
+      responses:
+        '200':
+          description: Roles assigned successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Role or group not found.
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/groups/{id}/revoke:
+    post:
+      summary: Weaviate Revoke A Role From A Group
+      description: Revoke roles from the specified group.
+      tags:
+      - authz
+      operationId: revokeRoleFromGroup
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The name of the group.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  description: The roles to revoke from the specified group.
+                  items:
+                    type: string
+                groupType:
+                  $ref: '#/components/schemas/GroupType'
+      responses:
+        '200':
+          description: Roles revoked successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Role or group not found.
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/groups/{id}/roles/{groupType}:
+    get:
+      summary: Weaviate Get Roles Assigned To A Specific Group
+      description: Retrieves a list of all roles assigned to a specific group. The group must be identified by both its name (`id`) and its type (`db` or `oidc`).
+      tags:
+      - authz
+      operationId: getRolesForGroup
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique name of the group.
+        schema:
+          type: string
+      - name: groupType
+        in: path
+        required: true
+        description: The type of the group.
+        schema:
+          type: string
+          enum:
+          - oidc
+      - name: includeFullRoles
+        in: query
+        required: false
+        description: If true, the response will include the full role definitions with all associated permissions. If false, only role names are returned.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: A list of roles assigned to the specified group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: The specified group was not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /authz/groups/{groupType}:
+    get:
+      summary: Weaviate List All Groups Of A Specific Type
+      description: Retrieves a list of all available group names for a specified group type (`oidc` or `db`).
+      tags:
+      - authz
+      operationId: getGroups
+      parameters:
+      - name: groupType
+        in: path
+        required: true
+        description: The type of group to retrieve.
+        schema:
+          type: string
+          enum:
+          - oidc
+      responses:
+        '200':
+          description: A list of group names for the specified type.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    UserTypeInput:
+      type: string
+      description: The type of the user. `db` users are managed by Weaviate, `oidc` users are managed by an external OIDC provider.
+      enum:
+      - db
+      - oidc
+    RolesListResponse:
+      type: array
+      description: List of roles.
+      items:
+        $ref: '#/components/schemas/Role'
+    Role:
+      type: object
+      required:
+      - name
+      - permissions
+      properties:
+        name:
+          type: string
+          description: The name (ID) of the role.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    Permission:
+      type: object
+      description: Permissions attached to a role.
+      required:
+      - action
+      properties:
+        backups:
+          type: object
+          description: Resources applicable for backup actions.
+          properties:
+            collection:
+              type: string
+              description: A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.
+              default: '*'
+        data:
+          type: object
+          description: Resources applicable for data actions.
+          properties:
+            collection:
+              type: string
+              description: A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.
+              default: '*'
+            tenant:
+              type: string
+              description: A string that specifies which tenants this permission applies to. Can be an exact tenant name or a regex pattern. The default value `*` applies the permission to all tenants.
+              default: '*'
+            object:
+              type: string
+              description: A string that specifies which objects this permission applies to. Can be an exact object ID or a regex pattern. The default value `*` applies the permission to all objects.
+              default: '*'
+        nodes:
+          type: object
+          description: Resources applicable for cluster actions.
+          properties:
+            verbosity:
+              type: string
+              description: Whether to allow (verbose) returning shards and stats data in the response.
+              enum:
+              - verbose
+              - minimal
+              default: minimal
+            collection:
+              type: string
+              description: A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.
+              default: '*'
+        users:
+          type: object
+          description: Resources applicable for user actions.
+          properties:
+            users:
+              type: string
+              description: A string that specifies which users this permission applies to. Can be an exact user name or a regex pattern. The default value `*` applies the permission to all users.
+              default: '*'
+        groups:
+          type: object
+          description: Resources applicable for group actions.
+          properties:
+            group:
+              type: string
+              description: A string that specifies which groups this permission applies to. Can be an exact group name or a regex pattern. The default value `*` applies the permission to all groups.
+              default: '*'
+            groupType:
+              $ref: '#/components/schemas/GroupType'
+        tenants:
+          type: object
+          description: Resources applicable for tenant actions.
+          properties:
+            collection:
+              type: string
+              description: A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.
+              default: '*'
+            tenant:
+              type: string
+              description: A string that specifies which tenants this permission applies to. Can be an exact tenant name or a regex pattern. The default value `*` applies the permission to all tenants.
+              default: '*'
+        roles:
+          type: object
+          description: Resources applicable for role actions.
+          properties:
+            role:
+              type: string
+              description: A string that specifies which roles this permission applies to. Can be an exact role name or a regex pattern. The default value `*` applies the permission to all roles.
+              default: '*'
+            scope:
+              type: string
+              description: Set the scope for the manage role permission.
+              enum:
+              - all
+              - match
+              default: match
+        collections:
+          type: object
+          description: Resources applicable for collection and/or tenant actions.
+          properties:
+            collection:
+              type: string
+              description: A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.
+              default: '*'
+        replicate:
+          type: object
+          description: resources applicable for replicate actions
+          properties:
+            collection:
+              type: string
+              description: string or regex. if a specific collection name, if left empty it will be ALL or *
+              default: '*'
+            shard:
+              type: string
+              description: string or regex. if a specific shard name, if left empty it will be ALL or *
+              default: '*'
+        aliases:
+          type: object
+          description: Resource definition for alias-related actions and permissions. Used to specify which aliases and collections can be accessed or modified.
+          properties:
+            collection:
+              type: string
+              description: A string that specifies which collections this permission applies to. Can be an exact collection name or a regex pattern. The default value `*` applies the permission to all collections.
+              default: '*'
+            alias:
+              type: string
+              description: A string that specifies which aliases this permission applies to. Can be an exact alias name or a regex pattern. The default value `*` applies the permission to all aliases.
+              default: '*'
+        namespaces:
+          type: object
+          description: Resources applicable for namespace actions.
+          properties:
+            namespace:
+              type: string
+              description: A string that specifies which namespaces this permission applies to. Can be an exact namespace name or a regex pattern. The default value `*` applies the permission to all namespaces.
+              default: '*'
+        action:
+          type: string
+          description: Allowed actions in weaviate.
+          enum:
+          - manage_backups
+          - read_cluster
+          - create_data
+          - read_data
+          - update_data
+          - delete_data
+          - read_nodes
+          - create_roles
+          - read_roles
+          - update_roles
+          - delete_roles
+          - create_collections
+          - read_collections
+          - update_collections
+          - delete_collections
+          - assign_and_revoke_users
+          - create_users
+          - read_users
+          - update_users
+          - delete_users
+          - create_tenants
+          - read_tenants
+          - update_tenants
+          - delete_tenants
+          - create_replicate
+          - read_replicate
+          - update_replicate
+          - delete_replicate
+          - create_aliases
+          - read_aliases
+          - update_aliases
+          - delete_aliases
+          - assign_and_revoke_groups
+          - read_groups
+          - create_mcp
+          - read_mcp
+          - update_mcp
+          - manage_namespaces
+    GroupType:
+      type: string
+      description: If the group contains OIDC or database users.
+      enum:
+      - oidc
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    UserTypeOutput:
+      type: string
+      description: The type of the user. `db_user` users are created through the `users` API, `db_env_user` users are created through environment variables, and `oidc` users are managed by an external OIDC provider.
+      enum:
+      - db_user
+      - db_env_user
+      - oidc
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

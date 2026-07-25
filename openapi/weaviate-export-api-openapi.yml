@@ -1,0 +1,326 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz export API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: export
+paths:
+  /export/{backend}:
+    post:
+      summary: Weaviate Start A New Export
+      description: Initiates an export operation on the specified backend storage (S3, GCS, Azure, or filesystem). The output format is controlled by the required 'file_format' field in the request body (currently only 'parquet' is supported). Each collection is exported to a separate file.
+      tags:
+      - export
+      operationId: export.create
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: The backend storage system to use for the export (e.g., `filesystem`, `gcs`, `s3`, `azure`).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportCreateRequest'
+      responses:
+        '200':
+          description: Successfully started export operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportCreateResponse'
+        '401':
+          description: Unauthorized or invalid credentials
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Export already exists or another export is already in progress
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid export request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error occurred while starting export
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /export/{backend}/{id}:
+    get:
+      summary: Weaviate Get Export Status
+      description: Retrieves the current status of an export operation, including progress for each collection being exported.
+      tags:
+      - export
+      operationId: export.status
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: The backend storage system where the export is stored.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the export.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved export status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportStatusResponse'
+        '401':
+          description: Unauthorized or invalid credentials
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Export not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request (e.g., unsupported backend)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error occurred while retrieving export status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Cancel An Export
+      description: Cancels an ongoing export operation identified by its ID.
+      tags:
+      - export
+      operationId: export.cancel
+      parameters:
+      - name: backend
+        in: path
+        required: true
+        description: The backend storage system where the export is stored.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the export to cancel.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Export cancelled successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Export not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Export has already finished and cannot be cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid request (e.g., unsupported backend)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error occurred while cancelling export
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    ExportStatusResponse:
+      type: object
+      description: Current status of an export operation
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this export
+        backend:
+          type: string
+          description: The backend storage system used
+        path:
+          type: string
+          description: Full path where the export is stored
+        status:
+          type: string
+          description: Current status of the export
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - SUCCESS
+          - FAILED
+          - CANCELED
+        startedAt:
+          type: string
+          format: date-time
+          description: When the export started
+        completedAt:
+          type: string
+          format: date-time
+          description: When the export completed (successfully, with failure, or was canceled)
+        tookInMs:
+          type: integer
+          format: int64
+          description: Duration of the export in milliseconds
+        classes:
+          type: array
+          description: List of collections in this export
+          items:
+            type: string
+        shardStatus:
+          type: object
+          description: 'Per-shard progress: className -> shardName -> status'
+          additionalProperties:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/ShardProgress'
+        error:
+          type: string
+          description: Error message if export failed
+    ExportCreateResponse:
+      type: object
+      description: Response from creating an export operation
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this export
+        backend:
+          type: string
+          description: The backend storage system used
+        path:
+          type: string
+          description: Full path where the export is being written
+        status:
+          type: string
+          description: Current status of the export
+          enum:
+          - STARTED
+        startedAt:
+          type: string
+          format: date-time
+          description: When the export started
+        classes:
+          type: array
+          description: List of collections being exported
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    ShardProgress:
+      type: object
+      description: Progress information for exporting a single shard
+      properties:
+        status:
+          type: string
+          description: Status of this shard's export
+          enum:
+          - TRANSFERRING
+          - SUCCESS
+          - FAILED
+          - SKIPPED
+        objectsExported:
+          type: integer
+          format: int64
+          description: Number of objects exported from this shard
+        error:
+          type: string
+          description: Error message if this shard's export failed
+        skipReason:
+          type: string
+          description: Reason why this shard was skipped (e.g. tenant status)
+    ExportCreateRequest:
+      type: object
+      description: Request to create a new export operation
+      required:
+      - id
+      - file_format
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this export. Must be URL-safe.
+        file_format:
+          type: string
+          description: Output file format for the export.
+          enum:
+          - parquet
+        include:
+          type: array
+          description: List of collection names to include in the export. Cannot be used with 'exclude'.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collection names to exclude from the export. Cannot be used with 'include'.
+          items:
+            type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

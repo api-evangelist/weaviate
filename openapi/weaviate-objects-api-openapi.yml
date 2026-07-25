@@ -1,0 +1,1757 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz objects API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: objects
+paths:
+  /objects:
+    get:
+      summary: Weaviate List Objects
+      description: Retrieves a list of data objects. By default, objects are returned in reverse order of creation. Requires a collection name (`class`) parameter to specify which collection's objects to list, otherwise, returns an empty list.
+      tags:
+      - objects
+      operationId: objects.list
+      parameters:
+      - name: after
+        in: query
+        required: false
+        description: A threshold UUID of the objects to retrieve after, using an UUID-based ordering. This object is not part of the set. <br/><br/>Must be used with collection name (`class`), typically in conjunction with `limit`. <br/><br/>Note `after` cannot be used with `offset` or `sort`. <br/><br/>For a null value similar to offset=0, set an empty string in the request, i.e. `after=` or `after`.
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        description: The starting index of the result window. Note `offset` will retrieve `offset+limit` results and return `limit` results from the object with index `offset` onwards. Limited by the value of `QUERY_MAXIMUM_RESULTS`. <br/><br/>Should be used in conjunction with `limit`. <br/><br/>Cannot be used with `after`.
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        description: The maximum number of items to be returned per page. The default is 25 unless set otherwise as an environment variable.
+        schema:
+          type: integer
+          format: int64
+      - name: include
+        in: query
+        required: false
+        description: 'Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`.'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        description: Name(s) of the property to sort by - e.g. `city`, or `country,city`.
+        schema:
+          type: string
+      - name: order
+        in: query
+        required: false
+        description: 'Order parameter to tell how to order (asc or desc) data within given field. Should be used in conjunction with `sort` parameter. If providing multiple `sort` values, provide multiple `order` values in corresponding order, e.g.: `sort=author_name,title&order=desc,asc`.'
+        schema:
+          type: string
+      - name: class
+        in: query
+        required: false
+        description: The collection from which to query objects.  <br/><br/>Note that if the collection name (`class`) is not provided, the response will not include any objects.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing the list of objects. If the collection name (`class`) is not provided, the response will not include any objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectsListResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Successful query result but no matching objects were found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the specified collection exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    post:
+      summary: Weaviate Create An Object
+      description: Creates a new data object. The object's metadata and schema values are validated before creation.<br/><br/>**Note (batch import)**:<br/>If you plan on importing a large number of objects, using the `/batch/objects` endpoint is significantly more efficient than sending multiple single requests.<br/><br/>**Note (idempotence)**:<br/>This operation (POST) fails if an object with the provided ID already exists. To update an existing object, use the PUT or PATCH methods.
+      tags:
+      - objects
+      operationId: objects.create
+      parameters:
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Object created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /objects/{id}:
+    delete:
+      summary: Weaviate Delete An Object
+      description: 'Deletes an object from the database based on its UUID. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be deleted.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Object deleted successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    get:
+      summary: Weaviate Get An Object
+      description: 'Get a specific object based on its UUID. Also available as Websocket bus. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be retrieved.
+        schema:
+          type: string
+          format: uuid
+      - name: include
+        in: query
+        required: false
+        description: 'Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing the object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    patch:
+      summary: Weaviate Patch An Object
+      description: 'Update an object based on its UUID (using patch semantics). This method supports json-merge style patch semantics (RFC 7396). Provided meta-data and schema values are validated. `lastUpdateTimeUnix` is set to the time this function is called. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be patched.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '204':
+          description: Object patched successfully.
+        '400':
+          description: Malformed patch request body.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '422':
+          description: The patch object is valid JSON but is unprocessable for other reasons (e.g., invalid schema).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Update An Object
+      description: 'Updates an object based on its UUID. Given meta-data and schema values are validated. `lastUpdateTimeUnix` is set to the time this function is called. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be replaced.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Object replaced successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    head:
+      summary: Weaviate Check If An Object Exists
+      description: 'Checks if an object exists in the system based on its UUID. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.head
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to check.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: Object exists.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object does not exist.
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /objects/{className}/{id}:
+    get:
+      summary: Weaviate Get An Object
+      description: Get a data object based on its collection name (`className`) and UUID (`id`).
+      tags:
+      - objects
+      operationId: objects.class.get
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be retrieved.
+        schema:
+          type: string
+          format: uuid
+      - name: include
+        in: query
+        required: false
+        description: 'Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`.'
+        schema:
+          type: string
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: node_name
+        in: query
+        required: false
+        description: The target node which should fulfill the request.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing the object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete An Object
+      description: Removes a data object from a specific collection, identified by its collection name (`className`) and UUID (`id`).<br/><br/>**Note on deleting references (legacy format):**<br/>For backward compatibility with older beacon formats (lacking a collection name), deleting a reference requires the beacon in the request to exactly match the stored format. Beacons always use `localhost` as the host, indicating the target is within the same Weaviate instance.
+      tags:
+      - objects
+      operationId: objects.class.delete
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be deleted.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Object deleted successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Replace An Object
+      description: Replaces properties of an existing data object. The object is identified by its collection name (`className`) and UUID (`id`). The request body must contain the complete object definition with the new property values.
+      tags:
+      - objects
+      operationId: objects.class.put
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be replaced.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Object replaced successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    patch:
+      summary: Weaviate Patch An Object
+      description: Updates specific properties of an existing data object using JSON merge patch semantics (RFC 7396). The object is identified by its collection name (`className`) and UUID (`id`). Only the fields provided in the request body are modified. Metadata and schema values are validated, and the object's `lastUpdateTimeUnix` is updated.
+      tags:
+      - objects
+      operationId: objects.class.patch
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to be patched.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '204':
+          description: Object patched successfully.
+        '400':
+          description: Malformed patch request body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+        '422':
+          description: The patch object is valid JSON but is unprocessable for other reasons (e.g., invalid schema).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    head:
+      summary: Weaviate Check If An Object Exists
+      description: Verifies the existence of a specific data object within a collection (class), identified by its collection name (`className`) and UUID (`id`), without returning the object itself.<br/><br/>This is faster than a GET request as it avoids retrieving and processing object data. Existence is confirmed by a 204 No Content status code, while non-existence results in a 404 Not Found.
+      tags:
+      - objects
+      operationId: objects.class.head
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the object to check.
+        schema:
+          type: string
+          format: uuid
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Object exists.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object does not exist.
+        '422':
+          description: Invalid data provided. Please check the values in your request (e.g., invalid UUID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /objects/{id}/references/{propertyName}:
+    post:
+      summary: Weaviate Add An Object Reference
+      description: 'Add a reference to a specific property of a data object. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.references.create
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the source object.
+        schema:
+          type: string
+          format: uuid
+      - name: propertyName
+        in: path
+        required: true
+        description: Unique name of the reference property of the source object.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleRef'
+      responses:
+        '200':
+          description: Reference added successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the property exists and is a reference type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Replace Object References
+      description: 'Replace all references in cross-reference property of an object. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.references.update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the source object.
+        schema:
+          type: string
+          format: uuid
+      - name: propertyName
+        in: path
+        required: true
+        description: Unique name of the reference property of the source object.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultipleRef'
+      responses:
+        '200':
+          description: References replaced successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the property exists and is a reference type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete An Object Reference
+      description: 'Delete the single reference that is given in the body from the list of references that this property has. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead.'
+      tags:
+      - objects
+      operationId: objects.references.delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the source object.
+        schema:
+          type: string
+          format: uuid
+      - name: propertyName
+        in: path
+        required: true
+        description: Unique name of the reference property of the source object.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleRef'
+      responses:
+        '204':
+          description: Reference deleted successfully.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object or reference not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /objects/{className}/{id}/references/{propertyName}:
+    post:
+      summary: Weaviate Add An Object Reference
+      description: Adds a new reference to a reference property (`propertyName`) on a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The reference to add is specified in the request body.
+      tags:
+      - objects
+      operationId: objects.class.references.create
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the source object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the source object.
+        schema:
+          type: string
+          format: uuid
+      - name: propertyName
+        in: path
+        required: true
+        description: Unique name of the reference property of the source object.
+        schema:
+          type: string
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleRef'
+      responses:
+        '200':
+          description: Reference added successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Source object not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the property exists and is a reference type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    put:
+      summary: Weaviate Replace Object References
+      description: Replaces all existing references for a specific reference property (`propertyName`) on a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The new set of references is provided in the request body.
+      tags:
+      - objects
+      operationId: objects.class.references.put
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the source object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the source object.
+        schema:
+          type: string
+          format: uuid
+      - name: propertyName
+        in: path
+        required: true
+        description: Unique name of the reference property of the source object.
+        schema:
+          type: string
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultipleRef'
+      responses:
+        '200':
+          description: References replaced successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Source object not found.
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the property exists and is a reference type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete An Object Reference
+      description: Removes a specific reference from a reference property (`propertyName`) of a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The reference to remove is specified in the request body.
+      tags:
+      - objects
+      operationId: objects.class.references.delete
+      parameters:
+      - name: className
+        in: path
+        required: true
+        description: Name of the collection (class) the source object belongs to.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Unique UUID of the source object.
+        schema:
+          type: string
+          format: uuid
+      - name: propertyName
+        in: path
+        required: true
+        description: Unique name of the reference property of the source object.
+        schema:
+          type: string
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleRef'
+      responses:
+        '204':
+          description: Reference deleted successfully.
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object or reference not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the property exists and is a reference type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /objects/validate:
+    post:
+      summary: Weaviate Validate An Object
+      description: Checks if a data object's structure conforms to the specified collection schema and metadata rules without actually storing the object.<br/><br/>A successful validation returns a 200 OK status code with no body. If validation fails, an error response with details is returned.
+      tags:
+      - objects
+      operationId: objects.validate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Object is valid according to the schema.
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Request body is well-formed but the object is invalid according to the schema.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /batch/objects:
+    post:
+      summary: Weaviate Create Objects In Batch
+      description: Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch).
+      tags:
+      - objects
+      operationId: batch.objects.create
+      parameters:
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  description: Controls which fields are returned in the response for each object. Default is `ALL`.
+                  items:
+                    type: string
+                    enum:
+                    - ALL
+                    - class
+                    - schema
+                    - id
+                    - creationTimeUnix
+                    default: ALL
+                objects:
+                  type: array
+                  description: Array of objects to be created.
+                  items:
+                    $ref: '#/components/schemas/Object'
+      responses:
+        '200':
+          description: Request processed successfully. Individual object statuses are provided in the response body.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectsGetResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+    delete:
+      summary: Weaviate Delete Objects In Batch
+      description: Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are found.
+      tags:
+      - objects
+      operationId: batch.objects.delete
+      parameters:
+      - name: consistency_level
+        in: query
+        required: false
+        description: Determines how many replicas must acknowledge a request before it is considered successful.
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        required: false
+        description: Specifies the tenant in a request targeting a multi-tenant collection (class).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDelete'
+      responses:
+        '200':
+          description: Request processed successfully. See response body for matching objects and deletion results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Invalid data provided. Please check the values in your request (e.g., invalid filter).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An error occurred while trying to fulfill the request. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    C11yVector:
+      type: array
+      description: A vector representation of the object in the Contextionary. If provided at object creation, this wil take precedence over any vectorizer setting.
+      items:
+        type: number
+        format: float
+    BatchDeleteResponse:
+      type: object
+      description: Delete Objects response.
+      properties:
+        match:
+          type: object
+          description: Outlines how to find the objects to be deleted.
+          properties:
+            class:
+              type: string
+              description: The name of the collection (class) from which to delete objects.
+              example: City
+            where:
+              $ref: '#/components/schemas/WhereFilter'
+        output:
+          type: string
+          description: 'Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.'
+          default: minimal
+        deletionTimeUnixMilli:
+          type: integer
+          format: int64
+          description: Timestamp of deletion in milliseconds since epoch UTC.
+        dryRun:
+          type: boolean
+          description: If true, objects will not be deleted yet, but merely listed. Defaults to false.
+          default: false
+        results:
+          type: object
+          properties:
+            matches:
+              type: number
+              format: int64
+              description: How many objects were matched by the filter.
+            limit:
+              type: number
+              format: int64
+              description: The most amount of objects that can be deleted in a single query, equals [`QUERY_MAXIMUM_RESULTS`](https://docs.weaviate.io/deploy/configuration/env-vars#QUERY_MAXIMUM_RESULTS).
+            successful:
+              type: number
+              format: int64
+              description: How many objects were successfully deleted in this round.
+            failed:
+              type: number
+              format: int64
+              description: How many objects should have been deleted but could not be deleted.
+            objects:
+              type: array
+              description: With output set to `minimal` only objects with error occurred will the be described. Successfully deleted objects would be omitted. Output set to `verbose` will list all of the objects with their respective statuses.
+              items:
+                format: object
+                description: Results for this specific Object.
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The UUID of the object.
+                  status:
+                    type: string
+                    enum:
+                    - SUCCESS
+                    - DRYRUN
+                    - FAILED
+                    default: SUCCESS
+                  errors:
+                    $ref: '#/components/schemas/ErrorResponse'
+    ObjectsListResponse:
+      type: object
+      description: List of objects.
+      properties:
+        objects:
+          type: array
+          description: The actual list of objects.
+          items:
+            $ref: '#/components/schemas/Object'
+        deprecations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deprecation'
+        totalResults:
+          type: integer
+          format: int64
+          description: The total number of objects for the query. The number of items in a response may be smaller due to paging.
+    VectorWeights:
+      type: object
+      description: 'Allow custom overrides of vector weights as math expressions. E.g. `pancake`: `7` will set the weight for the word pancake to 7 in the vectorization, whereas `w * 3` would triple the originally calculated word. This is an open object, with OpenAPI Specification 3.0 this will be more detailed. See Weaviate docs for more info. In the future this will become a key/value (string/string) object.'
+    Deprecation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id that uniquely identifies this particular deprecation (mostly used internally).
+        status:
+          type: string
+          description: Whether the problematic API functionality is deprecated (planned to be removed) or already removed.
+        apiType:
+          type: string
+          description: 'Describes which API is affected, usually one of: REST, GraphQL and gRPC.'
+        msg:
+          type: string
+          description: What this deprecation is about.
+        mitigation:
+          type: string
+          description: User-required object to not be affected by the (planned) removal.
+        sinceVersion:
+          type: string
+          description: The deprecation was introduced in this version.
+        plannedRemovalVersion:
+          type: string
+          description: A best-effort guess of which upcoming version will remove the feature entirely.
+        removedIn:
+          type: string
+          description: If the feature has already been removed, it was removed in this version.
+        removedTime:
+          type: string
+          format: date-time
+          description: If the feature has already been removed, it was removed at this timestamp.
+        sinceTime:
+          type: string
+          format: date-time
+          description: The deprecation was introduced at this timestamp.
+        locations:
+          type: array
+          description: The locations within the specified API affected by this deprecation.
+          items:
+            type: string
+    BatchDelete:
+      type: object
+      properties:
+        match:
+          type: object
+          description: Outlines how to find the objects to be deleted.
+          properties:
+            class:
+              type: string
+              description: The name of the collection (class) from which to delete objects.
+              example: City
+            where:
+              $ref: '#/components/schemas/WhereFilter'
+        output:
+          type: string
+          description: 'Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.'
+          default: minimal
+        deletionTimeUnixMilli:
+          type: integer
+          format: int64
+          description: Timestamp of deletion in milliseconds since epoch UTC.
+        dryRun:
+          type: boolean
+          description: If true, the call will show which objects would be matched using the specified filter without deleting any objects. <br/><br/>Depending on the configured verbosity, you will either receive a count of affected objects, or a list of IDs.
+          default: false
+    Vector:
+      type: object
+      description: A vector representation of the object. If provided at object creation, this wil take precedence over any vectorizer setting.
+    WhereFilter:
+      type: object
+      description: Filter search results using a where filter.
+      properties:
+        operands:
+          type: array
+          description: Combine multiple where filters, requires 'And' or 'Or' operator.
+          items:
+            $ref: '#/components/schemas/WhereFilter'
+        operator:
+          type: string
+          description: Operator to use.
+          enum:
+          - And
+          - Or
+          - Equal
+          - Like
+          - NotEqual
+          - GreaterThan
+          - GreaterThanEqual
+          - LessThan
+          - LessThanEqual
+          - WithinGeoRange
+          - IsNull
+          - ContainsAny
+          - ContainsAll
+          - ContainsNone
+          - Not
+          example: GreaterThanEqual
+        path:
+          type: array
+          description: Path to the property currently being filtered.
+          example:
+          - inCity
+          - city
+          - name
+          items:
+            type: string
+        valueInt:
+          type: integer
+          format: int64
+          description: value as integer
+          example: 2000
+        valueNumber:
+          type: number
+          format: float64
+          description: value as number/float
+          example: 3.14
+        valueBoolean:
+          type: boolean
+          description: value as boolean
+          example: false
+        valueString:
+          type: string
+          description: value as text (deprecated as of v1.19; alias for valueText)
+          example: my search term
+        valueText:
+          type: string
+          description: value as text
+          example: my search term
+        valueDate:
+          type: string
+          description: value as date (as string)
+          example: TODO
+        valueIntArray:
+          type: array
+          description: value as integer
+          example: '[100, 200]'
+          items:
+            type: integer
+            format: int64
+        valueNumberArray:
+          type: array
+          description: value as number/float
+          example:
+          - 3.14
+          items:
+            type: number
+            format: float64
+        valueBooleanArray:
+          type: array
+          description: value as boolean
+          example:
+          - true
+          - false
+          items:
+            type: boolean
+        valueStringArray:
+          type: array
+          description: value as text (deprecated as of v1.19; alias for valueText)
+          example:
+          - my search term
+          items:
+            type: string
+        valueTextArray:
+          type: array
+          description: value as text
+          example:
+          - my search term
+          items:
+            type: string
+        valueDateArray:
+          type: array
+          description: value as date (as string)
+          example: TODO
+          items:
+            type: string
+        valueGeoRange:
+          $ref: '#/components/schemas/WhereFilterGeoRange'
+    ReferenceMetaClassification:
+      description: This meta field contains additional info about the classified reference property
+      properties:
+        overallCount:
+          type: number
+          format: int64
+          description: overall neighbors checked as part of the classification. In most cases this will equal k, but could be lower than k - for example if not enough data was present
+        winningCount:
+          type: number
+          format: int64
+          description: size of the winning group, a number between 1..k
+        losingCount:
+          type: number
+          format: int64
+          description: size of the losing group, can be 0 if the winning group size equals k
+        closestOverallDistance:
+          type: number
+          format: float32
+          description: The lowest distance of any neighbor, regardless of whether they were in the winning or losing group
+        winningDistance:
+          type: number
+          format: float32
+          description: deprecated - do not use, to be removed in 0.23.0
+        meanWinningDistance:
+          type: number
+          format: float32
+          description: Mean distance of all neighbors from the winning group
+        closestWinningDistance:
+          type: number
+          format: float32
+          description: Closest distance of a neighbor from the winning group
+        closestLosingDistance:
+          type: number
+          format: float32
+          description: The lowest distance of a neighbor in the losing group. Optional. If k equals the size of the winning group, there is no losing group
+        losingDistance:
+          type: number
+          format: float32
+          description: deprecated - do not use, to be removed in 0.23.0
+        meanLosingDistance:
+          type: number
+          format: float32
+          description: Mean distance of all neighbors from the losing group. Optional. If k equals the size of the winning group, there is no losing group.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    PropertySchema:
+      type: object
+      description: Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection.
+    AdditionalProperties:
+      type: object
+      description: (Response only) Additional meta information about a single object.
+      additionalProperties:
+        type: object
+    Object:
+      type: object
+      properties:
+        class:
+          type: string
+          description: Name of the collection (class) the object belongs to.
+        vectorWeights:
+          $ref: '#/components/schemas/VectorWeights'
+        properties:
+          $ref: '#/components/schemas/PropertySchema'
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the object.
+        creationTimeUnix:
+          type: integer
+          format: int64
+          description: (Response only) Timestamp of creation of this object in milliseconds since epoch UTC.
+        lastUpdateTimeUnix:
+          type: integer
+          format: int64
+          description: (Response only) Timestamp of the last object update in milliseconds since epoch UTC.
+        vector:
+          $ref: '#/components/schemas/C11yVector'
+        vectors:
+          $ref: '#/components/schemas/Vectors'
+        tenant:
+          type: string
+          description: The name of the tenant the object belongs to.
+        additional:
+          $ref: '#/components/schemas/AdditionalProperties'
+    GeoCoordinates:
+      properties:
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
+    ObjectsGetResponse:
+      allOf:
+      - $ref: '#/components/schemas/Object'
+      - properties:
+          deprecations:
+            type: array
+            items:
+              $ref: '#/components/schemas/Deprecation'
+      - properties:
+          result:
+            format: object
+            description: Results for this specific object.
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAILED
+                default: SUCCESS
+              errors:
+                $ref: '#/components/schemas/ErrorResponse'
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
+    SingleRef:
+      description: Either set beacon (direct reference) or set collection (class) and schema (concept reference)
+      properties:
+        class:
+          type: string
+          format: uri
+          description: If using a concept reference (rather than a direct reference), specify the desired collection (class) name here.
+        schema:
+          $ref: '#/components/schemas/PropertySchema'
+        beacon:
+          type: string
+          format: uri
+          description: If using a direct reference, specify the URI to point to the cross-reference here. Should be in the form of weaviate://localhost/<uuid> for the example of a local cross-reference to an object
+        href:
+          type: string
+          format: uri
+          description: If using a direct reference, this read-only fields provides a link to the referenced resource. If 'origin' is globally configured, an absolute URI is shown - a relative URI otherwise.
+        classification:
+          $ref: '#/components/schemas/ReferenceMetaClassification'
+    MultipleRef:
+      type: array
+      description: Multiple instances of references to other objects.
+      items:
+        $ref: '#/components/schemas/SingleRef'
+    Vectors:
+      type: object
+      description: A map of named vectors for multi-vector representations.
+      additionalProperties:
+        $ref: '#/components/schemas/Vector'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication

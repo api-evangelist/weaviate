@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: Weaviate REST authz classifications API
+  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  version: 1.38.0-dev
+servers:
+- url: http://localhost:8080
+  description: Local Weaviate instance
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: classifications
+paths:
+  /classifications/:
+    post:
+      summary: Weaviate Start A Classification
+      description: Initiates a background classification task based on the provided parameters. Use the GET /classifications/{id} endpoint to monitor the status and retrieve results.
+      tags:
+      - classifications
+      operationId: classifications.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Classification'
+      responses:
+        '201':
+          description: Classification task successfully initiated. The response body contains the classification details including its ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Classification'
+        '400':
+          description: Invalid request body or parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: An internal server error occurred while starting the classification task. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+  /classifications/{id}:
+    get:
+      summary: Weaviate Get Classification Status
+      description: Retrieves the status, metadata, and results (if completed) of a classification task identified by its unique ID.
+      tags:
+      - classifications
+      operationId: classifications.get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the classification task.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the classification details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Classification'
+        '401':
+          description: Unauthorized or invalid credentials.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Classification with the given ID not found.
+        '500':
+          description: An internal server error occurred while retrieving the classification status. Check the ErrorResponse for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 100
+components:
+  schemas:
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
+    Classification:
+      type: object
+      description: Manage classifications, trigger them and view status of past classifications.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID to uniquely identify this classification run.
+          example: ee722219-b8ec-4db1-8f8d-5150bb1a9e0c
+        class:
+          type: string
+          description: The name of the collection (class) which is used in this classification.
+          example: City
+        classifyProperties:
+          type: array
+          description: Which ref-property to set as part of the classification.
+          example:
+          - inCountry
+          items:
+            type: string
+        basedOnProperties:
+          type: array
+          description: Base the text-based classification on these fields (of type text).
+          example:
+          - description
+          items:
+            type: string
+        status:
+          type: string
+          description: Status of this classification.
+          enum:
+          - running
+          - completed
+          - failed
+          example: running
+        meta:
+          $ref: '#/components/schemas/ClassificationMeta'
+        type:
+          type: string
+          description: Which algorithm to use for classifications.
+        settings:
+          type: object
+          description: Classification-type specific settings.
+        error:
+          type: string
+          description: Error message if status == failed.
+          default: ''
+          example: 'classify xzy: something went wrong'
+        filters:
+          type: object
+          properties:
+            sourceWhere:
+              $ref: '#/components/schemas/WhereFilter'
+            trainingSetWhere:
+              $ref: '#/components/schemas/WhereFilter'
+            targetWhere:
+              $ref: '#/components/schemas/WhereFilter'
+    GeoCoordinates:
+      properties:
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
+    WhereFilter:
+      type: object
+      description: Filter search results using a where filter.
+      properties:
+        operands:
+          type: array
+          description: Combine multiple where filters, requires 'And' or 'Or' operator.
+          items:
+            $ref: '#/components/schemas/WhereFilter'
+        operator:
+          type: string
+          description: Operator to use.
+          enum:
+          - And
+          - Or
+          - Equal
+          - Like
+          - NotEqual
+          - GreaterThan
+          - GreaterThanEqual
+          - LessThan
+          - LessThanEqual
+          - WithinGeoRange
+          - IsNull
+          - ContainsAny
+          - ContainsAll
+          - ContainsNone
+          - Not
+          example: GreaterThanEqual
+        path:
+          type: array
+          description: Path to the property currently being filtered.
+          example:
+          - inCity
+          - city
+          - name
+          items:
+            type: string
+        valueInt:
+          type: integer
+          format: int64
+          description: value as integer
+          example: 2000
+        valueNumber:
+          type: number
+          format: float64
+          description: value as number/float
+          example: 3.14
+        valueBoolean:
+          type: boolean
+          description: value as boolean
+          example: false
+        valueString:
+          type: string
+          description: value as text (deprecated as of v1.19; alias for valueText)
+          example: my search term
+        valueText:
+          type: string
+          description: value as text
+          example: my search term
+        valueDate:
+          type: string
+          description: value as date (as string)
+          example: TODO
+        valueIntArray:
+          type: array
+          description: value as integer
+          example: '[100, 200]'
+          items:
+            type: integer
+            format: int64
+        valueNumberArray:
+          type: array
+          description: value as number/float
+          example:
+          - 3.14
+          items:
+            type: number
+            format: float64
+        valueBooleanArray:
+          type: array
+          description: value as boolean
+          example:
+          - true
+          - false
+          items:
+            type: boolean
+        valueStringArray:
+          type: array
+          description: value as text (deprecated as of v1.19; alias for valueText)
+          example:
+          - my search term
+          items:
+            type: string
+        valueTextArray:
+          type: array
+          description: value as text
+          example:
+          - my search term
+          items:
+            type: string
+        valueDateArray:
+          type: array
+          description: value as date (as string)
+          example: TODO
+          items:
+            type: string
+        valueGeoRange:
+          $ref: '#/components/schemas/WhereFilterGeoRange'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    ClassificationMeta:
+      type: object
+      description: Additional information to a specific classification.
+      properties:
+        started:
+          type: string
+          format: date-time
+          description: Time when this classification was started.
+          example: '2017-07-21T17:32:28Z'
+        completed:
+          type: string
+          format: date-time
+          description: Time when this classification finished.
+          example: '2017-07-21T17:32:28Z'
+        count:
+          type: integer
+          description: Number of objects which were taken into consideration for classification.
+          example: 147
+        countSucceeded:
+          type: integer
+          description: Number of objects successfully classified.
+          example: 140
+        countFailed:
+          type: integer
+          description: Number of objects which could not be classified - see error message for details.
+          example: 7
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OIDC/JWT bearer authentication
