@@ -1,0 +1,777 @@
+{
+  "info": {
+    "_postman_id": "b84c83ca-f404-41d2-98ea-8b2975065911",
+    "name": "Weaviate REST authz nodes API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:29.000Z",
+    "updatedAt": "2026-07-28T03:29:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b84c83ca-f404-41d2-98ea-8b2975065911"
+  },
+  "item": [
+    {
+      "name": "nodes",
+      "item": [
+        {
+          "name": "{className}",
+          "item": [
+            {
+              "name": "Weaviate Get Node Status By Collection",
+              "id": "32bf333b-8a0d-4d17-b6aa-a8209c406dab",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "6e8306e2-3c53-4c3f-9f01-c26760e190b5",
+                      "key": "className",
+                      "value": "<string>",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "description": "Retrieves status information only for the nodes that host shards for the specified collection (`className`). Use the `output` query parameter to control the level of detail."
+              },
+              "response": [
+                {
+                  "id": "43a7f571-5176-4881-baf8-3c9fc9330303",
+                  "name": "Successfully retrieved the status for nodes relevant to the specified collection.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nodes",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "key": "shardName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                          "key": "output",
+                          "value": "minimal"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"nodes\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"<string>\",\n      \"gitHash\": \"<string>\",\n      \"stats\": {\n        \"shardCount\": \"<number>\",\n        \"objectCount\": \"<number>\"\n      },\n      \"batchStats\": {\n        \"queueLength\": \"<number>\",\n        \"ratePerSecond\": \"<number>\"\n      },\n      \"shards\": [\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        }\n      ],\n      \"operationalMode\": \"ReadWrite\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"<string>\",\n      \"gitHash\": \"<string>\",\n      \"stats\": {\n        \"shardCount\": \"<number>\",\n        \"objectCount\": \"<number>\"\n      },\n      \"batchStats\": {\n        \"queueLength\": \"<number>\",\n        \"ratePerSecond\": \"<number>\"\n      },\n      \"shards\": [\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        }\n      ],\n      \"operationalMode\": \"WriteOnly\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:30.000Z",
+                  "updatedAt": "2026-07-28T03:29:30.000Z",
+                  "uid": "35240-43a7f571-5176-4881-baf8-3c9fc9330303"
+                },
+                {
+                  "id": "a45c2bf2-4406-41d0-a61a-3575be8a44ee",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nodes",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "key": "shardName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                          "key": "output",
+                          "value": "minimal"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:30.000Z",
+                  "updatedAt": "2026-07-28T03:29:30.000Z",
+                  "uid": "35240-a45c2bf2-4406-41d0-a61a-3575be8a44ee"
+                },
+                {
+                  "id": "45b7c782-4de8-4808-b11d-72f56788bb67",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nodes",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "key": "shardName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                          "key": "output",
+                          "value": "minimal"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:30.000Z",
+                  "updatedAt": "2026-07-28T03:29:30.000Z",
+                  "uid": "35240-45b7c782-4de8-4808-b11d-72f56788bb67"
+                },
+                {
+                  "id": "5aa8b1c2-2e30-40d4-a9cc-69bd201db90e",
+                  "name": "Not Found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nodes",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "key": "shardName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                          "key": "output",
+                          "value": "minimal"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:30.000Z",
+                  "updatedAt": "2026-07-28T03:29:30.000Z",
+                  "uid": "35240-5aa8b1c2-2e30-40d4-a9cc-69bd201db90e"
+                },
+                {
+                  "id": "2660568a-f33e-4720-83a5-fe509a2ca529",
+                  "name": "Invalid request for node status.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nodes",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "key": "shardName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                          "key": "output",
+                          "value": "minimal"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:30.000Z",
+                  "updatedAt": "2026-07-28T03:29:30.000Z",
+                  "uid": "35240-2660568a-f33e-4720-83a5-fe509a2ca529"
+                },
+                {
+                  "id": "83ac2b96-83ef-4e61-9467-d09bc59295da",
+                  "name": "An internal server error occurred while retrieving node status for the collection. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nodes/:className?shardName=<string>&output=minimal",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nodes",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "key": "shardName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                          "key": "output",
+                          "value": "minimal"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:30.000Z",
+                  "updatedAt": "2026-07-28T03:29:30.000Z",
+                  "uid": "35240-83ac2b96-83ef-4e61-9467-d09bc59295da"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-32bf333b-8a0d-4d17-b6aa-a8209c406dab"
+            }
+          ],
+          "id": "d1719c5a-9e7a-4481-ae8e-f28d4d7bea57",
+          "createdAt": "2026-07-28T03:29:30.000Z",
+          "updatedAt": "2026-07-28T03:29:30.000Z",
+          "uid": "35240-d1719c5a-9e7a-4481-ae8e-f28d4d7bea57"
+        },
+        {
+          "name": "Weaviate Get Node Status",
+          "id": "7f0629c2-142c-474e-8235-5cca461fe42b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/nodes?output=minimal",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nodes"
+              ],
+              "query": [
+                {
+                  "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                  "key": "output",
+                  "value": "minimal"
+                }
+              ]
+            },
+            "description": "Retrieves status information about all nodes in the cluster. Use the `output` query parameter to control the level of detail."
+          },
+          "response": [
+            {
+              "id": "5001d00a-6240-4244-a6c7-e421dbb7ed01",
+              "name": "Successfully retrieved the status for all nodes.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes?output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"nodes\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"<string>\",\n      \"gitHash\": \"<string>\",\n      \"stats\": {\n        \"shardCount\": \"<number>\",\n        \"objectCount\": \"<number>\"\n      },\n      \"batchStats\": {\n        \"queueLength\": \"<number>\",\n        \"ratePerSecond\": \"<number>\"\n      },\n      \"shards\": [\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        }\n      ],\n      \"operationalMode\": \"ReadWrite\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"<string>\",\n      \"gitHash\": \"<string>\",\n      \"stats\": {\n        \"shardCount\": \"<number>\",\n        \"objectCount\": \"<number>\"\n      },\n      \"batchStats\": {\n        \"queueLength\": \"<number>\",\n        \"ratePerSecond\": \"<number>\"\n      },\n      \"shards\": [\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"class\": \"<string>\",\n          \"objectCount\": \"<number>\",\n          \"vectorIndexingStatus\": \"<string>\",\n          \"compressed\": \"<boolean>\",\n          \"vectorQueueLength\": \"<number>\",\n          \"loaded\": \"<boolean>\",\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            },\n            {\n              \"objectsPropagated\": \"<number>\",\n              \"startDiffTimeUnixMillis\": \"<number>\",\n              \"targetNode\": \"<string>\"\n            }\n          ],\n          \"numberOfReplicas\": \"<integer,null-int64>\",\n          \"replicationFactor\": \"<integer,null-int64>\"\n        }\n      ],\n      \"operationalMode\": \"WriteOnly\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-5001d00a-6240-4244-a6c7-e421dbb7ed01"
+            },
+            {
+              "id": "7fb23da3-2c96-4af9-bd87-b083dda160ca",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes?output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-7fb23da3-2c96-4af9-bd87-b083dda160ca"
+            },
+            {
+              "id": "dd6da531-fae1-499e-82ed-62dfaf4cb8eb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes?output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-dd6da531-fae1-499e-82ed-62dfaf4cb8eb"
+            },
+            {
+              "id": "ecf8a39a-eb1a-429e-a646-16a8f02c4ece",
+              "name": "Not Found.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes?output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-ecf8a39a-eb1a-429e-a646-16a8f02c4ece"
+            },
+            {
+              "id": "705aaeb1-c25a-4ee0-a516-5a0c2788ee70",
+              "name": "Invalid request for node status.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes?output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-705aaeb1-c25a-4ee0-a516-5a0c2788ee70"
+            },
+            {
+              "id": "6cb8d1ee-4640-4dcb-a24a-432a381c3524",
+              "name": "An internal server error occurred while retrieving node status. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nodes?output=minimal",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`.",
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:30.000Z",
+              "updatedAt": "2026-07-28T03:29:30.000Z",
+              "uid": "35240-6cb8d1ee-4640-4dcb-a24a-432a381c3524"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:30.000Z",
+          "updatedAt": "2026-07-28T03:29:30.000Z",
+          "uid": "35240-7f0629c2-142c-474e-8235-5cca461fe42b"
+        }
+      ],
+      "id": "f76c09dd-6575-4c4a-8ae4-c4413dc49db1",
+      "createdAt": "2026-07-28T03:29:30.000Z",
+      "updatedAt": "2026-07-28T03:29:30.000Z",
+      "uid": "35240-f76c09dd-6575-4c4a-8ae4-c4413dc49db1"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

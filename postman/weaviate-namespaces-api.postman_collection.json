@@ -1,0 +1,1286 @@
+{
+  "info": {
+    "_postman_id": "03d1f59e-dac3-4574-b689-9873bd1dd7a6",
+    "name": "Weaviate REST authz namespaces API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:28.000Z",
+    "updatedAt": "2026-07-28T03:29:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-03d1f59e-dac3-4574-b689-9873bd1dd7a6"
+  },
+  "item": [
+    {
+      "name": "namespaces",
+      "item": [
+        {
+          "name": "{namespace_id}",
+          "item": [
+            {
+              "name": "Weaviate Create A New Namespace",
+              "id": "e1b28e53-9b70-4741-b9cc-1938c6dcd2be",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces",
+                    ":namespace_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a4264f2c-e953-4035-a9c9-ae986e288403",
+                      "key": "namespace_id",
+                      "value": "<string>",
+                      "description": "(Required) The name of the namespace. Must start with a lowercase letter, contain only lowercase letters and digits, length 3-36, and not be a reserved name."
+                    }
+                  ]
+                },
+                "description": "Create a new cluster-level namespace with the given name. Names must start with a lowercase letter, contain only lowercase letters and digits, be 3-36 characters long, and must not be a reserved name."
+              },
+              "response": [
+                {
+                  "id": "1167218d-dde2-4254-94fd-cadffb02e3e6",
+                  "name": "Namespace created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-1167218d-dde2-4254-94fd-cadffb02e3e6"
+                },
+                {
+                  "id": "fac1080d-ac86-4652-b795-b1d2d932505d",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-fac1080d-ac86-4652-b795-b1d2d932505d"
+                },
+                {
+                  "id": "543acf54-a534-4937-87ad-96749d98b3ef",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-543acf54-a534-4937-87ad-96749d98b3ef"
+                },
+                {
+                  "id": "52c8dfa8-aa9b-4022-aecf-1d2a27a8a721",
+                  "name": "Not Found - The namespaces feature is not enabled on this cluster.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-52c8dfa8-aa9b-4022-aecf-1d2a27a8a721"
+                },
+                {
+                  "id": "7bdec1a4-ef58-4fb7-b5ee-909125ebf9d1",
+                  "name": "A namespace with the specified name already exists.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-7bdec1a4-ef58-4fb7-b5ee-909125ebf9d1"
+                },
+                {
+                  "id": "79f8d68a-f944-4add-8f00-ba9c1b1da6b7",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues (e.g. invalid name format or reserved name).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-79f8d68a-f944-4add-8f00-ba9c1b1da6b7"
+                },
+                {
+                  "id": "7e507db5-7507-4c96-8816-fd753633946b",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-7e507db5-7507-4c96-8816-fd753633946b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-e1b28e53-9b70-4741-b9cc-1938c6dcd2be"
+            },
+            {
+              "name": "Weaviate Get A Namespace",
+              "id": "1b20d54c-014b-4e30-a14c-06caed423d75",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces",
+                    ":namespace_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2c77770b-1907-428f-acf9-3c6c42ab66c7",
+                      "key": "namespace_id",
+                      "value": "<string>",
+                      "description": "(Required) The name of the namespace."
+                    }
+                  ]
+                },
+                "description": "Retrieve details about a specific namespace by its name."
+              },
+              "response": [
+                {
+                  "id": "23e0280c-79ad-4c44-9248-d81acb74e6ff",
+                  "name": "Successfully retrieved the namespace.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-23e0280c-79ad-4c44-9248-d81acb74e6ff"
+                },
+                {
+                  "id": "6591557b-496f-47c3-a830-60ff4d48509d",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-6591557b-496f-47c3-a830-60ff4d48509d"
+                },
+                {
+                  "id": "90075338-c2e4-41a7-a233-a956944432e2",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-90075338-c2e4-41a7-a233-a956944432e2"
+                },
+                {
+                  "id": "cc2f14ac-0a7e-42a9-8882-d91322cd423e",
+                  "name": "Not Found - Namespace does not exist, or the namespaces feature is not enabled on this cluster.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-cc2f14ac-0a7e-42a9-8882-d91322cd423e"
+                },
+                {
+                  "id": "0cb626d9-c46a-4387-8f57-0695a5040cfb",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues (e.g. invalid name format or reserved name).",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-0cb626d9-c46a-4387-8f57-0695a5040cfb"
+                },
+                {
+                  "id": "8ba25a01-bb8c-4e07-a19b-64f4e5d141c2",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-8ba25a01-bb8c-4e07-a19b-64f4e5d141c2"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-1b20d54c-014b-4e30-a14c-06caed423d75"
+            },
+            {
+              "name": "Weaviate Delete A Namespace",
+              "id": "d0385baf-3774-4ac1-b2f6-89da7f463fdf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces",
+                    ":namespace_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cad64e04-43ae-4ded-aa18-a7cca2489665",
+                      "key": "namespace_id",
+                      "value": "<string>",
+                      "description": "(Required) The name of the namespace."
+                    }
+                  ]
+                },
+                "description": "Hard-delete a namespace by its name."
+              },
+              "response": [
+                {
+                  "id": "b39fcc0a-ec56-4176-a62e-727f90501326",
+                  "name": "Successfully deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-b39fcc0a-ec56-4176-a62e-727f90501326"
+                },
+                {
+                  "id": "1a2438b7-1898-462d-8801-b0855c3d4242",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-1a2438b7-1898-462d-8801-b0855c3d4242"
+                },
+                {
+                  "id": "3d47b1c9-082a-4138-9191-1154482df91b",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-3d47b1c9-082a-4138-9191-1154482df91b"
+                },
+                {
+                  "id": "516cb7a5-f691-49e6-ae65-653df518fbbb",
+                  "name": "Not Found - Namespace does not exist, or the namespaces feature is not enabled on this cluster.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-516cb7a5-f691-49e6-ae65-653df518fbbb"
+                },
+                {
+                  "id": "b061798e-4b93-43b2-b2b6-387a608cee60",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues (e.g. invalid name format or reserved name).",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-b061798e-4b93-43b2-b2b6-387a608cee60"
+                },
+                {
+                  "id": "e1e7e158-f550-40cf-8773-a8a45120d67a",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:namespace_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":namespace_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "namespace_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:28.000Z",
+                  "updatedAt": "2026-07-28T03:29:28.000Z",
+                  "uid": "35240-e1e7e158-f550-40cf-8773-a8a45120d67a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-d0385baf-3774-4ac1-b2f6-89da7f463fdf"
+            }
+          ],
+          "id": "6d40bb4a-ebee-4f1d-ab2e-d3bc761f9dc8",
+          "createdAt": "2026-07-28T03:29:28.000Z",
+          "updatedAt": "2026-07-28T03:29:28.000Z",
+          "uid": "35240-6d40bb4a-ebee-4f1d-ab2e-d3bc761f9dc8"
+        },
+        {
+          "name": "Weaviate List Namespaces",
+          "id": "84458f03-7a35-48c1-b8eb-2f623672114a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/namespaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "namespaces"
+              ]
+            },
+            "description": "Retrieve the list of all namespaces the caller has permission to see. Callers without any applicable `manage_namespaces` permission receive an empty list (never 403)."
+          },
+          "response": [
+            {
+              "id": "6f312cf5-3a0c-4853-b54c-5231b7254683",
+              "name": "Successfully retrieved the list of namespaces (possibly empty).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-6f312cf5-3a0c-4853-b54c-5231b7254683"
+            },
+            {
+              "id": "00f8c6b4-7d95-453d-8822-004b583ba7f8",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-00f8c6b4-7d95-453d-8822-004b583ba7f8"
+            },
+            {
+              "id": "7d0047ac-08e7-4057-a482-fc80ba1fcb68",
+              "name": "Not Found - The namespaces feature is not enabled on this cluster.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-7d0047ac-08e7-4057-a482-fc80ba1fcb68"
+            },
+            {
+              "id": "95998e4f-9aa9-487e-8a4b-0dfb4684f960",
+              "name": "The request syntax is correct, but the server couldn't process it.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-95998e4f-9aa9-487e-8a4b-0dfb4684f960"
+            },
+            {
+              "id": "81031af8-2042-45e8-8fcb-828aec71b15f",
+              "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:28.000Z",
+              "updatedAt": "2026-07-28T03:29:28.000Z",
+              "uid": "35240-81031af8-2042-45e8-8fcb-828aec71b15f"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:28.000Z",
+          "updatedAt": "2026-07-28T03:29:28.000Z",
+          "uid": "35240-84458f03-7a35-48c1-b8eb-2f623672114a"
+        }
+      ],
+      "id": "409b467f-ebb0-4568-aef2-6024f44db635",
+      "createdAt": "2026-07-28T03:29:28.000Z",
+      "updatedAt": "2026-07-28T03:29:28.000Z",
+      "uid": "35240-409b467f-ebb0-4568-aef2-6024f44db635"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

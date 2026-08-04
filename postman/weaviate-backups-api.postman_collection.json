@@ -1,0 +1,2737 @@
+{
+  "info": {
+    "_postman_id": "ebe3c300-fe99-48a2-8b2c-2e025de615c0",
+    "name": "Weaviate REST authz backups API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:17.000Z",
+    "updatedAt": "2026-07-28T03:29:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ebe3c300-fe99-48a2-8b2c-2e025de615c0"
+  },
+  "item": [
+    {
+      "name": "backups",
+      "item": [
+        {
+          "name": "{backend}",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "restore",
+                  "item": [
+                    {
+                      "name": "Weaviate Restore From A Backup",
+                      "id": "152c4359-4433-448a-ba9d-ce7f98235cc8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id",
+                            "restore"
+                          ],
+                          "variable": [
+                            {
+                              "id": "12080863-568a-44c6-be38-ec7d36dd80f3",
+                              "key": "backend",
+                              "value": "<string>",
+                              "description": "(Required) Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                            },
+                            {
+                              "id": "936b1388-3b62-4381-9ad7-6a6cce8b6ee3",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the backup to restore from. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+                            }
+                          ]
+                        },
+                        "description": "Initiates the restoration of collections from a specified backup located on a designated backend.<br/><br/>Requirements:<br/>- Target cluster must have the same number of nodes as the source cluster where the backup was created.<br/>- Collections included in the restore must not already exist on the target cluster.<br/>- Node names must match between the backup and the target cluster."
+                      },
+                      "response": [
+                        {
+                          "id": "10710d10-d255-47aa-8c5c-463d6656d099",
+                          "name": "Backup restoration process initiated successfully. Check the status endpoint for progress.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"classes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"backend\": \"<string>\",\n  \"path\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"STARTED\"\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-10710d10-d255-47aa-8c5c-463d6656d099"
+                        },
+                        {
+                          "id": "aeb17c77-209e-4095-8c15-016f7821b730",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-aeb17c77-209e-4095-8c15-016f7821b730"
+                        },
+                        {
+                          "id": "82cbefd3-9d07-47d7-ba5e-530ce9958ded",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-82cbefd3-9d07-47d7-ba5e-530ce9958ded"
+                        },
+                        {
+                          "id": "3a830da0-7c0a-4149-86b2-e1e32c69b631",
+                          "name": "Backup not found on the specified backend with the given ID.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-3a830da0-7c0a-4149-86b2-e1e32c69b631"
+                        },
+                        {
+                          "id": "031525ee-9218-4030-90ff-f5f20fae3b95",
+                          "name": "Invalid backup restoration request. Check requirements and request body.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-031525ee-9218-4030-90ff-f5f20fae3b95"
+                        },
+                        {
+                          "id": "79963853-8340-4f39-85d2-34cf05e3163b",
+                          "name": "An internal server error occurred during restore initiation. Check the ErrorResponse for details.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"rolesOptions\": \"noRestore\",\n    \"usersOptions\": \"noRestore\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"node_mapping\": {\n    \"esse_0c6\": \"<string>\"\n  },\n  \"overwriteAlias\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-79963853-8340-4f39-85d2-34cf05e3163b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-152c4359-4433-448a-ba9d-ce7f98235cc8"
+                    },
+                    {
+                      "name": "Weaviate Get Backup Restoration Status",
+                      "id": "b16f6a05-a7bf-43e0-82cb-09613fa70934",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id",
+                            "restore"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b5041f7c-28c8-4b93-a4ac-f4a099176483",
+                              "key": "backend",
+                              "value": "<string>",
+                              "description": "(Required) Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                            },
+                            {
+                              "id": "014b126c-a881-40a4-8566-d3a0f86d9867",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the backup being restored. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+                            }
+                          ]
+                        },
+                        "description": "Checks the status of a specific backup restoration process identified by the backup ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled."
+                      },
+                      "response": [
+                        {
+                          "id": "29ac1579-c47b-4a43-b1e4-52a7ca2ca180",
+                          "name": "Successfully retrieved the status of the backup restoration process.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"path\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"STARTED\"\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-29ac1579-c47b-4a43-b1e4-52a7ca2ca180"
+                        },
+                        {
+                          "id": "0ac4488a-cc98-491a-83a9-97509728ddd6",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-0ac4488a-cc98-491a-83a9-97509728ddd6"
+                        },
+                        {
+                          "id": "f08ec53f-9d07-43b4-8680-32064abc51d5",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-f08ec53f-9d07-43b4-8680-32064abc51d5"
+                        },
+                        {
+                          "id": "dfb95081-b800-4e79-bfd5-6be7783c80e1",
+                          "name": "Backup not found on the specified backend with the given ID.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-dfb95081-b800-4e79-bfd5-6be7783c80e1"
+                        },
+                        {
+                          "id": "5170f87f-7854-477c-8e27-be626e1a8ca6",
+                          "name": "An internal server error occurred while checking restore status. Check the ErrorResponse for details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-5170f87f-7854-477c-8e27-be626e1a8ca6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-b16f6a05-a7bf-43e0-82cb-09613fa70934"
+                    },
+                    {
+                      "name": "Weaviate Cancel A Backup Restoration",
+                      "id": "29b4fe00-f416-4ae2-8017-75cacf561581",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id",
+                            "restore"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "21af753f-44bb-4a2c-94f7-74231dceefc4",
+                              "key": "backend",
+                              "value": "<string>",
+                              "description": "(Required) Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                            },
+                            {
+                              "id": "8265eab2-d4e9-4655-bf68-ec4dda93b96f",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the backup restoration to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+                            }
+                          ]
+                        },
+                        "description": "Cancels an ongoing backup restoration process identified by its ID on the specified backend storage."
+                      },
+                      "response": [
+                        {
+                          "id": "8554566d-8acc-4795-8c37-aabe642d32bc",
+                          "name": "Backup restoration cancelled successfully.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-8554566d-8acc-4795-8c37-aabe642d32bc"
+                        },
+                        {
+                          "id": "056bb83f-6e2a-4b36-88b6-121b96314c87",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-056bb83f-6e2a-4b36-88b6-121b96314c87"
+                        },
+                        {
+                          "id": "b7462686-c4b3-48de-a8aa-074d07548cf4",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-b7462686-c4b3-48de-a8aa-074d07548cf4"
+                        },
+                        {
+                          "id": "f5abc2a5-30bf-4dc8-a8fd-7145356e6897",
+                          "name": "Invalid backup restoration cancellation request.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-f5abc2a5-30bf-4dc8-a8fd-7145356e6897"
+                        },
+                        {
+                          "id": "3f32f3b1-0695-4a96-b252-f2a86b219b74",
+                          "name": "An internal server error occurred during backup restoration cancellation. Check the ErrorResponse for details.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backups/:backend/:id/restore?bucket=<string>&path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backups",
+                                ":backend",
+                                ":id",
+                                "restore"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                                  "key": "path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "backend"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:18.000Z",
+                          "updatedAt": "2026-07-28T03:29:18.000Z",
+                          "uid": "35240-3f32f3b1-0695-4a96-b252-f2a86b219b74"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-29b4fe00-f416-4ae2-8017-75cacf561581"
+                    }
+                  ],
+                  "id": "28373695-cc93-4a25-89a9-39df69a6a0d9",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-28373695-cc93-4a25-89a9-39df69a6a0d9"
+                },
+                {
+                  "name": "Weaviate Get Backup Creation Status",
+                  "id": "28fe4df3-e247-4e41-821d-60c1d7c90f40",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                          "key": "bucket",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                          "key": "path",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c92d9e62-db43-4c55-834b-c05714b6daf3",
+                          "key": "backend",
+                          "value": "<string>",
+                          "description": "(Required) Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                        },
+                        {
+                          "id": "4c8f05e6-9a68-46cb-818f-a68da3cd3871",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the backup. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+                        }
+                      ]
+                    },
+                    "description": "Checks the status of a specific backup creation process identified by its ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled."
+                  },
+                  "response": [
+                    {
+                      "id": "13de21d0-ac0a-4eb6-8b3b-c340e01ded44",
+                      "name": "Successfully retrieved the status of the backup creation process.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"path\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"STARTED\",\n  \"startedAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"size\": \"<number>\"\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-13de21d0-ac0a-4eb6-8b3b-c340e01ded44"
+                    },
+                    {
+                      "id": "034f780b-5762-4898-b670-fe3944a49a61",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-034f780b-5762-4898-b670-fe3944a49a61"
+                    },
+                    {
+                      "id": "efb882d5-cc26-41d7-9208-8555a114bb07",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-efb882d5-cc26-41d7-9208-8555a114bb07"
+                    },
+                    {
+                      "id": "ce28d9ec-8c21-4266-84d5-9650e4d18b49",
+                      "name": "Backup not found on the specified backend with the given ID.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-ce28d9ec-8c21-4266-84d5-9650e4d18b49"
+                    },
+                    {
+                      "id": "653b202b-9e22-409e-944c-76e6a4123ed2",
+                      "name": "Invalid request to check backup creation status.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-653b202b-9e22-409e-944c-76e6a4123ed2"
+                    },
+                    {
+                      "id": "1c3a23ea-1e14-4664-bff9-b7a48f2dafe6",
+                      "name": "An internal server error occurred while checking backup status. Check the ErrorResponse for details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-1c3a23ea-1e14-4664-bff9-b7a48f2dafe6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-28fe4df3-e247-4e41-821d-60c1d7c90f40"
+                },
+                {
+                  "name": "Weaviate Cancel A Backup",
+                  "id": "fae5c29a-7592-45c3-9ce8-d12c4c18013a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                          "key": "bucket",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                          "key": "path",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "75ecf769-37c3-4d43-ad0d-ed7b9bc9765f",
+                          "key": "backend",
+                          "value": "<string>",
+                          "description": "(Required) Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                        },
+                        {
+                          "id": "49200f24-9022-4680-b0ad-bd08cba0301b",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the backup to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+                        }
+                      ]
+                    },
+                    "description": "Cancels an ongoing backup operation identified by its ID."
+                  },
+                  "response": [
+                    {
+                      "id": "145f39bf-ee36-4ae4-8cc2-74f05ccf8e96",
+                      "name": "Backup canceled successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-145f39bf-ee36-4ae4-8cc2-74f05ccf8e96"
+                    },
+                    {
+                      "id": "5fafad1b-1393-4d28-b6b3-ae48b9214e36",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-5fafad1b-1393-4d28-b6b3-ae48b9214e36"
+                    },
+                    {
+                      "id": "db6622ae-af0b-459b-9d10-9e56f77b3e59",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-db6622ae-af0b-459b-9d10-9e56f77b3e59"
+                    },
+                    {
+                      "id": "3f068b21-3861-4012-878e-f930c56b0e8d",
+                      "name": "Invalid backup cancellation request.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-3f068b21-3861-4012-878e-f930c56b0e8d"
+                    },
+                    {
+                      "id": "238c6a6f-07b4-4c60-a4be-a5e2538a4cc9",
+                      "name": "An internal server error occurred during backup cancellation. Check the ErrorResponse for details.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backups/:backend/:id?bucket=<string>&path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backups",
+                            ":backend",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional: Specifies the bucket, container, or volume name if required by the backend.",
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root.",
+                              "key": "path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:18.000Z",
+                      "updatedAt": "2026-07-28T03:29:18.000Z",
+                      "uid": "35240-238c6a6f-07b4-4c60-a4be-a5e2538a4cc9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-fae5c29a-7592-45c3-9ce8-d12c4c18013a"
+                }
+              ],
+              "id": "b55d2b13-6356-4af3-a4e2-b5e38b929138",
+              "createdAt": "2026-07-28T03:29:18.000Z",
+              "updatedAt": "2026-07-28T03:29:18.000Z",
+              "uid": "35240-b55d2b13-6356-4af3-a4e2-b5e38b929138"
+            },
+            {
+              "name": "Weaviate Create A Backup",
+              "id": "3eb8dd07-c55c-4278-8c93-992513d525bc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"ChunkSize\": \"<integer>\",\n    \"CompressionLevel\": \"DefaultCompression\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"incremental_base_backup_id\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/backups/:backend",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backups",
+                    ":backend"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c04fc61e-120b-442c-a48b-53f5af00b0d9",
+                      "key": "backend",
+                      "value": "<string>",
+                      "description": "(Required) Specifies the backend storage system where the backup will be stored (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                    }
+                  ]
+                },
+                "description": "Initiates the creation of a backup for specified collections on a designated backend storage.<br/><br/>Notes:<br/>- Backups are compressed using gzip by default.<br/>- Weaviate remains operational during the backup process."
+              },
+              "response": [
+                {
+                  "id": "2973713f-ce39-41c3-9416-e30c7172de1b",
+                  "name": "Backup creation process initiated successfully. Check the status endpoint for progress.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"ChunkSize\": \"<integer>\",\n    \"CompressionLevel\": \"DefaultCompression\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"incremental_base_backup_id\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"classes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"backend\": \"<string>\",\n  \"bucket\": \"<string>\",\n  \"path\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"STARTED\"\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-2973713f-ce39-41c3-9416-e30c7172de1b"
+                },
+                {
+                  "id": "6210c971-8a2e-4e38-9008-afd3a3ded75f",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"ChunkSize\": \"<integer>\",\n    \"CompressionLevel\": \"DefaultCompression\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"incremental_base_backup_id\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-6210c971-8a2e-4e38-9008-afd3a3ded75f"
+                },
+                {
+                  "id": "66264379-d961-49a8-afdd-6c23d0b230bf",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"ChunkSize\": \"<integer>\",\n    \"CompressionLevel\": \"DefaultCompression\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"incremental_base_backup_id\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-66264379-d961-49a8-afdd-6c23d0b230bf"
+                },
+                {
+                  "id": "152764ad-49b3-4484-bb94-0d8a3a3ffc10",
+                  "name": "Invalid backup creation request. Check the request body and backend configuration.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"ChunkSize\": \"<integer>\",\n    \"CompressionLevel\": \"DefaultCompression\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"incremental_base_backup_id\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-152764ad-49b3-4484-bb94-0d8a3a3ffc10"
+                },
+                {
+                  "id": "a717eb7f-a07d-4b75-8d3e-5119f9984e06",
+                  "name": "An internal server error occurred during backup initiation. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"config\": {\n    \"Endpoint\": \"<string>\",\n    \"Bucket\": \"<string>\",\n    \"Path\": \"<string>\",\n    \"CPUPercentage\": 50,\n    \"ChunkSize\": \"<integer>\",\n    \"CompressionLevel\": \"DefaultCompression\"\n  },\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"incremental_base_backup_id\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-a717eb7f-a07d-4b75-8d3e-5119f9984e06"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:18.000Z",
+              "updatedAt": "2026-07-28T03:29:18.000Z",
+              "uid": "35240-3eb8dd07-c55c-4278-8c93-992513d525bc"
+            },
+            {
+              "name": "Weaviate List All Created Backups",
+              "id": "5348dac4-16ab-4dcc-a5df-af9762a9bcb9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backups/:backend?order=desc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backups",
+                    ":backend"
+                  ],
+                  "query": [
+                    {
+                      "description": "Order of returned list of backups based on creation time. (asc or desc)",
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "57af807d-e450-4a7e-bd8a-0d7247ea8349",
+                      "key": "backend",
+                      "value": "<string>",
+                      "description": "(Required) Specifies the backend storage system to list backups from (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                    }
+                  ]
+                },
+                "description": "List all created backups IDs, Status"
+              },
+              "response": [
+                {
+                  "id": "cdf1d366-9160-4807-9254-7d0d574dab4f",
+                  "name": "Successfully retrieved the list of backups in progress.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend?order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "query": [
+                        {
+                          "description": "Order of returned list of backups based on creation time. (asc or desc)",
+                          "key": "order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"classes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"CANCELED\",\n    \"startedAt\": \"<dateTime>\",\n    \"completedAt\": \"<dateTime>\",\n    \"size\": \"<number>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"classes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"CANCELED\",\n    \"startedAt\": \"<dateTime>\",\n    \"completedAt\": \"<dateTime>\",\n    \"size\": \"<number>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-cdf1d366-9160-4807-9254-7d0d574dab4f"
+                },
+                {
+                  "id": "afa7096c-8c45-4a50-8128-da89db959f97",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend?order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "query": [
+                        {
+                          "description": "Order of returned list of backups based on creation time. (asc or desc)",
+                          "key": "order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-afa7096c-8c45-4a50-8128-da89db959f97"
+                },
+                {
+                  "id": "cdf143d3-43f4-433a-b82d-59800d5c6a1c",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend?order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "query": [
+                        {
+                          "description": "Order of returned list of backups based on creation time. (asc or desc)",
+                          "key": "order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-cdf143d3-43f4-433a-b82d-59800d5c6a1c"
+                },
+                {
+                  "id": "d351e93b-5fda-403a-96fc-558e9e78ee68",
+                  "name": "Invalid request to list backups.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend?order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "query": [
+                        {
+                          "description": "Order of returned list of backups based on creation time. (asc or desc)",
+                          "key": "order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-d351e93b-5fda-403a-96fc-558e9e78ee68"
+                },
+                {
+                  "id": "1cd37c68-6597-41da-bd33-ee74f7608a4c",
+                  "name": "An internal server error occurred while listing backups. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backups/:backend?order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backups",
+                        ":backend"
+                      ],
+                      "query": [
+                        {
+                          "description": "Order of returned list of backups based on creation time. (asc or desc)",
+                          "key": "order",
+                          "value": "desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:18.000Z",
+                  "updatedAt": "2026-07-28T03:29:18.000Z",
+                  "uid": "35240-1cd37c68-6597-41da-bd33-ee74f7608a4c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:18.000Z",
+              "updatedAt": "2026-07-28T03:29:18.000Z",
+              "uid": "35240-5348dac4-16ab-4dcc-a5df-af9762a9bcb9"
+            }
+          ],
+          "id": "1d4aff92-c6d8-4f0b-aba9-b9d3cb4ba8f9",
+          "createdAt": "2026-07-28T03:29:18.000Z",
+          "updatedAt": "2026-07-28T03:29:18.000Z",
+          "uid": "35240-1d4aff92-c6d8-4f0b-aba9-b9d3cb4ba8f9"
+        }
+      ],
+      "id": "eb2634c5-9728-4cd6-b8cf-dee313de3bb3",
+      "createdAt": "2026-07-28T03:29:18.000Z",
+      "updatedAt": "2026-07-28T03:29:18.000Z",
+      "uid": "35240-eb2634c5-9728-4cd6-b8cf-dee313de3bb3"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "info": {
+    "_postman_id": "0e22f379-4302-4657-bbe2-510549e8e3a7",
+    "name": "Weaviate REST authz references API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:35.000Z",
+    "updatedAt": "2026-07-28T03:29:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0e22f379-4302-4657-bbe2-510549e8e3a7"
+  },
+  "item": [
+    {
+      "name": "batch",
+      "item": [
+        {
+          "name": "references",
+          "item": [
+            {
+              "name": "Weaviate Create Cross-References In Bulk",
+              "id": "43e634a2-c16d-4e09-af20-aeb5c7ee1a8f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "query": [
+                    {
+                      "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Batch create cross-references between collection items in bulk."
+              },
+              "response": [
+                {
+                  "id": "ff2cd271-3e6d-406c-a4be-670edc062537",
+                  "name": "Request Successful. Warning: A successful request does not guarantee that every batched reference was successfully created. Inspect the response body to see which references succeeded and which failed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\",\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"<string>\"\n          },\n          {\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\",\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"<string>\"\n          },\n          {\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    }\n  }\n]",
+                  "createdAt": "2026-07-28T03:29:35.000Z",
+                  "updatedAt": "2026-07-28T03:29:35.000Z",
+                  "uid": "35240-ff2cd271-3e6d-406c-a4be-670edc062537"
+                },
+                {
+                  "id": "94170c06-b20c-4d41-9de7-91232aa53333",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:35.000Z",
+                  "updatedAt": "2026-07-28T03:29:35.000Z",
+                  "uid": "35240-94170c06-b20c-4d41-9de7-91232aa53333"
+                },
+                {
+                  "id": "2d13fb78-92c3-4bd5-8e8a-c0fa5ba2e4e3",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:35.000Z",
+                  "updatedAt": "2026-07-28T03:29:35.000Z",
+                  "uid": "35240-2d13fb78-92c3-4bd5-8e8a-c0fa5ba2e4e3"
+                },
+                {
+                  "id": "7605560e-14ca-4870-b523-5f675f9954b7",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:35.000Z",
+                  "updatedAt": "2026-07-28T03:29:35.000Z",
+                  "uid": "35240-7605560e-14ca-4870-b523-5f675f9954b7"
+                },
+                {
+                  "id": "4d7ee7c2-a5f7-478d-b2ec-4fed285b1ffc",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:35.000Z",
+                  "updatedAt": "2026-07-28T03:29:35.000Z",
+                  "uid": "35240-4d7ee7c2-a5f7-478d-b2ec-4fed285b1ffc"
+                },
+                {
+                  "id": "cd4942c4-e24d-44c4-8106-ac6ca21b9f22",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:35.000Z",
+                  "updatedAt": "2026-07-28T03:29:35.000Z",
+                  "uid": "35240-cd4942c4-e24d-44c4-8106-ac6ca21b9f22"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:35.000Z",
+              "updatedAt": "2026-07-28T03:29:35.000Z",
+              "uid": "35240-43e634a2-c16d-4e09-af20-aeb5c7ee1a8f"
+            }
+          ],
+          "id": "e34e98f8-c5f0-44b0-8e9d-a567f4d1e93c",
+          "createdAt": "2026-07-28T03:29:35.000Z",
+          "updatedAt": "2026-07-28T03:29:35.000Z",
+          "uid": "35240-e34e98f8-c5f0-44b0-8e9d-a567f4d1e93c"
+        }
+      ],
+      "id": "e9320bea-a6f3-4372-9089-17e09fdfed8a",
+      "createdAt": "2026-07-28T03:29:35.000Z",
+      "updatedAt": "2026-07-28T03:29:35.000Z",
+      "uid": "35240-e9320bea-a6f3-4372-9089-17e09fdfed8a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

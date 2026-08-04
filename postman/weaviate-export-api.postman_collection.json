@@ -1,0 +1,1227 @@
+{
+  "info": {
+    "_postman_id": "6e5193d6-6c10-4735-9d48-237b9fb2ffb5",
+    "name": "Weaviate REST authz export API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:24.000Z",
+    "updatedAt": "2026-07-28T03:29:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6e5193d6-6c10-4735-9d48-237b9fb2ffb5"
+  },
+  "item": [
+    {
+      "name": "export",
+      "item": [
+        {
+          "name": "{backend}",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Weaviate Get Export Status",
+                  "id": "10f27370-99ff-41b0-8596-5cf0b124f087",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "39da3424-5ba8-44fb-a27d-adf18eadcfcb",
+                          "key": "backend",
+                          "value": "<string>",
+                          "description": "(Required) The backend storage system where the export is stored."
+                        },
+                        {
+                          "id": "b3b9cfaf-4711-4ff9-8814-66a698dc653a",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the export."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the current status of an export operation, including progress for each collection being exported."
+                  },
+                  "response": [
+                    {
+                      "id": "fcd79be0-5564-422e-9b35-73e4b40e38c7",
+                      "name": "Successfully retrieved export status",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"path\": \"<string>\",\n  \"status\": \"CANCELED\",\n  \"startedAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"tookInMs\": \"<long>\",\n  \"classes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shardStatus\": {\n    \"nulla87\": {\n      \"id_c\": {\n        \"status\": \"SUCCESS\",\n        \"objectsExported\": \"<long>\",\n        \"error\": \"<string>\",\n        \"skipReason\": \"<string>\"\n      },\n      \"culpa_8\": {\n        \"status\": \"TRANSFERRING\",\n        \"objectsExported\": \"<long>\",\n        \"error\": \"<string>\",\n        \"skipReason\": \"<string>\"\n      },\n      \"laborum_f\": {\n        \"status\": \"FAILED\",\n        \"objectsExported\": \"<long>\",\n        \"error\": \"<string>\",\n        \"skipReason\": \"<string>\"\n      }\n    },\n    \"voluptate_4\": {\n      \"in6da\": {\n        \"status\": \"SKIPPED\",\n        \"objectsExported\": \"<long>\",\n        \"error\": \"<string>\",\n        \"skipReason\": \"<string>\"\n      },\n      \"sedd43\": {\n        \"status\": \"TRANSFERRING\",\n        \"objectsExported\": \"<long>\",\n        \"error\": \"<string>\",\n        \"skipReason\": \"<string>\"\n      }\n    }\n  },\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-fcd79be0-5564-422e-9b35-73e4b40e38c7"
+                    },
+                    {
+                      "id": "a10afd8c-9115-4886-bcd3-a5e45d70acfb",
+                      "name": "Unauthorized or invalid credentials",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-a10afd8c-9115-4886-bcd3-a5e45d70acfb"
+                    },
+                    {
+                      "id": "718e6a3b-8417-49b0-836f-2ecac1e9e0e1",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-718e6a3b-8417-49b0-836f-2ecac1e9e0e1"
+                    },
+                    {
+                      "id": "59721c4c-76ea-46da-bce3-3169ca9247f6",
+                      "name": "Export not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-59721c4c-76ea-46da-bce3-3169ca9247f6"
+                    },
+                    {
+                      "id": "bdbd61a0-127b-43e3-99e1-73d7b6125c17",
+                      "name": "Invalid request (e.g., unsupported backend)",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-bdbd61a0-127b-43e3-99e1-73d7b6125c17"
+                    },
+                    {
+                      "id": "6cd2b9a0-b1dd-4481-843b-c39b17beef99",
+                      "name": "Internal server error occurred while retrieving export status",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-6cd2b9a0-b1dd-4481-843b-c39b17beef99"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-10f27370-99ff-41b0-8596-5cf0b124f087"
+                },
+                {
+                  "name": "Weaviate Cancel An Export",
+                  "id": "52c13f23-7792-4ef9-961c-29c24d79131f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "902db055-7014-478e-a0b2-a4887749d07c",
+                          "key": "backend",
+                          "value": "<string>",
+                          "description": "(Required) The backend storage system where the export is stored."
+                        },
+                        {
+                          "id": "c78a7474-a72a-44b0-88fe-3ec8ca002f1a",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the export to cancel."
+                        }
+                      ]
+                    },
+                    "description": "Cancels an ongoing export operation identified by its ID."
+                  },
+                  "response": [
+                    {
+                      "id": "b62af563-873a-4088-bb66-d89b790d1252",
+                      "name": "Export cancelled successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-b62af563-873a-4088-bb66-d89b790d1252"
+                    },
+                    {
+                      "id": "9184d901-e7c3-4c49-b5bc-e4b3c399c137",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-9184d901-e7c3-4c49-b5bc-e4b3c399c137"
+                    },
+                    {
+                      "id": "a1f1512b-083a-4304-a98a-bdbc14bc6612",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-a1f1512b-083a-4304-a98a-bdbc14bc6612"
+                    },
+                    {
+                      "id": "ee15f3bb-3e98-4021-a2c8-634eb15e904b",
+                      "name": "Export not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-ee15f3bb-3e98-4021-a2c8-634eb15e904b"
+                    },
+                    {
+                      "id": "245e00ac-d697-4d4c-bb96-e200a0bbda3a",
+                      "name": "Export has already finished and cannot be cancelled",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-245e00ac-d697-4d4c-bb96-e200a0bbda3a"
+                    },
+                    {
+                      "id": "bc61e2ca-7448-4700-a4ee-7f2511292be4",
+                      "name": "Invalid request (e.g., unsupported backend)",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-bc61e2ca-7448-4700-a4ee-7f2511292be4"
+                    },
+                    {
+                      "id": "209832b8-b8ae-40f3-8a84-423142f5a97e",
+                      "name": "Internal server error occurred while cancelling export",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/export/:backend/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            ":backend",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "backend"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:24.000Z",
+                      "updatedAt": "2026-07-28T03:29:24.000Z",
+                      "uid": "35240-209832b8-b8ae-40f3-8a84-423142f5a97e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-52c13f23-7792-4ef9-961c-29c24d79131f"
+                }
+              ],
+              "id": "a72d2d12-2b17-405a-85d3-d5b6f4e0b39a",
+              "createdAt": "2026-07-28T03:29:24.000Z",
+              "updatedAt": "2026-07-28T03:29:24.000Z",
+              "uid": "35240-a72d2d12-2b17-405a-85d3-d5b6f4e0b39a"
+            },
+            {
+              "name": "Weaviate Start A New Export",
+              "id": "482906bf-1e5f-4739-9c3c-cced6e15b764",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/export/:backend",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "export",
+                    ":backend"
+                  ],
+                  "variable": [
+                    {
+                      "id": "00df9b65-0af8-4144-8223-599414c92248",
+                      "key": "backend",
+                      "value": "<string>",
+                      "description": "(Required) The backend storage system to use for the export (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+                    }
+                  ]
+                },
+                "description": "Initiates an export operation on the specified backend storage (S3, GCS, Azure, or filesystem). The output format is controlled by the required 'file_format' field in the request body (currently only 'parquet' is supported). Each collection is exported to a separate file."
+              },
+              "response": [
+                {
+                  "id": "ff9eb3c0-c051-429d-ade8-c86bbdadc7c5",
+                  "name": "Successfully started export operation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"path\": \"<string>\",\n  \"status\": \"STARTED\",\n  \"startedAt\": \"<dateTime>\",\n  \"classes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-ff9eb3c0-c051-429d-ade8-c86bbdadc7c5"
+                },
+                {
+                  "id": "bf8fd968-6ea7-452a-b3b7-753c0b73aeb5",
+                  "name": "Unauthorized or invalid credentials",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-bf8fd968-6ea7-452a-b3b7-753c0b73aeb5"
+                },
+                {
+                  "id": "498ac360-c130-4133-b90d-48a50c503779",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-498ac360-c130-4133-b90d-48a50c503779"
+                },
+                {
+                  "id": "3f0da32d-075c-473f-a4bb-b7f054b344c0",
+                  "name": "Export already exists or another export is already in progress",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-3f0da32d-075c-473f-a4bb-b7f054b344c0"
+                },
+                {
+                  "id": "536d58f5-27fb-4228-841d-08a01c887861",
+                  "name": "Invalid export request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-536d58f5-27fb-4228-841d-08a01c887861"
+                },
+                {
+                  "id": "8d6cb240-6cc9-46ab-af38-800fe8af2653",
+                  "name": "Internal server error occurred while starting export",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"file_format\": \"parquet\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exclude\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/export/:backend",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "export",
+                        ":backend"
+                      ],
+                      "variable": [
+                        {
+                          "key": "backend"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:24.000Z",
+                  "updatedAt": "2026-07-28T03:29:24.000Z",
+                  "uid": "35240-8d6cb240-6cc9-46ab-af38-800fe8af2653"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:24.000Z",
+              "updatedAt": "2026-07-28T03:29:24.000Z",
+              "uid": "35240-482906bf-1e5f-4739-9c3c-cced6e15b764"
+            }
+          ],
+          "id": "d5263565-7d43-499f-805a-8cd8c7ee7b06",
+          "createdAt": "2026-07-28T03:29:24.000Z",
+          "updatedAt": "2026-07-28T03:29:24.000Z",
+          "uid": "35240-d5263565-7d43-499f-805a-8cd8c7ee7b06"
+        }
+      ],
+      "id": "8f574308-82aa-4957-a30a-75246eebe2ea",
+      "createdAt": "2026-07-28T03:29:24.000Z",
+      "updatedAt": "2026-07-28T03:29:24.000Z",
+      "uid": "35240-8f574308-82aa-4957-a30a-75246eebe2ea"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

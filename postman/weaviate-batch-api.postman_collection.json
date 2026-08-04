@@ -1,0 +1,1386 @@
+{
+  "info": {
+    "_postman_id": "0c04ca99-7ae8-4f6a-bb82-f9adf175b28e",
+    "name": "Weaviate REST authz batch API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:19.000Z",
+    "updatedAt": "2026-07-28T03:29:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0c04ca99-7ae8-4f6a-bb82-f9adf175b28e"
+  },
+  "item": [
+    {
+      "name": "batch",
+      "item": [
+        {
+          "name": "objects",
+          "item": [
+            {
+              "name": "Weaviate Create Objects In Batch",
+              "id": "fbe7c631-64e3-4c13-8cea-9a632b8479fb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "query": [
+                    {
+                      "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch)."
+              },
+              "response": [
+                {
+                  "id": "a8ea4640-4ab2-4517-aed1-a7c92347af37",
+                  "name": "Request processed successfully. Individual object statuses are provided in the response body.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"class\": \"<string>\",\n    \"vectorWeights\": {},\n    \"properties\": {},\n    \"id\": \"<uuid>\",\n    \"creationTimeUnix\": \"<long>\",\n    \"lastUpdateTimeUnix\": \"<long>\",\n    \"vector\": [\n      \"<float>\",\n      \"<float>\"\n    ],\n    \"vectors\": {\n      \"ut58_\": {},\n      \"adipisicing_16\": {}\n    },\n    \"tenant\": \"<string>\",\n    \"additional\": {\n      \"irure6\": {},\n      \"commodo_c4\": {},\n      \"mollit9b\": {},\n      \"laboris_5\": {}\n    },\n    \"deprecations\": [\n      {\n        \"id\": \"<string>\",\n        \"status\": \"<string>\",\n        \"apiType\": \"<string>\",\n        \"msg\": \"<string>\",\n        \"mitigation\": \"<string>\",\n        \"sinceVersion\": \"<string>\",\n        \"plannedRemovalVersion\": \"<string>\",\n        \"removedIn\": \"<string>\",\n        \"removedTime\": \"<dateTime>\",\n        \"sinceTime\": \"<dateTime>\",\n        \"locations\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"status\": \"<string>\",\n        \"apiType\": \"<string>\",\n        \"msg\": \"<string>\",\n        \"mitigation\": \"<string>\",\n        \"sinceVersion\": \"<string>\",\n        \"plannedRemovalVersion\": \"<string>\",\n        \"removedIn\": \"<string>\",\n        \"removedTime\": \"<dateTime>\",\n        \"sinceTime\": \"<dateTime>\",\n        \"locations\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"<string>\"\n          },\n          {\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"class\": \"<string>\",\n    \"vectorWeights\": {},\n    \"properties\": {},\n    \"id\": \"<uuid>\",\n    \"creationTimeUnix\": \"<long>\",\n    \"lastUpdateTimeUnix\": \"<long>\",\n    \"vector\": [\n      \"<float>\",\n      \"<float>\"\n    ],\n    \"vectors\": {\n      \"mollit_167\": {}\n    },\n    \"tenant\": \"<string>\",\n    \"additional\": {\n      \"sit_b\": {},\n      \"aute_bc\": {}\n    },\n    \"deprecations\": [\n      {\n        \"id\": \"<string>\",\n        \"status\": \"<string>\",\n        \"apiType\": \"<string>\",\n        \"msg\": \"<string>\",\n        \"mitigation\": \"<string>\",\n        \"sinceVersion\": \"<string>\",\n        \"plannedRemovalVersion\": \"<string>\",\n        \"removedIn\": \"<string>\",\n        \"removedTime\": \"<dateTime>\",\n        \"sinceTime\": \"<dateTime>\",\n        \"locations\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"status\": \"<string>\",\n        \"apiType\": \"<string>\",\n        \"msg\": \"<string>\",\n        \"mitigation\": \"<string>\",\n        \"sinceVersion\": \"<string>\",\n        \"plannedRemovalVersion\": \"<string>\",\n        \"removedIn\": \"<string>\",\n        \"removedTime\": \"<dateTime>\",\n        \"sinceTime\": \"<dateTime>\",\n        \"locations\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"<string>\"\n          },\n          {\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    }\n  }\n]",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-a8ea4640-4ab2-4517-aed1-a7c92347af37"
+                },
+                {
+                  "id": "d51496da-e7ce-4d28-af3b-115ac2cc2be1",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-d51496da-e7ce-4d28-af3b-115ac2cc2be1"
+                },
+                {
+                  "id": "69b364fb-b9eb-4469-a9a8-5bddcb594b4b",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-69b364fb-b9eb-4469-a9a8-5bddcb594b4b"
+                },
+                {
+                  "id": "1243318c-fc14-4e44-9d2b-bfc21f7e428e",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-1243318c-fc14-4e44-9d2b-bfc21f7e428e"
+                },
+                {
+                  "id": "d77ff694-2818-4dea-b267-35acc95e3664",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-d77ff694-2818-4dea-b267-35acc95e3664"
+                },
+                {
+                  "id": "82b04393-f75f-4215-a945-d79529fd1e4c",
+                  "name": "An error occurred while trying to fulfill the request. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"sunt_6\": {},\n        \"cillume\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"dolor_5e9\": {}\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": {},\n      \"properties\": {},\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"laborisff\": {},\n        \"qui5\": {}\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"cillumde6\": {},\n        \"veniam_95\": {}\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-82b04393-f75f-4215-a945-d79529fd1e4c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:19.000Z",
+              "updatedAt": "2026-07-28T03:29:19.000Z",
+              "uid": "35240-fbe7c631-64e3-4c13-8cea-9a632b8479fb"
+            },
+            {
+              "name": "Weaviate Delete Objects In Batch",
+              "id": "259edb51-e350-40af-a143-cdf31129faa2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "query": [
+                    {
+                      "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are found."
+              },
+              "response": [
+                {
+                  "id": "545b225d-9765-45bd-995b-2e3fef8fe773",
+                  "name": "Request processed successfully. See response body for matching objects and deletion results.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                          "key": "tenant",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"NotEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false,\n  \"results\": {\n    \"matches\": \"<number>\",\n    \"limit\": \"<number>\",\n    \"successful\": \"<number>\",\n    \"failed\": \"<number>\",\n    \"objects\": [\n      {\n        \"id\": \"<uuid>\",\n        \"status\": \"SUCCESS\",\n        \"errors\": {\n          \"error\": [\n            {\n              \"message\": \"<string>\"\n            },\n            {\n              \"message\": \"<string>\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"status\": \"SUCCESS\",\n        \"errors\": {\n          \"error\": [\n            {\n              \"message\": \"<string>\"\n            },\n            {\n              \"message\": \"<string>\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-545b225d-9765-45bd-995b-2e3fef8fe773"
+                },
+                {
+                  "id": "c96cd989-607e-4cd3-9766-c576de48b3bb",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                          "key": "tenant",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-c96cd989-607e-4cd3-9766-c576de48b3bb"
+                },
+                {
+                  "id": "3c983760-7063-4feb-8a1c-5d43d0146cec",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                          "key": "tenant",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-3c983760-7063-4feb-8a1c-5d43d0146cec"
+                },
+                {
+                  "id": "0cfa3113-7e3c-4332-ac97-eba7c76450f8",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                          "key": "tenant",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-0cfa3113-7e3c-4332-ac97-eba7c76450f8"
+                },
+                {
+                  "id": "f3b1afe7-24b7-44f3-a7b5-d36a143bcd65",
+                  "name": "Invalid data provided. Please check the values in your request (e.g., invalid filter).",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                          "key": "tenant",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-f3b1afe7-24b7-44f3-a7b5-d36a143bcd65"
+                },
+                {
+                  "id": "3f06a4db-f3a0-44cd-96e0-69244790514e",
+                  "name": "An error occurred while trying to fulfill the request. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"WithinGeoRange\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/objects?consistency_level=<string>&tenant=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "objects"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Specifies the tenant in a request targeting a multi-tenant collection (class).",
+                          "key": "tenant",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-3f06a4db-f3a0-44cd-96e0-69244790514e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:19.000Z",
+              "updatedAt": "2026-07-28T03:29:19.000Z",
+              "uid": "35240-259edb51-e350-40af-a143-cdf31129faa2"
+            }
+          ],
+          "id": "06dd29a5-fc44-43d7-8ad8-e4526c094044",
+          "createdAt": "2026-07-28T03:29:19.000Z",
+          "updatedAt": "2026-07-28T03:29:19.000Z",
+          "uid": "35240-06dd29a5-fc44-43d7-8ad8-e4526c094044"
+        },
+        {
+          "name": "references",
+          "item": [
+            {
+              "name": "Weaviate Create Cross-References In Bulk",
+              "id": "667bb852-cc70-4c1a-bbf0-e2926be48465",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "query": [
+                    {
+                      "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Batch create cross-references between collection items in bulk."
+              },
+              "response": [
+                {
+                  "id": "988dce4d-933e-4785-add3-d8050230bebc",
+                  "name": "Request Successful. Warning: A successful request does not guarantee that every batched reference was successfully created. Inspect the response body to see which references succeeded and which failed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\",\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"<string>\"\n          },\n          {\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\",\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"<string>\"\n          },\n          {\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    }\n  }\n]",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-988dce4d-933e-4785-add3-d8050230bebc"
+                },
+                {
+                  "id": "71df003f-1613-4483-ae26-a94bb24ae9b4",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-71df003f-1613-4483-ae26-a94bb24ae9b4"
+                },
+                {
+                  "id": "a564ec3f-86a4-4099-9270-500f7b2bea71",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-a564ec3f-86a4-4099-9270-500f7b2bea71"
+                },
+                {
+                  "id": "d8f85ff4-7726-4a0a-8d47-44fd73abe5d6",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-d8f85ff4-7726-4a0a-8d47-44fd73abe5d6"
+                },
+                {
+                  "id": "d5c03676-7718-492f-a8ad-b97f9f3e9fcc",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-d5c03676-7718-492f-a8ad-b97f9f3e9fcc"
+                },
+                {
+                  "id": "5d97bb4b-2a13-4150-802f-eafe94ff18f9",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/batch/references?consistency_level=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "batch",
+                        "references"
+                      ],
+                      "query": [
+                        {
+                          "description": "Determines how many replicas must acknowledge a request before it is considered successful.",
+                          "key": "consistency_level",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:19.000Z",
+                  "updatedAt": "2026-07-28T03:29:19.000Z",
+                  "uid": "35240-5d97bb4b-2a13-4150-802f-eafe94ff18f9"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:19.000Z",
+              "updatedAt": "2026-07-28T03:29:19.000Z",
+              "uid": "35240-667bb852-cc70-4c1a-bbf0-e2926be48465"
+            }
+          ],
+          "id": "90ef322c-0851-4289-bfb2-4d48069e9a04",
+          "createdAt": "2026-07-28T03:29:19.000Z",
+          "updatedAt": "2026-07-28T03:29:19.000Z",
+          "uid": "35240-90ef322c-0851-4289-bfb2-4d48069e9a04"
+        }
+      ],
+      "id": "4784e411-9425-4b1b-8f88-71c769abc9a4",
+      "createdAt": "2026-07-28T03:29:19.000Z",
+      "updatedAt": "2026-07-28T03:29:19.000Z",
+      "uid": "35240-4784e411-9425-4b1b-8f88-71c769abc9a4"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

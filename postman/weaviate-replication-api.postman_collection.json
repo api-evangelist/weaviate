@@ -1,0 +1,4210 @@
+{
+  "info": {
+    "_postman_id": "6c769150-0824-415f-8c55-b7aa7887ef87",
+    "name": "Weaviate REST authz replication API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:37.000Z",
+    "updatedAt": "2026-07-28T03:29:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6c769150-0824-415f-8c55-b7aa7887ef87"
+  },
+  "item": [
+    {
+      "name": "replication",
+      "item": [
+        {
+          "name": "replicate",
+          "item": [
+            {
+              "name": "force-delete",
+              "item": [
+                {
+                  "name": "Weaviate Force Delete Replication Operations",
+                  "id": "76e3a093-90cc-4ff9-9a57-673b5ab0e38b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate",
+                        "force-delete"
+                      ]
+                    },
+                    "description": "USE AT OWN RISK! Synchronously force delete operations from the FSM. This will not perform any checks on which state the operation is in so may lead to data corruption or loss. It is recommended to first scale the number of replication engine workers to 0 before calling this endpoint to ensure no operations are in-flight."
+                  },
+                  "response": [
+                    {
+                      "id": "f85ecf67-8f32-4621-915e-33fa304564c3",
+                      "name": "Replication operations force deleted successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "force-delete"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"deleted\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"dryRun\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-f85ecf67-8f32-4621-915e-33fa304564c3"
+                    },
+                    {
+                      "id": "546417e0-9cf6-43d0-a4fd-5a5a6c2e1f02",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "force-delete"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-546417e0-9cf6-43d0-a4fd-5a5a6c2e1f02"
+                    },
+                    {
+                      "id": "b0a5cec5-7127-4f72-9fce-3a177104274d",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "force-delete"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-b0a5cec5-7127-4f72-9fce-3a177104274d"
+                    },
+                    {
+                      "id": "0fab1bff-a6d5-4ed9-89ad-34728461ef88",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "force-delete"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-0fab1bff-a6d5-4ed9-89ad-34728461ef88"
+                    },
+                    {
+                      "id": "c2b1093c-3b96-4813-b9be-caab768c2899",
+                      "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "force-delete"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-c2b1093c-3b96-4813-b9be-caab768c2899"
+                    },
+                    {
+                      "id": "ed381641-f0e0-4d05-9bc3-ec360cbbe185",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"node\": \"<string>\",\n  \"dryRun\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/force-delete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "force-delete"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-ed381641-f0e0-4d05-9bc3-ec360cbbe185"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-76e3a093-90cc-4ff9-9a57-673b5ab0e38b"
+                }
+              ],
+              "id": "88d68386-68b2-44e0-bf1b-cb5e26f82446",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-88d68386-68b2-44e0-bf1b-cb5e26f82446"
+            },
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "cancel",
+                  "item": [
+                    {
+                      "name": "Weaviate Cancel A Replication Operation",
+                      "id": "af9a84e5-0bd8-4406-bc13-2ca1b791a97f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a2851de1-6e56-4672-b56b-df8d74b9441a",
+                              "key": "id",
+                              "value": "<uuid>",
+                              "description": "(Required) The ID of the replication operation to cancel."
+                            }
+                          ]
+                        },
+                        "description": "Requests the cancellation of an active replication operation identified by its ID. The operation will be stopped, but its record will remain in the `CANCELLED` state (can't be resumed) and will not be automatically deleted."
+                      },
+                      "response": [
+                        {
+                          "id": "7509f5ac-ec8f-49be-8541-b93e91c475f3",
+                          "name": "Successfully cancelled.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-7509f5ac-ec8f-49be-8541-b93e91c475f3"
+                        },
+                        {
+                          "id": "89eff2c9-bfb0-4d69-a088-e49c151ed931",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-89eff2c9-bfb0-4d69-a088-e49c151ed931"
+                        },
+                        {
+                          "id": "ea874241-d2f9-4087-83b0-fc0eae8ff00a",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-ea874241-d2f9-4087-83b0-fc0eae8ff00a"
+                        },
+                        {
+                          "id": "0636d216-1550-4148-a36d-b8ca31d8cd17",
+                          "name": "Shard replica operation not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-0636d216-1550-4148-a36d-b8ca31d8cd17"
+                        },
+                        {
+                          "id": "79b46094-3095-4ced-8e21-309aca28cb05",
+                          "name": "The operation is not in a cancellable state, e.g. it is READY or is a MOVE op in the DEHYDRATING state.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-79b46094-3095-4ced-8e21-309aca28cb05"
+                        },
+                        {
+                          "id": "c6c99a29-7083-443c-b8bc-f94fb9c56b6c",
+                          "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-c6c99a29-7083-443c-b8bc-f94fb9c56b6c"
+                        },
+                        {
+                          "id": "1fdec0b4-e11a-4f73-8b96-cdffd6e87208",
+                          "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-1fdec0b4-e11a-4f73-8b96-cdffd6e87208"
+                        },
+                        {
+                          "id": "b2d5a090-3c8e-4d44-960f-677803b1fa30",
+                          "name": "Replica movement operations are disabled.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/replication/replicate/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "replication",
+                                "replicate",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Implemented",
+                          "code": 501,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:38.000Z",
+                          "updatedAt": "2026-07-28T03:29:38.000Z",
+                          "uid": "35240-b2d5a090-3c8e-4d44-960f-677803b1fa30"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-af9a84e5-0bd8-4406-bc13-2ca1b791a97f"
+                    }
+                  ],
+                  "id": "9f100934-f7e9-4b10-8fd5-c549642962af",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-9f100934-f7e9-4b10-8fd5-c549642962af"
+                },
+                {
+                  "name": "Weaviate Retrieve A Replication Operation",
+                  "id": "f09a5c11-f757-4304-b056-7e659fc56130",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include the history of the replication operation.",
+                          "key": "includeHistory",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "2dbfa642-405b-47e6-8591-cde64ca83320",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the replication operation to get details for."
+                        }
+                      ]
+                    },
+                    "description": "Fetches the current status and detailed information for a specific replication operation, identified by its unique ID. Optionally includes historical data of the operation's progress if requested."
+                  },
+                  "response": [
+                    {
+                      "id": "f21402a3-3cee-4ac5-b8f4-320750882e0e",
+                      "name": "The details of the replication operation.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"shard\": \"<string>\",\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"status\": {\n    \"state\": \"READY\",\n    \"whenStartedUnixMs\": \"<long>\",\n    \"errors\": [\n      {\n        \"whenErroredUnixMs\": \"<long>\",\n        \"message\": \"<string>\"\n      },\n      {\n        \"whenErroredUnixMs\": \"<long>\",\n        \"message\": \"<string>\"\n      }\n    ]\n  },\n  \"type\": \"COPY\",\n  \"uncancelable\": \"<boolean>\",\n  \"scheduledForCancel\": \"<boolean>\",\n  \"scheduledForDelete\": \"<boolean>\",\n  \"statusHistory\": [\n    {\n      \"state\": \"HYDRATING\",\n      \"whenStartedUnixMs\": \"<long>\",\n      \"errors\": [\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"state\": \"REGISTERED\",\n      \"whenStartedUnixMs\": \"<long>\",\n      \"errors\": [\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"whenStartedUnixMs\": \"<long>\"\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-f21402a3-3cee-4ac5-b8f4-320750882e0e"
+                    },
+                    {
+                      "id": "0044c867-cdf7-480e-965d-2e1ec8cd8c38",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-0044c867-cdf7-480e-965d-2e1ec8cd8c38"
+                    },
+                    {
+                      "id": "9358e616-4ff0-448f-9f42-8de2ffa01e3d",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-9358e616-4ff0-448f-9f42-8de2ffa01e3d"
+                    },
+                    {
+                      "id": "b749d50a-17f6-4d98-9a02-5e1d445c1500",
+                      "name": "Shard replica operation not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-b749d50a-17f6-4d98-9a02-5e1d445c1500"
+                    },
+                    {
+                      "id": "be7fda12-5a79-4480-8338-717d4fbef8dc",
+                      "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-be7fda12-5a79-4480-8338-717d4fbef8dc"
+                    },
+                    {
+                      "id": "78f7d40a-4d8d-4292-856d-7e14ac38ca08",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-78f7d40a-4d8d-4292-856d-7e14ac38ca08"
+                    },
+                    {
+                      "id": "07fa7a9c-92a3-49e6-8dcd-4bbb93de103b",
+                      "name": "Replica movement operations are disabled.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id?includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Implemented",
+                      "code": 501,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-07fa7a9c-92a3-49e6-8dcd-4bbb93de103b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-f09a5c11-f757-4304-b056-7e659fc56130"
+                },
+                {
+                  "name": "Weaviate Delete A Replication Operation",
+                  "id": "f0b4e7d0-256e-4002-9d9d-ce4655827e85",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8cf3c548-31ec-459c-907b-aa8db482c1a7",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) The ID of the replication operation to delete."
+                        }
+                      ]
+                    },
+                    "description": "Removes a specific replication operation. If the operation is currently active, it will be cancelled and its resources cleaned up before the operation is deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "437671df-d964-4131-885a-85b5ec13a4f3",
+                      "name": "Successfully deleted.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-437671df-d964-4131-885a-85b5ec13a4f3"
+                    },
+                    {
+                      "id": "df1d5b54-7508-4990-a9f4-b80003c503cc",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-df1d5b54-7508-4990-a9f4-b80003c503cc"
+                    },
+                    {
+                      "id": "68997e8f-0694-4ab8-add4-9270053dbdc1",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-68997e8f-0694-4ab8-add4-9270053dbdc1"
+                    },
+                    {
+                      "id": "fd097c8e-2cd4-458b-bfa6-a310517a1239",
+                      "name": "Shard replica operation not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-fd097c8e-2cd4-458b-bfa6-a310517a1239"
+                    },
+                    {
+                      "id": "7b7c317d-6c5e-4d21-99e2-a02202fad60a",
+                      "name": "The operation is not in a deletable state, e.g. it is a MOVE op in the DEHYDRATING state.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-7b7c317d-6c5e-4d21-99e2-a02202fad60a"
+                    },
+                    {
+                      "id": "2873c5f1-4609-462f-b8b7-3fe84159775f",
+                      "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-2873c5f1-4609-462f-b8b7-3fe84159775f"
+                    },
+                    {
+                      "id": "6ff92c8c-7b66-481d-94a5-cce32f14773e",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-6ff92c8c-7b66-481d-94a5-cce32f14773e"
+                    },
+                    {
+                      "id": "9649f6b7-d286-4fbd-99f4-d583df5f05a1",
+                      "name": "Replica movement operations are disabled.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Implemented",
+                      "code": 501,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-9649f6b7-d286-4fbd-99f4-d583df5f05a1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-f0b4e7d0-256e-4002-9d9d-ce4655827e85"
+                }
+              ],
+              "id": "50a9881c-4a13-4117-b6f4-27b35cf44274",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-50a9881c-4a13-4117-b6f4-27b35cf44274"
+            },
+            {
+              "name": "list",
+              "item": [
+                {
+                  "name": "Weaviate List Replication Operations",
+                  "id": "d4aafc47-ae8c-49d7-8961-b2c8600867e6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "The name of the target node to get details for.",
+                          "key": "targetNode",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The name of the collection to get details for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get details for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include the history of the replication operation.",
+                          "key": "includeHistory",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of currently registered replication operations, optionally filtered by collection, shard, or node ID."
+                  },
+                  "response": [
+                    {
+                      "id": "f696268a-ed76-4694-b937-fe96e76f3fac",
+                      "name": "The details of the replication operations.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "The name of the target node to get details for.",
+                              "key": "targetNode",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The name of the collection to get details for.",
+                              "key": "collection",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The shard to get details for.",
+                              "key": "shard",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"shard\": \"<string>\",\n    \"sourceNode\": \"<string>\",\n    \"targetNode\": \"<string>\",\n    \"collection\": \"<string>\",\n    \"status\": {\n      \"state\": \"CANCELLED\",\n      \"whenStartedUnixMs\": \"<long>\",\n      \"errors\": [\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    },\n    \"type\": \"MOVE\",\n    \"uncancelable\": \"<boolean>\",\n    \"scheduledForCancel\": \"<boolean>\",\n    \"scheduledForDelete\": \"<boolean>\",\n    \"statusHistory\": [\n      {\n        \"state\": \"FINALIZING\",\n        \"whenStartedUnixMs\": \"<long>\",\n        \"errors\": [\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          },\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"state\": \"DEHYDRATING\",\n        \"whenStartedUnixMs\": \"<long>\",\n        \"errors\": [\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          },\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"whenStartedUnixMs\": \"<long>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"shard\": \"<string>\",\n    \"sourceNode\": \"<string>\",\n    \"targetNode\": \"<string>\",\n    \"collection\": \"<string>\",\n    \"status\": {\n      \"state\": \"READY\",\n      \"whenStartedUnixMs\": \"<long>\",\n      \"errors\": [\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"whenErroredUnixMs\": \"<long>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    },\n    \"type\": \"MOVE\",\n    \"uncancelable\": \"<boolean>\",\n    \"scheduledForCancel\": \"<boolean>\",\n    \"scheduledForDelete\": \"<boolean>\",\n    \"statusHistory\": [\n      {\n        \"state\": \"READY\",\n        \"whenStartedUnixMs\": \"<long>\",\n        \"errors\": [\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          },\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"state\": \"CANCELLED\",\n        \"whenStartedUnixMs\": \"<long>\",\n        \"errors\": [\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          },\n          {\n            \"whenErroredUnixMs\": \"<long>\",\n            \"message\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"whenStartedUnixMs\": \"<long>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-f696268a-ed76-4694-b937-fe96e76f3fac"
+                    },
+                    {
+                      "id": "a5b8ac8a-0c35-4fb6-83d1-611c67896b81",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "The name of the target node to get details for.",
+                              "key": "targetNode",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The name of the collection to get details for.",
+                              "key": "collection",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The shard to get details for.",
+                              "key": "shard",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-a5b8ac8a-0c35-4fb6-83d1-611c67896b81"
+                    },
+                    {
+                      "id": "70d76f1c-1d12-4bdd-a1c4-f7803ef442db",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "The name of the target node to get details for.",
+                              "key": "targetNode",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The name of the collection to get details for.",
+                              "key": "collection",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The shard to get details for.",
+                              "key": "shard",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-70d76f1c-1d12-4bdd-a1c4-f7803ef442db"
+                    },
+                    {
+                      "id": "c4f516f2-89dd-48f2-a48a-cec52aebd593",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "The name of the target node to get details for.",
+                              "key": "targetNode",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The name of the collection to get details for.",
+                              "key": "collection",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The shard to get details for.",
+                              "key": "shard",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-c4f516f2-89dd-48f2-a48a-cec52aebd593"
+                    },
+                    {
+                      "id": "210ba7eb-1ae8-4ca7-83ee-997b6b2e570b",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "The name of the target node to get details for.",
+                              "key": "targetNode",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The name of the collection to get details for.",
+                              "key": "collection",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The shard to get details for.",
+                              "key": "shard",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-210ba7eb-1ae8-4ca7-83ee-997b6b2e570b"
+                    },
+                    {
+                      "id": "b403ee1e-1194-49cb-a7b9-2129c9f5fa70",
+                      "name": "Replica movement operations are disabled.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/replication/replicate/list?targetNode=<string>&collection=<string>&shard=<string>&includeHistory=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "replication",
+                            "replicate",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "The name of the target node to get details for.",
+                              "key": "targetNode",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The name of the collection to get details for.",
+                              "key": "collection",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The shard to get details for.",
+                              "key": "shard",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to include the history of the replication operation.",
+                              "key": "includeHistory",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Implemented",
+                      "code": 501,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:38.000Z",
+                      "updatedAt": "2026-07-28T03:29:38.000Z",
+                      "uid": "35240-b403ee1e-1194-49cb-a7b9-2129c9f5fa70"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-d4aafc47-ae8c-49d7-8961-b2c8600867e6"
+                }
+              ],
+              "id": "ab10f4bb-0c96-4c31-b967-0780366b0cb2",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-ab10f4bb-0c96-4c31-b967-0780366b0cb2"
+            },
+            {
+              "name": "Weaviate Initiate A Replica Movement",
+              "id": "0cb30b07-15a6-49c4-ba98-5df7224a9f77",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/replication/replicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "replication",
+                    "replicate"
+                  ]
+                },
+                "description": "Begins an asynchronous operation to move or copy a specific shard replica from its current node to a designated target node. The operation involves copying data, synchronizing, and potentially decommissioning the source replica."
+              },
+              "response": [
+                {
+                  "id": "d2db36f1-8320-4bcd-beaf-2cfc363cefaa",
+                  "name": "Replication operation registered successfully. ID of the operation is returned.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\"\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-d2db36f1-8320-4bcd-beaf-2cfc363cefaa"
+                },
+                {
+                  "id": "b54c3418-76a2-41db-b40d-5718dbf61a4f",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-b54c3418-76a2-41db-b40d-5718dbf61a4f"
+                },
+                {
+                  "id": "a67fd606-3878-40b4-977b-19c2362139c3",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-a67fd606-3878-40b4-977b-19c2362139c3"
+                },
+                {
+                  "id": "cbb9e9a0-935e-4ab6-a43d-86a9cdaedbe2",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-cbb9e9a0-935e-4ab6-a43d-86a9cdaedbe2"
+                },
+                {
+                  "id": "b1a5ad28-9ea0-4326-ae26-891da5fc6ba2",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-b1a5ad28-9ea0-4326-ae26-891da5fc6ba2"
+                },
+                {
+                  "id": "56dbf2b3-3805-498a-a2e6-b2191d807f22",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-56dbf2b3-3805-498a-a2e6-b2191d807f22"
+                },
+                {
+                  "id": "7ad466c9-08e9-44e7-b56f-10316e605bff",
+                  "name": "Replica movement operations are disabled.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sourceNode\": \"<string>\",\n  \"targetNode\": \"<string>\",\n  \"collection\": \"<string>\",\n  \"shard\": \"<string>\",\n  \"type\": \"COPY\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Not Implemented",
+                  "code": 501,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-7ad466c9-08e9-44e7-b56f-10316e605bff"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-0cb30b07-15a6-49c4-ba98-5df7224a9f77"
+            },
+            {
+              "name": "Weaviate Delete All Replication Operations",
+              "id": "a3ce1704-c27e-4a23-9aa7-dab2d26d46a9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/replication/replicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "replication",
+                    "replicate"
+                  ]
+                },
+                "description": "Schedules all replication operations for deletion across all collections, shards, and nodes."
+              },
+              "response": [
+                {
+                  "id": "6f07c5cf-0b1d-4124-a54d-67192391f16b",
+                  "name": "Replication operation registered successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-6f07c5cf-0b1d-4124-a54d-67192391f16b"
+                },
+                {
+                  "id": "9b33ec60-be65-4c32-8b00-8940e461f362",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-9b33ec60-be65-4c32-8b00-8940e461f362"
+                },
+                {
+                  "id": "10a948a7-7c4a-4cf1-91ff-b29337620a6a",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-10a948a7-7c4a-4cf1-91ff-b29337620a6a"
+                },
+                {
+                  "id": "9f21ca01-0e9f-4a27-aa4c-feb15daa610f",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-9f21ca01-0e9f-4a27-aa4c-feb15daa610f"
+                },
+                {
+                  "id": "02ce4257-02ff-4725-ba53-7564741b6989",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-02ce4257-02ff-4725-ba53-7564741b6989"
+                },
+                {
+                  "id": "72045224-90a6-4898-a09a-2305de12fdc4",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-72045224-90a6-4898-a09a-2305de12fdc4"
+                },
+                {
+                  "id": "8813dcab-0d12-4fec-b1d8-c8649a679c3e",
+                  "name": "Replica movement operations are disabled.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/replicate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "replicate"
+                      ]
+                    }
+                  },
+                  "status": "Not Implemented",
+                  "code": 501,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-8813dcab-0d12-4fec-b1d8-c8649a679c3e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-a3ce1704-c27e-4a23-9aa7-dab2d26d46a9"
+            }
+          ],
+          "id": "6b7b6ff8-41db-4e6f-b6bd-74fcbccf7b40",
+          "createdAt": "2026-07-28T03:29:38.000Z",
+          "updatedAt": "2026-07-28T03:29:38.000Z",
+          "uid": "35240-6b7b6ff8-41db-4e6f-b6bd-74fcbccf7b40"
+        },
+        {
+          "name": "sharding-state",
+          "item": [
+            {
+              "name": "Weaviate Get Sharding State",
+              "id": "a96dc467-a5a2-40e2-8d77-897707a88ebf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "replication",
+                    "sharding-state"
+                  ],
+                  "query": [
+                    {
+                      "description": "The collection name to get the sharding state for.",
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The shard to get the sharding state for.",
+                      "key": "shard",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Fetches the current sharding state, including replica locations and statuses, for all collections or a specified collection. If a shard name is provided along with a collection, the state for that specific shard is returned."
+              },
+              "response": [
+                {
+                  "id": "c9dfa6ea-abb2-41bc-9e89-83951874cef8",
+                  "name": "Successfully retrieved sharding state.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"shardingState\": {\n    \"collection\": \"<string>\",\n    \"shards\": [\n      {\n        \"shard\": \"<string>\",\n        \"replicas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"shard\": \"<string>\",\n        \"replicas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-c9dfa6ea-abb2-41bc-9e89-83951874cef8"
+                },
+                {
+                  "id": "2cb34f67-088d-43e7-b37e-69d97e159407",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-2cb34f67-088d-43e7-b37e-69d97e159407"
+                },
+                {
+                  "id": "3728e46c-2217-48bd-b96c-345f9148e202",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-3728e46c-2217-48bd-b96c-345f9148e202"
+                },
+                {
+                  "id": "2eb2e2f8-261b-4681-b0e6-5df84502b69c",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-2eb2e2f8-261b-4681-b0e6-5df84502b69c"
+                },
+                {
+                  "id": "ccb18fc8-b467-41a1-b54c-3f53f508f4f4",
+                  "name": "Collection or shard not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-ccb18fc8-b467-41a1-b54c-3f53f508f4f4"
+                },
+                {
+                  "id": "0ae5f36f-aae5-4968-9a40-f5496163319f",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-0ae5f36f-aae5-4968-9a40-f5496163319f"
+                },
+                {
+                  "id": "ffd8c799-ee62-46d1-b316-cd69f861794e",
+                  "name": "Replica movement operations are disabled.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/sharding-state?collection=<string>&shard=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "sharding-state"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection name to get the sharding state for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The shard to get the sharding state for.",
+                          "key": "shard",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Implemented",
+                  "code": 501,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-ffd8c799-ee62-46d1-b316-cd69f861794e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-a96dc467-a5a2-40e2-8d77-897707a88ebf"
+            }
+          ],
+          "id": "449762a1-7d42-4873-893b-fe60c141206b",
+          "createdAt": "2026-07-28T03:29:38.000Z",
+          "updatedAt": "2026-07-28T03:29:38.000Z",
+          "uid": "35240-449762a1-7d42-4873-893b-fe60c141206b"
+        },
+        {
+          "name": "scale",
+          "item": [
+            {
+              "name": "Weaviate Get Replication Scale Plan",
+              "id": "dcd7f620-d1f0-4457-b1f9-bdd5ee4f791a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "replication",
+                    "scale"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The collection name to get the scaling plan for.",
+                      "key": "collection",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                      "key": "replicationFactor",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Computes and returns a replication scale plan for a given collection and desired replication factor. The plan includes, for each shard, a list of nodes to be added and a list of nodes to be removed."
+              },
+              "response": [
+                {
+                  "id": "33f20b66-d1a2-4b33-bb00-edf1bd764ee4",
+                  "name": "Replication scale plan showing node additions and removals per shard.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-33f20b66-d1a2-4b33-bb00-edf1bd764ee4"
+                },
+                {
+                  "id": "2d6a0801-c095-4728-af5d-72606db7f48f",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-2d6a0801-c095-4728-af5d-72606db7f48f"
+                },
+                {
+                  "id": "7719031b-7060-4570-be38-487f44e040c6",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-7719031b-7060-4570-be38-487f44e040c6"
+                },
+                {
+                  "id": "e46ac9df-4a78-482c-b2e7-82d5bf9c2b6d",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-e46ac9df-4a78-482c-b2e7-82d5bf9c2b6d"
+                },
+                {
+                  "id": "a1cdbb54-2f57-42aa-b569-1fa0490fbee5",
+                  "name": "Collection not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-a1cdbb54-2f57-42aa-b569-1fa0490fbee5"
+                },
+                {
+                  "id": "1d34b049-4efe-40b1-b418-26b6ae1b8a47",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-1d34b049-4efe-40b1-b418-26b6ae1b8a47"
+                },
+                {
+                  "id": "4c5a1f23-a9fd-4580-be1b-dff6c461ffe6",
+                  "name": "Replica movement operations are disabled.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale?collection=<string>&replicationFactor=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The collection name to get the scaling plan for.",
+                          "key": "collection",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The desired replication factor to scale to. Must be a positive integer greater than zero.",
+                          "key": "replicationFactor",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Implemented",
+                  "code": 501,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-4c5a1f23-a9fd-4580-be1b-dff6c461ffe6"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-dcd7f620-d1f0-4457-b1f9-bdd5ee4f791a"
+            },
+            {
+              "name": "Weaviate Apply Replication Scaling Plan",
+              "id": "d0a7134b-8152-4402-8433-b0d792a920fd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/replication/scale",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "replication",
+                    "scale"
+                  ]
+                },
+                "description": "Apply a replication scaling plan that specifies nodes to add or remove per shard for a given collection."
+              },
+              "response": [
+                {
+                  "id": "403d5bcb-13b2-4873-b1a4-5f7b2699d59d",
+                  "name": "List of replication shard copy operation IDs initiated for the scale operation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"operationIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-403d5bcb-13b2-4873-b1a4-5f7b2699d59d"
+                },
+                {
+                  "id": "c494900c-5cec-4da8-b3fe-986d9b1cc1ed",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-c494900c-5cec-4da8-b3fe-986d9b1cc1ed"
+                },
+                {
+                  "id": "b5fcd0eb-e8a1-4bae-986d-8e018a9fc7e6",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-b5fcd0eb-e8a1-4bae-986d-8e018a9fc7e6"
+                },
+                {
+                  "id": "546d0ee5-8f5f-4001-9d44-6dd2d080911b",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-546d0ee5-8f5f-4001-9d44-6dd2d080911b"
+                },
+                {
+                  "id": "be534540-bbea-4661-b642-1e02637835e7",
+                  "name": "Collection not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-be534540-bbea-4661-b642-1e02637835e7"
+                },
+                {
+                  "id": "b6ae145d-fb07-4a5e-aa51-3498c6c1cdf6",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-b6ae145d-fb07-4a5e-aa51-3498c6c1cdf6"
+                },
+                {
+                  "id": "078a0e5d-6e44-4eba-8516-08adeca4b441",
+                  "name": "Replica movement operations are disabled.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planId\": \"<uuid>\",\n  \"collection\": \"<string>\",\n  \"shardScaleActions\": {\n    \"minim__6\": {\n      \"removeNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"addNodes\": {\n        \"esse_af\": \"<string,null>\",\n        \"do_7c\": \"<string,null>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/replication/scale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "replication",
+                        "scale"
+                      ]
+                    }
+                  },
+                  "status": "Not Implemented",
+                  "code": 501,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-078a0e5d-6e44-4eba-8516-08adeca4b441"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-d0a7134b-8152-4402-8433-b0d792a920fd"
+            }
+          ],
+          "id": "e6a3e6c4-7d5e-45a8-8a5b-e9233f2dcb9f",
+          "createdAt": "2026-07-28T03:29:38.000Z",
+          "updatedAt": "2026-07-28T03:29:38.000Z",
+          "uid": "35240-e6a3e6c4-7d5e-45a8-8a5b-e9233f2dcb9f"
+        }
+      ],
+      "id": "da1792b3-12b0-4356-ae61-76a368b79cd3",
+      "createdAt": "2026-07-28T03:29:38.000Z",
+      "updatedAt": "2026-07-28T03:29:38.000Z",
+      "uid": "35240-da1792b3-12b0-4356-ae61-76a368b79cd3"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

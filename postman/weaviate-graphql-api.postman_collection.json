@@ -1,0 +1,696 @@
+{
+  "info": {
+    "_postman_id": "e77ac970-9b25-43c3-91df-f5a1224c1dc8",
+    "name": "Weaviate REST authz graphql API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:25.000Z",
+    "updatedAt": "2026-07-28T03:29:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e77ac970-9b25-43c3-91df-f5a1224c1dc8"
+  },
+  "item": [
+    {
+      "name": "graphql",
+      "item": [
+        {
+          "name": "batch",
+          "item": [
+            {
+              "name": "Weaviate Perform Batched GraphQL Queries",
+              "id": "81f411c2-35f7-4fda-86eb-21a0166bbd95",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  },\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql/batch",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql",
+                    "batch"
+                  ]
+                },
+                "description": "Executes multiple GraphQL queries provided in the request body as an array. Allows performing several queries in a single network request for efficiency."
+              },
+              "response": [
+                {
+                  "id": "680c8a55-3663-4853-965f-af0a06b32953",
+                  "name": "Batch request processed successfully. The response body contains an array of results corresponding to the input queries.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  },\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/graphql/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "graphql",
+                        "batch"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"data\": {\n      \"id_47f\": {}\n    },\n    \"errors\": [\n      {\n        \"locations\": [\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          },\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          }\n        ],\n        \"message\": \"<string>\",\n        \"path\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"locations\": [\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          },\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          }\n        ],\n        \"message\": \"<string>\",\n        \"path\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  {\n    \"data\": {\n      \"dolor84b\": {},\n      \"nisi36\": {},\n      \"sed_1\": {}\n    },\n    \"errors\": [\n      {\n        \"locations\": [\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          },\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          }\n        ],\n        \"message\": \"<string>\",\n        \"path\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"locations\": [\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          },\n          {\n            \"column\": \"<long>\",\n            \"line\": \"<long>\"\n          }\n        ],\n        \"message\": \"<string>\",\n        \"path\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n]",
+                  "createdAt": "2026-07-28T03:29:25.000Z",
+                  "updatedAt": "2026-07-28T03:29:25.000Z",
+                  "uid": "35240-680c8a55-3663-4853-965f-af0a06b32953"
+                },
+                {
+                  "id": "494d13f5-2175-48e4-ab88-d26d4a676cdb",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  },\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/graphql/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "graphql",
+                        "batch"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:25.000Z",
+                  "updatedAt": "2026-07-28T03:29:25.000Z",
+                  "uid": "35240-494d13f5-2175-48e4-ab88-d26d4a676cdb"
+                },
+                {
+                  "id": "4dc84db0-3cf5-4818-971a-736cc3535767",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  },\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/graphql/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "graphql",
+                        "batch"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:25.000Z",
+                  "updatedAt": "2026-07-28T03:29:25.000Z",
+                  "uid": "35240-4dc84db0-3cf5-4818-971a-736cc3535767"
+                },
+                {
+                  "id": "23668716-7f27-49a0-8afd-9712887c0144",
+                  "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  },\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/graphql/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "graphql",
+                        "batch"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:25.000Z",
+                  "updatedAt": "2026-07-28T03:29:25.000Z",
+                  "uid": "35240-23668716-7f27-49a0-8afd-9712887c0144"
+                },
+                {
+                  "id": "dfdb6a60-fc6f-4c9a-aac8-227157b08536",
+                  "name": "An internal server error occurred during batch query execution. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  },\n  {\n    \"operationName\": \"<string>\",\n    \"query\": \"<string>\",\n    \"variables\": {}\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/graphql/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "graphql",
+                        "batch"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:25.000Z",
+                  "updatedAt": "2026-07-28T03:29:25.000Z",
+                  "uid": "35240-dfdb6a60-fc6f-4c9a-aac8-227157b08536"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:25.000Z",
+              "updatedAt": "2026-07-28T03:29:25.000Z",
+              "uid": "35240-81f411c2-35f7-4fda-86eb-21a0166bbd95"
+            }
+          ],
+          "id": "2db728e6-1bba-4bfc-acc4-d3c9eaee5508",
+          "createdAt": "2026-07-28T03:29:25.000Z",
+          "updatedAt": "2026-07-28T03:29:25.000Z",
+          "uid": "35240-2db728e6-1bba-4bfc-acc4-d3c9eaee5508"
+        },
+        {
+          "name": "Weaviate Perform A GraphQL Query",
+          "id": "82fd841a-caa5-4447-aac5-f394a22aa867",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operationName\": \"<string>\",\n  \"query\": \"<string>\",\n  \"variables\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Executes a single GraphQL query provided in the request body. Use this endpoint for all Weaviate data queries and exploration."
+          },
+          "response": [
+            {
+              "id": "cf8db720-015f-4558-b5eb-bea6e629e04f",
+              "name": "Query executed successfully. The response body contains the query result.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operationName\": \"<string>\",\n  \"query\": \"<string>\",\n  \"variables\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"pariatur60\": {},\n    \"sintc\": {}\n  },\n  \"errors\": [\n    {\n      \"locations\": [\n        {\n          \"column\": \"<long>\",\n          \"line\": \"<long>\"\n        },\n        {\n          \"column\": \"<long>\",\n          \"line\": \"<long>\"\n        }\n      ],\n      \"message\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"locations\": [\n        {\n          \"column\": \"<long>\",\n          \"line\": \"<long>\"\n        },\n        {\n          \"column\": \"<long>\",\n          \"line\": \"<long>\"\n        }\n      ],\n      \"message\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:25.000Z",
+              "updatedAt": "2026-07-28T03:29:25.000Z",
+              "uid": "35240-cf8db720-015f-4558-b5eb-bea6e629e04f"
+            },
+            {
+              "id": "414b2630-e50b-4d6d-8a2d-d539043659fa",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operationName\": \"<string>\",\n  \"query\": \"<string>\",\n  \"variables\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:25.000Z",
+              "updatedAt": "2026-07-28T03:29:25.000Z",
+              "uid": "35240-414b2630-e50b-4d6d-8a2d-d539043659fa"
+            },
+            {
+              "id": "55bc8d6c-90fd-44de-8d2b-663f9aee522f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operationName\": \"<string>\",\n  \"query\": \"<string>\",\n  \"variables\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:25.000Z",
+              "updatedAt": "2026-07-28T03:29:25.000Z",
+              "uid": "35240-55bc8d6c-90fd-44de-8d2b-663f9aee522f"
+            },
+            {
+              "id": "ecde66f3-8a93-46bc-9748-eb6ea1ce50c5",
+              "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operationName\": \"<string>\",\n  \"query\": \"<string>\",\n  \"variables\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:25.000Z",
+              "updatedAt": "2026-07-28T03:29:25.000Z",
+              "uid": "35240-ecde66f3-8a93-46bc-9748-eb6ea1ce50c5"
+            },
+            {
+              "id": "43ae7ff1-add2-4f70-afd3-07395e46eeb4",
+              "name": "An internal server error occurred during query execution. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operationName\": \"<string>\",\n  \"query\": \"<string>\",\n  \"variables\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:25.000Z",
+              "updatedAt": "2026-07-28T03:29:25.000Z",
+              "uid": "35240-43ae7ff1-add2-4f70-afd3-07395e46eeb4"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:25.000Z",
+          "updatedAt": "2026-07-28T03:29:25.000Z",
+          "uid": "35240-82fd841a-caa5-4447-aac5-f394a22aa867"
+        }
+      ],
+      "id": "47359417-454e-4e7b-abc0-33d4419f4139",
+      "createdAt": "2026-07-28T03:29:25.000Z",
+      "updatedAt": "2026-07-28T03:29:25.000Z",
+      "uid": "35240-47359417-454e-4e7b-abc0-33d4419f4139"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

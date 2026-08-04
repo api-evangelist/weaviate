@@ -1,0 +1,642 @@
+{
+  "info": {
+    "_postman_id": "70e1701b-a5d1-4dbf-8954-17526c2d9a2d",
+    "name": "Weaviate REST authz classifications API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:20.000Z",
+    "updatedAt": "2026-07-28T03:29:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-70e1701b-a5d1-4dbf-8954-17526c2d9a2d"
+  },
+  "item": [
+    {
+      "name": "classifications",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Weaviate Get Classification Status",
+              "id": "89e582af-0821-4369-b8d5-6bb3807c0d19",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/classifications/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7a51205a-b441-43cf-8a47-b63898dc98bf",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier (UUID) of the classification task."
+                    }
+                  ]
+                },
+                "description": "Retrieves the status, metadata, and results (if completed) of a classification task identified by its unique ID."
+              },
+              "response": [
+                {
+                  "id": "5d890f92-2010-4dea-b5b6-652f7d006c28",
+                  "name": "Successfully retrieved the classification details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/classifications/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "classifications",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:20.000Z",
+                  "updatedAt": "2026-07-28T03:29:20.000Z",
+                  "uid": "35240-5d890f92-2010-4dea-b5b6-652f7d006c28"
+                },
+                {
+                  "id": "63edf437-9269-4c39-a2e5-8862214e4882",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/classifications/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "classifications",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:20.000Z",
+                  "updatedAt": "2026-07-28T03:29:20.000Z",
+                  "uid": "35240-63edf437-9269-4c39-a2e5-8862214e4882"
+                },
+                {
+                  "id": "5aa4be43-8f1c-44f7-a8f6-b0d20753dacd",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/classifications/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "classifications",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:20.000Z",
+                  "updatedAt": "2026-07-28T03:29:20.000Z",
+                  "uid": "35240-5aa4be43-8f1c-44f7-a8f6-b0d20753dacd"
+                },
+                {
+                  "id": "14669fd6-80d5-4139-ae4a-c804ca36a1b5",
+                  "name": "Classification with the given ID not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/classifications/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "classifications",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:20.000Z",
+                  "updatedAt": "2026-07-28T03:29:20.000Z",
+                  "uid": "35240-14669fd6-80d5-4139-ae4a-c804ca36a1b5"
+                },
+                {
+                  "id": "ddb3de15-c393-48ec-8e55-2e7cdf03830c",
+                  "name": "An internal server error occurred while retrieving the classification status. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/classifications/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "classifications",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:20.000Z",
+                  "updatedAt": "2026-07-28T03:29:20.000Z",
+                  "uid": "35240-ddb3de15-c393-48ec-8e55-2e7cdf03830c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:20.000Z",
+              "updatedAt": "2026-07-28T03:29:20.000Z",
+              "uid": "35240-89e582af-0821-4369-b8d5-6bb3807c0d19"
+            }
+          ],
+          "id": "69ae1e47-86e2-4093-b743-c043bc16db6e",
+          "createdAt": "2026-07-28T03:29:20.000Z",
+          "updatedAt": "2026-07-28T03:29:20.000Z",
+          "uid": "35240-69ae1e47-86e2-4093-b743-c043bc16db6e"
+        },
+        {
+          "name": "Weaviate Start A Classification",
+          "id": "4892a1eb-3fef-4ace-a7a0-7d5d04168d1e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/classifications/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "classifications",
+                ""
+              ]
+            },
+            "description": "Initiates a background classification task based on the provided parameters. Use the GET /classifications/{id} endpoint to monitor the status and retrieve results."
+          },
+          "response": [
+            {
+              "id": "3c772a97-98c6-45f3-bf85-dde9a3617d98",
+              "name": "Classification task successfully initiated. The response body contains the classification details including its ID.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/classifications/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+              "createdAt": "2026-07-28T03:29:20.000Z",
+              "updatedAt": "2026-07-28T03:29:20.000Z",
+              "uid": "35240-3c772a97-98c6-45f3-bf85-dde9a3617d98"
+            },
+            {
+              "id": "2b53d44e-857c-45dd-8d68-a107dfa61085",
+              "name": "Invalid request body or parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/classifications/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications",
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:20.000Z",
+              "updatedAt": "2026-07-28T03:29:20.000Z",
+              "uid": "35240-2b53d44e-857c-45dd-8d68-a107dfa61085"
+            },
+            {
+              "id": "3134c6ae-6865-4a82-a8f6-4f75b43a8a88",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/classifications/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications",
+                    ""
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:20.000Z",
+              "updatedAt": "2026-07-28T03:29:20.000Z",
+              "uid": "35240-3134c6ae-6865-4a82-a8f6-4f75b43a8a88"
+            },
+            {
+              "id": "6eda22cd-ea94-4440-9647-229ff53489de",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/classifications/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications",
+                    ""
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:20.000Z",
+              "updatedAt": "2026-07-28T03:29:20.000Z",
+              "uid": "35240-6eda22cd-ea94-4440-9647-229ff53489de"
+            },
+            {
+              "id": "a863be77-e640-48b3-bab9-a54b9c7e7eb1",
+              "name": "An internal server error occurred while starting the classification task. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"failed\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": {},\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"Equal\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThan\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<number>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<number>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/classifications/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications",
+                    ""
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:20.000Z",
+              "updatedAt": "2026-07-28T03:29:20.000Z",
+              "uid": "35240-a863be77-e640-48b3-bab9-a54b9c7e7eb1"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:20.000Z",
+          "updatedAt": "2026-07-28T03:29:20.000Z",
+          "uid": "35240-4892a1eb-3fef-4ace-a7a0-7d5d04168d1e"
+        }
+      ],
+      "id": "fa6cbfe5-c4b4-4e6d-833c-80f6fc4753fb",
+      "createdAt": "2026-07-28T03:29:20.000Z",
+      "updatedAt": "2026-07-28T03:29:20.000Z",
+      "uid": "35240-fa6cbfe5-c4b4-4e6d-833c-80f6fc4753fb"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

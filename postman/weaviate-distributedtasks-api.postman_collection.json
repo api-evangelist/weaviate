@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "b3f83d54-7b2f-4939-ac6d-9000eeb7e064",
+    "name": "Weaviate REST authz distributedTasks API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:23.000Z",
+    "updatedAt": "2026-07-28T03:29:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b3f83d54-7b2f-4939-ac6d-9000eeb7e064"
+  },
+  "item": [
+    {
+      "name": "tasks",
+      "item": [
+        {
+          "name": "Weaviate Lists All Distributed Tasks In The Cluster",
+          "id": "0bd481a6-7c8c-4cdb-adf3-2e6027613473",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tasks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tasks"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf0a5337-3e69-409b-baa0-233fe6d1540b",
+              "name": "Distributed tasks successfully returned.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"sunt7e\": [\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"finishedNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"error\": \"<string>\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"finishedNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"error\": \"<string>\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        }\n      ]\n    }\n  ],\n  \"enim630\": [\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"finishedNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"error\": \"<string>\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"finishedNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"error\": \"<string>\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        }\n      ]\n    }\n  ],\n  \"amet5cf\": [\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"finishedNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"error\": \"<string>\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"startedAt\": \"<dateTime>\",\n      \"finishedAt\": \"<dateTime>\",\n      \"finishedNodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"error\": \"<string>\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"nodeId\": \"<string>\",\n          \"status\": \"<string>\",\n          \"progress\": \"<float>\",\n          \"error\": \"<string>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"finishedAt\": \"<dateTime>\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:23.000Z",
+              "updatedAt": "2026-07-28T03:29:23.000Z",
+              "uid": "35240-cf0a5337-3e69-409b-baa0-233fe6d1540b"
+            },
+            {
+              "id": "7e03b65a-927d-42ce-9f88-9b5e398287fe",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:23.000Z",
+              "updatedAt": "2026-07-28T03:29:23.000Z",
+              "uid": "35240-7e03b65a-927d-42ce-9f88-9b5e398287fe"
+            },
+            {
+              "id": "1ef5c5be-0ab0-47ff-8447-b69c54abf50d",
+              "name": "An internal server error occurred while retrieving distributed tasks. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tasks"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:23.000Z",
+              "updatedAt": "2026-07-28T03:29:23.000Z",
+              "uid": "35240-1ef5c5be-0ab0-47ff-8447-b69c54abf50d"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:23.000Z",
+          "updatedAt": "2026-07-28T03:29:23.000Z",
+          "uid": "35240-0bd481a6-7c8c-4cdb-adf3-2e6027613473"
+        }
+      ],
+      "id": "2cb46c08-5414-4467-a4f8-1d21d8992213",
+      "createdAt": "2026-07-28T03:29:23.000Z",
+      "updatedAt": "2026-07-28T03:29:23.000Z",
+      "uid": "35240-2cb46c08-5414-4467-a4f8-1d21d8992213"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

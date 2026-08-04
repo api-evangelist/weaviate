@@ -1,0 +1,226 @@
+{
+  "info": {
+    "_postman_id": "6673cea6-fa3c-44d0-92f4-1d669ce721c5",
+    "name": "Weaviate REST authz mcp API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:26.000Z",
+    "updatedAt": "2026-07-28T03:29:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6673cea6-fa3c-44d0-92f4-1d669ce721c5"
+  },
+  "item": [
+    {
+      "name": "mcp",
+      "item": [
+        {
+          "name": "Weaviate MCP Streamable HTTP Endpoint",
+          "id": "e3a4e4f2-d256-4fb0-8acd-af131565b84a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mcp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mcp"
+              ]
+            },
+            "description": "MCP Streamable HTTP endpoint. Handles JSON-RPC requests for tool discovery and invocation."
+          },
+          "response": [
+            {
+              "id": "bfd68346-f148-4231-9af6-c24bdb2fdef8",
+              "name": "JSON-RPC response or SSE stream",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/mcp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "mcp"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:26.000Z",
+              "updatedAt": "2026-07-28T03:29:26.000Z",
+              "uid": "35240-bfd68346-f148-4231-9af6-c24bdb2fdef8"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:26.000Z",
+          "updatedAt": "2026-07-28T03:29:26.000Z",
+          "uid": "35240-e3a4e4f2-d256-4fb0-8acd-af131565b84a"
+        },
+        {
+          "name": "Weaviate Opens An SSE Stream For Receiving MCP Server-Sent Events",
+          "id": "4292de8d-ff2d-4d25-a2df-f6f23ca03646",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mcp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mcp"
+              ]
+            },
+            "description": "Opens an SSE stream for receiving MCP server-sent events."
+          },
+          "response": [
+            {
+              "id": "55d4386e-2c76-41bc-9adb-9e8172a8bc09",
+              "name": "SSE event stream",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/mcp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "mcp"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:26.000Z",
+              "updatedAt": "2026-07-28T03:29:26.000Z",
+              "uid": "35240-55d4386e-2c76-41bc-9adb-9e8172a8bc09"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:26.000Z",
+          "updatedAt": "2026-07-28T03:29:26.000Z",
+          "uid": "35240-4292de8d-ff2d-4d25-a2df-f6f23ca03646"
+        },
+        {
+          "name": "Weaviate Terminates An MCP Session",
+          "id": "68b8bd81-c9cb-41dd-aa48-fcad480266d1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mcp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mcp"
+              ]
+            },
+            "description": "Terminates an MCP session."
+          },
+          "response": [
+            {
+              "id": "40b05679-44f7-4849-af84-60378d21f1f0",
+              "name": "Session terminated",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/mcp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "mcp"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:26.000Z",
+              "updatedAt": "2026-07-28T03:29:26.000Z",
+              "uid": "35240-40b05679-44f7-4849-af84-60378d21f1f0"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:26.000Z",
+          "updatedAt": "2026-07-28T03:29:26.000Z",
+          "uid": "35240-68b8bd81-c9cb-41dd-aa48-fcad480266d1"
+        }
+      ],
+      "id": "351069a6-ad54-40cc-9f11-b43af9e9534b",
+      "createdAt": "2026-07-28T03:29:26.000Z",
+      "updatedAt": "2026-07-28T03:29:26.000Z",
+      "uid": "35240-351069a6-ad54-40cc-9f11-b43af9e9534b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

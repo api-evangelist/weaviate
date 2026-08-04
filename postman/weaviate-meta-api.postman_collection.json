@@ -1,0 +1,239 @@
+{
+  "info": {
+    "_postman_id": "3b7db974-2d5f-4c15-9e4c-59ede919c247",
+    "name": "Weaviate REST authz meta API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:26.000Z",
+    "updatedAt": "2026-07-28T03:29:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3b7db974-2d5f-4c15-9e4c-59ede919c247"
+  },
+  "item": [
+    {
+      "name": "meta",
+      "item": [
+        {
+          "name": "Weaviate Get Instance Metadata",
+          "id": "8c5d8cdf-8da9-4a12-abec-ddece9f2c90f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/meta",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meta"
+              ]
+            },
+            "description": "Provides meta-information about the running Weaviate instance, including its version, loaded modules, and network hostname. This information can be useful for monitoring, compatibility checks, or inter-instance communication."
+          },
+          "response": [
+            {
+              "id": "ee5e6ad2-521c-4b6f-80d0-f6bff4cc364c",
+              "name": "Successfully retrieved meta information.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meta",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meta"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"hostname\": \"<string>\",\n  \"version\": \"<string>\",\n  \"modules\": {},\n  \"grpcMaxMessageSize\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:29:27.000Z",
+              "updatedAt": "2026-07-28T03:29:27.000Z",
+              "uid": "35240-ee5e6ad2-521c-4b6f-80d0-f6bff4cc364c"
+            },
+            {
+              "id": "87193426-5cf8-4dff-92c0-eb1535c9603f",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meta",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meta"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:27.000Z",
+              "updatedAt": "2026-07-28T03:29:27.000Z",
+              "uid": "35240-87193426-5cf8-4dff-92c0-eb1535c9603f"
+            },
+            {
+              "id": "def2ee50-cab8-4b78-8e03-f7430e2475c8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meta",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meta"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:27.000Z",
+              "updatedAt": "2026-07-28T03:29:27.000Z",
+              "uid": "35240-def2ee50-cab8-4b78-8e03-f7430e2475c8"
+            },
+            {
+              "id": "442d5adb-f177-46fb-9334-f35dcc553fa1",
+              "name": "An internal server error occurred while retrieving meta information. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meta",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meta"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:27.000Z",
+              "updatedAt": "2026-07-28T03:29:27.000Z",
+              "uid": "35240-442d5adb-f177-46fb-9334-f35dcc553fa1"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:27.000Z",
+          "updatedAt": "2026-07-28T03:29:27.000Z",
+          "uid": "35240-8c5d8cdf-8da9-4a12-abec-ddece9f2c90f"
+        }
+      ],
+      "id": "1aa14c83-1ce6-4aa0-98d9-de67c9452378",
+      "createdAt": "2026-07-28T03:29:27.000Z",
+      "updatedAt": "2026-07-28T03:29:27.000Z",
+      "uid": "35240-1aa14c83-1ce6-4aa0-98d9-de67c9452378"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

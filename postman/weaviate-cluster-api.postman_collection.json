@@ -1,0 +1,296 @@
+{
+  "info": {
+    "_postman_id": "0b56f926-6a1c-44e0-bc9e-b9548d9e5d15",
+    "name": "Weaviate REST authz cluster API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:21.000Z",
+    "updatedAt": "2026-07-28T03:29:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0b56f926-6a1c-44e0-bc9e-b9548d9e5d15"
+  },
+  "item": [
+    {
+      "name": "cluster",
+      "item": [
+        {
+          "name": "statistics",
+          "item": [
+            {
+              "name": "Weaviate Get Cluster Statistics",
+              "id": "f785ca69-8bdd-4fc7-9ae5-85021116b585",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/cluster/statistics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cluster",
+                    "statistics"
+                  ]
+                },
+                "description": "Provides statistics about the internal Raft consensus protocol state for the Weaviate cluster."
+              },
+              "response": [
+                {
+                  "id": "bafd71e8-410f-4a27-817c-09b18396ae81",
+                  "name": "Successfully retrieved Raft cluster statistics.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cluster/statistics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cluster",
+                        "statistics"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"statistics\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"HEALTHY\",\n      \"bootstrapped\": \"<boolean>\",\n      \"dbLoaded\": \"<boolean>\",\n      \"initialLastAppliedIndex\": \"<number>\",\n      \"lastAppliedIndex\": \"<number>\",\n      \"isVoter\": \"<boolean>\",\n      \"leaderId\": {},\n      \"leaderAddress\": {},\n      \"open\": \"<boolean>\",\n      \"ready\": \"<boolean>\",\n      \"candidates\": {},\n      \"raft\": {\n        \"appliedIndex\": \"<string>\",\n        \"commitIndex\": \"<string>\",\n        \"fsmPending\": \"<string>\",\n        \"lastContact\": \"<string>\",\n        \"lastLogIndex\": \"<string>\",\n        \"lastLogTerm\": \"<string>\",\n        \"lastSnapshotIndex\": \"<string>\",\n        \"lastSnapshotTerm\": \"<string>\",\n        \"latestConfiguration\": {},\n        \"latestConfigurationIndex\": \"<string>\",\n        \"numPeers\": \"<string>\",\n        \"protocolVersion\": \"<string>\",\n        \"protocolVersionMax\": \"<string>\",\n        \"protocolVersionMin\": \"<string>\",\n        \"snapshotVersionMax\": \"<string>\",\n        \"snapshotVersionMin\": \"<string>\",\n        \"state\": \"<string>\",\n        \"term\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"HEALTHY\",\n      \"bootstrapped\": \"<boolean>\",\n      \"dbLoaded\": \"<boolean>\",\n      \"initialLastAppliedIndex\": \"<number>\",\n      \"lastAppliedIndex\": \"<number>\",\n      \"isVoter\": \"<boolean>\",\n      \"leaderId\": {},\n      \"leaderAddress\": {},\n      \"open\": \"<boolean>\",\n      \"ready\": \"<boolean>\",\n      \"candidates\": {},\n      \"raft\": {\n        \"appliedIndex\": \"<string>\",\n        \"commitIndex\": \"<string>\",\n        \"fsmPending\": \"<string>\",\n        \"lastContact\": \"<string>\",\n        \"lastLogIndex\": \"<string>\",\n        \"lastLogTerm\": \"<string>\",\n        \"lastSnapshotIndex\": \"<string>\",\n        \"lastSnapshotTerm\": \"<string>\",\n        \"latestConfiguration\": {},\n        \"latestConfigurationIndex\": \"<string>\",\n        \"numPeers\": \"<string>\",\n        \"protocolVersion\": \"<string>\",\n        \"protocolVersionMax\": \"<string>\",\n        \"protocolVersionMin\": \"<string>\",\n        \"snapshotVersionMax\": \"<string>\",\n        \"snapshotVersionMin\": \"<string>\",\n        \"state\": \"<string>\",\n        \"term\": \"<string>\"\n      }\n    }\n  ],\n  \"synchronized\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:29:21.000Z",
+                  "updatedAt": "2026-07-28T03:29:21.000Z",
+                  "uid": "35240-bafd71e8-410f-4a27-817c-09b18396ae81"
+                },
+                {
+                  "id": "6f5c4988-f364-4ab0-a083-eb23f8e43fe2",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cluster/statistics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cluster",
+                        "statistics"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:21.000Z",
+                  "updatedAt": "2026-07-28T03:29:21.000Z",
+                  "uid": "35240-6f5c4988-f364-4ab0-a083-eb23f8e43fe2"
+                },
+                {
+                  "id": "802a7f2f-dba4-4d90-9326-bf62d0d3196f",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cluster/statistics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cluster",
+                        "statistics"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:21.000Z",
+                  "updatedAt": "2026-07-28T03:29:21.000Z",
+                  "uid": "35240-802a7f2f-dba4-4d90-9326-bf62d0d3196f"
+                },
+                {
+                  "id": "a8322cdb-04c8-4366-a89b-375352daf688",
+                  "name": "Invalid request for cluster statistics.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cluster/statistics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cluster",
+                        "statistics"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:21.000Z",
+                  "updatedAt": "2026-07-28T03:29:21.000Z",
+                  "uid": "35240-a8322cdb-04c8-4366-a89b-375352daf688"
+                },
+                {
+                  "id": "9d5eb66a-08af-42cc-b602-927d96a5dc10",
+                  "name": "An internal server error occurred while retrieving cluster statistics. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/cluster/statistics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cluster",
+                        "statistics"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:21.000Z",
+                  "updatedAt": "2026-07-28T03:29:21.000Z",
+                  "uid": "35240-9d5eb66a-08af-42cc-b602-927d96a5dc10"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:21.000Z",
+              "updatedAt": "2026-07-28T03:29:21.000Z",
+              "uid": "35240-f785ca69-8bdd-4fc7-9ae5-85021116b585"
+            }
+          ],
+          "id": "d61346ca-bf89-49f3-b975-3c308b39ed48",
+          "createdAt": "2026-07-28T03:29:21.000Z",
+          "updatedAt": "2026-07-28T03:29:21.000Z",
+          "uid": "35240-d61346ca-bf89-49f3-b975-3c308b39ed48"
+        }
+      ],
+      "id": "21cc0833-cb87-48ce-83be-a87b74427a77",
+      "createdAt": "2026-07-28T03:29:21.000Z",
+      "updatedAt": "2026-07-28T03:29:21.000Z",
+      "uid": "35240-21cc0833-cb87-48ce-83be-a87b74427a77"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

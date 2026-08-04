@@ -1,0 +1,412 @@
+{
+  "info": {
+    "_postman_id": "a0a3030c-af32-4c15-b1ec-b0092d1205a0",
+    "name": "Weaviate REST authz tokenize API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:40.000Z",
+    "updatedAt": "2026-07-28T03:29:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a0a3030c-af32-4c15-b1ec-b0092d1205a0"
+  },
+  "item": [
+    {
+      "name": "tokenize",
+      "item": [
+        {
+          "name": "Weaviate Tokenize Text",
+          "id": "60748f79-2314-4cc3-aabb-969ba9cdac7d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tokenize",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tokenize"
+              ]
+            },
+            "description": "Tokenizes the provided text using the specified tokenization method. This is a stateless utility endpoint useful for debugging and understanding how text will be processed during indexing and querying. The response includes both the indexed tokens (as stored in the inverted index) and query tokens (after optional stopword removal)."
+          },
+          "response": [
+            {
+              "id": "42035236-647b-4b34-a730-e60301d8940c",
+              "name": "Successfully tokenized the text.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokenize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokenize"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"indexed\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"query\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:41.000Z",
+              "updatedAt": "2026-07-28T03:29:41.000Z",
+              "uid": "35240-42035236-647b-4b34-a730-e60301d8940c"
+            },
+            {
+              "id": "578daa3a-5058-4601-89a2-f92ea5311881",
+              "name": "Invalid or malformed request body.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokenize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokenize"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:41.000Z",
+              "updatedAt": "2026-07-28T03:29:41.000Z",
+              "uid": "35240-578daa3a-5058-4601-89a2-f92ea5311881"
+            },
+            {
+              "id": "3a52afd4-913b-4611-82e0-584b9805b423",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokenize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokenize"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:29:41.000Z",
+              "updatedAt": "2026-07-28T03:29:41.000Z",
+              "uid": "35240-3a52afd4-913b-4611-82e0-584b9805b423"
+            },
+            {
+              "id": "55ca6568-a338-4c20-9fe1-346499322c15",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokenize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokenize"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:41.000Z",
+              "updatedAt": "2026-07-28T03:29:41.000Z",
+              "uid": "35240-55ca6568-a338-4c20-9fe1-346499322c15"
+            },
+            {
+              "id": "70b9cfd3-0be3-433a-94fc-ca788cd9b55d",
+              "name": "Request binding or validation error. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokenize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokenize"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:41.000Z",
+              "updatedAt": "2026-07-28T03:29:41.000Z",
+              "uid": "35240-70b9cfd3-0be3-433a-94fc-ca788cd9b55d"
+            },
+            {
+              "id": "5c11ef59-db07-4712-8130-8245bf585098",
+              "name": "An unexpected error occurred while tokenizing the text. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"trigram\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"velit_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokenize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokenize"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:41.000Z",
+              "updatedAt": "2026-07-28T03:29:41.000Z",
+              "uid": "35240-5c11ef59-db07-4712-8130-8245bf585098"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:41.000Z",
+          "updatedAt": "2026-07-28T03:29:41.000Z",
+          "uid": "35240-60748f79-2314-4cc3-aabb-969ba9cdac7d"
+        }
+      ],
+      "id": "76a101b7-e77b-4f10-a12d-e0a057a3d84a",
+      "createdAt": "2026-07-28T03:29:41.000Z",
+      "updatedAt": "2026-07-28T03:29:41.000Z",
+      "uid": "35240-76a101b7-e77b-4f10-a12d-e0a057a3d84a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

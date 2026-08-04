@@ -1,0 +1,384 @@
+{
+  "info": {
+    "_postman_id": "f957225e-00ed-4a9b-aeda-b9b6dd8e81b0",
+    "name": "Weaviate REST authz .well Known API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:43.000Z",
+    "updatedAt": "2026-07-28T03:29:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f957225e-00ed-4a9b-aeda-b9b6dd8e81b0"
+  },
+  "item": [
+    {
+      "name": ".well-known",
+      "item": [
+        {
+          "name": "live",
+          "item": [
+            {
+              "name": "Weaviate Check Application Liveness",
+              "id": "c3f0c5a7-e948-4c78-a963-9ccc6a26c076",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/.well-known/live",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ".well-known",
+                    "live"
+                  ]
+                },
+                "description": "Indicates if the Weaviate instance is running and responsive to basic HTTP requests. Primarily used for health checks, such as Kubernetes liveness probes."
+              },
+              "response": [
+                {
+                  "id": "10fe30e0-0096-4184-be60-d5fc4fe65e26",
+                  "name": "The application is alive and responding to HTTP requests.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/.well-known/live",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ".well-known",
+                        "live"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:44.000Z",
+                  "updatedAt": "2026-07-28T03:29:44.000Z",
+                  "uid": "35240-10fe30e0-0096-4184-be60-d5fc4fe65e26"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:44.000Z",
+              "updatedAt": "2026-07-28T03:29:44.000Z",
+              "uid": "35240-c3f0c5a7-e948-4c78-a963-9ccc6a26c076"
+            }
+          ],
+          "id": "7396fef3-7734-4104-b7e4-2391538e9e95",
+          "createdAt": "2026-07-28T03:29:44.000Z",
+          "updatedAt": "2026-07-28T03:29:44.000Z",
+          "uid": "35240-7396fef3-7734-4104-b7e4-2391538e9e95"
+        },
+        {
+          "name": "ready",
+          "item": [
+            {
+              "name": "Weaviate Check Application Readiness",
+              "id": "c198f39e-c6f2-4adf-9cc7-39ddf38f296a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/.well-known/ready",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ".well-known",
+                    "ready"
+                  ]
+                },
+                "description": "Indicates if the Weaviate instance has completed its startup routines and is prepared to accept user traffic (data import, queries, etc.). Used for readiness checks, such as Kubernetes readiness probes."
+              },
+              "response": [
+                {
+                  "id": "a5f8364a-2b5a-449a-bbde-c14a5e19e748",
+                  "name": "The application is ready to serve traffic.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/.well-known/ready",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ".well-known",
+                        "ready"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:44.000Z",
+                  "updatedAt": "2026-07-28T03:29:44.000Z",
+                  "uid": "35240-a5f8364a-2b5a-449a-bbde-c14a5e19e748"
+                },
+                {
+                  "id": "60ba4a61-025d-4cf6-ba38-895802f272ce",
+                  "name": "The application is not ready to serve traffic. Traffic should be directed to other available replicas if applicable.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/.well-known/ready",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ".well-known",
+                        "ready"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:44.000Z",
+                  "updatedAt": "2026-07-28T03:29:44.000Z",
+                  "uid": "35240-60ba4a61-025d-4cf6-ba38-895802f272ce"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:44.000Z",
+              "updatedAt": "2026-07-28T03:29:44.000Z",
+              "uid": "35240-c198f39e-c6f2-4adf-9cc7-39ddf38f296a"
+            }
+          ],
+          "id": "c7d18488-2d7d-4acd-924b-65429b07d3c1",
+          "createdAt": "2026-07-28T03:29:44.000Z",
+          "updatedAt": "2026-07-28T03:29:44.000Z",
+          "uid": "35240-c7d18488-2d7d-4acd-924b-65429b07d3c1"
+        },
+        {
+          "name": "openid-configuration",
+          "item": [
+            {
+              "name": "Weaviate Get OIDC Configuration",
+              "id": "5fa132bf-4c1f-44a4-aef6-e61603d32771",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/.well-known/openid-configuration",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ".well-known",
+                    "openid-configuration"
+                  ]
+                },
+                "description": "Provides OpenID Connect (OIDC) discovery information if OIDC authentication is configured for Weaviate. Returns details like the token issuer URL, client ID, and required scopes."
+              },
+              "response": [
+                {
+                  "id": "6ea092aa-3974-4b1d-b305-4cbbe840a4cb",
+                  "name": "OIDC configuration details returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/.well-known/openid-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ".well-known",
+                        "openid-configuration"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"href\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:44.000Z",
+                  "updatedAt": "2026-07-28T03:29:44.000Z",
+                  "uid": "35240-6ea092aa-3974-4b1d-b305-4cbbe840a4cb"
+                },
+                {
+                  "id": "699db56b-f8c5-4bdd-a036-bc7553f8fabf",
+                  "name": "OIDC provider is not configured for this Weaviate instance.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/.well-known/openid-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ".well-known",
+                        "openid-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:44.000Z",
+                  "updatedAt": "2026-07-28T03:29:44.000Z",
+                  "uid": "35240-699db56b-f8c5-4bdd-a036-bc7553f8fabf"
+                },
+                {
+                  "id": "f537d1e1-27cc-4031-867a-fe02c5e6e5ab",
+                  "name": "An internal server error occurred while retrieving OIDC configuration. Check the ErrorResponse for details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/.well-known/openid-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ".well-known",
+                        "openid-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:44.000Z",
+                  "updatedAt": "2026-07-28T03:29:44.000Z",
+                  "uid": "35240-f537d1e1-27cc-4031-867a-fe02c5e6e5ab"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:44.000Z",
+              "updatedAt": "2026-07-28T03:29:44.000Z",
+              "uid": "35240-5fa132bf-4c1f-44a4-aef6-e61603d32771"
+            }
+          ],
+          "id": "c81c53fa-9d91-4aa1-bdec-4ce571259caa",
+          "createdAt": "2026-07-28T03:29:44.000Z",
+          "updatedAt": "2026-07-28T03:29:44.000Z",
+          "uid": "35240-c81c53fa-9d91-4aa1-bdec-4ce571259caa"
+        }
+      ],
+      "id": "af4436c0-19e3-4770-92cb-0d3a877f5f69",
+      "createdAt": "2026-07-28T03:29:44.000Z",
+      "updatedAt": "2026-07-28T03:29:44.000Z",
+      "uid": "35240-af4436c0-19e3-4770-92cb-0d3a877f5f69"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

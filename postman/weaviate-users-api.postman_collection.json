@@ -1,0 +1,3113 @@
+{
+  "info": {
+    "_postman_id": "6c692075-b293-455a-a8d8-c5f963d0b1ec",
+    "name": "Weaviate REST authz users API",
+    "description": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:41.000Z",
+    "updatedAt": "2026-07-28T03:29:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6c692075-b293-455a-a8d8-c5f963d0b1ec"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "own-info",
+          "item": [
+            {
+              "name": "Weaviate Get Current User Info",
+              "id": "e5de578d-a363-46f9-82b6-910b64d3eceb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/own-info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "own-info"
+                  ]
+                },
+                "description": "Get information about the currently authenticated user, including username and assigned roles."
+              },
+              "response": [
+                {
+                  "id": "56f9dcfe-b33e-424c-b761-7b36ecd39f91",
+                  "name": "Info about the user.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/own-info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "own-info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"username\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    {\n      \"name\": \"<string>\",\n      \"permissions\": [\n        {\n          \"action\": \"update_replicate\",\n          \"backups\": {\n            \"collection\": \"*\"\n          },\n          \"data\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\",\n            \"object\": \"*\"\n          },\n          \"nodes\": {\n            \"verbosity\": \"minimal\",\n            \"collection\": \"*\"\n          },\n          \"users\": {\n            \"users\": \"*\"\n          },\n          \"groups\": {\n            \"group\": \"*\",\n            \"groupType\": \"oidc\"\n          },\n          \"tenants\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\"\n          },\n          \"roles\": {\n            \"role\": \"*\",\n            \"scope\": \"match\"\n          },\n          \"collections\": {\n            \"collection\": \"*\"\n          },\n          \"replicate\": {\n            \"collection\": \"*\",\n            \"shard\": \"*\"\n          },\n          \"aliases\": {\n            \"collection\": \"*\",\n            \"alias\": \"*\"\n          },\n          \"namespaces\": {\n            \"namespace\": \"*\"\n          }\n        },\n        {\n          \"action\": \"create_tenants\",\n          \"backups\": {\n            \"collection\": \"*\"\n          },\n          \"data\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\",\n            \"object\": \"*\"\n          },\n          \"nodes\": {\n            \"verbosity\": \"minimal\",\n            \"collection\": \"*\"\n          },\n          \"users\": {\n            \"users\": \"*\"\n          },\n          \"groups\": {\n            \"group\": \"*\",\n            \"groupType\": \"oidc\"\n          },\n          \"tenants\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\"\n          },\n          \"roles\": {\n            \"role\": \"*\",\n            \"scope\": \"match\"\n          },\n          \"collections\": {\n            \"collection\": \"*\"\n          },\n          \"replicate\": {\n            \"collection\": \"*\",\n            \"shard\": \"*\"\n          },\n          \"aliases\": {\n            \"collection\": \"*\",\n            \"alias\": \"*\"\n          },\n          \"namespaces\": {\n            \"namespace\": \"*\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"permissions\": [\n        {\n          \"action\": \"delete_users\",\n          \"backups\": {\n            \"collection\": \"*\"\n          },\n          \"data\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\",\n            \"object\": \"*\"\n          },\n          \"nodes\": {\n            \"verbosity\": \"minimal\",\n            \"collection\": \"*\"\n          },\n          \"users\": {\n            \"users\": \"*\"\n          },\n          \"groups\": {\n            \"group\": \"*\",\n            \"groupType\": \"oidc\"\n          },\n          \"tenants\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\"\n          },\n          \"roles\": {\n            \"role\": \"*\",\n            \"scope\": \"match\"\n          },\n          \"collections\": {\n            \"collection\": \"*\"\n          },\n          \"replicate\": {\n            \"collection\": \"*\",\n            \"shard\": \"*\"\n          },\n          \"aliases\": {\n            \"collection\": \"*\",\n            \"alias\": \"*\"\n          },\n          \"namespaces\": {\n            \"namespace\": \"*\"\n          }\n        },\n        {\n          \"action\": \"delete_replicate\",\n          \"backups\": {\n            \"collection\": \"*\"\n          },\n          \"data\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\",\n            \"object\": \"*\"\n          },\n          \"nodes\": {\n            \"verbosity\": \"minimal\",\n            \"collection\": \"*\"\n          },\n          \"users\": {\n            \"users\": \"*\"\n          },\n          \"groups\": {\n            \"group\": \"*\",\n            \"groupType\": \"oidc\"\n          },\n          \"tenants\": {\n            \"collection\": \"*\",\n            \"tenant\": \"*\"\n          },\n          \"roles\": {\n            \"role\": \"*\",\n            \"scope\": \"match\"\n          },\n          \"collections\": {\n            \"collection\": \"*\"\n          },\n          \"replicate\": {\n            \"collection\": \"*\",\n            \"shard\": \"*\"\n          },\n          \"aliases\": {\n            \"collection\": \"*\",\n            \"alias\": \"*\"\n          },\n          \"namespaces\": {\n            \"namespace\": \"*\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-56f9dcfe-b33e-424c-b761-7b36ecd39f91"
+                },
+                {
+                  "id": "08707807-1052-473c-86a7-284b00aa24a3",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/own-info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "own-info"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-08707807-1052-473c-86a7-284b00aa24a3"
+                },
+                {
+                  "id": "b21f093d-634b-4487-8d5f-a8c80abfeb26",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/own-info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "own-info"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-b21f093d-634b-4487-8d5f-a8c80abfeb26"
+                },
+                {
+                  "id": "d2576b36-4a1b-4f36-bb81-ffc7fdf90635",
+                  "name": "Replica movement operations are disabled.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/own-info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "own-info"
+                      ]
+                    }
+                  },
+                  "status": "Not Implemented",
+                  "code": 501,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-d2576b36-4a1b-4f36-bb81-ffc7fdf90635"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:42.000Z",
+              "updatedAt": "2026-07-28T03:29:42.000Z",
+              "uid": "35240-e5de578d-a363-46f9-82b6-910b64d3eceb"
+            }
+          ],
+          "id": "b0d8052c-6393-402d-be94-e1790991bfc9",
+          "createdAt": "2026-07-28T03:29:42.000Z",
+          "updatedAt": "2026-07-28T03:29:42.000Z",
+          "uid": "35240-b0d8052c-6393-402d-be94-e1790991bfc9"
+        },
+        {
+          "name": "db",
+          "item": [
+            {
+              "name": "{user_id}",
+              "item": [
+                {
+                  "name": "rotate-key",
+                  "item": [
+                    {
+                      "name": "Weaviate Rotate API Key Of A User",
+                      "id": "ec4cbf66-7468-4f2c-acdb-d91afce44ed7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id",
+                            "rotate-key"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4f25661b-6ad4-49ce-9bb2-ef00d4f80c66",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) The name of the user."
+                            }
+                          ]
+                        },
+                        "description": "Revoke the current API key for the specified database user (`db` user type) and generate a new one."
+                      },
+                      "response": [
+                        {
+                          "id": "b4bad8bc-e51e-43dc-b1bc-63c9d8248af6",
+                          "name": "API key successfully updated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"apikey\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-b4bad8bc-e51e-43dc-b1bc-63c9d8248af6"
+                        },
+                        {
+                          "id": "521d50a2-b0d8-441c-8fd8-d1155d963d44",
+                          "name": "Malformed request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-521d50a2-b0d8-441c-8fd8-d1155d963d44"
+                        },
+                        {
+                          "id": "cfb9991b-6fc4-4b77-a79b-860b4856cea1",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-cfb9991b-6fc4-4b77-a79b-860b4856cea1"
+                        },
+                        {
+                          "id": "07bd4783-d407-4d42-aadc-3f1bc0cdd1a1",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-07bd4783-d407-4d42-aadc-3f1bc0cdd1a1"
+                        },
+                        {
+                          "id": "175b72ff-8a75-4352-8f8a-ea9628f14b58",
+                          "name": "User not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-175b72ff-8a75-4352-8f8a-ea9628f14b58"
+                        },
+                        {
+                          "id": "80a074a5-b0f6-4abb-9a28-ed933d2c4818",
+                          "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-80a074a5-b0f6-4abb-9a28-ed933d2c4818"
+                        },
+                        {
+                          "id": "c7e92605-312f-4a82-a55d-b07eb681812e",
+                          "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/rotate-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "rotate-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-c7e92605-312f-4a82-a55d-b07eb681812e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-ec4cbf66-7468-4f2c-acdb-d91afce44ed7"
+                    }
+                  ],
+                  "id": "64f6df98-cd62-43a6-9bc6-aa0f74de3401",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-64f6df98-cd62-43a6-9bc6-aa0f74de3401"
+                },
+                {
+                  "name": "activate",
+                  "item": [
+                    {
+                      "name": "Weaviate Activate A User",
+                      "id": "a5918adc-396e-4e11-9a30-6f9cd4a08391",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id",
+                            "activate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "894141df-30b3-4794-8cd4-55cdc185edc8",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) The name of the user."
+                            }
+                          ]
+                        },
+                        "description": "Activate a deactivated database user (`db` user type)."
+                      },
+                      "response": [
+                        {
+                          "id": "012987de-304e-46a3-8c1d-cd6004df6f05",
+                          "name": "User successfully activated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-012987de-304e-46a3-8c1d-cd6004df6f05"
+                        },
+                        {
+                          "id": "ac34798c-be8c-4e4e-aa50-9889f493f5d5",
+                          "name": "Malformed request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-ac34798c-be8c-4e4e-aa50-9889f493f5d5"
+                        },
+                        {
+                          "id": "db66a3fb-0c5e-4d41-9e08-31715f1eea6c",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-db66a3fb-0c5e-4d41-9e08-31715f1eea6c"
+                        },
+                        {
+                          "id": "b758f6fc-43c3-4a08-9d48-f7eae8349fdc",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-b758f6fc-43c3-4a08-9d48-f7eae8349fdc"
+                        },
+                        {
+                          "id": "6da42f28-2936-48ee-a92d-2e60777498d0",
+                          "name": "User not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-6da42f28-2936-48ee-a92d-2e60777498d0"
+                        },
+                        {
+                          "id": "d3b9332b-2df5-4920-bf50-b99aa53622a5",
+                          "name": "User already activated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-d3b9332b-2df5-4920-bf50-b99aa53622a5"
+                        },
+                        {
+                          "id": "642692bc-91ff-4e0b-9410-d2bbbdb36bd8",
+                          "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-642692bc-91ff-4e0b-9410-d2bbbdb36bd8"
+                        },
+                        {
+                          "id": "366ec600-477a-4166-a6d0-7615850ed9f1",
+                          "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/activate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "activate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-366ec600-477a-4166-a6d0-7615850ed9f1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-a5918adc-396e-4e11-9a30-6f9cd4a08391"
+                    }
+                  ],
+                  "id": "f3fff31e-7aee-4cf2-9104-cf794cda2737",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-f3fff31e-7aee-4cf2-9104-cf794cda2737"
+                },
+                {
+                  "name": "deactivate",
+                  "item": [
+                    {
+                      "name": "Weaviate Deactivate A User",
+                      "id": "c004df11-c329-4c99-910b-e82b85d266f8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"revoke_key\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id",
+                            "deactivate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b39ce802-49fe-426d-ace5-62be29970f6e",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) The name of the user."
+                            }
+                          ]
+                        },
+                        "description": "Deactivate a database user (`db` user type)."
+                      },
+                      "response": [
+                        {
+                          "id": "df20be30-8514-43ec-9726-d5278bb09549",
+                          "name": "User successfully deactivated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-df20be30-8514-43ec-9726-d5278bb09549"
+                        },
+                        {
+                          "id": "52a8f2a0-87dd-4bb5-b1ad-5092782e57de",
+                          "name": "Malformed request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-52a8f2a0-87dd-4bb5-b1ad-5092782e57de"
+                        },
+                        {
+                          "id": "3d2d4928-5494-4a80-b7b6-1056d5259139",
+                          "name": "Unauthorized or invalid credentials.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-3d2d4928-5494-4a80-b7b6-1056d5259139"
+                        },
+                        {
+                          "id": "7ef36354-6f23-4463-af71-c6ee6da19ef6",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-7ef36354-6f23-4463-af71-c6ee6da19ef6"
+                        },
+                        {
+                          "id": "7017d804-27a1-4fe0-979f-f9c1ad501476",
+                          "name": "User not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-7017d804-27a1-4fe0-979f-f9c1ad501476"
+                        },
+                        {
+                          "id": "cfaf113a-0ed8-482c-9832-8e464c72c86b",
+                          "name": "User already deactivated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-cfaf113a-0ed8-482c-9832-8e464c72c86b"
+                        },
+                        {
+                          "id": "5adadb6b-113c-4af2-a474-0c26fd0aaf02",
+                          "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-5adadb6b-113c-4af2-a474-0c26fd0aaf02"
+                        },
+                        {
+                          "id": "4e9fcee8-4511-48ea-b3ab-8f784aa0dacd",
+                          "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"revoke_key\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/db/:user_id/deactivate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                "db",
+                                ":user_id",
+                                "deactivate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:29:42.000Z",
+                          "updatedAt": "2026-07-28T03:29:42.000Z",
+                          "uid": "35240-4e9fcee8-4511-48ea-b3ab-8f784aa0dacd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-c004df11-c329-4c99-910b-e82b85d266f8"
+                    }
+                  ],
+                  "id": "58861036-5b1e-4918-9154-d0902c148618",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-58861036-5b1e-4918-9154-d0902c148618"
+                },
+                {
+                  "name": "Weaviate Get User Info",
+                  "id": "2589790c-db6a-46c2-a1a2-6baf4d8e3273",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db",
+                        ":user_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include the last used time of the given user",
+                          "key": "includeLastUsedTime",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "33471afb-ddb8-4f0b-b60e-fe918d3a834b",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) The name of the user."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve detailed information about a specific database user (`db` user type), including their roles, status, and type."
+                  },
+                  "response": [
+                    {
+                      "id": "6c59a8c1-f2e8-4ce4-ae99-5ea9095cdac6",
+                      "name": "Info about the user.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the last used time of the given user",
+                              "key": "includeLastUsedTime",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"userId\": \"<string>\",\n  \"dbUserType\": \"db_env_user\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"<boolean>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"apiKeyFirstLetters\": \"<string,null>\",\n  \"lastUsedAt\": \"<string,null-date-time>\",\n  \"namespace\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-6c59a8c1-f2e8-4ce4-ae99-5ea9095cdac6"
+                    },
+                    {
+                      "id": "af93d6e3-8a62-46b4-bae5-50efdab3cc84",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the last used time of the given user",
+                              "key": "includeLastUsedTime",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-af93d6e3-8a62-46b4-bae5-50efdab3cc84"
+                    },
+                    {
+                      "id": "cc059f1d-2bad-4215-adc7-ed74d86930a8",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the last used time of the given user",
+                              "key": "includeLastUsedTime",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-cc059f1d-2bad-4215-adc7-ed74d86930a8"
+                    },
+                    {
+                      "id": "d1b61465-4a9b-4feb-9fa8-58c9b7d4d5b1",
+                      "name": "User not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the last used time of the given user",
+                              "key": "includeLastUsedTime",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-d1b61465-4a9b-4feb-9fa8-58c9b7d4d5b1"
+                    },
+                    {
+                      "id": "af587fd3-58a3-4705-9374-12dd0fc9a350",
+                      "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the last used time of the given user",
+                              "key": "includeLastUsedTime",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-af587fd3-58a3-4705-9374-12dd0fc9a350"
+                    },
+                    {
+                      "id": "9ce408f0-f4ea-43b6-a36b-11dcad287b70",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id?includeLastUsedTime=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether to include the last used time of the given user",
+                              "key": "includeLastUsedTime",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-9ce408f0-f4ea-43b6-a36b-11dcad287b70"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-2589790c-db6a-46c2-a1a2-6baf4d8e3273"
+                },
+                {
+                  "name": "Weaviate Create A New User",
+                  "id": "e59b72ca-7500-49c6-bab9-d647454ff104",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "05096b4e-9bcd-4a94-8a5f-21e344ab33af",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) The name of the user."
+                        }
+                      ]
+                    },
+                    "description": "Create a new database (`db` user type) user with the specified name. Returns an API key for the newly created user."
+                  },
+                  "response": [
+                    {
+                      "id": "fd7c1320-c414-4758-a29c-8379561d1361",
+                      "name": "User created successfully and API key returned.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"apikey\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-fd7c1320-c414-4758-a29c-8379561d1361"
+                    },
+                    {
+                      "id": "9418f231-8a8c-4aaf-91b2-23f77d4500ef",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-9418f231-8a8c-4aaf-91b2-23f77d4500ef"
+                    },
+                    {
+                      "id": "ebc19d25-d0e7-416c-b628-5fa5d62fdaa1",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-ebc19d25-d0e7-416c-b628-5fa5d62fdaa1"
+                    },
+                    {
+                      "id": "fc392d92-c7c6-4da3-b102-84491c687ea7",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-fc392d92-c7c6-4da3-b102-84491c687ea7"
+                    },
+                    {
+                      "id": "5bc5ec5a-a09b-47d5-b4f8-c9a76275de7b",
+                      "name": "User not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-5bc5ec5a-a09b-47d5-b4f8-c9a76275de7b"
+                    },
+                    {
+                      "id": "408cd7a9-8b52-4fb7-b889-9951af28d904",
+                      "name": "A user with the specified name already exists.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-408cd7a9-8b52-4fb7-b889-9951af28d904"
+                    },
+                    {
+                      "id": "5191d120-6142-4347-85aa-f4c134e4e864",
+                      "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-5191d120-6142-4347-85aa-f4c134e4e864"
+                    },
+                    {
+                      "id": "9ed5843c-917d-4fca-92c4-7fd95e49c0ad",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"import\": false,\n  \"createTime\": \"<dateTime>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-9ed5843c-917d-4fca-92c4-7fd95e49c0ad"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-e59b72ca-7500-49c6-bab9-d647454ff104"
+                },
+                {
+                  "name": "Weaviate Delete A User",
+                  "id": "6706f4e7-cc10-450d-9e98-17395b28bd6d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "54119790-ed3d-405b-85db-cb33ceb38271",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) The name of the user."
+                        }
+                      ]
+                    },
+                    "description": "Delete a database user. You can't delete your current user."
+                  },
+                  "response": [
+                    {
+                      "id": "8da2f788-b403-4e1f-baee-670b1a882b2e",
+                      "name": "Successfully deleted.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-8da2f788-b403-4e1f-baee-670b1a882b2e"
+                    },
+                    {
+                      "id": "1f45a522-0f36-487c-9b1e-57590f3b3267",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-1f45a522-0f36-487c-9b1e-57590f3b3267"
+                    },
+                    {
+                      "id": "27f23c9b-e5a5-4164-a3fe-ced8088d2cd5",
+                      "name": "Unauthorized or invalid credentials.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-27f23c9b-e5a5-4164-a3fe-ced8088d2cd5"
+                    },
+                    {
+                      "id": "64b71d61-3e61-45dc-84a6-cd7bfacc64d1",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-64b71d61-3e61-45dc-84a6-cd7bfacc64d1"
+                    },
+                    {
+                      "id": "552e5190-5b8a-4f41-b7db-270f9e61d9df",
+                      "name": "User not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-552e5190-5b8a-4f41-b7db-270f9e61d9df"
+                    },
+                    {
+                      "id": "0e9f26b6-65c8-470f-af63-f0fd9e5f427a",
+                      "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-0e9f26b6-65c8-470f-af63-f0fd9e5f427a"
+                    },
+                    {
+                      "id": "a45832f5-058f-4836-9a4f-7f5e667f68fc",
+                      "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/db/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            "db",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:29:42.000Z",
+                      "updatedAt": "2026-07-28T03:29:42.000Z",
+                      "uid": "35240-a45832f5-058f-4836-9a4f-7f5e667f68fc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-6706f4e7-cc10-450d-9e98-17395b28bd6d"
+                }
+              ],
+              "id": "8a97ca3a-34cd-4f95-948f-33a3eae0bf5d",
+              "createdAt": "2026-07-28T03:29:42.000Z",
+              "updatedAt": "2026-07-28T03:29:42.000Z",
+              "uid": "35240-8a97ca3a-34cd-4f95-948f-33a3eae0bf5d"
+            },
+            {
+              "name": "Weaviate List All Users",
+              "id": "513fc4f2-8b9b-4d07-99ad-b39eb99b6f27",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/db?includeLastUsedTime=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "db"
+                  ],
+                  "query": [
+                    {
+                      "description": "Whether to include the last time the users were utilized.",
+                      "key": "includeLastUsedTime",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of all database (`db` user type) users with their roles and status information."
+              },
+              "response": [
+                {
+                  "id": "315f55d0-0de0-49e0-8ea7-84b697bc5f6a",
+                  "name": "Info about the users.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db?includeLastUsedTime=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include the last time the users were utilized.",
+                          "key": "includeLastUsedTime",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"userId\": \"<string>\",\n    \"dbUserType\": \"db_user\",\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"active\": \"<boolean>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"apiKeyFirstLetters\": \"<string,null>\",\n    \"lastUsedAt\": \"<string,null-date-time>\",\n    \"namespace\": \"<string>\"\n  },\n  {\n    \"userId\": \"<string>\",\n    \"dbUserType\": \"db_env_user\",\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"active\": \"<boolean>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"apiKeyFirstLetters\": \"<string,null>\",\n    \"lastUsedAt\": \"<string,null-date-time>\",\n    \"namespace\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-315f55d0-0de0-49e0-8ea7-84b697bc5f6a"
+                },
+                {
+                  "id": "b7b742c7-b6c7-4a4f-af27-5d32b8374c30",
+                  "name": "Unauthorized or invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db?includeLastUsedTime=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include the last time the users were utilized.",
+                          "key": "includeLastUsedTime",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-b7b742c7-b6c7-4a4f-af27-5d32b8374c30"
+                },
+                {
+                  "id": "1fe11da6-0c3d-4107-b30f-1500b2a29ce1",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db?includeLastUsedTime=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include the last time the users were utilized.",
+                          "key": "includeLastUsedTime",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-1fe11da6-0c3d-4107-b30f-1500b2a29ce1"
+                },
+                {
+                  "id": "e4cc3f18-5eff-44e2-a467-0314a0f2f383",
+                  "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/db?includeLastUsedTime=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "db"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include the last time the users were utilized.",
+                          "key": "includeLastUsedTime",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:42.000Z",
+                  "updatedAt": "2026-07-28T03:29:42.000Z",
+                  "uid": "35240-e4cc3f18-5eff-44e2-a467-0314a0f2f383"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:42.000Z",
+              "updatedAt": "2026-07-28T03:29:42.000Z",
+              "uid": "35240-513fc4f2-8b9b-4d07-99ad-b39eb99b6f27"
+            }
+          ],
+          "id": "408fc527-6a5d-4774-a047-96ecf1107de7",
+          "createdAt": "2026-07-28T03:29:42.000Z",
+          "updatedAt": "2026-07-28T03:29:42.000Z",
+          "uid": "35240-408fc527-6a5d-4774-a047-96ecf1107de7"
+        }
+      ],
+      "id": "1912aaa9-065d-4155-ba34-140e8af8f6c0",
+      "createdAt": "2026-07-28T03:29:42.000Z",
+      "updatedAt": "2026-07-28T03:29:42.000Z",
+      "uid": "35240-1912aaa9-065d-4155-ba34-140e8af8f6c0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
