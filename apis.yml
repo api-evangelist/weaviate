@@ -33,7 +33,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/weaviate/refs/heads/main/apis.yml
 created: '2024-06-18'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: weaviate:weaviate-authz-api
   name: Weaviate authz API
