@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz replication API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "replication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Initiate A Replica Movement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/replicate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Begins an asynchronous operation to move or copy a specific shard replica from its current node to a designated target node. The operation involves copying data, synchronizing, and potentially decommissioning the source replica."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete All Replication Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/replication/replicate"
+          },
+          "docs": "Schedules all replication operations for deletion across all collections, shards, and nodes."
+        },
+        {
+          "info": {
+            "name": "Weaviate Force Delete Replication Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/replicate/force-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "USE AT OWN RISK! Synchronously force delete operations from the FSM. This will not perform any checks on which state the operation is in so may lead to data corruption or loss. It is recommended to first scale the number of replication engine workers to 0 before calling this endpoint to ensure no operations are in-flight."
+        },
+        {
+          "info": {
+            "name": "Weaviate Retrieve A Replication Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/replicate/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replication operation to get details for."
+              },
+              {
+                "name": "includeHistory",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the history of the replication operation."
+              }
+            ]
+          },
+          "docs": "Fetches the current status and detailed information for a specific replication operation, identified by its unique ID. Optionally includes historical data of the operation's progress if requested."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Replication Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/replication/replicate/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replication operation to delete."
+              }
+            ]
+          },
+          "docs": "Removes a specific replication operation. If the operation is currently active, it will be cancelled and its resources cleaned up before the operation is deleted."
+        },
+        {
+          "info": {
+            "name": "Weaviate List Replication Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/replicate/list",
+            "params": [
+              {
+                "name": "targetNode",
+                "value": "",
+                "type": "query",
+                "description": "The name of the target node to get details for."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The name of the collection to get details for."
+              },
+              {
+                "name": "shard",
+                "value": "",
+                "type": "query",
+                "description": "The shard to get details for."
+              },
+              {
+                "name": "includeHistory",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the history of the replication operation."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of currently registered replication operations, optionally filtered by collection, shard, or node ID."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel A Replication Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/replicate/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the replication operation to cancel."
+              }
+            ]
+          },
+          "docs": "Requests the cancellation of an active replication operation identified by its ID. The operation will be stopped, but its record will remain in the `CANCELLED` state (can't be resumed) and will not be automatically deleted."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Sharding State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/sharding-state",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name to get the sharding state for."
+              },
+              {
+                "name": "shard",
+                "value": "",
+                "type": "query",
+                "description": "The shard to get the sharding state for."
+              }
+            ]
+          },
+          "docs": "Fetches the current sharding state, including replica locations and statuses, for all collections or a specified collection. If a shard name is provided along with a collection, the state for that specific shard is returned."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Replication Scale Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/replication/scale",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "The collection name to get the scaling plan for."
+              },
+              {
+                "name": "replicationFactor",
+                "value": "",
+                "type": "query",
+                "description": "The desired replication factor to scale to. Must be a positive integer greater than zero."
+              }
+            ]
+          },
+          "docs": "Computes and returns a replication scale plan for a given collection and desired replication factor. The plan includes, for each shard, a list of nodes to be added and a list of nodes to be removed."
+        },
+        {
+          "info": {
+            "name": "Weaviate Apply Replication Scaling Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/replication/scale",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply a replication scaling plan that specifies nodes to add or remove per shard for a given collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

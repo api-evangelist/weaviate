@@ -1,0 +1,1261 @@
+{
+  "item": [
+    {
+      "id": "08e24014-d4ea-4911-bd9a-a02b46b6e16b",
+      "name": "batch",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35d1fc59-2fe0-4e37-a369-6c0f4ba1f9ff",
+          "name": "Weaviate Create Objects In Batch",
+          "request": {
+            "name": "Weaviate Create Objects In Batch",
+            "description": {
+              "content": "Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "objects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consistency_level",
+                  "value": "<string>",
+                  "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\",\n        \"key_2\": \"<object>\",\n        \"key_3\": \"<object>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f2950d3d-755c-4991-8295-e9d35888d1a9",
+              "name": "Request processed successfully. Individual object statuses are provided in the response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"class\": \"<string>\",\n    \"vectorWeights\": \"<object>\",\n    \"properties\": \"<object>\",\n    \"id\": \"<uuid>\",\n    \"creationTimeUnix\": \"<long>\",\n    \"lastUpdateTimeUnix\": \"<long>\",\n    \"vector\": [\n      \"<float>\",\n      \"<float>\"\n    ],\n    \"vectors\": {\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\"\n    },\n    \"tenant\": \"<string>\",\n    \"additional\": {\n      \"key_0\": \"<object>\"\n    },\n    \"deprecations\": [\n      {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"apiType\": \"string\",\n        \"msg\": \"string\",\n        \"mitigation\": \"string\",\n        \"sinceVersion\": \"string\",\n        \"plannedRemovalVersion\": \"string\",\n        \"removedIn\": \"string\",\n        \"removedTime\": \"1994-06-29T07:45:31.638Z\",\n        \"sinceTime\": \"2011-12-30T14:57:54.066Z\",\n        \"locations\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"apiType\": \"string\",\n        \"msg\": \"string\",\n        \"mitigation\": \"string\",\n        \"sinceVersion\": \"string\",\n        \"plannedRemovalVersion\": \"string\",\n        \"removedIn\": \"string\",\n        \"removedTime\": \"1978-12-30T12:17:13.528Z\",\n        \"sinceTime\": \"1983-10-14T14:38:32.620Z\",\n        \"locations\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"string\"\n          },\n          {\n            \"message\": \"string\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"class\": \"<string>\",\n    \"vectorWeights\": \"<object>\",\n    \"properties\": \"<object>\",\n    \"id\": \"<uuid>\",\n    \"creationTimeUnix\": \"<long>\",\n    \"lastUpdateTimeUnix\": \"<long>\",\n    \"vector\": [\n      \"<float>\",\n      \"<float>\"\n    ],\n    \"vectors\": {\n      \"key_0\": \"<object>\"\n    },\n    \"tenant\": \"<string>\",\n    \"additional\": {\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\"\n    },\n    \"deprecations\": [\n      {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"apiType\": \"string\",\n        \"msg\": \"string\",\n        \"mitigation\": \"string\",\n        \"sinceVersion\": \"string\",\n        \"plannedRemovalVersion\": \"string\",\n        \"removedIn\": \"string\",\n        \"removedTime\": \"2008-08-04T20:26:34.320Z\",\n        \"sinceTime\": \"1981-08-11T18:44:18.860Z\",\n        \"locations\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"apiType\": \"string\",\n        \"msg\": \"string\",\n        \"mitigation\": \"string\",\n        \"sinceVersion\": \"string\",\n        \"plannedRemovalVersion\": \"string\",\n        \"removedIn\": \"string\",\n        \"removedTime\": \"1959-03-25T19:28:04.066Z\",\n        \"sinceTime\": \"2023-02-11T12:28:52.198Z\",\n        \"locations\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"string\"\n          },\n          {\n            \"message\": \"string\"\n          }\n        ]\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "debab1eb-8389-4976-bd2d-8df1f3f1e6e0",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb89ed60-ed30-473a-98b3-c64f4f85ae5e",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aad7f2f8-934f-4756-bb45-f2f9efe9a257",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "423207bb-c73c-44e6-940f-4b905ed7cda8",
+              "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf83aaec-e6e9-4179-8f11-7b84d24e4f0a",
+              "name": "An error occurred while trying to fulfill the request. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"ALL\",\n    \"ALL\"\n  ],\n  \"objects\": [\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    },\n    {\n      \"class\": \"<string>\",\n      \"vectorWeights\": \"<object>\",\n      \"properties\": \"<object>\",\n      \"id\": \"<uuid>\",\n      \"creationTimeUnix\": \"<long>\",\n      \"lastUpdateTimeUnix\": \"<long>\",\n      \"vector\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"vectors\": {\n        \"key_0\": \"<object>\",\n        \"key_1\": \"<object>\"\n      },\n      \"tenant\": \"<string>\",\n      \"additional\": {\n        \"key_0\": \"<object>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5bc6c7f-444c-4f53-a999-e19ddde6574d",
+          "name": "Weaviate Delete Objects In Batch",
+          "request": {
+            "name": "Weaviate Delete Objects In Batch",
+            "description": {
+              "content": "Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are found.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "objects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consistency_level",
+                  "value": "<string>",
+                  "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+                },
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"match\": {\n    \"class\": \"<string>\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<float64>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<float64>\",\n        \"<float64>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c3d0381-cbed-46c3-98f8-b0a234e9365e",
+              "name": "Request processed successfully. See response body for matching objects and deletion results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": 5261,\n  \"dryRun\": false,\n  \"results\": {\n    \"matches\": 7782.35518536412,\n    \"limit\": 3351.140707145125,\n    \"successful\": 6105.097193510397,\n    \"failed\": 5467.350386794644,\n    \"objects\": [\n      {\n        \"id\": \"96179956-44ef-0800-4f63-7472e9e036ca\",\n        \"status\": \"SUCCESS\",\n        \"errors\": {\n          \"error\": [\n            {\n              \"message\": \"string\"\n            },\n            {\n              \"message\": \"string\"\n            }\n          ]\n        }\n      },\n      {\n        \"id\": \"5a2ebdb7-7866-18fe-68d5-ed458bf37776\",\n        \"status\": \"SUCCESS\",\n        \"errors\": {\n          \"error\": [\n            {\n              \"message\": \"string\"\n            },\n            {\n              \"message\": \"string\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8f30e2d-8b52-48f1-a5e7-5137daeb8dca",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "303f09f3-1b47-4e5c-90b8-90854e4dcf64",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c13be28-98ac-4cdb-b3ba-25b7dd0f9249",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b741c841-c9d1-4452-aceb-3c138577ff92",
+              "name": "Invalid data provided. Please check the values in your request (e.g., invalid filter).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abce4464-4f02-4504-bdb6-6207152d94d2",
+              "name": "An error occurred while trying to fulfill the request. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"class\": \"City\",\n    \"where\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  },\n  \"output\": \"minimal\",\n  \"deletionTimeUnixMilli\": \"<long>\",\n  \"dryRun\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ad992e7-4194-4fb8-b934-7200fafe0877",
+          "name": "Weaviate Create Cross-References In Bulk",
+          "request": {
+            "name": "Weaviate Create Cross-References In Bulk",
+            "description": {
+              "content": "Batch create cross-references between collection items in bulk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "references"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consistency_level",
+                  "value": "<string>",
+                  "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"<uri>\",\n    \"to\": \"<uri>\",\n    \"tenant\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b9f98af-efd2-4506-bdf5-15db5b0f734a",
+              "name": "Request Successful. Warning: A successful request does not guarantee that every batched reference was successfully created. Inspect the response body to see which references succeeded and which failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\",\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"string\"\n          },\n          {\n            \"message\": \"string\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\",\n    \"result\": {\n      \"status\": \"SUCCESS\",\n      \"errors\": {\n        \"error\": [\n          {\n            \"message\": \"string\"\n          },\n          {\n            \"message\": \"string\"\n          }\n        ]\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98be7c8a-5121-4376-a444-7208ee355e32",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "987ea922-6fc1-4067-92fa-7cabb1287f10",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7920009-f07a-4c82-b6a6-82697b632bc0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "251327e5-c1d4-4f02-8f27-e3c8c93a6e51",
+              "name": "The request syntax is correct, but the server couldn't process it due to semantic issues. Please check the values in your request. Ensure the collection exists and the object properties are valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0be6ee09-2a56-431b-bf71-ab93c0d27c5c",
+              "name": "An error has occurred while trying to fulfill the request. Most likely the ErrorResponse will contain more information about the error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consistency_level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  },\n  {\n    \"from\": \"weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals\",\n    \"to\": \"weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f\",\n    \"tenant\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "20579585-6f72-4741-a46f-61f490f9e7ec",
+    "name": "Weaviate REST authz batch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+      "type": "text/plain"
+    }
+  }
+}

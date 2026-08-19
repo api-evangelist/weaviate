@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz distributedTasks API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "distributedTasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Lists All Distributed Tasks In The Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/tasks"
+          },
+          "docs": "Weaviate Lists All Distributed Tasks In The Cluster"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

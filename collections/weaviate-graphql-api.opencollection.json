@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz graphql API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "graphql",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Perform A GraphQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/graphql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a single GraphQL query provided in the request body. Use this endpoint for all Weaviate data queries and exploration."
+        },
+        {
+          "info": {
+            "name": "Weaviate Perform Batched GraphQL Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/graphql/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes multiple GraphQL queries provided in the request body as an array. Allows performing several queries in a single network request for efficiency."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

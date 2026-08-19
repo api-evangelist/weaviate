@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "30c1ef1f-3622-44ed-b074-e4cfa56ea0f8",
+      "name": "classifications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "229d540a-434c-4a24-aac3-4c13b36e3c5d",
+          "name": "Weaviate Start A Classification",
+          "request": {
+            "name": "Weaviate Start A Classification",
+            "description": {
+              "content": "Initiates a background classification task based on the provided parameters. Use the GET /classifications/{id} endpoint to monitor the status and retrieve results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classifications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"class\": \"<string>\",\n  \"classifyProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"basedOnProperties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"meta\": {\n    \"started\": \"<dateTime>\",\n    \"completed\": \"<dateTime>\",\n    \"count\": \"<integer>\",\n    \"countSucceeded\": \"<integer>\",\n    \"countFailed\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<float64>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<float64>\",\n        \"<float64>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<float64>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<float64>\",\n        \"<float64>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueInt\": \"<long>\",\n      \"valueNumber\": \"<float64>\",\n      \"valueBoolean\": \"<boolean>\",\n      \"valueString\": \"<string>\",\n      \"valueText\": \"<string>\",\n      \"valueDate\": \"<string>\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        \"<float64>\",\n        \"<float64>\"\n      ],\n      \"valueBooleanArray\": [\n        \"<boolean>\",\n        \"<boolean>\"\n      ],\n      \"valueStringArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueTextArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e0989f9-40d4-43c6-8b34-5c01cfd9b26e",
+              "name": "Classification task successfully initiated. The response body contains the classification details including its ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd2591b9-7da1-47c3-95bd-5a216aa86e03",
+              "name": "Invalid request body or parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e4b4dd2-2dc5-4f3c-8589-ea2324ef30cd",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0528beca-8fc3-4521-99b3-0ad2fa6cb669",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08ceb6d5-ef15-4392-918b-dd056e0d949b",
+              "name": "An internal server error occurred while starting the classification task. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56e0f0ae-28c9-45fc-bbb1-4614fbdc3cf4",
+          "name": "Weaviate Get Classification Status",
+          "request": {
+            "name": "Weaviate Get Classification Status",
+            "description": {
+              "content": "Retrieves the status, metadata, and results (if completed) of a classification task identified by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classifications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the classification task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb958480-d7a0-4f6d-ac0c-f494ec9bf1e9",
+              "name": "Successfully retrieved the classification details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the classification task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ee722219-b8ec-4db1-8f8d-5150bb1a9e0c\",\n  \"class\": \"City\",\n  \"classifyProperties\": [\n    \"inCountry\"\n  ],\n  \"basedOnProperties\": [\n    \"description\"\n  ],\n  \"status\": \"running\",\n  \"meta\": {\n    \"started\": \"2017-07-21T17:32:28Z\",\n    \"completed\": \"2017-07-21T17:32:28Z\",\n    \"count\": 147,\n    \"countSucceeded\": 140,\n    \"countFailed\": 7\n  },\n  \"type\": \"<string>\",\n  \"settings\": \"<object>\",\n  \"error\": \"classify xzy: something went wrong\",\n  \"filters\": {\n    \"sourceWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"trainingSetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    },\n    \"targetWhere\": {\n      \"operands\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/WhereFilter detected>\"\n        }\n      ],\n      \"operator\": \"GreaterThanEqual\",\n      \"path\": [\n        \"inCity\",\n        \"city\",\n        \"name\"\n      ],\n      \"valueInt\": 2000,\n      \"valueNumber\": 3.14,\n      \"valueBoolean\": false,\n      \"valueString\": \"my search term\",\n      \"valueText\": \"my search term\",\n      \"valueDate\": \"TODO\",\n      \"valueIntArray\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"valueNumberArray\": [\n        3.14\n      ],\n      \"valueBooleanArray\": [\n        true,\n        false\n      ],\n      \"valueStringArray\": [\n        \"my search term\"\n      ],\n      \"valueTextArray\": [\n        \"my search term\"\n      ],\n      \"valueDateArray\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"valueGeoRange\": {\n        \"geoCoordinates\": {\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"distance\": {\n          \"max\": \"<float64>\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb93a5b5-aba9-4d17-a78f-ae1e9934b1f8",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the classification task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff0c2b72-f481-4334-8b61-52c807461102",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the classification task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72c338ec-e2c9-4064-a639-806466c68b05",
+              "name": "Classification with the given ID not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the classification task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47adaee6-2433-466c-9d3b-d87b1c76a36e",
+              "name": "An internal server error occurred while retrieving the classification status. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the classification task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6f551a3-fe21-4bd1-bbd1-3f5ca0853692",
+    "name": "Weaviate REST authz classifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "authz",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get All Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles"
+          },
+          "docs": "Get all roles and their assigned permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create New Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new role with the specified permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add Permissions To A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles/:id/add-permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name (ID) of the role being modified."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add new permissions to an existing role without affecting current permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Remove Permissions From A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles/:id/remove-permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role being modified."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permissions can be revoked from a specified role. Removing all permissions from a role will delete the role itself."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ]
+          },
+          "docs": "Fetch a role by its name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/authz/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ]
+          },
+          "docs": "Deleting a role will remove it from the system, and revoke the associated permissions from all users who had this role."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check Whether A Role Possesses A Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/roles/:id/has-permission",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check whether a role has the specified permissions."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Users Assigned To A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the role."
+              }
+            ]
+          },
+          "docs": "Get all the users (`db` + `oidc`) who have been assigned a specific role. Deprecated, will be removed when v1.29 is not supported anymore."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Users Assigned To A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id/user-assignments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name (ID) of the role."
+              }
+            ]
+          },
+          "docs": "Fetch a list of users which have the specified role."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Groups That Have A Specific Role Assigned",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/roles/:id/group-assignments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the role."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all groups that have been assigned a specific role, identified by its name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Roles Assigned To A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/users/:id/roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Retrieve the roles assigned to a specific user (`db` + `oidc`). Deprecated, will be removed when 1.29 is not supported anymore"
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Roles Assigned To A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/users/:id/roles/:userType",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              },
+              {
+                "name": "userType",
+                "value": "",
+                "type": "path",
+                "description": "The type of the user."
+              },
+              {
+                "name": "includeFullRoles",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include detailed role information like its assigned permissions."
+              }
+            ]
+          },
+          "docs": "Get all the roles for a specific user (`db` or `oidc`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Assign A Role To A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/users/:id/assign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign one or more roles to a user. Users can have multiple roles."
+        },
+        {
+          "info": {
+            "name": "Weaviate Revoke A Role From A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/users/:id/revoke",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove one or more roles from a user."
+        },
+        {
+          "info": {
+            "name": "Weaviate Assign A Role To A Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/groups/:id/assign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign roles to the specified group."
+        },
+        {
+          "info": {
+            "name": "Weaviate Revoke A Role From A Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/authz/groups/:id/revoke",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke roles from the specified group."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Roles Assigned To A Specific Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/groups/:id/roles/:groupType",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique name of the group."
+              },
+              {
+                "name": "groupType",
+                "value": "",
+                "type": "path",
+                "description": "The type of the group."
+              },
+              {
+                "name": "includeFullRoles",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response will include the full role definitions with all associated permissions. If false, only role names are returned."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all roles assigned to a specific group. The group must be identified by both its name (`id`) and its type (`db` or `oidc`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate List All Groups Of A Specific Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/authz/groups/:groupType",
+            "params": [
+              {
+                "name": "groupType",
+                "value": "",
+                "type": "path",
+                "description": "The type of group to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all available group names for a specified group type (`oidc` or `db`)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz mcp API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "mcp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Opens An SSE Stream For Receiving MCP Server-Sent Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/mcp"
+          },
+          "docs": "Opens an SSE stream for receiving MCP server-sent events."
+        },
+        {
+          "info": {
+            "name": "Weaviate MCP Streamable HTTP Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/mcp"
+          },
+          "docs": "MCP Streamable HTTP endpoint. Handles JSON-RPC requests for tool discovery and invocation."
+        },
+        {
+          "info": {
+            "name": "Weaviate Terminates An MCP Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/mcp"
+          },
+          "docs": "Terminates an MCP session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

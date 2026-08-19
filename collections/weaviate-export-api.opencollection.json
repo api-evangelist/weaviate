@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz export API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Start A New Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/export/:backend",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "The backend storage system to use for the export (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an export operation on the specified backend storage (S3, GCS, Azure, or filesystem). The output format is controlled by the required 'file_format' field in the request body (currently only 'parquet' is supported). Each collection is exported to a separate file."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Export Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/export/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "The backend storage system where the export is stored."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the export."
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of an export operation, including progress for each collection being exported."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel An Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/export/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "The backend storage system where the export is stored."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the export to cancel."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing export operation identified by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

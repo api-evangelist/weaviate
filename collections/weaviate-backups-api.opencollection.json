@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz backups API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "backups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List All Created Backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/backups/:backend",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system to list backups from (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order of returned list of backups based on creation time. (asc or desc)"
+              }
+            ]
+          },
+          "docs": "List all created backups IDs, Status"
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/backups/:backend",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup will be stored (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the creation of a backup for specified collections on a designated backend storage.<br/><br/>Notes:<br/>- Backups are compressed using gzip by default.<br/>- Weaviate remains operational during the backup process."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Backup Creation Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/backups/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root."
+              }
+            ]
+          },
+          "docs": "Checks the status of a specific backup creation process identified by its ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel A Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/backups/:backend/:id",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing backup operation identified by its ID."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Backup Restoration Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/backups/:backend/:id/restore",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup being restored. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket."
+              }
+            ]
+          },
+          "docs": "Checks the status of a specific backup restoration process identified by the backup ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled."
+        },
+        {
+          "info": {
+            "name": "Weaviate Restore From A Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/backups/:backend/:id/restore",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup to restore from. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the restoration of collections from a specified backup located on a designated backend.<br/><br/>Requirements:<br/>- Target cluster must have the same number of nodes as the source cluster where the backup was created.<br/>- Collections included in the restore must not already exist on the target cluster.<br/>- Node names must match between the backup and the target cluster."
+        },
+        {
+          "info": {
+            "name": "Weaviate Cancel A Backup Restoration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/backups/:backend/:id/restore",
+            "params": [
+              {
+                "name": "backend",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the backend storage system where the backup resides (e.g., `filesystem`, `gcs`, `s3`, `azure`)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the backup restoration to cancel. Must be URL-safe and compatible with filesystem paths (only lowercase, numbers, underscore, minus characters allowed)."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the bucket, container, or volume name if required by the backend."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Optional: Specifies the path within the bucket/container/volume if the backup is not at the root."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing backup restoration process identified by its ID on the specified backend storage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

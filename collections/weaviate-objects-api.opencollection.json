@@ -1,0 +1,749 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz objects API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/objects",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "A threshold UUID of the objects to retrieve after, using an UUID-based ordering. This object is not part of the set. <br/><br/>Must be used with collection name (`class`), typically in conjunction with `limit`. <br/><br/>Note `after` cannot be used with `offset` or `sort`. <br/><br/>For a null value similar to offset=0, set an empty string in the request, i.e. `after=` or `after`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the result window. Note `offset` will retrieve `offset+limit` results and return `limit` results from the object with index `offset` onwards. Limited by the value of `QUERY_MAXIMUM_RESULTS`. <br/><br/>Should be used in conjunction with `limit`. <br/><br/>Cannot be used with `after`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to be returned per page. The default is 25 unless set otherwise as an environment variable."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Name(s) of the property to sort by - e.g. `city`, or `country,city`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order parameter to tell how to order (asc or desc) data within given field. Should be used in conjunction with `sort` parameter. If providing multiple `sort` values, provide multiple `order` values in corresponding order, e.g.: `sort=author_name,title&order=desc,asc`."
+              },
+              {
+                "name": "class",
+                "value": "",
+                "type": "query",
+                "description": "The collection from which to query objects.  <br/><br/>Note that if the collection name (`class`) is not provided, the response will not include any objects."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of data objects. By default, objects are returned in reverse order of creation. Requires a collection name (`class`) parameter to specify which collection's objects to list, otherwise, returns an empty list."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data object. The object's metadata and schema values are validated before creation.<br/><br/>**Note (batch import)**:<br/>If you plan on importing a large number of objects, using the `/batch/objects` endpoint is significantly more efficient than sending multiple single requests.<br/><br/>**Note (idempotence)**:<br/>This operation (POST) fails if an object with the provided ID already exists. To update an existing object, use the PUT or PATCH methods."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be retrieved."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`."
+              }
+            ]
+          },
+          "docs": "Get a specific object based on its UUID. Also available as Websocket bus. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be replaced."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an object based on its UUID. Given meta-data and schema values are validated. `lastUpdateTimeUnix` is set to the time this function is called. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Patch An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be patched."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an object based on its UUID (using patch semantics). This method supports json-merge style patch semantics (RFC 7396). Provided meta-data and schema values are validated. `lastUpdateTimeUnix` is set to the time this function is called. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be deleted."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Deletes an object from the database based on its UUID. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check If An Object Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:8080/objects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to check."
+              }
+            ]
+          },
+          "docs": "Checks if an object exists in the system based on its UUID. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be retrieved."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include additional information, such as classification information. Allowed values include: `classification`, `vector` and `interpretation`."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "node_name",
+                "value": "",
+                "type": "query",
+                "description": "The target node which should fulfill the request."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Get a data object based on its collection name (`className`) and UUID (`id`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Replace An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be replaced."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces properties of an existing data object. The object is identified by its collection name (`className`) and UUID (`id`). The request body must contain the complete object definition with the new property values."
+        },
+        {
+          "info": {
+            "name": "Weaviate Patch An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be patched."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific properties of an existing data object using JSON merge patch semantics (RFC 7396). The object is identified by its collection name (`className`) and UUID (`id`). Only the fields provided in the request body are modified. Metadata and schema values are validated, and the object's `lastUpdateTimeUnix` is updated."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to be deleted."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Removes a data object from a specific collection, identified by its collection name (`className`) and UUID (`id`).<br/><br/>**Note on deleting references (legacy format):**<br/>For backward compatibility with older beacon formats (lacking a collection name), deleting a reference requires the beacon in the request to exactly match the stored format. Beacons always use `localhost` as the host, indicating the target is within the same Weaviate instance."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check If An Object Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:8080/objects/:className/:id",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the object to check."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ]
+          },
+          "docs": "Verifies the existence of a specific data object within a collection (class), identified by its collection name (`className`) and UUID (`id`), without returning the object itself.<br/><br/>This is faster than a GET request as it avoids retrieving and processing object data. Existence is confirmed by a 204 No Content status code, while non-existence results in a 404 Not Found."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a reference to a specific property of a data object. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Replace Object References",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all references in cross-reference property of an object. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete the single reference that is given in the body from the list of references that this property has. <br/><br/>**Note**: This endpoint is deprecated and will be removed in a future version. Use the `/objects/{className}/{id}/references/{propertyName}` endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects/:className/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the source object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new reference to a reference property (`propertyName`) on a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The reference to add is specified in the request body."
+        },
+        {
+          "info": {
+            "name": "Weaviate Replace Object References",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/objects/:className/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the source object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces all existing references for a specific reference property (`propertyName`) on a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The new set of references is provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Object Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/objects/:className/:id/references/:propertyName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "Name of the collection (class) the source object belongs to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique UUID of the source object."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "Unique name of the reference property of the source object."
+              },
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a specific reference from a reference property (`propertyName`) of a source data object. The source object is identified by its collection name (`className`) and UUID (`id`). The reference to remove is specified in the request body."
+        },
+        {
+          "info": {
+            "name": "Weaviate Validate An Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/objects/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks if a data object's structure conforms to the specified collection schema and metadata rules without actually storing the object.<br/><br/>A successful validation returns a 200 OK status code with no body. If validation fails, an error response with details is returned."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create Objects In Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/batch/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete Objects In Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/batch/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are f"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

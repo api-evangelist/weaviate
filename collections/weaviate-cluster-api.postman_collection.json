@@ -1,0 +1,301 @@
+{
+  "item": [
+    {
+      "id": "fb2e74ea-9340-429d-a1d8-4e5ef14e6900",
+      "name": "cluster",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0b8a7a6-9407-4187-a85b-ed0964f17f11",
+          "name": "Weaviate Get Cluster Statistics",
+          "request": {
+            "name": "Weaviate Get Cluster Statistics",
+            "description": {
+              "content": "Provides statistics about the internal Raft consensus protocol state for the Weaviate cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cluster",
+                "statistics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19d41e51-f473-4be3-9428-ccee25beca9a",
+              "name": "Successfully retrieved Raft cluster statistics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statistics\": [\n    {\n      \"name\": \"string\",\n      \"status\": \"HEALTHY\",\n      \"bootstrapped\": true,\n      \"dbLoaded\": false,\n      \"initialLastAppliedIndex\": 1109.9860511791283,\n      \"lastAppliedIndex\": 5918.065028944792,\n      \"isVoter\": true,\n      \"leaderId\": {},\n      \"leaderAddress\": {},\n      \"open\": true,\n      \"ready\": false,\n      \"candidates\": {},\n      \"raft\": {\n        \"appliedIndex\": \"string\",\n        \"commitIndex\": \"string\",\n        \"fsmPending\": \"string\",\n        \"lastContact\": \"string\",\n        \"lastLogIndex\": \"string\",\n        \"lastLogTerm\": \"string\",\n        \"lastSnapshotIndex\": \"string\",\n        \"lastSnapshotTerm\": \"string\",\n        \"latestConfiguration\": {},\n        \"latestConfigurationIndex\": \"string\",\n        \"numPeers\": \"string\",\n        \"protocolVersion\": \"string\",\n        \"protocolVersionMax\": \"string\",\n        \"protocolVersionMin\": \"string\",\n        \"snapshotVersionMax\": \"string\",\n        \"snapshotVersionMin\": \"string\",\n        \"state\": \"string\",\n        \"term\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"status\": \"HEALTHY\",\n      \"bootstrapped\": true,\n      \"dbLoaded\": true,\n      \"initialLastAppliedIndex\": 9988.995488750996,\n      \"lastAppliedIndex\": 5801.426231526938,\n      \"isVoter\": true,\n      \"leaderId\": {},\n      \"leaderAddress\": {},\n      \"open\": false,\n      \"ready\": false,\n      \"candidates\": {},\n      \"raft\": {\n        \"appliedIndex\": \"string\",\n        \"commitIndex\": \"string\",\n        \"fsmPending\": \"string\",\n        \"lastContact\": \"string\",\n        \"lastLogIndex\": \"string\",\n        \"lastLogTerm\": \"string\",\n        \"lastSnapshotIndex\": \"string\",\n        \"lastSnapshotTerm\": \"string\",\n        \"latestConfiguration\": {},\n        \"latestConfigurationIndex\": \"string\",\n        \"numPeers\": \"string\",\n        \"protocolVersion\": \"string\",\n        \"protocolVersionMax\": \"string\",\n        \"protocolVersionMin\": \"string\",\n        \"snapshotVersionMax\": \"string\",\n        \"snapshotVersionMin\": \"string\",\n        \"state\": \"string\",\n        \"term\": \"string\"\n      }\n    }\n  ],\n  \"synchronized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbe0bc23-1e1d-4ee2-a0fa-65bad915c103",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9bba3a53-e5c8-42cd-928c-946b60d5cd61",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2316b45f-13b1-4669-8ef0-5a984e370697",
+              "name": "Invalid request for cluster statistics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23520a24-6df2-43d8-a2d0-2a6c3c3e9c26",
+              "name": "An internal server error occurred while retrieving cluster statistics. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b93b7681-f65e-4547-8807-2a11023a194b",
+    "name": "Weaviate REST authz cluster API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+      "type": "text/plain"
+    }
+  }
+}

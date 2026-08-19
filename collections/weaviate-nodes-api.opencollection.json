@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz nodes API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get Node Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/nodes",
+            "params": [
+              {
+                "name": "output",
+                "value": "",
+                "type": "query",
+                "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+              }
+            ]
+          },
+          "docs": "Retrieves status information about all nodes in the cluster. Use the `output` query parameter to control the level of detail."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get Node Status By Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/nodes/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) for which to retrieve node status."
+              },
+              {
+                "name": "shardName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "output",
+                "value": "",
+                "type": "query",
+                "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+              }
+            ]
+          },
+          "docs": "Retrieves status information only for the nodes that host shards for the specified collection (`className`). Use the `output` query parameter to control the level of detail."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz users API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get Current User Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/users/own-info"
+          },
+          "docs": "Get information about the currently authenticated user, including username and assigned roles."
+        },
+        {
+          "info": {
+            "name": "Weaviate List All Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/users/db",
+            "params": [
+              {
+                "name": "includeLastUsedTime",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the last time the users were utilized."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all database (`db` user type) users with their roles and status information."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get User Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/users/db/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              },
+              {
+                "name": "includeLastUsedTime",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the last used time of the given user"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific database user (`db` user type), including their roles, status, and type."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new database (`db` user type) user with the specified name. Returns an API key for the newly created user."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/users/db/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Delete a database user. You can't delete your current user."
+        },
+        {
+          "info": {
+            "name": "Weaviate Rotate API Key Of A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id/rotate-key",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Revoke the current API key for the specified database user (`db` user type) and generate a new one."
+        },
+        {
+          "info": {
+            "name": "Weaviate Activate A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id/activate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ]
+          },
+          "docs": "Activate a deactivated database user (`db` user type)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Deactivate A User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/users/db/:user_id/deactivate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivate a database user (`db` user type)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

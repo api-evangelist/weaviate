@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz batch API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "batch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Create Objects In Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/batch/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers multiple data objects in a single request for efficiency. Metadata and schema values for each object are validated.<br/><br/>**Note (idempotence)**:<br/>This operation is idempotent based on the object UUIDs provided. If an object with a given UUID already exists, it will be overwritten (similar to a PUT operation for that specific object within the batch)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete Objects In Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/batch/objects",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant in a request targeting a multi-tenant collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes multiple data objects based on a filter specified in the request body.<br/><br/>Deletion occurs based on the filter criteria provided in the `where` clause. There is a configurable limit (default 10,000, set via `QUERY_MAXIMUM_RESULTS`) on how many objects can be deleted in a single batch request to prevent excessive resource usage. Objects are deleted in the order they match the filter. To delete more objects than the limit allows, repeat the request until no more matching objects are f"
+        },
+        {
+          "info": {
+            "name": "Weaviate Create Cross-References In Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/batch/references",
+            "params": [
+              {
+                "name": "consistency_level",
+                "value": "",
+                "type": "query",
+                "description": "Determines how many replicas must acknowledge a request before it is considered successful."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch create cross-references between collection items in bulk."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

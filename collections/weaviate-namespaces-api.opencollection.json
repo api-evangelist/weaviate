@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz namespaces API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "namespaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate List Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/namespaces"
+          },
+          "docs": "Retrieve the list of all namespaces the caller has permission to see. Callers without any applicable `manage_namespaces` permission receive an empty list (never 403)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/namespaces/:namespace_id",
+            "params": [
+              {
+                "name": "namespace_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific namespace by its name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/namespaces/:namespace_id",
+            "params": [
+              {
+                "name": "namespace_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace. Must start with a lowercase letter, contain only lowercase letters and digits, length 3-36, and not be a reserved name."
+              }
+            ]
+          },
+          "docs": "Create a new cluster-level namespace with the given name. Names must start with a lowercase letter, contain only lowercase letters and digits, be 3-36 characters long, and must not be a reserved name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/namespaces/:namespace_id",
+            "params": [
+              {
+                "name": "namespace_id",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Hard-delete a namespace by its name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

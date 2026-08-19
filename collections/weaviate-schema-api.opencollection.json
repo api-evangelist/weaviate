@@ -1,0 +1,535 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz schema API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Get All Collection Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the definitions of all collections (classes) currently in the database schema."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines and creates a new collection (class).<br/><br/>If [`AutoSchema`](https://docs.weaviate.io/weaviate/config-refs/collections#auto-schema) is enabled (not recommended for production), Weaviate might attempt to infer schema from data during import. Manual definition via this endpoint provides explicit control."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Single Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the definition of a specific collection (`className`), including its properties, configuration, and vectorizer settings."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update Collection Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/schema/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration settings of an existing collection (`className`) based on the provided definition. Note: This operation modifies mutable settings specified in the request body. It does not add properties (use `POST /schema/{className}/properties` for that) or change the collection name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Collection (And All Associated Data)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to delete."
+              }
+            ]
+          },
+          "docs": "Removes a collection definition from the schema. WARNING: This action permanently deletes all data objects stored within the collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Add A Property To A Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema/:className/properties",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to add the property to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new property definition to an existing collection (`className`) definition."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Property'S Inverted Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className/properties/:propertyName/index/:indexName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the property."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the property whose inverted index should be deleted."
+              },
+              {
+                "name": "indexName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the inverted index to delete from the property."
+              }
+            ]
+          },
+          "docs": "Deletes an inverted index of a specific property within a collection (`className`). The index to delete is identified by `indexName` and must be one of `filterable`, `searchable`, or `rangeFilters`."
+        },
+        {
+          "info": {
+            "name": "Weaviate Tokenize Text Using A Property'S Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema/:className/properties/:propertyName/tokenize",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the property."
+              },
+              {
+                "name": "propertyName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the property whose tokenization configuration should be used."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tokenizes the provided text using the tokenization method configured for the specified property. This endpoint automatically applies the property's tokenization setting and the collection's stopword configuration, making it useful for understanding exactly how text will be processed for a given property during indexing and querying."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete A Collection'S Vector Index.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className/vectors/:vectorIndexName/index",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the property."
+              },
+              {
+                "name": "vectorIndexName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the vector index."
+              }
+            ]
+          },
+          "docs": "Deletes a specific vector index within a collection (`className`). The vector index to delete is identified by `vectorIndexName`."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get The Shards Status Of A Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className/shards",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) whose shards to query."
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "The name of the tenant for which to retrieve shard statuses (only applicable for multi-tenant collections)."
+              }
+            ]
+          },
+          "docs": "Retrieves the status of all shards associated with the specified collection (`className`). For multi-tenant collections, use the `tenant` query parameter to retrieve status for a specific tenant's shards."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update A Shard Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/schema/:className/shards/:shardName",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the shard."
+              },
+              {
+                "name": "shardName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the shard to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of a specific shard within a collection (e.g., sets it to `READY` or `READONLY`). This is typically used after resolving an underlying issue (like disk space) that caused a shard to become non-operational. There is also a convenience function in each client to set the status of all shards of a collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get The List Of Tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) whose tenants to list."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all tenants currently associated with the specified collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the multi-tenant enabled collection (class)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates one or more new tenants for a specified collection (`className`). Multi-tenancy must be enabled for the collection via its definition."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update A Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the tenants."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the activity status (e.g., `ACTIVE`, `INACTIVE`, etc.) of one or more specified tenants within a collection (`className`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete Tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/schema/:className/tenants",
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) from which to delete tenants."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes one or more specified tenants from a collection (`className`). WARNING: This action permanently deletes all data associated with the specified tenants."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get A Specific Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/schema/:className/tenants/:tenantName",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) containing the tenant."
+              },
+              {
+                "name": "tenantName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves details about a specific tenant within the given collection (`className`), such as its current activity status."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check If A Tenant Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:8080/schema/:className/tenants/:tenantName",
+            "headers": [
+              {
+                "name": "consistency",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "className",
+                "value": "",
+                "type": "path",
+                "description": "The name of the collection (class) to check within."
+              },
+              {
+                "name": "tenantName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tenant to check for."
+              }
+            ]
+          },
+          "docs": "Checks for the existence of a specific tenant within the given collection (`className`)."
+        },
+        {
+          "info": {
+            "name": "Weaviate List Aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/aliases",
+            "params": [
+              {
+                "name": "class",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to retrieve aliases for a specific collection (class) only. If not provided, returns all aliases."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all aliases in the system. Results can be filtered by specifying a collection (class) name to get aliases for a specific collection only."
+        },
+        {
+          "info": {
+            "name": "Weaviate Create A New Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/aliases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new alias mapping between an alias name and a collection (class). The alias acts as an alternative name for accessing the collection."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get An Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/aliases/:aliasName",
+            "params": [
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve details about a specific alias by its name, including which collection (class) it points to."
+        },
+        {
+          "info": {
+            "name": "Weaviate Update An Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/aliases/:aliasName",
+            "params": [
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing alias to point to a different collection (class). This allows you to redirect an alias from one collection to another without changing the alias name."
+        },
+        {
+          "info": {
+            "name": "Weaviate Delete An Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/aliases/:aliasName",
+            "params": [
+              {
+                "name": "aliasName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove an existing alias from the system. This will delete the alias mapping but will not affect the underlying collection (class)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

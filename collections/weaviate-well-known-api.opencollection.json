@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Weaviate REST authz .well Known API",
+    "version": "1.38.0-dev"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": ".well Known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Weaviate Check Application Liveness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/.well-known/live"
+          },
+          "docs": "Indicates if the Weaviate instance is running and responsive to basic HTTP requests. Primarily used for health checks, such as Kubernetes liveness probes."
+        },
+        {
+          "info": {
+            "name": "Weaviate Check Application Readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/.well-known/ready"
+          },
+          "docs": "Indicates if the Weaviate instance has completed its startup routines and is prepared to accept user traffic (data import, queries, etc.). Used for readiness checks, such as Kubernetes readiness probes."
+        },
+        {
+          "info": {
+            "name": "Weaviate Get OIDC Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/.well-known/openid-configuration"
+          },
+          "docs": "Provides OpenID Connect (OIDC) discovery information if OIDC authentication is configured for Weaviate. Returns details like the token issuer URL, client ID, and required scopes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

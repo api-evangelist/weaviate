@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "612a305a-0611-463d-96bc-c164a75d16f8",
+      "name": "tokenize",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8561eb9-ce8a-4073-863c-4d7ac95c57b2",
+          "name": "Weaviate Tokenize Text",
+          "request": {
+            "name": "Weaviate Tokenize Text",
+            "description": {
+              "content": "Tokenizes the provided text using the specified tokenization method. This is a stateless utility endpoint useful for debugging and understanding how text will be processed during indexing and querying. The response includes both the indexed tokens (as stored in the inverted index) and query tokens (after optional stopword removal).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokenize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08317633-7710-4290-b3a3-4ad6fbe57b60",
+              "name": "Successfully tokenized the text.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"indexed\": [\n    \"string\",\n    \"string\"\n  ],\n  \"query\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5db85a1-df08-414e-80a9-b2b28b31a303",
+              "name": "Invalid or malformed request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0069c296-9064-4187-899c-9d524c7c2283",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc5099a3-6649-479b-8557-3f7480c19274",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df13cd67-d126-4c94-b732-31bf25b6090d",
+              "name": "Request binding or validation error. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80e86e7f-2efb-4904-aae4-1bf049fd6cd8",
+              "name": "An unexpected error occurred while tokenizing the text. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"tokenization\": \"<string>\",\n  \"analyzerConfig\": {\n    \"asciiFold\": \"<boolean>\",\n    \"asciiFoldIgnore\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stopwordPreset\": \"<string>\"\n  },\n  \"stopwords\": {\n    \"preset\": \"<string>\",\n    \"additions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removals\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"stopwordPresets\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "97a21d29-3749-4177-ba8f-8b3886e2228f",
+    "name": "Weaviate REST authz tokenize API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+      "type": "text/plain"
+    }
+  }
+}

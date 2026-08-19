@@ -1,0 +1,210 @@
+{
+  "item": [
+    {
+      "id": "df2ecd59-cbbd-45b7-b7bf-31146d075392",
+      "name": "distributedTasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "667b4c7c-63b7-4e04-85af-2014cc91dd96",
+          "name": "Weaviate Lists All Distributed Tasks In The Cluster",
+          "request": {
+            "name": "Weaviate Lists All Distributed Tasks In The Cluster",
+            "description": {},
+            "url": {
+              "path": [
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "248a6520-257e-43d8-a0d4-8f0955dd8c9a",
+              "name": "Distributed tasks successfully returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    {\n      \"id\": \"string\",\n      \"version\": 2128,\n      \"status\": \"string\",\n      \"startedAt\": \"1988-01-01T15:59:23.773Z\",\n      \"finishedAt\": \"1951-06-11T08:07:41.797Z\",\n      \"finishedNodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"error\": \"string\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"string\",\n          \"nodeId\": \"string\",\n          \"status\": \"string\",\n          \"progress\": 4758.943623675911,\n          \"error\": \"string\",\n          \"updatedAt\": \"1997-08-08T22:12:24.755Z\",\n          \"finishedAt\": \"1964-01-07T12:32:46.605Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"nodeId\": \"string\",\n          \"status\": \"string\",\n          \"progress\": 1170.9338501123468,\n          \"error\": \"string\",\n          \"updatedAt\": \"1972-09-23T11:47:35.294Z\",\n          \"finishedAt\": \"1977-09-01T01:57:22.774Z\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"version\": 4060,\n      \"status\": \"string\",\n      \"startedAt\": \"1949-12-28T13:37:42.123Z\",\n      \"finishedAt\": \"2002-05-27T12:52:50.177Z\",\n      \"finishedNodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"error\": \"string\",\n      \"payload\": {},\n      \"units\": [\n        {\n          \"id\": \"string\",\n          \"nodeId\": \"string\",\n          \"status\": \"string\",\n          \"progress\": 5021.60594744668,\n          \"error\": \"string\",\n          \"updatedAt\": \"2020-05-11T16:31:42.376Z\",\n          \"finishedAt\": \"1974-03-05T08:05:53.321Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"nodeId\": \"string\",\n          \"status\": \"string\",\n          \"progress\": 7696.580411729152,\n          \"error\": \"string\",\n          \"updatedAt\": \"1975-03-10T10:15:03.029Z\",\n          \"finishedAt\": \"1999-01-23T05:19:17.343Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f735f753-4ab6-40ba-aeac-20f9b4d7417e",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67150585-cdac-415c-9244-45baec596e25",
+              "name": "An internal server error occurred while retrieving distributed tasks. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "db205540-953b-4589-9a1a-b981600d9d2f",
+    "name": "Weaviate REST authz distributedTasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,793 @@
+{
+  "item": [
+    {
+      "id": "7d4472d7-5f66-43f0-ad53-051da360994f",
+      "name": "nodes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "debc1238-380f-41e2-9990-34f3d8013ffd",
+          "name": "Weaviate Get Node Status",
+          "request": {
+            "name": "Weaviate Get Node Status",
+            "description": {
+              "content": "Retrieves status information about all nodes in the cluster. Use the `output` query parameter to control the level of detail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "minimal",
+                  "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39874066-0a41-4705-ba13-924171061d60",
+              "name": "Successfully retrieved the status for all nodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nodes\": [\n    {\n      \"name\": \"string\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"string\",\n      \"gitHash\": \"string\",\n      \"stats\": {\n        \"shardCount\": 4965.796206979928,\n        \"objectCount\": 5056.599186292356\n      },\n      \"batchStats\": {\n        \"queueLength\": 6177.169848711761,\n        \"ratePerSecond\": 7074.396736127583\n      },\n      \"shards\": [\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 9952.6192327104,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": false,\n          \"vectorQueueLength\": 6810.527147628175,\n          \"loaded\": true,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": 1754\n        },\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 3555.235763415161,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": false,\n          \"vectorQueueLength\": 4481.771212924967,\n          \"loaded\": false,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": 3491,\n          \"replicationFactor\": 975\n        }\n      ],\n      \"operationalMode\": \"WriteOnly\"\n    },\n    {\n      \"name\": \"string\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"string\",\n      \"gitHash\": \"string\",\n      \"stats\": {\n        \"shardCount\": 1984.0639537543293,\n        \"objectCount\": 3961.214908150823\n      },\n      \"batchStats\": {\n        \"queueLength\": 4786.476422555892,\n        \"ratePerSecond\": 4090.7980013195233\n      },\n      \"shards\": [\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 2075.1144250267685,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": false,\n          \"vectorQueueLength\": 5033.834151747354,\n          \"loaded\": false,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": 7321\n        },\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 8078.855517076084,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": true,\n          \"vectorQueueLength\": 4674.83206819886,\n          \"loaded\": false,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": 1810\n        }\n      ],\n      \"operationalMode\": \"ReadOnly\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "360769cf-530c-4532-b48c-d7358b9c846e",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6f17ba2-49f4-44f9-9c98-c1a5b030603f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a2becc8-0ddf-45b4-a0e2-2b6818db61bb",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "808725ee-36f3-4a4e-b44f-11d238b9d3c8",
+              "name": "Invalid request for node status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b306f40-6258-4220-b836-bd67b651306d",
+              "name": "An internal server error occurred while retrieving node status. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "557cde9b-9cc0-4a93-b14c-edfccaa372b7",
+          "name": "Weaviate Get Node Status By Collection",
+          "request": {
+            "name": "Weaviate Get Node Status By Collection",
+            "description": {
+              "content": "Retrieves status information only for the nodes that host shards for the specified collection (`className`). Use the `output` query parameter to control the level of detail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nodes",
+                ":className"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shardName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "output",
+                  "value": "minimal",
+                  "description": "Controls the verbosity of the output, possible values are: `minimal`, `verbose`. Defaults to `minimal`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "className",
+                  "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d6690df-b631-4953-8cb0-3a63119a356b",
+              "name": "Successfully retrieved the status for nodes relevant to the specified collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nodes\": [\n    {\n      \"name\": \"string\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"string\",\n      \"gitHash\": \"string\",\n      \"stats\": {\n        \"shardCount\": 8181.825824200966,\n        \"objectCount\": 6930.289043903253\n      },\n      \"batchStats\": {\n        \"queueLength\": 1825.9504375959777,\n        \"ratePerSecond\": 2653.4259580988883\n      },\n      \"shards\": [\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 9276.548302228059,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": true,\n          \"vectorQueueLength\": 400.31758057666343,\n          \"loaded\": false,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": null\n        },\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 8074.266782022953,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": false,\n          \"vectorQueueLength\": 3743.7478514436852,\n          \"loaded\": true,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": 9849\n        }\n      ],\n      \"operationalMode\": \"ReadOnly\"\n    },\n    {\n      \"name\": \"string\",\n      \"status\": \"HEALTHY\",\n      \"version\": \"string\",\n      \"gitHash\": \"string\",\n      \"stats\": {\n        \"shardCount\": 5023.652124232691,\n        \"objectCount\": 7795.618909583294\n      },\n      \"batchStats\": {\n        \"queueLength\": 1441.6335101356947,\n        \"ratePerSecond\": 97.24018595289374\n      },\n      \"shards\": [\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 5333.921401302013,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": false,\n          \"vectorQueueLength\": 408.8453108706402,\n          \"loaded\": true,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": 5849\n        },\n        {\n          \"name\": \"string\",\n          \"class\": \"string\",\n          \"objectCount\": 3171.0715248728284,\n          \"vectorIndexingStatus\": \"string\",\n          \"compressed\": false,\n          \"vectorQueueLength\": 4982.089865520266,\n          \"loaded\": false,\n          \"asyncReplicationStatus\": [\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"objectsPropagated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDiffTimeUnixMillis\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"targetNode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"numberOfReplicas\": null,\n          \"replicationFactor\": null\n        }\n      ],\n      \"operationalMode\": \"WriteOnly\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "524feedf-32dc-4160-8dce-5ad5d23449c1",
+              "name": "Unauthorized or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fad5522d-e493-4b52-99f3-70a7811b2be7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f39ec2d9-2109-4d89-93aa-a6e2a203dd0d",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d46ed4-7bf3-4009-9569-c7a2ae753825",
+              "name": "Invalid request for node status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1d12c2b-01b2-4482-8f5f-da6f849bab72",
+              "name": "An internal server error occurred while retrieving node status for the collection. Check the ErrorResponse for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shardName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "output",
+                      "value": "minimal"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The name of the collection (class) for which to retrieve node status."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8c5cfd67-bc06-4594-b792-b7ae8baa646d",
+    "name": "Weaviate REST authz nodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).",
+      "type": "text/plain"
+    }
+  }
+}
