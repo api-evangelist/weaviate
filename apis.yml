@@ -24,6 +24,14 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/weaviate.png
 tags:
 - Vector Database
+- Artificial Intelligence
+- Machine-Learning
+- Semantic Search
+- Open-Source
+- GraphQL
+- Kubernetes
+tags_raw:
+- Vector Database
 - AI
 - Machine Learning
 - Semantic Search
@@ -55,6 +63,8 @@ apis:
   description: The backups API from Weaviate — 3 operation(s) for backups.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Backups
+  tags_raw:
   - backups
   properties:
   - type: OpenAPI
@@ -70,6 +80,8 @@ apis:
   description: The batch API from Weaviate — 2 operation(s) for batch.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Batch
+  tags_raw:
   - batch
   properties:
   - type: OpenAPI
@@ -85,6 +97,8 @@ apis:
   description: The classifications API from Weaviate — 2 operation(s) for classifications.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Classifications
+  tags_raw:
   - classifications
   properties:
   - type: OpenAPI
@@ -100,6 +114,8 @@ apis:
   description: The cluster API from Weaviate — 1 operation(s) for cluster.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Cluster
+  tags_raw:
   - cluster
   properties:
   - type: OpenAPI
@@ -115,6 +131,8 @@ apis:
   description: The discovery API from Weaviate — 1 operation(s) for discovery.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Discovery
+  tags_raw:
   - discovery
   properties:
   - type: OpenAPI
@@ -129,7 +147,8 @@ apis:
   name: Weaviate distributedTasks API
   description: The distributedTasks API from Weaviate — 1 operation(s) for distributedtasks.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
-  tags:
+  tags: []
+  tags_raw:
   - distributedTasks
   properties:
   - type: OpenAPI
@@ -145,6 +164,8 @@ apis:
   description: The export API from Weaviate — 2 operation(s) for export.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Export
+  tags_raw:
   - export
   properties:
   - type: OpenAPI
@@ -160,6 +181,8 @@ apis:
   description: The graphql API from Weaviate — 2 operation(s) for graphql.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - GraphQL
+  tags_raw:
   - graphql
   properties:
   - type: OpenAPI
@@ -175,6 +198,8 @@ apis:
   description: The mcp API from Weaviate — 1 operation(s) for mcp.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - MCP
+  tags_raw:
   - mcp
   properties:
   - type: OpenAPI
@@ -190,6 +215,8 @@ apis:
   description: The meta API from Weaviate — 1 operation(s) for meta.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Meta
+  tags_raw:
   - meta
   properties:
   - type: OpenAPI
@@ -205,6 +232,8 @@ apis:
   description: The namespaces API from Weaviate — 2 operation(s) for namespaces.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Namespaces
+  tags_raw:
   - namespaces
   properties:
   - type: OpenAPI
@@ -220,6 +249,8 @@ apis:
   description: The nodes API from Weaviate — 2 operation(s) for nodes.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Nodes
+  tags_raw:
   - nodes
   properties:
   - type: OpenAPI
@@ -235,6 +266,8 @@ apis:
   description: The objects API from Weaviate — 7 operation(s) for objects.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Objects
+  tags_raw:
   - objects
   properties:
   - type: OpenAPI
@@ -250,6 +283,8 @@ apis:
   description: The oidc API from Weaviate — 1 operation(s) for oidc.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - OIDC
+  tags_raw:
   - oidc
   properties:
   - type: OpenAPI
@@ -265,6 +300,8 @@ apis:
   description: The references API from Weaviate — 1 operation(s) for references.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - References
+  tags_raw:
   - references
   properties:
   - type: OpenAPI
@@ -280,6 +317,8 @@ apis:
   description: The replication API from Weaviate — 7 operation(s) for replication.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Replication
+  tags_raw:
   - replication
   properties:
   - type: OpenAPI
@@ -295,6 +334,8 @@ apis:
   description: The schema API from Weaviate — 12 operation(s) for schema.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Schema
+  tags_raw:
   - schema
   properties:
   - type: OpenAPI
@@ -310,6 +351,8 @@ apis:
   description: The tokenize API from Weaviate — 1 operation(s) for tokenize.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - Tokenize
+  tags_raw:
   - tokenize
   properties:
   - type: OpenAPI
@@ -325,6 +368,8 @@ apis:
   description: The users API from Weaviate — 6 operation(s) for users.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
