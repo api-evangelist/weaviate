@@ -6,6 +6,19 @@ description: >-
   search using HNSW or flat indexes. Weaviate supports multi-tenancy, automatic vectorization via configurable modules,
   GraphQL and REST APIs, and enterprise features including authentication, authorization, backups, and replication.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
