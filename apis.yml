@@ -76,7 +76,7 @@ apis:
   description: The backups API from Weaviate — 3 operation(s) for backups.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - Backups
+  - backups
   tags_raw:
   - backups
   properties:
@@ -110,7 +110,7 @@ apis:
   description: The classifications API from Weaviate — 2 operation(s) for classifications.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - Classifications
+  - classifications
   tags_raw:
   - classifications
   properties:
@@ -194,7 +194,7 @@ apis:
   description: The graphql API from Weaviate — 2 operation(s) for graphql.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - GraphQL
+  - graphql
   tags_raw:
   - graphql
   properties:
@@ -245,7 +245,7 @@ apis:
   description: The namespaces API from Weaviate — 2 operation(s) for namespaces.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - Namespaces
+  - namespaces
   tags_raw:
   - namespaces
   properties:
@@ -262,7 +262,7 @@ apis:
   description: The nodes API from Weaviate — 2 operation(s) for nodes.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - Nodes
+  - nodes
   tags_raw:
   - nodes
   properties:
@@ -330,7 +330,7 @@ apis:
   description: The replication API from Weaviate — 7 operation(s) for replication.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - Replication
+  - replication
   tags_raw:
   - replication
   properties:
