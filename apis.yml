@@ -424,6 +424,8 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 common:
+- type: Website
+  url: https://www.weaviate.io/
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/weaviate/overview
 - type: AgenticAccess
