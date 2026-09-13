@@ -25,7 +25,7 @@ conformance:
   - host-no-identifier
   soft_gaps:
   - content-type-not-ai-catalog-json
-  - cors-not-wildcard
+  - cors-not-readable-cross-origin
   official_tool:
     tool: ARD conformance-test v0.9.1 (ards-project/ard-spec)
     status: PASS
