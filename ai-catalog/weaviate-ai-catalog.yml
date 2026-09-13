@@ -1,0 +1,80 @@
+generated: '2026-09-13'
+method: probed
+source: https://weaviate.io/.well-known/ai-catalog.json
+description: 'AI Catalog manifest observed at /.well-known/ai-catalog.json on weaviate.io. The AI Catalog
+  Standard is the publishing half of Agentic Resource Discovery (ARD): a JSON manifest listing the agentic
+  resources a domain offers — MCP servers, agent cards, skills, APIs — each typed by media type and identified
+  by a domain-anchored urn:air: URN. Two verdicts are recorded: a structural grade against the data model,
+  and the result of the ARD project''s own conformance CLI run against this exact body. Provider-published
+  by construction — served from the provider''s own host; nothing here is derived or generated.'
+discovery:
+  path: /.well-known/ai-catalog.json
+  canonical: false
+  predecessor_only: true
+  attempts:
+  - path: /.well-known/ard.json
+    http_status: 404
+  - path: /.well-known/ai-catalog.json
+    http_status: 200
+  host: weaviate.io
+conformance:
+  spec: AI Catalog 1.0 / ARD v0.91
+  grade: flavored
+  spec_version_declared: '1.0'
+  hard_failures:
+  - host-no-identifier
+  soft_gaps:
+  - content-type-not-ai-catalog-json
+  - cors-not-wildcard
+  official_tool:
+    tool: ARD conformance-test v0.9.1 (ards-project/ard-spec)
+    status: PASS
+    critical_errors: 0
+    errors: []
+    warnings:
+    - '[Weaviate resources for AI agents] Media type ''text/markdown'' is based on standard discovery
+      type ''text/markdown'' but has missing required parameters: profile="urn:air:agent-skills".'
+    - '[Weaviate authentication guide] Media type ''text/markdown'' is based on standard discovery type
+      ''text/markdown'' but has missing required parameters: profile="urn:air:agent-skills".'
+    - '[weaviate.io site index (markdown)] Media type ''text/markdown'' is based on standard discovery
+      type ''text/markdown'' but has missing required parameters: profile="urn:air:agent-skills".'
+    - '[Weaviate llms.txt navigation index] Media type ''text/plain'' is not one of standard discovery
+      types: [''application/ai-catalog+json'', ''application/agent-card+json'', ''application/a2a-agent-card+json'',
+      ''application/mcp-server-card+json'', ''application/agent-skills+zip'', ''application/agent-skills+gzip'',
+      ''text/markdown; profile="urn:air:agent-skills"'', ''application/ai-registry'', ''application/ai-registry+json''].'
+    - '[Weaviate quickstart guidance (markdown)] Media type ''text/markdown'' is based on standard discovery
+      type ''text/markdown'' but has missing required parameters: profile="urn:air:agent-skills".'
+    - '[Weaviate pricing guidance (markdown)] Media type ''text/markdown'' is based on standard discovery
+      type ''text/markdown'' but has missing required parameters: profile="urn:air:agent-skills".'
+    informational:
+    - '[Weaviate Database Operations (Agent Skill)] Media type ''application/ai-skill'' is a valid application
+      extension media type. ARD permits extension types without core registration.'
+    - '[Weaviate Cookbooks (Agent Skill)] Media type ''application/ai-skill'' is a valid application extension
+      media type. ARD permits extension types without core registration.'
+    - '[Weaviate REST API description] Media type ''application/openapi+json'' is a valid application
+      extension media type. ARD permits extension types without core registration.'
+    - '[weaviate.io sitemap] Media type ''application/xml'' is a valid application extension media type.
+      ARD permits extension types without core registration.'
+catalog:
+  host_display_name: Weaviate
+  host_identifier: null
+  entry_count: 10
+  types:
+    application/ai-skill: 2
+    application/openapi+json: 1
+    application/xml: 1
+    text/markdown: 5
+    text/plain: 1
+  representative_queries: 26
+  trust_manifests: 0
+  file: weaviate-ai-catalog.json
+transport:
+  http_status: 200
+  content_type: application/json
+  access_control_allow_origin: null
+x-evidence:
+  fetched: '2026-09-13'
+  url: https://weaviate.io/.well-known/ai-catalog.json
+  http_status: 200
+  content_type: application/json
+  note: Verbatim body saved alongside this manifest. No field inferred.
