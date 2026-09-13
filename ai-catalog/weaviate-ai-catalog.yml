@@ -55,6 +55,7 @@ conformance:
       extension media type. ARD permits extension types without core registration.'
     - '[weaviate.io sitemap] Media type ''application/xml'' is a valid application extension media type.
       ARD permits extension types without core registration.'
+  did_web: null
 catalog:
   host_display_name: Weaviate
   host_identifier: null
