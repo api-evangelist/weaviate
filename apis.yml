@@ -189,23 +189,6 @@ apis:
     url: https://weaviate.io/developers/weaviate/quickstart
   - type: GraphQL
     url: graphql/weaviate-graphql.md
-- aid: weaviate:weaviate-graphql-api
-  name: Weaviate graphql API
-  description: The graphql API from Weaviate — 2 operation(s) for graphql.
-  humanURL: https://weaviate.io/developers/weaviate/api/rest
-  tags:
-  - GraphQL
-  tags_raw:
-  - graphql
-  properties:
-  - type: OpenAPI
-    url: openapi/weaviate-graphql-api-openapi.yml
-  - type: Documentation
-    url: https://weaviate.io/developers/weaviate/api/rest
-  - type: GettingStarted
-    url: https://weaviate.io/developers/weaviate/quickstart
-  - type: GraphQL
-    url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-mcp-api
   name: Weaviate mcp API
   description: The mcp API from Weaviate — 1 operation(s) for mcp.
@@ -417,6 +400,21 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/weaviate-well-known-api-openapi.yml
+  - type: Documentation
+    url: https://weaviate.io/developers/weaviate/api/rest
+  - type: GettingStarted
+    url: https://weaviate.io/developers/weaviate/quickstart
+  - type: GraphQL
+    url: graphql/weaviate-graphql.md
+- aid: weaviate:weaviate-graph-ql-api
+  name: Weaviate Graph QL API
+  description: The Graph QL API from Weaviate — 2 operation(s) for graph ql.
+  humanURL: https://weaviate.io/developers/weaviate/api/rest
+  tags:
+  - Graph QL
+  properties:
+  - type: OpenAPI
+    url: openapi/weaviate-graph-ql-api-openapi.yml
   - type: Documentation
     url: https://weaviate.io/developers/weaviate/api/rest
   - type: GettingStarted
