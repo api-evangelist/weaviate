@@ -245,7 +245,7 @@ apis:
   description: The nodes API from Weaviate — 2 operation(s) for nodes.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - Nodes
+  - Node
   tags_raw:
   - nodes
   properties:
@@ -411,6 +411,8 @@ apis:
   description: The Graph QL API from Weaviate — 2 operation(s) for graph ql.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
