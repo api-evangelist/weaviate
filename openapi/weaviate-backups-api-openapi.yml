@@ -1,7 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Weaviate REST authz backups API
-  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  title: Weaviate REST Backups API
+  description: '# Introduction
+
+    Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications.'
   version: 1.38.0-dev
 servers:
 - url: http://localhost:8080
@@ -10,14 +12,21 @@ security:
 - ApiKeyAuth: []
 - BearerAuth: []
 tags:
-- name: backups
+- name: Backups
 paths:
   /backups/{backend}:
     post:
       summary: Weaviate Create A Backup
-      description: Initiates the creation of a backup for specified collections on a designated backend storage.<br/><br/>Notes:<br/>- Backups are compressed using gzip by default.<br/>- Weaviate remains operational during the backup process.
+      description: 'Initiates the creation of a backup for specified collections on a designated backend storage.
+
+
+        Notes:
+
+        - Backups are compressed using gzip by default.
+
+        - Weaviate remains operational during the backup process.'
       tags:
-      - backups
+      - Backups
       operationId: backups.create
       parameters:
       - name: backend
@@ -64,7 +73,7 @@ paths:
       summary: Weaviate List All Created Backups
       description: List all created backups IDs, Status
       tags:
-      - backups
+      - Backups
       operationId: backups.list
       parameters:
       - name: backend
@@ -115,9 +124,12 @@ paths:
   /backups/{backend}/{id}:
     get:
       summary: Weaviate Get Backup Creation Status
-      description: Checks the status of a specific backup creation process identified by its ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled.
+      description: 'Checks the status of a specific backup creation process identified by its ID on the specified backend.
+
+
+        Client libraries often provide a ''wait for completion'' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if ''wait for completion'' is disabled.'
       tags:
-      - backups
+      - Backups
       operationId: backups.create.status
       parameters:
       - name: backend
@@ -183,7 +195,7 @@ paths:
       summary: Weaviate Cancel A Backup
       description: Cancels an ongoing backup operation identified by its ID.
       tags:
-      - backups
+      - Backups
       operationId: backups.cancel
       parameters:
       - name: backend
@@ -238,9 +250,18 @@ paths:
   /backups/{backend}/{id}/restore:
     post:
       summary: Weaviate Restore From A Backup
-      description: Initiates the restoration of collections from a specified backup located on a designated backend.<br/><br/>Requirements:<br/>- Target cluster must have the same number of nodes as the source cluster where the backup was created.<br/>- Collections included in the restore must not already exist on the target cluster.<br/>- Node names must match between the backup and the target cluster.
+      description: 'Initiates the restoration of collections from a specified backup located on a designated backend.
+
+
+        Requirements:
+
+        - Target cluster must have the same number of nodes as the source cluster where the backup was created.
+
+        - Collections included in the restore must not already exist on the target cluster.
+
+        - Node names must match between the backup and the target cluster.'
       tags:
-      - backups
+      - Backups
       operationId: backups.restore
       parameters:
       - name: backend
@@ -297,9 +318,12 @@ paths:
         delay: 100
     get:
       summary: Weaviate Get Backup Restoration Status
-      description: Checks the status of a specific backup restoration process identified by the backup ID on the specified backend.<br/><br/>Client libraries often provide a 'wait for completion' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if 'wait for completion' is disabled.
+      description: 'Checks the status of a specific backup restoration process identified by the backup ID on the specified backend.
+
+
+        Client libraries often provide a ''wait for completion'' feature that polls this endpoint automatically. Use this endpoint for manual status checks or if ''wait for completion'' is disabled.'
       tags:
-      - backups
+      - Backups
       operationId: backups.restore.status
       parameters:
       - name: backend
@@ -359,7 +383,7 @@ paths:
       summary: Weaviate Cancel A Backup Restoration
       description: Cancels an ongoing backup restoration process identified by its ID on the specified backend storage.
       tags:
-      - backups
+      - Backups
       operationId: backups.restore.cancel
       parameters:
       - name: backend
@@ -413,34 +437,28 @@ paths:
         delay: 100
 components:
   schemas:
-    BackupRestoreStatusResponse:
-      description: The definition of a backup restore metadata.
+    BackupCreateRequest:
+      description: Request body for creating a backup for a set of collections.
       properties:
         id:
           type: string
-          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
-        backend:
+          description: The ID of the backup (required). Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        config:
+          $ref: '#/components/schemas/BackupConfig'
+        include:
+          type: array
+          description: List of collections to include in the backup creation process. If not set, all collections are included. Cannot be used together with `exclude`.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collections to exclude from the backup creation process. If not set, all collections are included. Cannot be used together with `include`.
+          items:
+            type: string
+        incremental_base_backup_id:
           type: string
-          description: Backup backend name e.g. filesystem, gcs, s3.
-        path:
-          type: string
-          description: Destination path of backup files valid for the selected backup backend, contains bucket and path.
-        error:
-          type: string
-          description: Error message if backup restoration failed.
-        status:
-          type: string
-          description: Phase of backup restoration process.
-          enum:
-          - STARTED
-          - TRANSFERRING
-          - TRANSFERRED
-          - FINALIZING
-          - SUCCESS
-          - FAILED
-          - CANCELLING
-          - CANCELED
-          default: STARTED
+          description: The ID of an existing backup to use as the base for a file-based incremental backup. If set, only files that have changed since the base backup will be included in the new backup.
+          default: null
     BackupRestoreRequest:
       description: Request body for restoring a backup for a set of collections (classes).
       properties:
@@ -464,6 +482,39 @@ components:
         overwriteAlias:
           type: boolean
           description: Allows ovewriting the collection alias if there is a conflict
+    RestoreConfig:
+      type: object
+      description: Backup custom configuration
+      properties:
+        Endpoint:
+          type: string
+          description: name of the endpoint, e.g. s3.amazonaws.com
+        Bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc
+        Path:
+          type: string
+          description: Path within the bucket
+        CPUPercentage:
+          type: integer
+          description: Desired CPU core utilization ranging from 1%-80%
+          default: 50
+          minimum: 1
+          maximum: 80
+        rolesOptions:
+          type: string
+          description: How roles should be restored
+          enum:
+          - noRestore
+          - all
+          default: noRestore
+        usersOptions:
+          type: string
+          description: How users should be restored
+          enum:
+          - noRestore
+          - all
+          default: noRestore
     BackupCreateStatusResponse:
       description: The definition of a backup create metadata
       properties:
@@ -504,64 +555,17 @@ components:
           type: number
           format: float64
           description: Size of the backup in Gibs
-    BackupCreateRequest:
-      description: Request body for creating a backup for a set of collections.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
       properties:
-        id:
-          type: string
-          description: The ID of the backup (required). Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
-        config:
-          $ref: '#/components/schemas/BackupConfig'
-        include:
-          type: array
-          description: List of collections to include in the backup creation process. If not set, all collections are included. Cannot be used together with `exclude`.
-          items:
-            type: string
-        exclude:
-          type: array
-          description: List of collections to exclude from the backup creation process. If not set, all collections are included. Cannot be used together with `include`.
-          items:
-            type: string
-        incremental_base_backup_id:
-          type: string
-          description: The ID of an existing backup to use as the base for a file-based incremental backup. If set, only files that have changed since the base backup will be included in the new backup.
-          default: null
-    BackupCreateResponse:
-      description: The definition of a backup create response body
-      properties:
-        id:
-          type: string
-          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
-        classes:
-          type: array
-          description: The list of collections (classes) for which the backup creation process was started.
-          items:
-            type: string
-        backend:
-          type: string
-          description: Backup backend name e.g. filesystem, gcs, s3.
-        bucket:
-          type: string
-          description: Name of the bucket, container, volume, etc
-        path:
-          type: string
-          description: Path within bucket of backup
         error:
-          type: string
-          description: error message if creation failed
-        status:
-          type: string
-          description: phase of backup creation process
-          enum:
-          - STARTED
-          - TRANSFERRING
-          - TRANSFERRED
-          - FINALIZING
-          - SUCCESS
-          - FAILED
-          - CANCELLING
-          - CANCELED
-          default: STARTED
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     BackupListResponse:
       type: array
       description: The definition of a backup create response body.
@@ -600,39 +604,6 @@ components:
             type: number
             format: float64
             description: Size of the backup in Gibs
-    RestoreConfig:
-      type: object
-      description: Backup custom configuration
-      properties:
-        Endpoint:
-          type: string
-          description: name of the endpoint, e.g. s3.amazonaws.com
-        Bucket:
-          type: string
-          description: Name of the bucket, container, volume, etc
-        Path:
-          type: string
-          description: Path within the bucket
-        CPUPercentage:
-          type: integer
-          description: Desired CPU core utilization ranging from 1%-80%
-          default: 50
-          minimum: 1
-          maximum: 80
-        rolesOptions:
-          type: string
-          description: How roles should be restored
-          enum:
-          - noRestore
-          - all
-          default: noRestore
-        usersOptions:
-          type: string
-          description: How users should be restored
-          enum:
-          - noRestore
-          - all
-          default: noRestore
     BackupRestoreResponse:
       description: The definition of a backup restore response body.
       properties:
@@ -666,17 +637,70 @@ components:
           - CANCELLING
           - CANCELED
           default: STARTED
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
+    BackupRestoreStatusResponse:
+      description: The definition of a backup restore metadata.
       properties:
+        id:
+          type: string
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        backend:
+          type: string
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        path:
+          type: string
+          description: Destination path of backup files valid for the selected backup backend, contains bucket and path.
         error:
+          type: string
+          description: Error message if backup restoration failed.
+        status:
+          type: string
+          description: Phase of backup restoration process.
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
+    BackupCreateResponse:
+      description: The definition of a backup create response body
+      properties:
+        id:
+          type: string
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        classes:
           type: array
+          description: The list of collections (classes) for which the backup creation process was started.
           items:
-            type: object
-            properties:
-              message:
-                type: string
+            type: string
+        backend:
+          type: string
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc
+        path:
+          type: string
+          description: Path within bucket of backup
+        error:
+          type: string
+          description: error message if creation failed
+        status:
+          type: string
+          description: phase of backup creation process
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
     BackupConfig:
       type: object
       description: Backup custom configuration.

@@ -1,7 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Weaviate REST authz users API
-  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  title: Weaviate REST Users API
+  description: '# Introduction
+
+    Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications.'
   version: 1.38.0-dev
 servers:
 - url: http://localhost:8080
@@ -10,14 +12,14 @@ security:
 - ApiKeyAuth: []
 - BearerAuth: []
 tags:
-- name: users
+- name: Users
 paths:
   /users/own-info:
     get:
       summary: Weaviate Get Current User Info
       description: Get information about the currently authenticated user, including username and assigned roles.
       tags:
-      - users
+      - Users
       operationId: getOwnInfo
       responses:
         '200':
@@ -47,7 +49,7 @@ paths:
       summary: Weaviate List All Users
       description: Retrieves a list of all database (`db` user type) users with their roles and status information.
       tags:
-      - users
+      - Users
       operationId: listAllUsers
       parameters:
       - name: includeLastUsedTime
@@ -87,7 +89,7 @@ paths:
       summary: Weaviate Get User Info
       description: Retrieve detailed information about a specific database user (`db` user type), including their roles, status, and type.
       tags:
-      - users
+      - Users
       operationId: getUserInfo
       parameters:
       - name: user_id
@@ -138,7 +140,7 @@ paths:
       summary: Weaviate Create A New User
       description: Create a new database (`db` user type) user with the specified name. Returns an API key for the newly created user.
       tags:
-      - users
+      - Users
       operationId: createUser
       parameters:
       - name: user_id
@@ -215,7 +217,7 @@ paths:
       summary: Weaviate Delete A User
       description: Delete a database user. You can't delete your current user.
       tags:
-      - users
+      - Users
       operationId: deleteUser
       parameters:
       - name: user_id
@@ -262,7 +264,7 @@ paths:
       summary: Weaviate Rotate API Key Of A User
       description: Revoke the current API key for the specified database user (`db` user type) and generate a new one.
       tags:
-      - users
+      - Users
       operationId: rotateUserApiKey
       parameters:
       - name: user_id
@@ -313,7 +315,7 @@ paths:
       summary: Weaviate Activate A User
       description: Activate a deactivated database user (`db` user type).
       tags:
-      - users
+      - Users
       operationId: activateUser
       parameters:
       - name: user_id
@@ -362,7 +364,7 @@ paths:
       summary: Weaviate Deactivate A User
       description: Deactivate a database user (`db` user type).
       tags:
-      - users
+      - Users
       operationId: deactivateUser
       parameters:
       - name: user_id
@@ -418,27 +420,34 @@ paths:
         delay: 100
 components:
   schemas:
-    Role:
+    UserOwnInfo:
       type: object
       required:
-      - name
-      - permissions
+      - username
       properties:
-        name:
-          type: string
-          description: The name (ID) of the role.
-        permissions:
+        groups:
+          type: array
+          description: The groups associated with the user.
+          items:
+            type: string
+        roles:
           type: array
           items:
-            $ref: '#/components/schemas/Permission'
-    UserApiKey:
-      type: object
-      required:
-      - apikey
-      properties:
-        apikey:
+            $ref: '#/components/schemas/Role'
+        username:
           type: string
-          description: The API key associated with the user.
+          description: The name (ID) of the user.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     DBUserInfo:
       type: object
       required:
@@ -485,6 +494,32 @@ components:
         namespace:
           type: string
           description: The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise.
+    GroupType:
+      type: string
+      description: If the group contains OIDC or database users.
+      enum:
+      - oidc
+    Role:
+      type: object
+      required:
+      - name
+      - permissions
+      properties:
+        name:
+          type: string
+          description: The name (ID) of the role.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    UserApiKey:
+      type: object
+      required:
+      - apikey
+      properties:
+        apikey:
+          type: string
+          description: The API key associated with the user.
     Permission:
       type: object
       description: Permissions attached to a role.
@@ -657,39 +692,6 @@ components:
           - read_mcp
           - update_mcp
           - manage_namespaces
-    GroupType:
-      type: string
-      description: If the group contains OIDC or database users.
-      enum:
-      - oidc
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    UserOwnInfo:
-      type: object
-      required:
-      - username
-      properties:
-        groups:
-          type: array
-          description: The groups associated with the user.
-          items:
-            type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        username:
-          type: string
-          description: The name (ID) of the user.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

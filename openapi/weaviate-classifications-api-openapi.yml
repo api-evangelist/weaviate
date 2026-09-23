@@ -1,7 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Weaviate REST authz classifications API
-  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  title: Weaviate REST Classifications API
+  description: '# Introduction
+
+    Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications.'
   version: 1.38.0-dev
 servers:
 - url: http://localhost:8080
@@ -10,14 +12,14 @@ security:
 - ApiKeyAuth: []
 - BearerAuth: []
 tags:
-- name: classifications
+- name: Classifications
 paths:
   /classifications/:
     post:
       summary: Weaviate Start A Classification
       description: Initiates a background classification task based on the provided parameters. Use the GET /classifications/{id} endpoint to monitor the status and retrieve results.
       tags:
-      - classifications
+      - Classifications
       operationId: classifications.post
       requestBody:
         content:
@@ -58,7 +60,7 @@ paths:
       summary: Weaviate Get Classification Status
       description: Retrieves the status, metadata, and results (if completed) of a classification task identified by its unique ID.
       tags:
-      - classifications
+      - Classifications
       operationId: classifications.get
       parameters:
       - name: id
@@ -106,73 +108,17 @@ components:
             max:
               type: number
               format: float64
-    Classification:
+    ErrorResponse:
       type: object
-      description: Manage classifications, trigger them and view status of past classifications.
+      description: An error response returned by Weaviate endpoints.
       properties:
-        id:
-          type: string
-          format: uuid
-          description: ID to uniquely identify this classification run.
-          example: ee722219-b8ec-4db1-8f8d-5150bb1a9e0c
-        class:
-          type: string
-          description: The name of the collection (class) which is used in this classification.
-          example: City
-        classifyProperties:
-          type: array
-          description: Which ref-property to set as part of the classification.
-          example:
-          - inCountry
-          items:
-            type: string
-        basedOnProperties:
-          type: array
-          description: Base the text-based classification on these fields (of type text).
-          example:
-          - description
-          items:
-            type: string
-        status:
-          type: string
-          description: Status of this classification.
-          enum:
-          - running
-          - completed
-          - failed
-          example: running
-        meta:
-          $ref: '#/components/schemas/ClassificationMeta'
-        type:
-          type: string
-          description: Which algorithm to use for classifications.
-        settings:
-          type: object
-          description: Classification-type specific settings.
         error:
-          type: string
-          description: Error message if status == failed.
-          default: ''
-          example: 'classify xzy: something went wrong'
-        filters:
-          type: object
-          properties:
-            sourceWhere:
-              $ref: '#/components/schemas/WhereFilter'
-            trainingSetWhere:
-              $ref: '#/components/schemas/WhereFilter'
-            targetWhere:
-              $ref: '#/components/schemas/WhereFilter'
-    GeoCoordinates:
-      properties:
-        latitude:
-          type: number
-          format: float
-          description: The latitude of the point on earth in decimal form.
-        longitude:
-          type: number
-          format: float
-          description: The longitude of the point on earth in decimal form.
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     WhereFilter:
       type: object
       description: Filter search results using a where filter.
@@ -282,17 +228,63 @@ components:
             type: string
         valueGeoRange:
           $ref: '#/components/schemas/WhereFilterGeoRange'
-    ErrorResponse:
+    Classification:
       type: object
-      description: An error response returned by Weaviate endpoints.
+      description: Manage classifications, trigger them and view status of past classifications.
       properties:
-        error:
+        id:
+          type: string
+          format: uuid
+          description: ID to uniquely identify this classification run.
+          example: ee722219-b8ec-4db1-8f8d-5150bb1a9e0c
+        class:
+          type: string
+          description: The name of the collection (class) which is used in this classification.
+          example: City
+        classifyProperties:
           type: array
+          description: Which ref-property to set as part of the classification.
+          example:
+          - inCountry
           items:
-            type: object
-            properties:
-              message:
-                type: string
+            type: string
+        basedOnProperties:
+          type: array
+          description: Base the text-based classification on these fields (of type text).
+          example:
+          - description
+          items:
+            type: string
+        status:
+          type: string
+          description: Status of this classification.
+          enum:
+          - running
+          - completed
+          - failed
+          example: running
+        meta:
+          $ref: '#/components/schemas/ClassificationMeta'
+        type:
+          type: string
+          description: Which algorithm to use for classifications.
+        settings:
+          type: object
+          description: Classification-type specific settings.
+        error:
+          type: string
+          description: Error message if status == failed.
+          default: ''
+          example: 'classify xzy: something went wrong'
+        filters:
+          type: object
+          properties:
+            sourceWhere:
+              $ref: '#/components/schemas/WhereFilter'
+            trainingSetWhere:
+              $ref: '#/components/schemas/WhereFilter'
+            targetWhere:
+              $ref: '#/components/schemas/WhereFilter'
     ClassificationMeta:
       type: object
       description: Additional information to a specific classification.
@@ -319,6 +311,16 @@ components:
           type: integer
           description: Number of objects which could not be classified - see error message for details.
           example: 7
+    GeoCoordinates:
+      properties:
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

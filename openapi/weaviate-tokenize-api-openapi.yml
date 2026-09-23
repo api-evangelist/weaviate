@@ -1,7 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Weaviate REST authz tokenize API
-  description: '# Introduction<br/> Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications. <br/> ### Base Path <br/>The base path for the Weaviate server is structured as `[YOUR-WEAVIATE-HOST]:[PORT]/v1`. As an example, if you wish to access the `schema` endpoint on a local instance, you would navigate to `http://localhost:8080/v1/schema`. Ensure you replace `[YOUR-WEAVIATE-HOST]` and `[PORT]` with your actual server host and port number respectively. <br/> ### Questions? <br/>If you have any comments or questions, please feel free to reach out to us at the community forum [https://forum.weaviate.io/](https://forum.weaviate.io/). <br/>### Issues? <br/>If you find a bug or want to file a feature request, please open an issue on our GitHub repository for [Weaviate](https://github.com/weaviate/weaviate). <br/>### Need more documentation? <br/>For a quickstart, code examples, concepts and more, please visit our [documentation page](https://docs.weaviate.io/weaviate).'
+  title: Weaviate REST Tokenize API
+  description: '# Introduction
+
+    Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications.'
   version: 1.38.0-dev
 servers:
 - url: http://localhost:8080
@@ -10,14 +12,14 @@ security:
 - ApiKeyAuth: []
 - BearerAuth: []
 tags:
-- name: tokenize
+- name: Tokenize
 paths:
   /tokenize:
     post:
       summary: Weaviate Tokenize Text
       description: Tokenizes the provided text using the specified tokenization method. This is a stateless utility endpoint useful for debugging and understanding how text will be processed during indexing and querying. The response includes both the indexed tokens (as stored in the inverted index) and query tokens (after optional stopword removal).
       tags:
-      - tokenize
+      - Tokenize
       operationId: tokenize
       requestBody:
         content:
@@ -89,17 +91,6 @@ components:
           description: 'Stopwords to be removed from consideration (default: []). Can be any array of custom strings.'
           items:
             type: string
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     TokenizeResponse:
       type: object
       description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
@@ -114,6 +105,17 @@ components:
           description: The tokens as they would be used for query matching (e.g., after stopword removal).
           items:
             type: string
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     TokenizeRequest:
       type: object
       description: Request body for the generic tokenize endpoint.
