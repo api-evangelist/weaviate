@@ -215,88 +215,6 @@ paths:
         delay: 100
 components:
   schemas:
-    Vector:
-      type: object
-      description: A vector representation of the object. If provided at object creation, this wil take precedence over any vectorizer setting.
-    ObjectsGetResponse:
-      allOf:
-      - $ref: '#/components/schemas/Object'
-      - properties:
-          deprecations:
-            type: array
-            items:
-              $ref: '#/components/schemas/Deprecation'
-      - properties:
-          result:
-            format: object
-            description: Results for this specific object.
-            properties:
-              status:
-                type: string
-                enum:
-                - SUCCESS
-                - FAILED
-                default: SUCCESS
-              errors:
-                $ref: '#/components/schemas/ErrorResponse'
-    Vectors:
-      type: object
-      description: A map of named vectors for multi-vector representations.
-      additionalProperties:
-        $ref: '#/components/schemas/Vector'
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    WhereFilterGeoRange:
-      type: object
-      description: Filter within a distance of a georange.
-      properties:
-        geoCoordinates:
-          $ref: '#/components/schemas/GeoCoordinates'
-        distance:
-          type: object
-          properties:
-            max:
-              type: number
-              format: float64
-    C11yVector:
-      type: array
-      description: A vector representation of the object in the Contextionary. If provided at object creation, this wil take precedence over any vectorizer setting.
-      items:
-        type: number
-        format: float
-    VectorWeights:
-      type: object
-      description: 'Allow custom overrides of vector weights as math expressions. E.g. `pancake`: `7` will set the weight for the word pancake to 7 in the vectorization, whereas `w * 3` would triple the originally calculated word. This is an open object, with OpenAPI Specification 3.0 this will be more detailed. See Weaviate docs for more info. In the future this will become a key/value (string/string) object.'
-    AdditionalProperties:
-      type: object
-      description: (Response only) Additional meta information about a single object.
-      additionalProperties:
-        type: object
-    BatchReferenceResponse:
-      allOf:
-      - $ref: '#/components/schemas/BatchReference'
-      - properties:
-          result:
-            format: object
-            description: Results for this specific reference.
-            properties:
-              status:
-                type: string
-                enum:
-                - SUCCESS
-                - FAILED
-                default: SUCCESS
-              errors:
-                $ref: '#/components/schemas/ErrorResponse'
     WhereFilter:
       type: object
       description: Filter search results using a where filter.
@@ -406,52 +324,87 @@ components:
             type: string
         valueGeoRange:
           $ref: '#/components/schemas/WhereFilterGeoRange'
-    Object:
+    WhereFilterGeoRange:
       type: object
+      description: Filter within a distance of a georange.
       properties:
-        class:
-          type: string
-          description: Name of the collection (class) the object belongs to.
-        vectorWeights:
-          $ref: '#/components/schemas/VectorWeights'
-        properties:
-          $ref: '#/components/schemas/PropertySchema'
-        id:
-          type: string
-          format: uuid
-          description: The UUID of the object.
-        creationTimeUnix:
-          type: integer
-          format: int64
-          description: (Response only) Timestamp of creation of this object in milliseconds since epoch UTC.
-        lastUpdateTimeUnix:
-          type: integer
-          format: int64
-          description: (Response only) Timestamp of the last object update in milliseconds since epoch UTC.
-        vector:
-          $ref: '#/components/schemas/C11yVector'
-        vectors:
-          $ref: '#/components/schemas/Vectors'
-        tenant:
-          type: string
-          description: The name of the tenant the object belongs to.
-        additional:
-          $ref: '#/components/schemas/AdditionalProperties'
-    BatchReference:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
+    BatchReferenceResponse:
+      allOf:
+      - $ref: '#/components/schemas/BatchReference'
+      - properties:
+          result:
+            format: object
+            description: Results for this specific reference.
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAILED
+                default: SUCCESS
+              errors:
+                $ref: '#/components/schemas/ErrorResponse'
+    PropertySchema:
+      type: object
+      description: Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection.
+    Vector:
+      type: object
+      description: A vector representation of the object. If provided at object creation, this wil take precedence over any vectorizer setting.
+    C11yVector:
+      type: array
+      description: A vector representation of the object in the Contextionary. If provided at object creation, this wil take precedence over any vectorizer setting.
+      items:
+        type: number
+        format: float
+    Vectors:
+      type: object
+      description: A map of named vectors for multi-vector representations.
+      additionalProperties:
+        $ref: '#/components/schemas/Vector'
+    ObjectsGetResponse:
+      allOf:
+      - $ref: '#/components/schemas/Object'
+      - properties:
+          deprecations:
+            type: array
+            items:
+              $ref: '#/components/schemas/Deprecation'
+      - properties:
+          result:
+            format: object
+            description: Results for this specific object.
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAILED
+                default: SUCCESS
+              errors:
+                $ref: '#/components/schemas/ErrorResponse'
+    AdditionalProperties:
+      type: object
+      description: (Response only) Additional meta information about a single object.
+      additionalProperties:
+        type: object
+    GeoCoordinates:
       properties:
-        from:
-          type: string
-          format: uri
-          description: Long-form beacon-style URI to identify the source of the cross-reference, including the property name. Should be in the form of `weaviate://localhost/objects/<uuid>/<className>/<propertyName>`, where `<className>` and `<propertyName>` must represent the cross-reference property of the source class to be used.
-          example: weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals
-        to:
-          type: string
-          format: uri
-          description: Short-form URI to point to the cross-reference. Should be in the form of `weaviate://localhost/<uuid>` for the example of a local cross-reference to an object.
-          example: weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f
-        tenant:
-          type: string
-          description: Name of the reference tenant.
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
     BatchDelete:
       type: object
       properties:
@@ -477,6 +430,21 @@ components:
           type: boolean
           description: If true, the call will show which objects would be matched using the specified filter without deleting any objects. <br/><br/>Depending on the configured verbosity, you will either receive a count of affected objects, or a list of IDs.
           default: false
+    BatchReference:
+      properties:
+        from:
+          type: string
+          format: uri
+          description: Long-form beacon-style URI to identify the source of the cross-reference, including the property name. Should be in the form of `weaviate://localhost/objects/<uuid>/<className>/<propertyName>`, where `<className>` and `<propertyName>` must represent the cross-reference property of the source class to be used.
+          example: weaviate://localhost/Zoo/a5d09582-4239-4702-81c9-92a6e0122bb4/hasAnimals
+        to:
+          type: string
+          format: uri
+          description: Short-form URI to point to the cross-reference. Should be in the form of `weaviate://localhost/<uuid>` for the example of a local cross-reference to an object.
+          example: weaviate://localhost/97525810-a9a5-4eb0-858a-71449aeb007f
+        tenant:
+          type: string
+          description: Name of the reference tenant.
     Deprecation:
       type: object
       properties:
@@ -582,19 +550,51 @@ components:
                     default: SUCCESS
                   errors:
                     $ref: '#/components/schemas/ErrorResponse'
-    PropertySchema:
+    ErrorResponse:
       type: object
-      description: Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection.
-    GeoCoordinates:
+      description: An error response returned by Weaviate endpoints.
       properties:
-        latitude:
-          type: number
-          format: float
-          description: The latitude of the point on earth in decimal form.
-        longitude:
-          type: number
-          format: float
-          description: The longitude of the point on earth in decimal form.
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    Object:
+      type: object
+      properties:
+        class:
+          type: string
+          description: Name of the collection (class) the object belongs to.
+        vectorWeights:
+          $ref: '#/components/schemas/VectorWeights'
+        properties:
+          $ref: '#/components/schemas/PropertySchema'
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the object.
+        creationTimeUnix:
+          type: integer
+          format: int64
+          description: (Response only) Timestamp of creation of this object in milliseconds since epoch UTC.
+        lastUpdateTimeUnix:
+          type: integer
+          format: int64
+          description: (Response only) Timestamp of the last object update in milliseconds since epoch UTC.
+        vector:
+          $ref: '#/components/schemas/C11yVector'
+        vectors:
+          $ref: '#/components/schemas/Vectors'
+        tenant:
+          type: string
+          description: The name of the tenant the object belongs to.
+        additional:
+          $ref: '#/components/schemas/AdditionalProperties'
+    VectorWeights:
+      type: object
+      description: 'Allow custom overrides of vector weights as math expressions. E.g. `pancake`: `7` will set the weight for the word pancake to 7 in the vectorization, whereas `w * 3` would triple the originally calculated word. This is an open object, with OpenAPI Specification 3.0 this will be more detailed. See Weaviate docs for more info. In the future this will become a key/value (string/string) object.'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

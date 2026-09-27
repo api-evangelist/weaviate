@@ -96,29 +96,6 @@ paths:
         delay: 100
 components:
   schemas:
-    WhereFilterGeoRange:
-      type: object
-      description: Filter within a distance of a georange.
-      properties:
-        geoCoordinates:
-          $ref: '#/components/schemas/GeoCoordinates'
-        distance:
-          type: object
-          properties:
-            max:
-              type: number
-              format: float64
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     WhereFilter:
       type: object
       description: Filter search results using a where filter.
@@ -228,6 +205,18 @@ components:
             type: string
         valueGeoRange:
           $ref: '#/components/schemas/WhereFilterGeoRange'
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
     Classification:
       type: object
       description: Manage classifications, trigger them and view status of past classifications.
@@ -321,6 +310,17 @@ components:
           type: number
           format: float
           description: The longitude of the point on earth in decimal form.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

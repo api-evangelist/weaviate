@@ -8,6 +8,10 @@ description: Weaviate is an open-source, AI-native vector database that enables 
 type: Index
 deliveryModel:
   model: unknown
+  license_evidence:
+    repo: weaviate/weaviate
+    spdx: NOASSERTION
+    stars: 16846
   open_source: unknown
   commercial: true
   callable_host: false
@@ -17,7 +21,7 @@ deliveryModel:
   - openapi
   - pricing
   - repository-unlicensed
-  generated: '2026-08-28'
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -38,11 +42,12 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/weaviate.p
 tags:
 - Vector Database
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 - Semantic Search
-- Open-Source
+- Open Source
 - GraphQL
 - Kubernetes
+- Database
 tags_raw:
 - Vector Database
 - AI
@@ -51,13 +56,16 @@ tags_raw:
 - Open Source
 - GraphQL
 - Kubernetes
+- Machine-Learning
+- Open-Source
+- Database
 url: https://raw.githubusercontent.com/api-evangelist/weaviate/refs/heads/main/apis.yml
 created: '2024-06-18'
 modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: weaviate:weaviate-authz-api
-  name: Weaviate authz API
+  name: Weaviate Authz API
   description: The authz API from Weaviate — 16 operation(s) for authz.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -72,7 +80,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-backups-api
-  name: Weaviate backups API
+  name: Weaviate Backups API
   description: The backups API from Weaviate — 3 operation(s) for backups.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -89,7 +97,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-batch-api
-  name: Weaviate batch API
+  name: Weaviate Batch API
   description: The batch API from Weaviate — 2 operation(s) for batch.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -106,7 +114,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-classifications-api
-  name: Weaviate classifications API
+  name: Weaviate Classifications API
   description: The classifications API from Weaviate — 2 operation(s) for classifications.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -123,7 +131,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-cluster-api
-  name: Weaviate cluster API
+  name: Weaviate Cluster API
   description: The cluster API from Weaviate — 1 operation(s) for cluster.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -140,7 +148,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-discovery-api
-  name: Weaviate discovery API
+  name: Weaviate Discovery API
   description: The discovery API from Weaviate — 1 operation(s) for discovery.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -157,7 +165,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-distributedtasks-api
-  name: Weaviate distributedTasks API
+  name: Weaviate Distributed Tasks API
   description: The distributedTasks API from Weaviate — 1 operation(s) for distributedtasks.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags: []
@@ -173,7 +181,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-export-api
-  name: Weaviate export API
+  name: Weaviate Export API
   description: The export API from Weaviate — 2 operation(s) for export.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -190,7 +198,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-mcp-api
-  name: Weaviate mcp API
+  name: Weaviate MCP API
   description: The mcp API from Weaviate — 1 operation(s) for mcp.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -207,7 +215,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-meta-api
-  name: Weaviate meta API
+  name: Weaviate Meta API
   description: The meta API from Weaviate — 1 operation(s) for meta.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -224,7 +232,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-namespaces-api
-  name: Weaviate namespaces API
+  name: Weaviate Namespaces API
   description: The namespaces API from Weaviate — 2 operation(s) for namespaces.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -241,7 +249,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-nodes-api
-  name: Weaviate nodes API
+  name: Weaviate Nodes API
   description: The nodes API from Weaviate — 2 operation(s) for nodes.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -258,7 +266,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-objects-api
-  name: Weaviate objects API
+  name: Weaviate Objects API
   description: The objects API from Weaviate — 7 operation(s) for objects.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -275,7 +283,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-oidc-api
-  name: Weaviate oidc API
+  name: Weaviate Oidc API
   description: The oidc API from Weaviate — 1 operation(s) for oidc.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -292,7 +300,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-references-api
-  name: Weaviate references API
+  name: Weaviate References API
   description: The references API from Weaviate — 1 operation(s) for references.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -309,7 +317,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-replication-api
-  name: Weaviate replication API
+  name: Weaviate Replication API
   description: The replication API from Weaviate — 7 operation(s) for replication.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -326,7 +334,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-schema-api
-  name: Weaviate schema API
+  name: Weaviate Schema API
   description: The schema API from Weaviate — 12 operation(s) for schema.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -343,7 +351,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-tokenize-api
-  name: Weaviate tokenize API
+  name: Weaviate Tokenize API
   description: The tokenize API from Weaviate — 1 operation(s) for tokenize.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -360,7 +368,7 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 - aid: weaviate:weaviate-users-api
-  name: Weaviate users API
+  name: Weaviate Users API
   description: The users API from Weaviate — 6 operation(s) for users.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
@@ -411,8 +419,6 @@ apis:
   description: The Graph QL API from Weaviate — 2 operation(s) for graph ql.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - GraphQL
-  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI

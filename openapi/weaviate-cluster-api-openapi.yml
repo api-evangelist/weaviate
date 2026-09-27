@@ -52,17 +52,6 @@ paths:
         delay: 100
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     RaftStatistics:
       description: The definition of Raft statistics.
       properties:
@@ -103,16 +92,17 @@ components:
           type: string
         term:
           type: string
-    ClusterStatisticsResponse:
+    ErrorResponse:
       type: object
-      description: The cluster statistics of all of the Weaviate nodes
+      description: An error response returned by Weaviate endpoints.
       properties:
-        statistics:
+        error:
           type: array
           items:
-            $ref: '#/components/schemas/Statistics'
-        synchronized:
-          type: boolean
+            type: object
+            properties:
+              message:
+                type: string
     Statistics:
       description: The definition of node statistics.
       properties:
@@ -151,6 +141,16 @@ components:
           type: object
         raft:
           $ref: '#/components/schemas/RaftStatistics'
+    ClusterStatisticsResponse:
+      type: object
+      description: The cluster statistics of all of the Weaviate nodes
+      properties:
+        statistics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Statistics'
+        synchronized:
+          type: boolean
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -43,17 +43,34 @@ paths:
         delay: 100
 components:
   schemas:
-    ErrorResponse:
+    DistributedTaskUnit:
       type: object
-      description: An error response returned by Weaviate endpoints.
+      description: A unit of a distributed task.
       properties:
+        id:
+          type: string
+          description: The ID of the unit.
+        nodeId:
+          type: string
+          description: The node that owns this unit.
+        status:
+          type: string
+          description: The status of the unit.
+        progress:
+          type: number
+          format: float
+          description: The progress of the unit (0.0 to 1.0).
         error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
+          type: string
+          description: The error message if the unit failed.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The time when the unit was last updated.
+        finishedAt:
+          type: string
+          format: date-time
+          description: The time when the unit finished.
     DistributedTask:
       type: object
       description: Distributed task metadata.
@@ -98,34 +115,17 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/DistributedTask'
-    DistributedTaskUnit:
+    ErrorResponse:
       type: object
-      description: A unit of a distributed task.
+      description: An error response returned by Weaviate endpoints.
       properties:
-        id:
-          type: string
-          description: The ID of the unit.
-        nodeId:
-          type: string
-          description: The node that owns this unit.
-        status:
-          type: string
-          description: The status of the unit.
-        progress:
-          type: number
-          format: float
-          description: The progress of the unit (0.0 to 1.0).
         error:
-          type: string
-          description: The error message if the unit failed.
-        updatedAt:
-          type: string
-          format: date-time
-          description: The time when the unit was last updated.
-        finishedAt:
-          type: string
-          format: date-time
-          description: The time when the unit finished.
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

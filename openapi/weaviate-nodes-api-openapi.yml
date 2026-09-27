@@ -170,50 +170,6 @@ components:
           - 'null'
           format: int64
           description: Minimum number of replicas for the shard.
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    AsyncReplicationStatus:
-      description: The status of the async replication.
-      properties:
-        objectsPropagated:
-          type: number
-          format: uint64
-          description: The number of objects propagated in the most recent iteration.
-        startDiffTimeUnixMillis:
-          type: number
-          format: int64
-          description: The start time of the most recent iteration.
-        targetNode:
-          type: string
-          description: The target node of the replication, if set, otherwise empty.
-    NodesStatusResponse:
-      type: object
-      description: The status of all of the Weaviate nodes
-      properties:
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/NodeStatus'
-    NodeStats:
-      description: The summary of Weaviate's statistics.
-      properties:
-        shardCount:
-          type: number
-          format: int
-          description: The count of Weaviate's shards. To see this value, set `output` to `verbose`.
-        objectCount:
-          type: number
-          format: int64
-          description: The total number of objects in DB.
     NodeStatus:
       description: The definition of a backup node status response body
       properties:
@@ -252,6 +208,36 @@ components:
           - WriteOnly
           - ReadOnly
           - ScaleOut
+    NodeStats:
+      description: The summary of Weaviate's statistics.
+      properties:
+        shardCount:
+          type: number
+          format: int
+          description: The count of Weaviate's shards. To see this value, set `output` to `verbose`.
+        objectCount:
+          type: number
+          format: int64
+          description: The total number of objects in DB.
+    NodesStatusResponse:
+      type: object
+      description: The status of all of the Weaviate nodes
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/NodeStatus'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     BatchStats:
       description: The summary of a nodes batch queue congestion status.
       properties:
@@ -263,6 +249,20 @@ components:
           type: number
           format: int
           description: How many objects are approximately processed from the batch queue per second.
+    AsyncReplicationStatus:
+      description: The status of the async replication.
+      properties:
+        objectsPropagated:
+          type: number
+          format: uint64
+          description: The number of objects propagated in the most recent iteration.
+        startDiffTimeUnixMillis:
+          type: number
+          format: int64
+          description: The start time of the most recent iteration.
+        targetNode:
+          type: string
+          description: The target node of the replication, if set, otherwise empty.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

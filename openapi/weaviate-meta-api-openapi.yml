@@ -46,6 +46,17 @@ paths:
         delay: 100
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     Meta:
       type: object
       description: Contains meta information of the current Weaviate instance.
@@ -63,17 +74,6 @@ components:
         grpcMaxMessageSize:
           type: integer
           description: Max message size for GRPC connection in bytes.
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

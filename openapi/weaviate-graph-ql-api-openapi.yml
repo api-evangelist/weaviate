@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Weaviate REST Graphql API
+  title: Weaviate REST GraphQL API
   description: '# Introduction
 
     Weaviate is an open source, AI-native vector database that helps developers create intuitive and reliable AI-powered applications.'
@@ -111,6 +111,22 @@ components:
         variables:
           type: object
           description: Additional variables for the query.
+    JsonObject:
+      type: object
+      description: JSON object value.
+    GraphQLResponse:
+      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
+      properties:
+        data:
+          type: object
+          description: GraphQL data object.
+          additionalProperties:
+            $ref: '#/components/schemas/JsonObject'
+        errors:
+          type: array
+          description: Array with errors.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
     GraphQLError:
       description: An error response caused by a GraphQL query.
       properties:
@@ -131,6 +147,11 @@ components:
           type: array
           items:
             type: string
+    GraphQLQueries:
+      type: array
+      description: A list of GraphQL queries.
+      items:
+        $ref: '#/components/schemas/GraphQLQuery'
     ErrorResponse:
       type: object
       description: An error response returned by Weaviate endpoints.
@@ -142,32 +163,11 @@ components:
             properties:
               message:
                 type: string
-    GraphQLQueries:
-      type: array
-      description: A list of GraphQL queries.
-      items:
-        $ref: '#/components/schemas/GraphQLQuery'
-    JsonObject:
-      type: object
-      description: JSON object value.
     GraphQLResponses:
       type: array
       description: A list of GraphQL responses.
       items:
         $ref: '#/components/schemas/GraphQLResponse'
-    GraphQLResponse:
-      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
-      properties:
-        data:
-          type: object
-          description: GraphQL data object.
-          additionalProperties:
-            $ref: '#/components/schemas/JsonObject'
-        errors:
-          type: array
-          description: Array with errors.
-          items:
-            $ref: '#/components/schemas/GraphQLError'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
