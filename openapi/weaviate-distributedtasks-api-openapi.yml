@@ -71,6 +71,13 @@ components:
           type: string
           format: date-time
           description: The time when the unit finished.
+    DistributedTasks:
+      type: object
+      description: Active distributed tasks by namespace.
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/DistributedTask'
     DistributedTask:
       type: object
       description: Distributed task metadata.
@@ -108,13 +115,6 @@ components:
           description: Units of the task. Only present for tasks that use unit tracking.
           items:
             $ref: '#/components/schemas/DistributedTaskUnit'
-    DistributedTasks:
-      type: object
-      description: Active distributed tasks by namespace.
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/DistributedTask'
     ErrorResponse:
       type: object
       description: An error response returned by Weaviate endpoints.

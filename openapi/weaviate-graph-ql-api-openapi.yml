@@ -98,35 +98,11 @@ paths:
         delay: 100
 components:
   schemas:
-    GraphQLQuery:
-      type: object
-      description: 'GraphQL query based on: http://facebook.github.io/graphql/.'
-      properties:
-        operationName:
-          type: string
-          description: The name of the operation if multiple exist in the query.
-        query:
-          type: string
-          description: Query based on GraphQL syntax.
-        variables:
-          type: object
-          description: Additional variables for the query.
-    JsonObject:
-      type: object
-      description: JSON object value.
-    GraphQLResponse:
-      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
-      properties:
-        data:
-          type: object
-          description: GraphQL data object.
-          additionalProperties:
-            $ref: '#/components/schemas/JsonObject'
-        errors:
-          type: array
-          description: Array with errors.
-          items:
-            $ref: '#/components/schemas/GraphQLError'
+    GraphQLResponses:
+      type: array
+      description: A list of GraphQL responses.
+      items:
+        $ref: '#/components/schemas/GraphQLResponse'
     GraphQLError:
       description: An error response caused by a GraphQL query.
       properties:
@@ -147,11 +123,19 @@ components:
           type: array
           items:
             type: string
-    GraphQLQueries:
-      type: array
-      description: A list of GraphQL queries.
-      items:
-        $ref: '#/components/schemas/GraphQLQuery'
+    GraphQLResponse:
+      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
+      properties:
+        data:
+          type: object
+          description: GraphQL data object.
+          additionalProperties:
+            $ref: '#/components/schemas/JsonObject'
+        errors:
+          type: array
+          description: Array with errors.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
     ErrorResponse:
       type: object
       description: An error response returned by Weaviate endpoints.
@@ -163,11 +147,27 @@ components:
             properties:
               message:
                 type: string
-    GraphQLResponses:
+    JsonObject:
+      type: object
+      description: JSON object value.
+    GraphQLQuery:
+      type: object
+      description: 'GraphQL query based on: http://facebook.github.io/graphql/.'
+      properties:
+        operationName:
+          type: string
+          description: The name of the operation if multiple exist in the query.
+        query:
+          type: string
+          description: Query based on GraphQL syntax.
+        variables:
+          type: object
+          description: Additional variables for the query.
+    GraphQLQueries:
       type: array
-      description: A list of GraphQL responses.
+      description: A list of GraphQL queries.
       items:
-        $ref: '#/components/schemas/GraphQLResponse'
+        $ref: '#/components/schemas/GraphQLQuery'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

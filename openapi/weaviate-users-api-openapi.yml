@@ -420,6 +420,60 @@ paths:
         delay: 100
 components:
   schemas:
+    GroupType:
+      type: string
+      description: If the group contains OIDC or database users.
+      enum:
+      - oidc
+    Role:
+      type: object
+      required:
+      - name
+      - permissions
+      properties:
+        name:
+          type: string
+          description: The name (ID) of the role.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    UserOwnInfo:
+      type: object
+      required:
+      - username
+      properties:
+        groups:
+          type: array
+          description: The groups associated with the user.
+          items:
+            type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        username:
+          type: string
+          description: The name (ID) of the user.
+    UserApiKey:
+      type: object
+      required:
+      - apikey
+      properties:
+        apikey:
+          type: string
+          description: The API key associated with the user.
     DBUserInfo:
       type: object
       required:
@@ -466,43 +520,6 @@ components:
         namespace:
           type: string
           description: The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise.
-    UserApiKey:
-      type: object
-      required:
-      - apikey
-      properties:
-        apikey:
-          type: string
-          description: The API key associated with the user.
-    GroupType:
-      type: string
-      description: If the group contains OIDC or database users.
-      enum:
-      - oidc
-    Role:
-      type: object
-      required:
-      - name
-      - permissions
-      properties:
-        name:
-          type: string
-          description: The name (ID) of the role.
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     Permission:
       type: object
       description: Permissions attached to a role.
@@ -675,23 +692,6 @@ components:
           - read_mcp
           - update_mcp
           - manage_namespaces
-    UserOwnInfo:
-      type: object
-      required:
-      - username
-      properties:
-        groups:
-          type: array
-          description: The groups associated with the user.
-          items:
-            type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        username:
-          type: string
-          description: The name (ID) of the user.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

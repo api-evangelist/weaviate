@@ -199,17 +199,6 @@ paths:
         delay: 100
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     NamespaceListResponse:
       type: array
       description: Response object containing a list of namespaces.
@@ -222,6 +211,17 @@ components:
         name:
           type: string
           description: The unique name of the namespace.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -89,17 +89,6 @@ components:
         tenant:
           type: string
           description: Name of the reference tenant.
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     BatchReferenceResponse:
       allOf:
       - $ref: '#/components/schemas/BatchReference'
@@ -116,6 +105,17 @@ components:
                 default: SUCCESS
               errors:
                 $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

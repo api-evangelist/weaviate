@@ -96,6 +96,16 @@ paths:
         delay: 100
 components:
   schemas:
+    GeoCoordinates:
+      properties:
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
     WhereFilter:
       type: object
       description: Filter search results using a where filter.
@@ -205,18 +215,17 @@ components:
             type: string
         valueGeoRange:
           $ref: '#/components/schemas/WhereFilterGeoRange'
-    WhereFilterGeoRange:
+    ErrorResponse:
       type: object
-      description: Filter within a distance of a georange.
+      description: An error response returned by Weaviate endpoints.
       properties:
-        geoCoordinates:
-          $ref: '#/components/schemas/GeoCoordinates'
-        distance:
-          type: object
-          properties:
-            max:
-              type: number
-              format: float64
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     Classification:
       type: object
       description: Manage classifications, trigger them and view status of past classifications.
@@ -274,6 +283,18 @@ components:
               $ref: '#/components/schemas/WhereFilter'
             targetWhere:
               $ref: '#/components/schemas/WhereFilter'
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
     ClassificationMeta:
       type: object
       description: Additional information to a specific classification.
@@ -300,27 +321,6 @@ components:
           type: integer
           description: Number of objects which could not be classified - see error message for details.
           example: 7
-    GeoCoordinates:
-      properties:
-        latitude:
-          type: number
-          format: float
-          description: The latitude of the point on earth in decimal form.
-        longitude:
-          type: number
-          format: float
-          description: The longitude of the point on earth in decimal form.
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

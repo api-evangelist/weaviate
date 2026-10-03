@@ -74,20 +74,17 @@ components:
         stopwordPreset:
           type: string
           description: Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets.
-    TokenizeResponse:
+    ErrorResponse:
       type: object
-      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
+      description: An error response returned by Weaviate endpoints.
       properties:
-        indexed:
+        error:
           type: array
-          description: The tokens as they would be stored in the inverted index.
           items:
-            type: string
-        query:
-          type: array
-          description: The tokens as they would be used for query matching (e.g., after stopword removal).
-          items:
-            type: string
+            type: object
+            properties:
+              message:
+                type: string
     TokenizeRequest:
       type: object
       description: Request body for the generic tokenize endpoint.
@@ -122,6 +119,20 @@ components:
             type: array
             items:
               type: string
+    TokenizeResponse:
+      type: object
+      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
+      properties:
+        indexed:
+          type: array
+          description: The tokens as they would be stored in the inverted index.
+          items:
+            type: string
+        query:
+          type: array
+          description: The tokens as they would be used for query matching (e.g., after stopword removal).
+          items:
+            type: string
     StopwordConfig:
       type: object
       description: Fine-grained control over stopword list usage.
@@ -139,17 +150,6 @@ components:
           description: 'Stopwords to be removed from consideration (default: []). Can be any array of custom strings.'
           items:
             type: string
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

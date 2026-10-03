@@ -976,17 +976,22 @@ paths:
         delay: 100
 components:
   schemas:
+    GroupType:
+      type: string
+      description: If the group contains OIDC or database users.
+      enum:
+      - oidc
+    RolesListResponse:
+      type: array
+      description: List of roles.
+      items:
+        $ref: '#/components/schemas/Role'
     UserTypeOutput:
       type: string
       description: The type of the user. `db_user` users are created through the `users` API, `db_env_user` users are created through environment variables, and `oidc` users are managed by an external OIDC provider.
       enum:
       - db_user
       - db_env_user
-      - oidc
-    GroupType:
-      type: string
-      description: If the group contains OIDC or database users.
-      enum:
       - oidc
     UserTypeInput:
       type: string
@@ -1190,11 +1195,6 @@ components:
           - read_mcp
           - update_mcp
           - manage_namespaces
-    RolesListResponse:
-      type: array
-      description: List of roles.
-      items:
-        $ref: '#/components/schemas/Role'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
