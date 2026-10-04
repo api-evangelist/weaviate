@@ -96,6 +96,55 @@ paths:
         delay: 100
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
+    ClassificationMeta:
+      type: object
+      description: Additional information to a specific classification.
+      properties:
+        started:
+          type: string
+          format: date-time
+          description: Time when this classification was started.
+          example: '2017-07-21T17:32:28Z'
+        completed:
+          type: string
+          format: date-time
+          description: Time when this classification finished.
+          example: '2017-07-21T17:32:28Z'
+        count:
+          type: integer
+          description: Number of objects which were taken into consideration for classification.
+          example: 147
+        countSucceeded:
+          type: integer
+          description: Number of objects successfully classified.
+          example: 140
+        countFailed:
+          type: integer
+          description: Number of objects which could not be classified - see error message for details.
+          example: 7
     GeoCoordinates:
       properties:
         latitude:
@@ -106,6 +155,63 @@ components:
           type: number
           format: float
           description: The longitude of the point on earth in decimal form.
+    Classification:
+      type: object
+      description: Manage classifications, trigger them and view status of past classifications.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID to uniquely identify this classification run.
+          example: ee722219-b8ec-4db1-8f8d-5150bb1a9e0c
+        class:
+          type: string
+          description: The name of the collection (class) which is used in this classification.
+          example: City
+        classifyProperties:
+          type: array
+          description: Which ref-property to set as part of the classification.
+          example:
+          - inCountry
+          items:
+            type: string
+        basedOnProperties:
+          type: array
+          description: Base the text-based classification on these fields (of type text).
+          example:
+          - description
+          items:
+            type: string
+        status:
+          type: string
+          description: Status of this classification.
+          enum:
+          - running
+          - completed
+          - failed
+          example: running
+        meta:
+          $ref: '#/components/schemas/ClassificationMeta'
+        type:
+          type: string
+          description: Which algorithm to use for classifications.
+        settings:
+          type: object
+          description: Classification-type specific settings.
+        error:
+          type: string
+          description: Error message if status == failed.
+          default: ''
+          example: 'classify xzy: something went wrong'
+        filters:
+          type: object
+          properties:
+            sourceWhere:
+              $ref: '#/components/schemas/WhereFilter'
+            trainingSetWhere:
+              $ref: '#/components/schemas/WhereFilter'
+            targetWhere:
+              $ref: '#/components/schemas/WhereFilter'
     WhereFilter:
       type: object
       description: Filter search results using a where filter.
@@ -215,112 +321,6 @@ components:
             type: string
         valueGeoRange:
           $ref: '#/components/schemas/WhereFilterGeoRange'
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    Classification:
-      type: object
-      description: Manage classifications, trigger them and view status of past classifications.
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: ID to uniquely identify this classification run.
-          example: ee722219-b8ec-4db1-8f8d-5150bb1a9e0c
-        class:
-          type: string
-          description: The name of the collection (class) which is used in this classification.
-          example: City
-        classifyProperties:
-          type: array
-          description: Which ref-property to set as part of the classification.
-          example:
-          - inCountry
-          items:
-            type: string
-        basedOnProperties:
-          type: array
-          description: Base the text-based classification on these fields (of type text).
-          example:
-          - description
-          items:
-            type: string
-        status:
-          type: string
-          description: Status of this classification.
-          enum:
-          - running
-          - completed
-          - failed
-          example: running
-        meta:
-          $ref: '#/components/schemas/ClassificationMeta'
-        type:
-          type: string
-          description: Which algorithm to use for classifications.
-        settings:
-          type: object
-          description: Classification-type specific settings.
-        error:
-          type: string
-          description: Error message if status == failed.
-          default: ''
-          example: 'classify xzy: something went wrong'
-        filters:
-          type: object
-          properties:
-            sourceWhere:
-              $ref: '#/components/schemas/WhereFilter'
-            trainingSetWhere:
-              $ref: '#/components/schemas/WhereFilter'
-            targetWhere:
-              $ref: '#/components/schemas/WhereFilter'
-    WhereFilterGeoRange:
-      type: object
-      description: Filter within a distance of a georange.
-      properties:
-        geoCoordinates:
-          $ref: '#/components/schemas/GeoCoordinates'
-        distance:
-          type: object
-          properties:
-            max:
-              type: number
-              format: float64
-    ClassificationMeta:
-      type: object
-      description: Additional information to a specific classification.
-      properties:
-        started:
-          type: string
-          format: date-time
-          description: Time when this classification was started.
-          example: '2017-07-21T17:32:28Z'
-        completed:
-          type: string
-          format: date-time
-          description: Time when this classification finished.
-          example: '2017-07-21T17:32:28Z'
-        count:
-          type: integer
-          description: Number of objects which were taken into consideration for classification.
-          example: 147
-        countSucceeded:
-          type: integer
-          description: Number of objects successfully classified.
-          example: 140
-        countFailed:
-          type: integer
-          description: Number of objects which could not be classified - see error message for details.
-          example: 7
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

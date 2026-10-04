@@ -568,6 +568,38 @@ paths:
         delay: 100
 components:
   schemas:
+    ReplicationReplicateForceDeleteRequest:
+      type: object
+      description: Specifies the parameters available when force deleting replication operations.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier (ID) of the replication operation to be forcefully deleted.
+        collection:
+          type: string
+          description: The name of the collection to which the shard being replicated belongs.
+        shard:
+          type: string
+          description: The identifier of the shard involved in the replication operations.
+        node:
+          type: string
+          description: The name of the target node where the replication operations are registered.
+        dryRun:
+          type: boolean
+          description: If true, the operation will not actually delete anything but will return the expected outcome of the deletion.
+          default: false
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     ReplicationReplicateDetailsReplicaResponse:
       description: Provides a comprehensive overview of a specific replication operation, detailing its unique ID, the involved collection, shard, source and target nodes, transfer type, current status, and optionally, its status history.
       required:
@@ -621,37 +653,6 @@ components:
           type: integer
           format: int64
           description: The UNIX timestamp in ms when the replication operation was initiated. This is an approximate time and so should not be used for precise timing.
-    ReplicationReplicateReplicaResponse:
-      type: object
-      description: Contains the unique identifier for a successfully initiated asynchronous replica movement operation. This ID can be used to track the progress of the operation.
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier (ID) assigned to the registered replication operation.
-    ReplicationScaleApplyResponse:
-      type: object
-      description: Response for the POST /replication/scale endpoint containing the list of initiated shard copy operation IDs.
-      required:
-      - operationIds
-      - planId
-      - collection
-      properties:
-        operationIds:
-          type: array
-          description: List of shard copy operation IDs created during scaling.
-          items:
-            type: string
-            format: uuid
-        planId:
-          type: string
-          format: uuid
-          description: The unique identifier of the replication scaling plan that generated these operations.
-        collection:
-          type: string
-          description: The name of the collection associated with this replication scaling plan.
     ReplicationReplicateReplicaRequest:
       type: object
       description: Specifies the parameters required to initiate a shard replica movement operation between two nodes for a given collection and shard. This request defines the source and target node, the collection and type of transfer.
@@ -680,6 +681,38 @@ components:
           - COPY
           - MOVE
           default: COPY
+    ReplicationScaleApplyResponse:
+      type: object
+      description: Response for the POST /replication/scale endpoint containing the list of initiated shard copy operation IDs.
+      required:
+      - operationIds
+      - planId
+      - collection
+      properties:
+        operationIds:
+          type: array
+          description: List of shard copy operation IDs created during scaling.
+          items:
+            type: string
+            format: uuid
+        planId:
+          type: string
+          format: uuid
+          description: The unique identifier of the replication scaling plan that generated these operations.
+        collection:
+          type: string
+          description: The name of the collection associated with this replication scaling plan.
+    ReplicationReplicateDetailsReplicaStatusError:
+      type: object
+      description: Represents an error encountered during a replication operation, including its timestamp and a human-readable message.
+      properties:
+        whenErroredUnixMs:
+          type: integer
+          format: int64
+          description: The unix timestamp in ms when the error occurred. This is an approximate time and so should not be used for precise timing.
+        message:
+          type: string
+          description: A human-readable message describing the error.
     ReplicationReplicateForceDeleteResponse:
       type: object
       description: Provides the UUIDs that were successfully force deleted as part of the replication operation. If dryRun is true, this will return the expected outcome without actually deleting anything.
@@ -693,17 +726,38 @@ components:
         dryRun:
           type: boolean
           description: Indicates whether the operation was a dry run (true) or an actual deletion (false).
-    ReplicationReplicateDetailsReplicaStatusError:
+    ReplicationShardReplicas:
       type: object
-      description: Represents an error encountered during a replication operation, including its timestamp and a human-readable message.
+      description: Represents a shard and lists the nodes that currently host its replicas.
       properties:
-        whenErroredUnixMs:
-          type: integer
-          format: int64
-          description: The unix timestamp in ms when the error occurred. This is an approximate time and so should not be used for precise timing.
-        message:
+        shard:
           type: string
-          description: A human-readable message describing the error.
+        replicas:
+          type: array
+          items:
+            type: string
+    ReplicationShardingState:
+      type: object
+      description: Details the sharding layout for a specific collection, mapping each shard to its set of replicas across the cluster.
+      properties:
+        collection:
+          type: string
+          description: The name of the collection.
+        shards:
+          type: array
+          description: An array detailing each shard within the collection and the nodes hosting its replicas.
+          items:
+            $ref: '#/components/schemas/ReplicationShardReplicas'
+    ReplicationReplicateReplicaResponse:
+      type: object
+      description: Contains the unique identifier for a successfully initiated asynchronous replica movement operation. This ID can be used to track the progress of the operation.
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier (ID) assigned to the registered replication operation.
     ReplicationReplicateDetailsReplicaStatus:
       type: object
       description: Represents the current or historical status of a shard replica involved in a replication operation, including its operational state and any associated errors.
@@ -727,17 +781,12 @@ components:
           description: A list of error messages encountered by this replica during the replication operation, if any.
           items:
             $ref: '#/components/schemas/ReplicationReplicateDetailsReplicaStatusError'
-    ErrorResponse:
+    ReplicationShardingStateResponse:
       type: object
-      description: An error response returned by Weaviate endpoints.
+      description: Provides the detailed sharding state for one or more collections, including the distribution of shards and their replicas across the cluster nodes.
       properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
+        shardingState:
+          $ref: '#/components/schemas/ReplicationShardingState'
     ReplicationScalePlan:
       type: object
       description: Defines a complete plan for scaling replication within a collection. Each shard entry specifies nodes to remove and nodes to add. Added nodes may either be initialized empty (null) or created by replicating data from a source node specified as a string. If a source node is also marked for removal in the same shard, it represents a move operation and can only be used once as a source for that shard. If a source node is not marked for removal, it represents a copy operation and can be used as the source for multiple additions in that shard. Nodes listed in 'removeNodes' cannot also appear as targets in 'addNodes' for the same shard, and the same node cannot be specified for both addition and removal in a single shard.
@@ -773,55 +822,6 @@ components:
                   - string
                   - 'null'
                   description: Defines how the new replica should be created. If null, an empty shard is created. If a string, it specifies the source node from which data for this shard should be replicated.
-    ReplicationShardingState:
-      type: object
-      description: Details the sharding layout for a specific collection, mapping each shard to its set of replicas across the cluster.
-      properties:
-        collection:
-          type: string
-          description: The name of the collection.
-        shards:
-          type: array
-          description: An array detailing each shard within the collection and the nodes hosting its replicas.
-          items:
-            $ref: '#/components/schemas/ReplicationShardReplicas'
-    ReplicationShardReplicas:
-      type: object
-      description: Represents a shard and lists the nodes that currently host its replicas.
-      properties:
-        shard:
-          type: string
-        replicas:
-          type: array
-          items:
-            type: string
-    ReplicationReplicateForceDeleteRequest:
-      type: object
-      description: Specifies the parameters available when force deleting replication operations.
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier (ID) of the replication operation to be forcefully deleted.
-        collection:
-          type: string
-          description: The name of the collection to which the shard being replicated belongs.
-        shard:
-          type: string
-          description: The identifier of the shard involved in the replication operations.
-        node:
-          type: string
-          description: The name of the target node where the replication operations are registered.
-        dryRun:
-          type: boolean
-          description: If true, the operation will not actually delete anything but will return the expected outcome of the deletion.
-          default: false
-    ReplicationShardingStateResponse:
-      type: object
-      description: Provides the detailed sharding state for one or more collections, including the distribution of shards and their replicas across the cluster nodes.
-      properties:
-        shardingState:
-          $ref: '#/components/schemas/ReplicationShardingState'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

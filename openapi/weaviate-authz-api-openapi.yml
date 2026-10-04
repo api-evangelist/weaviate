@@ -981,23 +981,23 @@ components:
       description: If the group contains OIDC or database users.
       enum:
       - oidc
-    RolesListResponse:
-      type: array
-      description: List of roles.
-      items:
-        $ref: '#/components/schemas/Role'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     UserTypeOutput:
       type: string
       description: The type of the user. `db_user` users are created through the `users` API, `db_env_user` users are created through environment variables, and `oidc` users are managed by an external OIDC provider.
       enum:
       - db_user
       - db_env_user
-      - oidc
-    UserTypeInput:
-      type: string
-      description: The type of the user. `db` users are managed by Weaviate, `oidc` users are managed by an external OIDC provider.
-      enum:
-      - db
       - oidc
     Role:
       type: object
@@ -1012,17 +1012,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Permission'
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     Permission:
       type: object
       description: Permissions attached to a role.
@@ -1195,6 +1184,17 @@ components:
           - read_mcp
           - update_mcp
           - manage_namespaces
+    RolesListResponse:
+      type: array
+      description: List of roles.
+      items:
+        $ref: '#/components/schemas/Role'
+    UserTypeInput:
+      type: string
+      description: The type of the user. `db` users are managed by Weaviate, `oidc` users are managed by an external OIDC provider.
+      enum:
+      - db
+      - oidc
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

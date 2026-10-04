@@ -1366,113 +1366,39 @@ paths:
         delay: 100
 components:
   schemas:
-    AdditionalProperties:
+    Object:
       type: object
-      description: (Response only) Additional meta information about a single object.
-      additionalProperties:
-        type: object
-    PropertySchema:
-      type: object
-      description: Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection.
-    ReferenceMetaClassification:
-      description: This meta field contains additional info about the classified reference property
       properties:
-        overallCount:
-          type: number
+        class:
+          type: string
+          description: Name of the collection (class) the object belongs to.
+        vectorWeights:
+          $ref: '#/components/schemas/VectorWeights'
+        properties:
+          $ref: '#/components/schemas/PropertySchema'
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the object.
+        creationTimeUnix:
+          type: integer
           format: int64
-          description: overall neighbors checked as part of the classification. In most cases this will equal k, but could be lower than k - for example if not enough data was present
-        winningCount:
-          type: number
+          description: (Response only) Timestamp of creation of this object in milliseconds since epoch UTC.
+        lastUpdateTimeUnix:
+          type: integer
           format: int64
-          description: size of the winning group, a number between 1..k
-        losingCount:
-          type: number
-          format: int64
-          description: size of the losing group, can be 0 if the winning group size equals k
-        closestOverallDistance:
-          type: number
-          format: float32
-          description: The lowest distance of any neighbor, regardless of whether they were in the winning or losing group
-        winningDistance:
-          type: number
-          format: float32
-          description: deprecated - do not use, to be removed in 0.23.0
-        meanWinningDistance:
-          type: number
-          format: float32
-          description: Mean distance of all neighbors from the winning group
-        closestWinningDistance:
-          type: number
-          format: float32
-          description: Closest distance of a neighbor from the winning group
-        closestLosingDistance:
-          type: number
-          format: float32
-          description: The lowest distance of a neighbor in the losing group. Optional. If k equals the size of the winning group, there is no losing group
-        losingDistance:
-          type: number
-          format: float32
-          description: deprecated - do not use, to be removed in 0.23.0
-        meanLosingDistance:
-          type: number
-          format: float32
-          description: Mean distance of all neighbors from the losing group. Optional. If k equals the size of the winning group, there is no losing group.
-    ErrorResponse:
+          description: (Response only) Timestamp of the last object update in milliseconds since epoch UTC.
+        vector:
+          $ref: '#/components/schemas/C11yVector'
+        vectors:
+          $ref: '#/components/schemas/Vectors'
+        tenant:
+          type: string
+          description: The name of the tenant the object belongs to.
+        additional:
+          $ref: '#/components/schemas/AdditionalProperties'
+    BatchDelete:
       type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    ObjectsGetResponse:
-      allOf:
-      - $ref: '#/components/schemas/Object'
-      - properties:
-          deprecations:
-            type: array
-            items:
-              $ref: '#/components/schemas/Deprecation'
-      - properties:
-          result:
-            format: object
-            description: Results for this specific object.
-            properties:
-              status:
-                type: string
-                enum:
-                - SUCCESS
-                - FAILED
-                default: SUCCESS
-              errors:
-                $ref: '#/components/schemas/ErrorResponse'
-    Vectors:
-      type: object
-      description: A map of named vectors for multi-vector representations.
-      additionalProperties:
-        $ref: '#/components/schemas/Vector'
-    GeoCoordinates:
-      properties:
-        latitude:
-          type: number
-          format: float
-          description: The latitude of the point on earth in decimal form.
-        longitude:
-          type: number
-          format: float
-          description: The longitude of the point on earth in decimal form.
-    C11yVector:
-      type: array
-      description: A vector representation of the object in the Contextionary. If provided at object creation, this wil take precedence over any vectorizer setting.
-      items:
-        type: number
-        format: float
-    BatchDeleteResponse:
-      type: object
-      description: Delete Objects response.
       properties:
         match:
           type: object
@@ -1494,93 +1420,48 @@ components:
           description: Timestamp of deletion in milliseconds since epoch UTC.
         dryRun:
           type: boolean
-          description: If true, objects will not be deleted yet, but merely listed. Defaults to false.
+          description: If true, the call will show which objects would be matched using the specified filter without deleting any objects. <br/><br/>Depending on the configured verbosity, you will either receive a count of affected objects, or a list of IDs.
           default: false
-        results:
-          type: object
-          properties:
-            matches:
-              type: number
-              format: int64
-              description: How many objects were matched by the filter.
-            limit:
-              type: number
-              format: int64
-              description: The most amount of objects that can be deleted in a single query, equals [`QUERY_MAXIMUM_RESULTS`](https://docs.weaviate.io/deploy/configuration/env-vars#QUERY_MAXIMUM_RESULTS).
-            successful:
-              type: number
-              format: int64
-              description: How many objects were successfully deleted in this round.
-            failed:
-              type: number
-              format: int64
-              description: How many objects should have been deleted but could not be deleted.
-            objects:
-              type: array
-              description: With output set to `minimal` only objects with error occurred will the be described. Successfully deleted objects would be omitted. Output set to `verbose` will list all of the objects with their respective statuses.
-              items:
-                format: object
-                description: Results for this specific Object.
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                    description: The UUID of the object.
-                  status:
-                    type: string
-                    enum:
-                    - SUCCESS
-                    - DRYRUN
-                    - FAILED
-                    default: SUCCESS
-                  errors:
-                    $ref: '#/components/schemas/ErrorResponse'
-    VectorWeights:
+    AdditionalProperties:
       type: object
-      description: 'Allow custom overrides of vector weights as math expressions. E.g. `pancake`: `7` will set the weight for the word pancake to 7 in the vectorization, whereas `w * 3` would triple the originally calculated word. This is an open object, with OpenAPI Specification 3.0 this will be more detailed. See Weaviate docs for more info. In the future this will become a key/value (string/string) object.'
+      description: (Response only) Additional meta information about a single object.
+      additionalProperties:
+        type: object
     Vector:
       type: object
       description: A vector representation of the object. If provided at object creation, this wil take precedence over any vectorizer setting.
-    Deprecation:
+    C11yVector:
+      type: array
+      description: A vector representation of the object in the Contextionary. If provided at object creation, this wil take precedence over any vectorizer setting.
+      items:
+        type: number
+        format: float
+    Vectors:
       type: object
-      properties:
-        id:
-          type: string
-          description: The id that uniquely identifies this particular deprecation (mostly used internally).
-        status:
-          type: string
-          description: Whether the problematic API functionality is deprecated (planned to be removed) or already removed.
-        apiType:
-          type: string
-          description: 'Describes which API is affected, usually one of: REST, GraphQL and gRPC.'
-        msg:
-          type: string
-          description: What this deprecation is about.
-        mitigation:
-          type: string
-          description: User-required object to not be affected by the (planned) removal.
-        sinceVersion:
-          type: string
-          description: The deprecation was introduced in this version.
-        plannedRemovalVersion:
-          type: string
-          description: A best-effort guess of which upcoming version will remove the feature entirely.
-        removedIn:
-          type: string
-          description: If the feature has already been removed, it was removed in this version.
-        removedTime:
-          type: string
-          format: date-time
-          description: If the feature has already been removed, it was removed at this timestamp.
-        sinceTime:
-          type: string
-          format: date-time
-          description: The deprecation was introduced at this timestamp.
-        locations:
-          type: array
-          description: The locations within the specified API affected by this deprecation.
-          items:
-            type: string
+      description: A map of named vectors for multi-vector representations.
+      additionalProperties:
+        $ref: '#/components/schemas/Vector'
+    ObjectsGetResponse:
+      allOf:
+      - $ref: '#/components/schemas/Object'
+      - properties:
+          deprecations:
+            type: array
+            items:
+              $ref: '#/components/schemas/Deprecation'
+      - properties:
+          result:
+            format: object
+            description: Results for this specific object.
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAILED
+                default: SUCCESS
+              errors:
+                $ref: '#/components/schemas/ErrorResponse'
     SingleRef:
       description: Either set beacon (direct reference) or set collection (class) and schema (concept reference)
       properties:
@@ -1600,40 +1481,12 @@ components:
           description: If using a direct reference, this read-only fields provides a link to the referenced resource. If 'origin' is globally configured, an absolute URI is shown - a relative URI otherwise.
         classification:
           $ref: '#/components/schemas/ReferenceMetaClassification'
-    ObjectsListResponse:
+    VectorWeights:
       type: object
-      description: List of objects.
-      properties:
-        objects:
-          type: array
-          description: The actual list of objects.
-          items:
-            $ref: '#/components/schemas/Object'
-        deprecations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Deprecation'
-        totalResults:
-          type: integer
-          format: int64
-          description: The total number of objects for the query. The number of items in a response may be smaller due to paging.
-    WhereFilterGeoRange:
+      description: 'Allow custom overrides of vector weights as math expressions. E.g. `pancake`: `7` will set the weight for the word pancake to 7 in the vectorization, whereas `w * 3` would triple the originally calculated word. This is an open object, with OpenAPI Specification 3.0 this will be more detailed. See Weaviate docs for more info. In the future this will become a key/value (string/string) object.'
+    PropertySchema:
       type: object
-      description: Filter within a distance of a georange.
-      properties:
-        geoCoordinates:
-          $ref: '#/components/schemas/GeoCoordinates'
-        distance:
-          type: object
-          properties:
-            max:
-              type: number
-              format: float64
-    MultipleRef:
-      type: array
-      description: Multiple instances of references to other objects.
-      items:
-        $ref: '#/components/schemas/SingleRef'
+      description: Names and values of an individual property. A returned response may also contain additional metadata, such as from classification or feature projection.
     WhereFilter:
       type: object
       description: Filter search results using a where filter.
@@ -1743,39 +1596,9 @@ components:
             type: string
         valueGeoRange:
           $ref: '#/components/schemas/WhereFilterGeoRange'
-    Object:
+    BatchDeleteResponse:
       type: object
-      properties:
-        class:
-          type: string
-          description: Name of the collection (class) the object belongs to.
-        vectorWeights:
-          $ref: '#/components/schemas/VectorWeights'
-        properties:
-          $ref: '#/components/schemas/PropertySchema'
-        id:
-          type: string
-          format: uuid
-          description: The UUID of the object.
-        creationTimeUnix:
-          type: integer
-          format: int64
-          description: (Response only) Timestamp of creation of this object in milliseconds since epoch UTC.
-        lastUpdateTimeUnix:
-          type: integer
-          format: int64
-          description: (Response only) Timestamp of the last object update in milliseconds since epoch UTC.
-        vector:
-          $ref: '#/components/schemas/C11yVector'
-        vectors:
-          $ref: '#/components/schemas/Vectors'
-        tenant:
-          type: string
-          description: The name of the tenant the object belongs to.
-        additional:
-          $ref: '#/components/schemas/AdditionalProperties'
-    BatchDelete:
-      type: object
+      description: Delete Objects response.
       properties:
         match:
           type: object
@@ -1797,8 +1620,185 @@ components:
           description: Timestamp of deletion in milliseconds since epoch UTC.
         dryRun:
           type: boolean
-          description: If true, the call will show which objects would be matched using the specified filter without deleting any objects. <br/><br/>Depending on the configured verbosity, you will either receive a count of affected objects, or a list of IDs.
+          description: If true, objects will not be deleted yet, but merely listed. Defaults to false.
           default: false
+        results:
+          type: object
+          properties:
+            matches:
+              type: number
+              format: int64
+              description: How many objects were matched by the filter.
+            limit:
+              type: number
+              format: int64
+              description: The most amount of objects that can be deleted in a single query, equals [`QUERY_MAXIMUM_RESULTS`](https://docs.weaviate.io/deploy/configuration/env-vars#QUERY_MAXIMUM_RESULTS).
+            successful:
+              type: number
+              format: int64
+              description: How many objects were successfully deleted in this round.
+            failed:
+              type: number
+              format: int64
+              description: How many objects should have been deleted but could not be deleted.
+            objects:
+              type: array
+              description: With output set to `minimal` only objects with error occurred will the be described. Successfully deleted objects would be omitted. Output set to `verbose` will list all of the objects with their respective statuses.
+              items:
+                format: object
+                description: Results for this specific Object.
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The UUID of the object.
+                  status:
+                    type: string
+                    enum:
+                    - SUCCESS
+                    - DRYRUN
+                    - FAILED
+                    default: SUCCESS
+                  errors:
+                    $ref: '#/components/schemas/ErrorResponse'
+    ObjectsListResponse:
+      type: object
+      description: List of objects.
+      properties:
+        objects:
+          type: array
+          description: The actual list of objects.
+          items:
+            $ref: '#/components/schemas/Object'
+        deprecations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deprecation'
+        totalResults:
+          type: integer
+          format: int64
+          description: The total number of objects for the query. The number of items in a response may be smaller due to paging.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    MultipleRef:
+      type: array
+      description: Multiple instances of references to other objects.
+      items:
+        $ref: '#/components/schemas/SingleRef'
+    ReferenceMetaClassification:
+      description: This meta field contains additional info about the classified reference property
+      properties:
+        overallCount:
+          type: number
+          format: int64
+          description: overall neighbors checked as part of the classification. In most cases this will equal k, but could be lower than k - for example if not enough data was present
+        winningCount:
+          type: number
+          format: int64
+          description: size of the winning group, a number between 1..k
+        losingCount:
+          type: number
+          format: int64
+          description: size of the losing group, can be 0 if the winning group size equals k
+        closestOverallDistance:
+          type: number
+          format: float32
+          description: The lowest distance of any neighbor, regardless of whether they were in the winning or losing group
+        winningDistance:
+          type: number
+          format: float32
+          description: deprecated - do not use, to be removed in 0.23.0
+        meanWinningDistance:
+          type: number
+          format: float32
+          description: Mean distance of all neighbors from the winning group
+        closestWinningDistance:
+          type: number
+          format: float32
+          description: Closest distance of a neighbor from the winning group
+        closestLosingDistance:
+          type: number
+          format: float32
+          description: The lowest distance of a neighbor in the losing group. Optional. If k equals the size of the winning group, there is no losing group
+        losingDistance:
+          type: number
+          format: float32
+          description: deprecated - do not use, to be removed in 0.23.0
+        meanLosingDistance:
+          type: number
+          format: float32
+          description: Mean distance of all neighbors from the losing group. Optional. If k equals the size of the winning group, there is no losing group.
+    GeoCoordinates:
+      properties:
+        latitude:
+          type: number
+          format: float
+          description: The latitude of the point on earth in decimal form.
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the point on earth in decimal form.
+    Deprecation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id that uniquely identifies this particular deprecation (mostly used internally).
+        status:
+          type: string
+          description: Whether the problematic API functionality is deprecated (planned to be removed) or already removed.
+        apiType:
+          type: string
+          description: 'Describes which API is affected, usually one of: REST, GraphQL and gRPC.'
+        msg:
+          type: string
+          description: What this deprecation is about.
+        mitigation:
+          type: string
+          description: User-required object to not be affected by the (planned) removal.
+        sinceVersion:
+          type: string
+          description: The deprecation was introduced in this version.
+        plannedRemovalVersion:
+          type: string
+          description: A best-effort guess of which upcoming version will remove the feature entirely.
+        removedIn:
+          type: string
+          description: If the feature has already been removed, it was removed in this version.
+        removedTime:
+          type: string
+          format: date-time
+          description: If the feature has already been removed, it was removed at this timestamp.
+        sinceTime:
+          type: string
+          format: date-time
+          description: The deprecation was introduced at this timestamp.
+        locations:
+          type: array
+          description: The locations within the specified API affected by this deprecation.
+          items:
+            type: string
+    WhereFilterGeoRange:
+      type: object
+      description: Filter within a distance of a georange.
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        distance:
+          type: object
+          properties:
+            max:
+              type: number
+              format: float64
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

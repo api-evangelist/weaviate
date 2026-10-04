@@ -98,11 +98,17 @@ paths:
         delay: 100
 components:
   schemas:
-    GraphQLResponses:
-      type: array
-      description: A list of GraphQL responses.
-      items:
-        $ref: '#/components/schemas/GraphQLResponse'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     GraphQLError:
       description: An error response caused by a GraphQL query.
       properties:
@@ -123,30 +129,11 @@ components:
           type: array
           items:
             type: string
-    GraphQLResponse:
-      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
-      properties:
-        data:
-          type: object
-          description: GraphQL data object.
-          additionalProperties:
-            $ref: '#/components/schemas/JsonObject'
-        errors:
-          type: array
-          description: Array with errors.
-          items:
-            $ref: '#/components/schemas/GraphQLError'
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
+    GraphQLResponses:
+      type: array
+      description: A list of GraphQL responses.
+      items:
+        $ref: '#/components/schemas/GraphQLResponse'
     JsonObject:
       type: object
       description: JSON object value.
@@ -163,6 +150,19 @@ components:
         variables:
           type: object
           description: Additional variables for the query.
+    GraphQLResponse:
+      description: 'GraphQL based response: http://facebook.github.io/graphql/.'
+      properties:
+        data:
+          type: object
+          description: GraphQL data object.
+          additionalProperties:
+            $ref: '#/components/schemas/JsonObject'
+        errors:
+          type: array
+          description: Array with errors.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
     GraphQLQueries:
       type: array
       description: A list of GraphQL queries.

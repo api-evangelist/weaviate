@@ -59,21 +59,6 @@ paths:
         delay: 100
 components:
   schemas:
-    TextAnalyzerConfig:
-      type: object
-      description: Text analysis options for a property. These settings are immutable after the property is created. Applies only to text and text[] data types that use an inverted index (searchable or filterable).
-      properties:
-        asciiFold:
-          type: boolean
-          description: If true, accent/diacritic marks are folded to their base characters during indexing and search. For example, 'école' matches 'ecole'. Defaults to false.
-        asciiFoldIgnore:
-          type: array
-          description: If provided, specifies a list of characters that should be excluded from ascii folding. For example, if ['é'] is provided, then 'é' will not be folded to 'e' during indexing and search. This list is immutable after the property is created.
-          items:
-            type: string
-        stopwordPreset:
-          type: string
-          description: Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets.
     ErrorResponse:
       type: object
       description: An error response returned by Weaviate endpoints.
@@ -85,6 +70,20 @@ components:
             properties:
               message:
                 type: string
+    TokenizeResponse:
+      type: object
+      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
+      properties:
+        indexed:
+          type: array
+          description: The tokens as they would be stored in the inverted index.
+          items:
+            type: string
+        query:
+          type: array
+          description: The tokens as they would be used for query matching (e.g., after stopword removal).
+          items:
+            type: string
     TokenizeRequest:
       type: object
       description: Request body for the generic tokenize endpoint.
@@ -119,20 +118,6 @@ components:
             type: array
             items:
               type: string
-    TokenizeResponse:
-      type: object
-      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
-      properties:
-        indexed:
-          type: array
-          description: The tokens as they would be stored in the inverted index.
-          items:
-            type: string
-        query:
-          type: array
-          description: The tokens as they would be used for query matching (e.g., after stopword removal).
-          items:
-            type: string
     StopwordConfig:
       type: object
       description: Fine-grained control over stopword list usage.
@@ -150,6 +135,21 @@ components:
           description: 'Stopwords to be removed from consideration (default: []). Can be any array of custom strings.'
           items:
             type: string
+    TextAnalyzerConfig:
+      type: object
+      description: Text analysis options for a property. These settings are immutable after the property is created. Applies only to text and text[] data types that use an inverted index (searchable or filterable).
+      properties:
+        asciiFold:
+          type: boolean
+          description: If true, accent/diacritic marks are folded to their base characters during indexing and search. For example, 'école' matches 'ecole'. Defaults to false.
+        asciiFoldIgnore:
+          type: array
+          description: If provided, specifies a list of characters that should be excluded from ascii folding. For example, if ['é'] is provided, then 'é' will not be folded to 'e' during indexing and search. This list is immutable after the property is created.
+          items:
+            type: string
+        stopwordPreset:
+          type: string
+          description: Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

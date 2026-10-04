@@ -1090,6 +1090,18 @@ paths:
         delay: 100
 components:
   schemas:
+    MultiTenancyConfig:
+      description: Configuration related to multi-tenancy within a collection (class)
+      properties:
+        enabled:
+          type: boolean
+          description: 'Whether or not multi-tenancy is enabled for this collection (class) (default: `false`).'
+        autoTenantCreation:
+          type: boolean
+          description: 'Nonexistent tenants should (not) be created implicitly (default: `false`).'
+        autoTenantActivation:
+          type: boolean
+          description: 'Existing tenants should (not) be turned HOT implicitly when they are accessed and in another activity status (default: `false`).'
     ObjectTtlConfig:
       description: Configuration of objects' time-to-live
       properties:
@@ -1105,134 +1117,95 @@ components:
         filterExpiredObjects:
           type: boolean
           description: 'Whether remove from resultset expired, but not yet deleted by background process objects (default: `false`).'
-    ErrorResponse:
+    InvertedIndexConfig:
       type: object
-      description: An error response returned by Weaviate endpoints.
+      description: 'Configure the inverted index built into Weaviate. See [Reference: Inverted index](https://docs.weaviate.io/weaviate/config-refs/indexing/inverted-index#inverted-index-parameters) for details.'
       properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    ShardStatus:
-      description: The status of a single shard
-      properties:
-        status:
-          type: string
-          description: Status of the shard
-    MultiTenancyConfig:
-      description: Configuration related to multi-tenancy within a collection (class)
-      properties:
-        enabled:
+        cleanupIntervalSeconds:
+          type: number
+          format: int
+          description: 'Asynchronous index clean up happens every n seconds (default: 60).'
+        bm25:
+          $ref: '#/components/schemas/BM25Config'
+        stopwords:
+          $ref: '#/components/schemas/StopwordConfig'
+        indexTimestamps:
           type: boolean
-          description: 'Whether or not multi-tenancy is enabled for this collection (class) (default: `false`).'
-        autoTenantCreation:
+          description: 'Index each object by its internal timestamps (default: `false`).'
+        indexNullState:
           type: boolean
-          description: 'Nonexistent tenants should (not) be created implicitly (default: `false`).'
-        autoTenantActivation:
+          description: 'Index each object with the null state (default: `false`).'
+        indexPropertyLength:
           type: boolean
-          description: 'Existing tenants should (not) be turned HOT implicitly when they are accessed and in another activity status (default: `false`).'
-    AliasResponse:
-      type: object
-      description: Response object containing a list of alias mappings.
-      properties:
-        aliases:
+          description: 'Index length of properties (default: `false`).'
+        usingBlockMaxWAND:
+          type: boolean
+          description: 'Using BlockMax WAND for query execution (default: `false`, will be `true` for new collections created after 1.30).'
+        tokenizerUserDict:
           type: array
-          description: Array of alias objects, each containing an alias-to-collection mapping.
+          description: User-defined dictionary for tokenization.
           items:
-            $ref: '#/components/schemas/Alias'
-    ShardStatusGetResponse:
-      description: Response body of shard status get request
-      properties:
-        name:
-          type: string
-          description: Name of the shard
-        status:
-          type: string
-          description: Status of the shard
-        vectorQueueSize:
-          type: integer
-          description: Size of the vector queue of the shard
-    Alias:
-      type: object
-      description: Represents the mapping between an alias name and a collection. An alias provides an alternative name for accessing a collection.
-      properties:
-        alias:
-          type: string
-          description: The unique name of the alias that serves as an alternative identifier for the collection.
-        class:
-          type: string
-          description: The name of the collection (class) to which this alias is mapped.
-    Property:
-      type: object
-      properties:
-        dataType:
-          type: array
-          description: Data type of the property (required). If it starts with a capital (for example Person), may be a reference to another type.
-          items:
-            type: string
-        description:
-          type: string
-          description: Description of the property.
-        moduleConfig:
+            $ref: '#/components/schemas/TokenizerUserDictConfig'
+        stopwordPresets:
           type: object
-          description: Configuration specific to modules in a collection context.
-        name:
-          type: string
-          description: The name of the property (required). Multiple words should be concatenated in camelCase, e.g. `nameOfAuthor`.
-        indexInverted:
-          type: boolean
-          description: (Deprecated). Whether to include this property in the inverted index. If `false`, this property cannot be used in `where` filters, `bm25` or `hybrid` search. <br/><br/>Unrelated to vectorization behavior (deprecated as of v1.19; use indexFilterable or/and indexSearchable instead)
-        indexFilterable:
-          type: boolean
-          description: 'Whether to include this property in the filterable, Roaring Bitmap index. If `false`, this property cannot be used in `where` filters. <br/><br/>Note: Unrelated to vectorization behavior.'
-        indexSearchable:
-          type: boolean
-          description: Optional. Should this property be indexed in the inverted index. Defaults to true. Applicable only to properties of data type text and text[]. If you choose false, you will not be able to use this property in bm25 or hybrid search. This property has no affect on vectorization decisions done by modules
-        indexRangeFilters:
-          type: boolean
-          description: Whether to include this property in the filterable, range-based Roaring Bitmap index. Provides better performance for range queries compared to filterable index in large datasets. Applicable only to properties of data type int, number, date.
-        tokenization:
-          type: string
-          description: 'Determines how a property is indexed. This setting applies to `text` and `text[]` data types. The following tokenization methods are available:<br/><br/>- `word` (default): Splits the text on any non-alphanumeric characters and lowercases the tokens.<br/>- `lowercase`: Splits the text on whitespace and lowercases the tokens.<br/>- `whitespace`: Splits the text on whitespace. This tokenization is case-sensitive.<br/>- `field`: Indexes the entire property value as a single token after trimming whitespace.<br/>- `trigram`: Splits the property into rolling trigrams (three-character sequences).<br/>- `gse`: Uses the `gse` tokenizer, suitable for Chinese language text. [See `gse` docs](https://pkg.go.dev/github.com/go-ego/gse#section-readme).<br/>- `kagome_ja`: Uses the `Kagome` tokenizer with a Japanese (IPA) dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/>- `kagome_kr`: Uses the `Kagome` tokenizer with a Korean dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/><br/>See [Reference: Tokenization](https://docs.weaviate.io/weaviate/config-refs/collections#tokenization) for details.'
-          enum:
-          - word
-          - lowercase
-          - whitespace
-          - field
-          - trigram
-          - gse
-          - kagome_kr
-          - kagome_ja
-          - gse_ch
-        nestedProperties:
-          type: array
-          description: The properties of the nested object(s). Applies to object and object[] data types.
-          items:
-            $ref: '#/components/schemas/NestedProperty'
-        disableDuplicatedReferences:
-          type: boolean
-          description: If set to false, allows multiple references to the same target object within this property. Setting it to true will enforce uniqueness of references within this property. By default, this is set to true.
-          default: true
-        textAnalyzer:
-          $ref: '#/components/schemas/TextAnalyzerConfig'
-    TextAnalyzerConfig:
+          description: User-defined named stopword lists. Each key is a preset name that can be referenced by a property's textAnalyzer.stopwordPreset field. The value is an array of stopword strings. Preset names must not be empty or whitespace-only; each list must contain at least one word; individual words must not be empty or whitespace-only.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    StopwordConfig:
       type: object
-      description: Text analysis options for a property. These settings are immutable after the property is created. Applies only to text and text[] data types that use an inverted index (searchable or filterable).
+      description: Fine-grained control over stopword list usage.
       properties:
-        asciiFold:
-          type: boolean
-          description: If true, accent/diacritic marks are folded to their base characters during indexing and search. For example, 'école' matches 'ecole'. Defaults to false.
-        asciiFoldIgnore:
+        preset:
+          type: string
+          description: 'Pre-existing list of common words by language (default: `en`). Options: [`en`, `none`].'
+        additions:
           type: array
-          description: If provided, specifies a list of characters that should be excluded from ascii folding. For example, if ['é'] is provided, then 'é' will not be folded to 'e' during indexing and search. This list is immutable after the property is created.
+          description: 'Stopwords to be considered additionally (default: []). Can be any array of custom strings.'
           items:
             type: string
-        stopwordPreset:
+        removals:
+          type: array
+          description: 'Stopwords to be removed from consideration (default: []). Can be any array of custom strings.'
+          items:
+            type: string
+    VectorConfig:
+      type: object
+      properties:
+        vectorizer:
+          type: object
+          description: Configuration of a specific vectorizer used by this vector
+        vectorIndexType:
           type: string
-          description: Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets.
+          description: Name of the vector index to use, eg. (HNSW)
+        vectorIndexConfig:
+          type: object
+          description: Vector-index config, that is specific to the type of index selected in vectorIndexType
+    ReplicationConfig:
+      type: object
+      description: Configure how replication is executed in a cluster
+      properties:
+        factor:
+          type: integer
+          description: 'Number of times a collection (class) is replicated (default: 1).'
+        asyncEnabled:
+          type: boolean
+          description: 'Enable asynchronous replication (default: `false`).'
+        asyncConfig:
+          $ref: '#/components/schemas/ReplicationAsyncConfig'
+        deletionStrategy:
+          type: string
+          description: Conflict resolution strategy for deleted objects.
+          enum:
+          - NoAutomatedResolution
+          - DeleteOnConflict
+          - TimeBasedResolution
+    ShardStatusList:
+      type: array
+      description: The status of all the shards of a Class
+      items:
+        $ref: '#/components/schemas/ShardStatusGetResponse'
     ReplicationAsyncConfig:
       type: object
       description: Configuration for asynchronous replication.
@@ -1293,224 +1266,25 @@ components:
           type: integer
           format: int64
           description: Number of objects to include in a single propagation batch.
-    NestedProperty:
+    AliasResponse:
       type: object
+      description: Response object containing a list of alias mappings.
       properties:
-        dataType:
+        aliases:
           type: array
+          description: Array of alias objects, each containing an alias-to-collection mapping.
           items:
-            type: string
-        description:
-          type: string
-        name:
-          type: string
-        indexFilterable:
-          type: boolean
-        indexSearchable:
-          type: boolean
-        indexRangeFilters:
-          type: boolean
-        tokenization:
-          type: string
-          enum:
-          - word
-          - lowercase
-          - whitespace
-          - field
-          - trigram
-          - gse
-          - kagome_kr
-          - kagome_ja
-          - gse_ch
-        nestedProperties:
-          type: array
-          description: The properties of the nested object(s). Applies to object and object[] data types.
-          items:
-            $ref: '#/components/schemas/NestedProperty'
-        textAnalyzer:
-          $ref: '#/components/schemas/TextAnalyzerConfig'
-    Schema:
+            $ref: '#/components/schemas/Alias'
+    Alias:
       type: object
-      description: 'Definitions of semantic schemas (also see: https://github.com/weaviate/weaviate-semantic-schemas).'
+      description: Represents the mapping between an alias name and a collection. An alias provides an alternative name for accessing a collection.
       properties:
-        classes:
-          type: array
-          description: Semantic classes that are available.
-          items:
-            $ref: '#/components/schemas/Class'
-        maintainer:
+        alias:
           type: string
-          format: email
-          description: Email of the maintainer.
-        name:
+          description: The unique name of the alias that serves as an alternative identifier for the collection.
+        class:
           type: string
-          description: Name of the schema.
-    InvertedIndexConfig:
-      type: object
-      description: 'Configure the inverted index built into Weaviate. See [Reference: Inverted index](https://docs.weaviate.io/weaviate/config-refs/indexing/inverted-index#inverted-index-parameters) for details.'
-      properties:
-        cleanupIntervalSeconds:
-          type: number
-          format: int
-          description: 'Asynchronous index clean up happens every n seconds (default: 60).'
-        bm25:
-          $ref: '#/components/schemas/BM25Config'
-        stopwords:
-          $ref: '#/components/schemas/StopwordConfig'
-        indexTimestamps:
-          type: boolean
-          description: 'Index each object by its internal timestamps (default: `false`).'
-        indexNullState:
-          type: boolean
-          description: 'Index each object with the null state (default: `false`).'
-        indexPropertyLength:
-          type: boolean
-          description: 'Index length of properties (default: `false`).'
-        usingBlockMaxWAND:
-          type: boolean
-          description: 'Using BlockMax WAND for query execution (default: `false`, will be `true` for new collections created after 1.30).'
-        tokenizerUserDict:
-          type: array
-          description: User-defined dictionary for tokenization.
-          items:
-            $ref: '#/components/schemas/TokenizerUserDictConfig'
-        stopwordPresets:
-          type: object
-          description: User-defined named stopword lists. Each key is a preset name that can be referenced by a property's textAnalyzer.stopwordPreset field. The value is an array of stopword strings. Preset names must not be empty or whitespace-only; each list must contain at least one word; individual words must not be empty or whitespace-only.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    BM25Config:
-      type: object
-      description: Tuning parameters for the BM25 algorithm.
-      properties:
-        k1:
-          type: number
-          format: float
-          description: 'Calibrates term-weight scaling based on the term frequency within a document (default: 1.2).'
-        b:
-          type: number
-          format: float
-          description: 'Calibrates term-weight scaling based on the document length (default: 0.75).'
-    ReplicationConfig:
-      type: object
-      description: Configure how replication is executed in a cluster
-      properties:
-        factor:
-          type: integer
-          description: 'Number of times a collection (class) is replicated (default: 1).'
-        asyncEnabled:
-          type: boolean
-          description: 'Enable asynchronous replication (default: `false`).'
-        asyncConfig:
-          $ref: '#/components/schemas/ReplicationAsyncConfig'
-        deletionStrategy:
-          type: string
-          description: Conflict resolution strategy for deleted objects.
-          enum:
-          - NoAutomatedResolution
-          - DeleteOnConflict
-          - TimeBasedResolution
-    TokenizerUserDictConfig:
-      type: object
-      description: A list of pairs of strings that should be replaced with another string during tokenization.
-      properties:
-        tokenizer:
-          type: string
-          description: The tokenizer to which the user dictionary should be applied. Currently, only the `kagame` ja and kr tokenizers supports user dictionaries.
-        replacements:
-          type: array
-          items:
-            type: object
-            required:
-            - source
-            - target
-            properties:
-              source:
-                type: string
-                description: The string to be replaced.
-              target:
-                type: string
-                description: The string to replace with.
-    Tenant:
-      type: object
-      description: Attributes representing a single tenant within Weaviate.
-      properties:
-        name:
-          type: string
-          description: The name of the tenant (required).
-        activityStatus:
-          type: string
-          description: 'The activity status of the tenant, which determines if it is queryable and where its data is stored.<br/><br/><b>Available Statuses:</b><br/>- `ACTIVE`: The tenant is fully operational and ready for queries. Data is stored on local, hot storage.<br/>- `INACTIVE`: The tenant is not queryable. Data is stored locally.<br/>- `OFFLOADED`: The tenant is inactive and its data is stored in a remote cloud backend.<br/><br/><b>Usage Rules:</b><br/>- <b>On Create:</b> This field is optional and defaults to `ACTIVE`. Allowed values are `ACTIVE` and `INACTIVE`.<br/>- <b>On Update:</b> This field is required. Allowed values are `ACTIVE`, `INACTIVE`, and `OFFLOADED`.<br/><br/><b>Read-Only Statuses:</b><br/>The following statuses are set by the server and indicate a tenant is transitioning between states:<br/>- `OFFLOADING`<br/>- `ONLOADING`<br/><br/><b>Note on Deprecated Names:</b><br/>For backward compatibility, deprecated names are still accepted and are mapped to their modern equivalents: `HOT` (now `ACTIVE`), `COLD` (now `INACTIVE`), `FROZEN` (now `OFFLOADED`), `FREEZING` (now `OFFLOADING`), `UNFREEZING` (now `ONLOADING`).'
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - OFFLOADED
-          - OFFLOADING
-          - ONLOADING
-          - HOT
-          - COLD
-          - FROZEN
-          - FREEZING
-          - UNFREEZING
-    TokenizeResponse:
-      type: object
-      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
-      properties:
-        indexed:
-          type: array
-          description: The tokens as they would be stored in the inverted index.
-          items:
-            type: string
-        query:
-          type: array
-          description: The tokens as they would be used for query matching (e.g., after stopword removal).
-          items:
-            type: string
-    VectorConfig:
-      type: object
-      properties:
-        vectorizer:
-          type: object
-          description: Configuration of a specific vectorizer used by this vector
-        vectorIndexType:
-          type: string
-          description: Name of the vector index to use, eg. (HNSW)
-        vectorIndexConfig:
-          type: object
-          description: Vector-index config, that is specific to the type of index selected in vectorIndexType
-    StopwordConfig:
-      type: object
-      description: Fine-grained control over stopword list usage.
-      properties:
-        preset:
-          type: string
-          description: 'Pre-existing list of common words by language (default: `en`). Options: [`en`, `none`].'
-        additions:
-          type: array
-          description: 'Stopwords to be considered additionally (default: []). Can be any array of custom strings.'
-          items:
-            type: string
-        removals:
-          type: array
-          description: 'Stopwords to be removed from consideration (default: []). Can be any array of custom strings.'
-          items:
-            type: string
-    ShardStatusList:
-      type: array
-      description: The status of all the shards of a Class
-      items:
-        $ref: '#/components/schemas/ShardStatusGetResponse'
-    PropertyTokenizeRequest:
-      type: object
-      description: Request body for the property-specific tokenize endpoint.
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: The text to tokenize using the property's configured tokenization.
+          description: The name of the collection (class) to which this alias is mapped.
     Class:
       type: object
       properties:
@@ -1553,6 +1327,232 @@ components:
           description: Define properties of the collection.
           items:
             $ref: '#/components/schemas/Property'
+    BM25Config:
+      type: object
+      description: Tuning parameters for the BM25 algorithm.
+      properties:
+        k1:
+          type: number
+          format: float
+          description: 'Calibrates term-weight scaling based on the term frequency within a document (default: 1.2).'
+        b:
+          type: number
+          format: float
+          description: 'Calibrates term-weight scaling based on the document length (default: 0.75).'
+    Schema:
+      type: object
+      description: 'Definitions of semantic schemas (also see: https://github.com/weaviate/weaviate-semantic-schemas).'
+      properties:
+        classes:
+          type: array
+          description: Semantic classes that are available.
+          items:
+            $ref: '#/components/schemas/Class'
+        maintainer:
+          type: string
+          format: email
+          description: Email of the maintainer.
+        name:
+          type: string
+          description: Name of the schema.
+    Tenant:
+      type: object
+      description: Attributes representing a single tenant within Weaviate.
+      properties:
+        name:
+          type: string
+          description: The name of the tenant (required).
+        activityStatus:
+          type: string
+          description: 'The activity status of the tenant, which determines if it is queryable and where its data is stored.<br/><br/><b>Available Statuses:</b><br/>- `ACTIVE`: The tenant is fully operational and ready for queries. Data is stored on local, hot storage.<br/>- `INACTIVE`: The tenant is not queryable. Data is stored locally.<br/>- `OFFLOADED`: The tenant is inactive and its data is stored in a remote cloud backend.<br/><br/><b>Usage Rules:</b><br/>- <b>On Create:</b> This field is optional and defaults to `ACTIVE`. Allowed values are `ACTIVE` and `INACTIVE`.<br/>- <b>On Update:</b> This field is required. Allowed values are `ACTIVE`, `INACTIVE`, and `OFFLOADED`.<br/><br/><b>Read-Only Statuses:</b><br/>The following statuses are set by the server and indicate a tenant is transitioning between states:<br/>- `OFFLOADING`<br/>- `ONLOADING`<br/><br/><b>Note on Deprecated Names:</b><br/>For backward compatibility, deprecated names are still accepted and are mapped to their modern equivalents: `HOT` (now `ACTIVE`), `COLD` (now `INACTIVE`), `FROZEN` (now `OFFLOADED`), `FREEZING` (now `OFFLOADING`), `UNFREEZING` (now `ONLOADING`).'
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - OFFLOADED
+          - OFFLOADING
+          - ONLOADING
+          - HOT
+          - COLD
+          - FROZEN
+          - FREEZING
+          - UNFREEZING
+    TokenizerUserDictConfig:
+      type: object
+      description: A list of pairs of strings that should be replaced with another string during tokenization.
+      properties:
+        tokenizer:
+          type: string
+          description: The tokenizer to which the user dictionary should be applied. Currently, only the `kagame` ja and kr tokenizers supports user dictionaries.
+        replacements:
+          type: array
+          items:
+            type: object
+            required:
+            - source
+            - target
+            properties:
+              source:
+                type: string
+                description: The string to be replaced.
+              target:
+                type: string
+                description: The string to replace with.
+    TextAnalyzerConfig:
+      type: object
+      description: Text analysis options for a property. These settings are immutable after the property is created. Applies only to text and text[] data types that use an inverted index (searchable or filterable).
+      properties:
+        asciiFold:
+          type: boolean
+          description: If true, accent/diacritic marks are folded to their base characters during indexing and search. For example, 'école' matches 'ecole'. Defaults to false.
+        asciiFoldIgnore:
+          type: array
+          description: If provided, specifies a list of characters that should be excluded from ascii folding. For example, if ['é'] is provided, then 'é' will not be folded to 'e' during indexing and search. This list is immutable after the property is created.
+          items:
+            type: string
+        stopwordPreset:
+          type: string
+          description: Stopword preset name. Overrides the collection-level invertedIndexConfig.stopwords for this property. Only applies to properties using 'word' tokenization. Can be a built-in preset ('en', 'none') or a user-defined preset from invertedIndexConfig.stopwordPresets.
+    Property:
+      type: object
+      properties:
+        dataType:
+          type: array
+          description: Data type of the property (required). If it starts with a capital (for example Person), may be a reference to another type.
+          items:
+            type: string
+        description:
+          type: string
+          description: Description of the property.
+        moduleConfig:
+          type: object
+          description: Configuration specific to modules in a collection context.
+        name:
+          type: string
+          description: The name of the property (required). Multiple words should be concatenated in camelCase, e.g. `nameOfAuthor`.
+        indexInverted:
+          type: boolean
+          description: (Deprecated). Whether to include this property in the inverted index. If `false`, this property cannot be used in `where` filters, `bm25` or `hybrid` search. <br/><br/>Unrelated to vectorization behavior (deprecated as of v1.19; use indexFilterable or/and indexSearchable instead)
+        indexFilterable:
+          type: boolean
+          description: 'Whether to include this property in the filterable, Roaring Bitmap index. If `false`, this property cannot be used in `where` filters. <br/><br/>Note: Unrelated to vectorization behavior.'
+        indexSearchable:
+          type: boolean
+          description: Optional. Should this property be indexed in the inverted index. Defaults to true. Applicable only to properties of data type text and text[]. If you choose false, you will not be able to use this property in bm25 or hybrid search. This property has no affect on vectorization decisions done by modules
+        indexRangeFilters:
+          type: boolean
+          description: Whether to include this property in the filterable, range-based Roaring Bitmap index. Provides better performance for range queries compared to filterable index in large datasets. Applicable only to properties of data type int, number, date.
+        tokenization:
+          type: string
+          description: 'Determines how a property is indexed. This setting applies to `text` and `text[]` data types. The following tokenization methods are available:<br/><br/>- `word` (default): Splits the text on any non-alphanumeric characters and lowercases the tokens.<br/>- `lowercase`: Splits the text on whitespace and lowercases the tokens.<br/>- `whitespace`: Splits the text on whitespace. This tokenization is case-sensitive.<br/>- `field`: Indexes the entire property value as a single token after trimming whitespace.<br/>- `trigram`: Splits the property into rolling trigrams (three-character sequences).<br/>- `gse`: Uses the `gse` tokenizer, suitable for Chinese language text. [See `gse` docs](https://pkg.go.dev/github.com/go-ego/gse#section-readme).<br/>- `kagome_ja`: Uses the `Kagome` tokenizer with a Japanese (IPA) dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/>- `kagome_kr`: Uses the `Kagome` tokenizer with a Korean dictionary. [See `kagome` docs](https://github.com/ikawaha/kagome).<br/><br/>See [Reference: Tokenization](https://docs.weaviate.io/weaviate/config-refs/collections#tokenization) for details.'
+          enum:
+          - word
+          - lowercase
+          - whitespace
+          - field
+          - trigram
+          - gse
+          - kagome_kr
+          - kagome_ja
+          - gse_ch
+        nestedProperties:
+          type: array
+          description: The properties of the nested object(s). Applies to object and object[] data types.
+          items:
+            $ref: '#/components/schemas/NestedProperty'
+        disableDuplicatedReferences:
+          type: boolean
+          description: If set to false, allows multiple references to the same target object within this property. Setting it to true will enforce uniqueness of references within this property. By default, this is set to true.
+          default: true
+        textAnalyzer:
+          $ref: '#/components/schemas/TextAnalyzerConfig'
+    ShardStatus:
+      description: The status of a single shard
+      properties:
+        status:
+          type: string
+          description: Status of the shard
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    NestedProperty:
+      type: object
+      properties:
+        dataType:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        name:
+          type: string
+        indexFilterable:
+          type: boolean
+        indexSearchable:
+          type: boolean
+        indexRangeFilters:
+          type: boolean
+        tokenization:
+          type: string
+          enum:
+          - word
+          - lowercase
+          - whitespace
+          - field
+          - trigram
+          - gse
+          - kagome_kr
+          - kagome_ja
+          - gse_ch
+        nestedProperties:
+          type: array
+          description: The properties of the nested object(s). Applies to object and object[] data types.
+          items:
+            $ref: '#/components/schemas/NestedProperty'
+        textAnalyzer:
+          $ref: '#/components/schemas/TextAnalyzerConfig'
+    ShardStatusGetResponse:
+      description: Response body of shard status get request
+      properties:
+        name:
+          type: string
+          description: Name of the shard
+        status:
+          type: string
+          description: Status of the shard
+        vectorQueueSize:
+          type: integer
+          description: Size of the vector queue of the shard
+    TokenizeResponse:
+      type: object
+      description: Response from the tokenize endpoints. Returns `indexed` text and text used at `query` time
+      properties:
+        indexed:
+          type: array
+          description: The tokens as they would be stored in the inverted index.
+          items:
+            type: string
+        query:
+          type: array
+          description: The tokens as they would be used for query matching (e.g., after stopword removal).
+          items:
+            type: string
+    PropertyTokenizeRequest:
+      type: object
+      description: Request body for the property-specific tokenize endpoint.
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: The text to tokenize using the property's configured tokenization.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

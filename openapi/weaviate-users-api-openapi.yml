@@ -425,19 +425,6 @@ components:
       description: If the group contains OIDC or database users.
       enum:
       - oidc
-    Role:
-      type: object
-      required:
-      - name
-      - permissions
-      properties:
-        name:
-          type: string
-          description: The name (ID) of the role.
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
     ErrorResponse:
       type: object
       description: An error response returned by Weaviate endpoints.
@@ -520,6 +507,19 @@ components:
         namespace:
           type: string
           description: The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise.
+    Role:
+      type: object
+      required:
+      - name
+      - permissions
+      properties:
+        name:
+          type: string
+          description: The name (ID) of the role.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
     Permission:
       type: object
       description: Permissions attached to a role.

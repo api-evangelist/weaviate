@@ -437,34 +437,17 @@ paths:
         delay: 100
 components:
   schemas:
-    BackupRestoreStatusResponse:
-      description: The definition of a backup restore metadata.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
       properties:
-        id:
-          type: string
-          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
-        backend:
-          type: string
-          description: Backup backend name e.g. filesystem, gcs, s3.
-        path:
-          type: string
-          description: Destination path of backup files valid for the selected backup backend, contains bucket and path.
         error:
-          type: string
-          description: Error message if backup restoration failed.
-        status:
-          type: string
-          description: Phase of backup restoration process.
-          enum:
-          - STARTED
-          - TRANSFERRING
-          - TRANSFERRED
-          - FINALIZING
-          - SUCCESS
-          - FAILED
-          - CANCELLING
-          - CANCELED
-          default: STARTED
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
     BackupCreateResponse:
       description: The definition of a backup create response body
       properties:
@@ -541,129 +524,39 @@ components:
           type: number
           format: float64
           description: Size of the backup in Gibs
-    BackupRestoreRequest:
-      description: Request body for restoring a backup for a set of collections (classes).
-      properties:
-        config:
-          $ref: '#/components/schemas/RestoreConfig'
-        include:
-          type: array
-          description: List of collections (classes) to include in the backup restoration process.
-          items:
-            type: string
-        exclude:
-          type: array
-          description: List of collections (classes) to exclude from the backup restoration process.
-          items:
-            type: string
-        node_mapping:
-          type: object
-          description: Allows overriding the node names stored in the backup with different ones. Useful when restoring backups to a different environment.
-          additionalProperties:
-            type: string
-        overwriteAlias:
-          type: boolean
-          description: Allows ovewriting the collection alias if there is a conflict
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    BackupConfig:
-      type: object
-      description: Backup custom configuration.
-      properties:
-        Endpoint:
-          type: string
-          description: Name of the endpoint, e.g. s3.amazonaws.com.
-        Bucket:
-          type: string
-          description: Name of the bucket, container, volume, etc.
-        Path:
-          type: string
-          description: Path or key within the bucket.
-        CPUPercentage:
-          type: integer
-          description: Desired CPU core utilization ranging from 1%-80%
-          default: 50
-          minimum: 1
-          maximum: 80
-        ChunkSize:
-          type: integer
-          description: Deprecated, has no effect.
-        CompressionLevel:
-          type: string
-          description: compression level used by compression algorithm
-          enum:
-          - DefaultCompression
-          - BestSpeed
-          - BestCompression
-          - ZstdDefaultCompression
-          - ZstdBestSpeed
-          - ZstdBestCompression
-          - NoCompression
-          default: DefaultCompression
-    RestoreConfig:
-      type: object
-      description: Backup custom configuration
-      properties:
-        Endpoint:
-          type: string
-          description: name of the endpoint, e.g. s3.amazonaws.com
-        Bucket:
-          type: string
-          description: Name of the bucket, container, volume, etc
-        Path:
-          type: string
-          description: Path within the bucket
-        CPUPercentage:
-          type: integer
-          description: Desired CPU core utilization ranging from 1%-80%
-          default: 50
-          minimum: 1
-          maximum: 80
-        rolesOptions:
-          type: string
-          description: How roles should be restored
-          enum:
-          - noRestore
-          - all
-          default: noRestore
-        usersOptions:
-          type: string
-          description: How users should be restored
-          enum:
-          - noRestore
-          - all
-          default: noRestore
-    BackupCreateRequest:
-      description: Request body for creating a backup for a set of collections.
+    BackupRestoreResponse:
+      description: The definition of a backup restore response body.
       properties:
         id:
           type: string
-          description: The ID of the backup (required). Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
-        config:
-          $ref: '#/components/schemas/BackupConfig'
-        include:
+          description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        classes:
           type: array
-          description: List of collections to include in the backup creation process. If not set, all collections are included. Cannot be used together with `exclude`.
+          description: The list of collections (classes) for which the backup restoration process was started.
           items:
             type: string
-        exclude:
-          type: array
-          description: List of collections to exclude from the backup creation process. If not set, all collections are included. Cannot be used together with `include`.
-          items:
-            type: string
-        incremental_base_backup_id:
+        backend:
           type: string
-          description: The ID of an existing backup to use as the base for a file-based incremental backup. If set, only files that have changed since the base backup will be included in the new backup.
-          default: null
+          description: Backup backend name e.g. filesystem, gcs, s3.
+        path:
+          type: string
+          description: Destination path of backup files valid for the selected backend.
+        error:
+          type: string
+          description: Error message if backup restoration failed.
+        status:
+          type: string
+          description: Phase of backup restoration process.
+          enum:
+          - STARTED
+          - TRANSFERRING
+          - TRANSFERRED
+          - FINALIZING
+          - SUCCESS
+          - FAILED
+          - CANCELLING
+          - CANCELED
+          default: STARTED
     BackupListResponse:
       type: array
       description: The definition of a backup create response body.
@@ -702,23 +595,18 @@ components:
             type: number
             format: float64
             description: Size of the backup in Gibs
-    BackupRestoreResponse:
-      description: The definition of a backup restore response body.
+    BackupRestoreStatusResponse:
+      description: The definition of a backup restore metadata.
       properties:
         id:
           type: string
           description: The ID of the backup. Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
-        classes:
-          type: array
-          description: The list of collections (classes) for which the backup restoration process was started.
-          items:
-            type: string
         backend:
           type: string
           description: Backup backend name e.g. filesystem, gcs, s3.
         path:
           type: string
-          description: Destination path of backup files valid for the selected backend.
+          description: Destination path of backup files valid for the selected backup backend, contains bucket and path.
         error:
           type: string
           description: Error message if backup restoration failed.
@@ -735,6 +623,118 @@ components:
           - CANCELLING
           - CANCELED
           default: STARTED
+    BackupCreateRequest:
+      description: Request body for creating a backup for a set of collections.
+      properties:
+        id:
+          type: string
+          description: The ID of the backup (required). Must be URL-safe and work as a filesystem path, only lowercase, numbers, underscore, minus characters allowed.
+        config:
+          $ref: '#/components/schemas/BackupConfig'
+        include:
+          type: array
+          description: List of collections to include in the backup creation process. If not set, all collections are included. Cannot be used together with `exclude`.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collections to exclude from the backup creation process. If not set, all collections are included. Cannot be used together with `include`.
+          items:
+            type: string
+        incremental_base_backup_id:
+          type: string
+          description: The ID of an existing backup to use as the base for a file-based incremental backup. If set, only files that have changed since the base backup will be included in the new backup.
+          default: null
+    BackupConfig:
+      type: object
+      description: Backup custom configuration.
+      properties:
+        Endpoint:
+          type: string
+          description: Name of the endpoint, e.g. s3.amazonaws.com.
+        Bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc.
+        Path:
+          type: string
+          description: Path or key within the bucket.
+        CPUPercentage:
+          type: integer
+          description: Desired CPU core utilization ranging from 1%-80%
+          default: 50
+          minimum: 1
+          maximum: 80
+        ChunkSize:
+          type: integer
+          description: Deprecated, has no effect.
+        CompressionLevel:
+          type: string
+          description: compression level used by compression algorithm
+          enum:
+          - DefaultCompression
+          - BestSpeed
+          - BestCompression
+          - ZstdDefaultCompression
+          - ZstdBestSpeed
+          - ZstdBestCompression
+          - NoCompression
+          default: DefaultCompression
+    BackupRestoreRequest:
+      description: Request body for restoring a backup for a set of collections (classes).
+      properties:
+        config:
+          $ref: '#/components/schemas/RestoreConfig'
+        include:
+          type: array
+          description: List of collections (classes) to include in the backup restoration process.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collections (classes) to exclude from the backup restoration process.
+          items:
+            type: string
+        node_mapping:
+          type: object
+          description: Allows overriding the node names stored in the backup with different ones. Useful when restoring backups to a different environment.
+          additionalProperties:
+            type: string
+        overwriteAlias:
+          type: boolean
+          description: Allows ovewriting the collection alias if there is a conflict
+    RestoreConfig:
+      type: object
+      description: Backup custom configuration
+      properties:
+        Endpoint:
+          type: string
+          description: name of the endpoint, e.g. s3.amazonaws.com
+        Bucket:
+          type: string
+          description: Name of the bucket, container, volume, etc
+        Path:
+          type: string
+          description: Path within the bucket
+        CPUPercentage:
+          type: integer
+          description: Desired CPU core utilization ranging from 1%-80%
+          default: 50
+          minimum: 1
+          maximum: 80
+        rolesOptions:
+          type: string
+          description: How roles should be restored
+          enum:
+          - noRestore
+          - all
+          default: noRestore
+        usersOptions:
+          type: string
+          description: How users should be restored
+          enum:
+          - noRestore
+          - all
+          default: noRestore
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -181,31 +181,39 @@ paths:
         delay: 100
 components:
   schemas:
-    ExportCreateRequest:
+    ErrorResponse:
       type: object
-      description: Request to create a new export operation
-      required:
-      - id
-      - file_format
+      description: An error response returned by Weaviate endpoints.
       properties:
-        id:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    ShardProgress:
+      type: object
+      description: Progress information for exporting a single shard
+      properties:
+        status:
           type: string
-          description: Unique identifier for this export. Must be URL-safe.
-        file_format:
-          type: string
-          description: Output file format for the export.
+          description: Status of this shard's export
           enum:
-          - parquet
-        include:
-          type: array
-          description: List of collection names to include in the export. Cannot be used with 'exclude'.
-          items:
-            type: string
-        exclude:
-          type: array
-          description: List of collection names to exclude from the export. Cannot be used with 'include'.
-          items:
-            type: string
+          - TRANSFERRING
+          - SUCCESS
+          - FAILED
+          - SKIPPED
+        objectsExported:
+          type: integer
+          format: int64
+          description: Number of objects exported from this shard
+        error:
+          type: string
+          description: Error message if this shard's export failed
+        skipReason:
+          type: string
+          description: Reason why this shard was skipped (e.g. tenant status)
     ExportStatusResponse:
       type: object
       description: Current status of an export operation
@@ -255,39 +263,6 @@ components:
         error:
           type: string
           description: Error message if export failed
-    ShardProgress:
-      type: object
-      description: Progress information for exporting a single shard
-      properties:
-        status:
-          type: string
-          description: Status of this shard's export
-          enum:
-          - TRANSFERRING
-          - SUCCESS
-          - FAILED
-          - SKIPPED
-        objectsExported:
-          type: integer
-          format: int64
-          description: Number of objects exported from this shard
-        error:
-          type: string
-          description: Error message if this shard's export failed
-        skipReason:
-          type: string
-          description: Reason why this shard was skipped (e.g. tenant status)
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
     ExportCreateResponse:
       type: object
       description: Response from creating an export operation
@@ -313,6 +288,31 @@ components:
         classes:
           type: array
           description: List of collections being exported
+          items:
+            type: string
+    ExportCreateRequest:
+      type: object
+      description: Request to create a new export operation
+      required:
+      - id
+      - file_format
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this export. Must be URL-safe.
+        file_format:
+          type: string
+          description: Output file format for the export.
+          enum:
+          - parquet
+        include:
+          type: array
+          description: List of collection names to include in the export. Cannot be used with 'exclude'.
+          items:
+            type: string
+        exclude:
+          type: array
+          description: List of collection names to exclude from the export. Cannot be used with 'include'.
           items:
             type: string
   securitySchemes:

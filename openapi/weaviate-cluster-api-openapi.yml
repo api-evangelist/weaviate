@@ -52,44 +52,6 @@ paths:
         delay: 100
 components:
   schemas:
-    Statistics:
-      description: The definition of node statistics.
-      properties:
-        name:
-          type: string
-          description: The name of the node.
-        status:
-          type: string
-          description: Node's status.
-          enum:
-          - HEALTHY
-          - UNHEALTHY
-          - UNAVAILABLE
-          - TIMEOUT
-          default: HEALTHY
-        bootstrapped:
-          type: boolean
-        dbLoaded:
-          type: boolean
-        initialLastAppliedIndex:
-          type: number
-          format: uint64
-        lastAppliedIndex:
-          type: number
-        isVoter:
-          type: boolean
-        leaderId:
-          type: object
-        leaderAddress:
-          type: object
-        open:
-          type: boolean
-        ready:
-          type: boolean
-        candidates:
-          type: object
-        raft:
-          $ref: '#/components/schemas/RaftStatistics'
     RaftStatistics:
       description: The definition of Raft statistics.
       properties:
@@ -130,6 +92,44 @@ components:
           type: string
         term:
           type: string
+    Statistics:
+      description: The definition of node statistics.
+      properties:
+        name:
+          type: string
+          description: The name of the node.
+        status:
+          type: string
+          description: Node's status.
+          enum:
+          - HEALTHY
+          - UNHEALTHY
+          - UNAVAILABLE
+          - TIMEOUT
+          default: HEALTHY
+        bootstrapped:
+          type: boolean
+        dbLoaded:
+          type: boolean
+        initialLastAppliedIndex:
+          type: number
+          format: uint64
+        lastAppliedIndex:
+          type: number
+        isVoter:
+          type: boolean
+        leaderId:
+          type: object
+        leaderAddress:
+          type: object
+        open:
+          type: boolean
+        ready:
+          type: boolean
+        candidates:
+          type: object
+        raft:
+          $ref: '#/components/schemas/RaftStatistics'
     ClusterStatisticsResponse:
       type: object
       description: The cluster statistics of all of the Weaviate nodes
