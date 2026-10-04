@@ -48,6 +48,7 @@ tags:
 - GraphQL
 - Kubernetes
 - Database
+- Vector Search
 tags_raw:
 - Vector Database
 - AI
@@ -59,6 +60,7 @@ tags_raw:
 - Machine-Learning
 - Open-Source
 - Database
+- Vector Search
 url: https://raw.githubusercontent.com/api-evangelist/weaviate/refs/heads/main/apis.yml
 created: '2024-06-18'
 modified: '2026-09-16'
@@ -419,6 +421,8 @@ apis:
   description: The Graph QL API from Weaviate — 2 operation(s) for graph ql.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
@@ -430,6 +434,9 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/weaviate-capability-edges.yml
+  name: Weaviate Business Capability Map
 - type: Website
   url: https://www.weaviate.io/
 - type: PostmanWorkspace
