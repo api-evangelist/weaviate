@@ -1,0 +1,36 @@
+slug: weaviate
+provider: Weaviate
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: authz
+  spec_file: weaviate-authz-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /authz/roles createRole; POST /authz/roles/{id}/add-permissions; GET /authz/users/{id}/roles
+    getRolesForUser
+  reason: Role and permission definition plus assignment of roles to users and groups is role-based access
+    control, squarely Identity & Access Management.
+- tag: Backups
+  spec_file: weaviate-backups-api-openapi.yml
+  capability_id: BC-4220.60
+  capability_id_l1: BC-4220
+  capability_name: Disaster Recovery & Resilience
+  confidence: 0.7
+  evidence: POST /backups/{backend} backups.create Weaviate Create A Backup; POST /backups/{backend}/{id}/restore
+    backups.restore Weaviate Restore From A Backup
+  reason: Operations provide backup creation, listing, and restore for the database — matches Disaster
+    Recovery & Resilience (backup and restore). Moderate confidence since it is a product feature of a
+    database rather than an operational DR process.
