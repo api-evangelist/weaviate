@@ -432,6 +432,8 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 common:
+- type: Plans
+  url: plans/weaviate-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/weaviate-capability-edges.yml
   name: Weaviate Business Capability Map
