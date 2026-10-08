@@ -432,6 +432,10 @@ apis:
   - type: GraphQL
     url: graphql/weaviate-graphql.md
 common:
+- type: RateLimits
+  url: rate-limits/weaviate-rate-limits.yml
+- type: FinOps
+  url: finops/weaviate-finops.yml
 - type: Plans
   url: plans/weaviate-plans-pricing.yml
 - type: CapabilityMap
