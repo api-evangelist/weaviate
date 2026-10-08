@@ -72,3 +72,68 @@ rate_limit_statements:
 - Embeddings (2,000 req/day) + Query Agent (1,000 req/mo)
 - Query Agent rate limits 1,000 req/mo 30,000 req/mo Unlimited Unlimited
 - Free to try — 1,000 requests / month
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - compute
+  - object
+  - token
+  plans:
+  - name: Free Forever
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - month
+  - name: Flex
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Premium
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Weaviate Embeddings — Snowflake Arctic-Embed-M-v1.5
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: Weaviate Embeddings — Snowflake Arctic-Embed-M-v2.0
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: Weaviate Embeddings — ModernVBERT ColModernVBERT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: Weaviate Query Agent
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - object
+    periods:
+    - month
