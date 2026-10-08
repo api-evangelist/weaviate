@@ -1,122 +1,74 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Weaviate
-providerId: weaviate
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-reconciled: true
-tags:
-  - Vector Database
-  - AI Infrastructure
-description: Weaviate Cloud (WCD) tiers across Free Trial / Flex / Premium.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://weaviate.io/pricing
 sources:
-  - https://weaviate.io/pricing
+- https://weaviate.io/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+  managed_tier: Flex
+published: true
+note: Pricing mainly by vector dimensions/storage/backup per GiB with monthly minimums; Premium tier is
+  contact sales but page shows derived rates.
+plan_count: 7
+currency: USD
 plans:
-  - id: weaviate-free-trial
-    name: Free Trial
-    type: freemium
-    description: Free for 14 days, then pay-as-you-go.
-    entries:
-      - label: Trial duration
-        name: trial
-        type: quota
-        metric: day
-        limit: 14
-        timeFrame: one-time
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Fully managed in shared cloud
-      - name: Hybrid search, dynamic index, compression
-      - name: Multi-tenancy
-      - name: RBAC baseline security
-      - name: Forum support
-  - id: weaviate-flex
-    name: Flex
-    type: paid
-    description: Starts $45/month; pay-as-you-go monthly.
-    entries:
-      - label: Monthly minimum
-        name: monthly_min
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '45.00'
-        userMultiplied: false
-      - label: Storage per GiB
-        name: storage
-        type: metered
-        metric: GiB
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.255'
-        userMultiplied: false
-      - label: Backup per GiB
-        name: backup
-        type: metered
-        metric: GiB
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.0264'
-        userMultiplied: false
-    elements:
-      - name: Pay-as-you-go monthly
-      - name: No commit
-      - name: Shared cloud
-      - name: RBAC
-      - name: 99.5% SLA
-      - name: Email support, NBD Sev 1
-  - id: weaviate-premium
-    name: Premium
-    type: enterprise
-    description: Starts $400/month; prepaid contract.
-    entries:
-      - label: Monthly minimum
-        name: monthly_min
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '400.00'
-        userMultiplied: false
-      - label: Storage per GiB
-        name: storage
-        type: metered
-        metric: GiB
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.31875'
-        userMultiplied: false
-      - label: Backup per GiB
-        name: backup
-        type: metered
-        metric: GiB
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.033'
-        userMultiplied: false
-    elements:
-      - name: Predictable spend
-      - name: Shared or dedicated
-      - name: Up to 99.95% SLA
-      - name: AWS/GCP/Azure global
-      - name: Enterprise support 1-hr Sev 1
+- name: Free Forever
+  price_text: $0 /mo
+  price: 0
+  currency: USD
+  period: month
+  unit: cluster
+  included_quota: 100,000 objects · 1 GB memory · 10 GB disk; 1 collection, up to 3 tenants; Embeddings
+    (2,000 req/day) + Query Agent (1,000 req/mo)
+- name: Flex
+  price_text: Starts at $45 /mo
+  price: 45
+  currency: USD
+  period: month
+  included_quota: Shared cloud cluster, RBAC, 99.5% uptime, Query Agent free tier + usage-based
+  overage: Vector dimensions from $0.00465 / 1M; Storage from $0.12 / GiB; Backup from $0.03036/ GiB
+- name: Premium
+  price_text: Contact sales for more information
+  period: none
+  included_quota: Prepaid contract; shared or dedicated; up to 99.95% uptime
+  overage: 'Shared: vector dimensions from $0.003875 / 1M, storage from $0.10 / GiB, backup from $0.021
+    / GiB; Dedicated: from $0.002718 / 1M, $0.33 / GiB, $0.014 / GiB; from $400/month minimum'
+- name: Weaviate Embeddings — Snowflake Arctic-Embed-M-v1.5
+  price_text: $0.025 / 1M tokens
+  price: 0.025
+  currency: USD
+  period: per-use
+  unit: 1M tokens
+- name: Weaviate Embeddings — Snowflake Arctic-Embed-M-v2.0
+  price_text: $0.040 / 1M tokens
+  price: 0.04
+  currency: USD
+  period: per-use
+  unit: 1M tokens
+- name: Weaviate Embeddings — ModernVBERT ColModernVBERT
+  price_text: $0.065 / 1M tokens
+  price: 0.065
+  currency: USD
+  period: per-use
+  unit: 1M tokens
+- name: Weaviate Query Agent
+  price_text: $30 / organization · monthly plan
+  price: 30
+  currency: USD
+  period: month
+  unit: organization
+  included_quota: 4,000 requests included; free to try — 1,000 requests / month
+  overage: Unlimited additional requests, usage-based
+rate_limit_statements:
+- Embeddings (2,000 req/day) + Query Agent (1,000 req/mo)
+- Query Agent rate limits 1,000 req/mo 30,000 req/mo Unlimited Unlimited
+- Free to try — 1,000 requests / month
