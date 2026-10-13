@@ -11,8 +11,8 @@ edges:
   type: marketplace
   marketplace: aws-marketplace
   channel: distribution
-  relationship: platform-app
-  direction: provider-built
+  relationship: distribution-channel
+  direction: third-party
   evidence: https://aws.amazon.com/marketplace/seller-profile?id=seller-jxgfug62rvpxs
   listing_count: 3
   apps:
@@ -28,8 +28,8 @@ edges:
   type: marketplace
   marketplace: azure-marketplace
   channel: distribution
-  relationship: platform-app
-  direction: provider-built
+  relationship: distribution-channel
+  direction: third-party
   evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Weaviate%20B.V.
   listing_count: 1
   apps:
