@@ -4,6 +4,7 @@ checked:
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
 - https://focus.finops.org/data-generators/
+- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://github.com/cncf/k8s-conformance
 - https://github.com/cncf/landscape
 - https://github.com/langchain-ai/langchain/tree/master/libs/partners
@@ -115,6 +116,32 @@ edges:
     detected_by: sweep-cloud-native.py
     detected: '2026-10-15'
   detected_by: sweep-cloud-native.py
+  first_seen: '2026-10-15'
+- partner_name: Pipedream
+  partner: pipedream
+  partner_match: aggregator
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/weaviate
+  category: null
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: weaviate
+    matched_domain: weaviate.io
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: weaviate
+    actions: true
+    sources: false
+    builder: Pipedream repo (component)
+  detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
 source:
 - https://github.com/cncf/landscape
