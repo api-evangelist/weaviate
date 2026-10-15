@@ -27,3 +27,25 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: weaviate-llamaindex
+  label: LlamaIndex
+  partner: llamaindex
+  partner_name: LlamaIndex
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/vector_stores/llama-index-vector-stores-weaviate
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: weaviate-langchain
+  label: LangChain
+  partner: langchain
+  partner_name: LangChain
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/langchain-ai/langchain-weaviate
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null

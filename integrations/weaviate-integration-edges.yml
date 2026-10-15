@@ -3,6 +3,8 @@ method: searched
 checked:
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
+- https://github.com/langchain-ai/langchain/tree/master/libs/partners
+- https://github.com/run-llama/llama_index/tree/main/llama-index-integrations
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -37,3 +39,44 @@ edges:
   seller_name: Weaviate B.V.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: LlamaIndex
+  partner: llamaindex
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/vector_stores/llama-index-vector-stores-weaviate
+  coverage_role:
+  - retrieval-reader
+  - vector-store
+  framework_signals:
+    packages:
+    - llama-index-readers-weaviate
+    - llama-index-vector-stores-weaviate
+    roles:
+    - retrieval-reader
+    - vector-store
+    vendor_domain: weaviate.io
+  matched_by: verified-domain-table
+  detected_by: sweep-rag-vector.py
+  first_seen: '2026-10-15'
+- partner_name: LangChain
+  partner: langchain
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/langchain-ai/langchain-weaviate
+  coverage_role:
+  - vector-store
+  framework_signals:
+    packages:
+    - langchain-weaviate
+    roles:
+    - vector-store
+    vendor_domain: weaviate.io
+  matched_by: verified-domain-table
+  detected_by: sweep-rag-vector.py
+  first_seen: '2026-10-15'
