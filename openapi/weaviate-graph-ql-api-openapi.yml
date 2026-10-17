@@ -98,17 +98,14 @@ paths:
         delay: 100
 components:
   schemas:
-    ErrorResponse:
+    JsonObject:
       type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
+      description: JSON object value.
+    GraphQLResponses:
+      type: array
+      description: A list of GraphQL responses.
+      items:
+        $ref: '#/components/schemas/GraphQLResponse'
     GraphQLError:
       description: An error response caused by a GraphQL query.
       properties:
@@ -129,14 +126,6 @@ components:
           type: array
           items:
             type: string
-    GraphQLResponses:
-      type: array
-      description: A list of GraphQL responses.
-      items:
-        $ref: '#/components/schemas/GraphQLResponse'
-    JsonObject:
-      type: object
-      description: JSON object value.
     GraphQLQuery:
       type: object
       description: 'GraphQL query based on: http://facebook.github.io/graphql/.'
@@ -150,6 +139,11 @@ components:
         variables:
           type: object
           description: Additional variables for the query.
+    GraphQLQueries:
+      type: array
+      description: A list of GraphQL queries.
+      items:
+        $ref: '#/components/schemas/GraphQLQuery'
     GraphQLResponse:
       description: 'GraphQL based response: http://facebook.github.io/graphql/.'
       properties:
@@ -163,11 +157,17 @@ components:
           description: Array with errors.
           items:
             $ref: '#/components/schemas/GraphQLError'
-    GraphQLQueries:
-      type: array
-      description: A list of GraphQL queries.
-      items:
-        $ref: '#/components/schemas/GraphQLQuery'
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

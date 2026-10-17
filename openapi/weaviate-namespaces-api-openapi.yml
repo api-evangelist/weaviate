@@ -199,6 +199,11 @@ paths:
         delay: 100
 components:
   schemas:
+    NamespaceListResponse:
+      type: array
+      description: Response object containing a list of namespaces.
+      items:
+        $ref: '#/components/schemas/Namespace'
     ErrorResponse:
       type: object
       description: An error response returned by Weaviate endpoints.
@@ -210,11 +215,6 @@ components:
             properties:
               message:
                 type: string
-    NamespaceListResponse:
-      type: array
-      description: Response object containing a list of namespaces.
-      items:
-        $ref: '#/components/schemas/Namespace'
     Namespace:
       type: object
       description: A cluster-level namespace used to group resources under a common administrative unit. Namespace names must start with a lowercase letter, contain only lowercase letters and digits, be 3-36 characters long, and must not be a reserved name.

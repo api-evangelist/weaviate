@@ -91,13 +91,6 @@ components:
             properties:
               message:
                 type: string
-    DistributedTasks:
-      type: object
-      description: Active distributed tasks by namespace.
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/DistributedTask'
     DistributedTaskUnit:
       type: object
       description: A unit of a distributed task.
@@ -126,6 +119,13 @@ components:
           type: string
           format: date-time
           description: The time when the unit finished.
+    DistributedTasks:
+      type: object
+      description: Active distributed tasks by namespace.
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/DistributedTask'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

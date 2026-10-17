@@ -420,106 +420,6 @@ paths:
         delay: 100
 components:
   schemas:
-    GroupType:
-      type: string
-      description: If the group contains OIDC or database users.
-      enum:
-      - oidc
-    ErrorResponse:
-      type: object
-      description: An error response returned by Weaviate endpoints.
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-    UserOwnInfo:
-      type: object
-      required:
-      - username
-      properties:
-        groups:
-          type: array
-          description: The groups associated with the user.
-          items:
-            type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        username:
-          type: string
-          description: The name (ID) of the user.
-    UserApiKey:
-      type: object
-      required:
-      - apikey
-      properties:
-        apikey:
-          type: string
-          description: The API key associated with the user.
-    DBUserInfo:
-      type: object
-      required:
-      - userId
-      - dbUserType
-      - roles
-      - active
-      properties:
-        roles:
-          type: array
-          description: The roles associated with the user.
-          items:
-            type: string
-        userId:
-          type: string
-          description: The name (ID) of the user.
-        dbUserType:
-          type: string
-          description: Type of the returned user.
-          enum:
-          - db_user
-          - db_env_user
-        active:
-          type: boolean
-          description: Activity status of the returned user.
-        createdAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: 'Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.'
-        apiKeyFirstLetters:
-          type:
-          - string
-          - 'null'
-          description: First 3 letters of the associated API key.
-          maxLength: 3
-        lastUsedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: 'Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.'
-        namespace:
-          type: string
-          description: The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise.
-    Role:
-      type: object
-      required:
-      - name
-      - permissions
-      properties:
-        name:
-          type: string
-          description: The name (ID) of the role.
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
     Permission:
       type: object
       description: Permissions attached to a role.
@@ -692,6 +592,106 @@ components:
           - read_mcp
           - update_mcp
           - manage_namespaces
+    DBUserInfo:
+      type: object
+      required:
+      - userId
+      - dbUserType
+      - roles
+      - active
+      properties:
+        roles:
+          type: array
+          description: The roles associated with the user.
+          items:
+            type: string
+        userId:
+          type: string
+          description: The name (ID) of the user.
+        dbUserType:
+          type: string
+          description: Type of the returned user.
+          enum:
+          - db_user
+          - db_env_user
+        active:
+          type: boolean
+          description: Activity status of the returned user.
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: 'Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.'
+        apiKeyFirstLetters:
+          type:
+          - string
+          - 'null'
+          description: First 3 letters of the associated API key.
+          maxLength: 3
+        lastUsedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: 'Date and time in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.'
+        namespace:
+          type: string
+          description: The namespace this user is bound to. Only populated for callers with global-operator privileges; omitted otherwise.
+    Role:
+      type: object
+      required:
+      - name
+      - permissions
+      properties:
+        name:
+          type: string
+          description: The name (ID) of the role.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    UserApiKey:
+      type: object
+      required:
+      - apikey
+      properties:
+        apikey:
+          type: string
+          description: The API key associated with the user.
+    GroupType:
+      type: string
+      description: If the group contains OIDC or database users.
+      enum:
+      - oidc
+    UserOwnInfo:
+      type: object
+      required:
+      - username
+      properties:
+        groups:
+          type: array
+          description: The groups associated with the user.
+          items:
+            type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        username:
+          type: string
+          description: The name (ID) of the user.
+    ErrorResponse:
+      type: object
+      description: An error response returned by Weaviate endpoints.
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
