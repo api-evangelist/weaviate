@@ -137,7 +137,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: weaviate-meltano
   label: Meltano
@@ -166,5 +166,5 @@
     quality:
     - unknown
     builder: 'community (Meltano Hub variant maintainers: steven-asearcy)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
