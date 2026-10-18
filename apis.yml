@@ -289,9 +289,10 @@ apis:
   description: The oidc API from Weaviate — 1 operation(s) for oidc.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
-  - OIDC
+  - OpenID Connect
   tags_raw:
   - oidc
+  - OIDC
   properties:
   - type: OpenAPI
     url: openapi/weaviate-oidc-api-openapi.yml
@@ -421,6 +422,8 @@ apis:
   description: The Graph QL API from Weaviate — 2 operation(s) for graph ql.
   humanURL: https://weaviate.io/developers/weaviate/api/rest
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
