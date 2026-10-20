@@ -49,66 +49,6 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
-- slug: weaviate-cncf-cloud-native-landscape
-  label: CNCF (Cloud Native Landscape)
-  partner: cncf
-  partner_name: CNCF (Cloud Native Landscape)
-  category: Cloud native landscape
-  type: register
-  channel: standard-directory
-  evidence: https://github.com/cncf/landscape/blob/3a7d378b1824b82e729a453bb03fa6f1e37557e1/landscape.yml
-  source: edge
-  relationship: standard-participant
-  contract_reference:
-    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @3a7d378b18)
-    spec_file: null
-    standard: Cloud Native (CNCF)
-    role: landscape-listed
-    registered_name: Weaviate
-    registered_names:
-    - Weaviate
-    website: https://weaviate.io/developers/weaviate/current/index.html
-    matched_domain: weaviate.io
-    matched_by: domain
-    member_tier: null
-    joined: null
-    end_user: false
-    cncf_projects: []
-    landscape_categories:
-    - App Definition and Development / Database
-    landscape_entries: 1
-    signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
-      categories, tier and projects are CONTEXT, never read (breadth is not credit)'
-    detected_by: sweep-cloud-native.py
-    detected: '2026-10-15'
-  status: not-a-workflow
-  arazzo: null
-- slug: weaviate-pipedream
-  label: Pipedream
-  partner: pipedream
-  partner_name: Pipedream
-  type: marketplace
-  marketplace: pipedream-components
-  channel: open-source-node
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/weaviate
-  source: edge
-  relationship: ipaas-bridge
-  contract_reference:
-    register: Pipedream components (PipedreamHQ/pipedream components/)
-    spec_file: null
-    role: ipaas-connector:pipedream
-    registered_name: weaviate
-    matched_domain: weaviate.io
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    app_slug: weaviate
-    actions: true
-    sources: false
-    builder: Pipedream repo (component)
-  status: not-a-workflow
-  arazzo: null
 - slug: weaviate-airbyte
   label: Airbyte
   partner: airbyte
@@ -166,5 +106,65 @@
     quality:
     - unknown
     builder: 'community (Meltano Hub variant maintainers: steven-asearcy)'
+  status: not-a-workflow
+  arazzo: null
+- slug: weaviate-cncf-cloud-native-landscape
+  label: CNCF (Cloud Native Landscape)
+  partner: cncf
+  partner_name: CNCF (Cloud Native Landscape)
+  category: Cloud native landscape
+  type: register
+  channel: standard-directory
+  evidence: https://github.com/cncf/landscape/blob/42dd4cd91dad8ec8558ac02467a43f0805b9957a/landscape.yml
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @42dd4cd91d)
+    spec_file: null
+    standard: Cloud Native (CNCF)
+    role: landscape-listed
+    registered_name: Weaviate
+    registered_names:
+    - Weaviate
+    website: https://weaviate.io/developers/weaviate/current/index.html
+    matched_domain: weaviate.io
+    matched_by: domain
+    member_tier: null
+    joined: null
+    end_user: false
+    cncf_projects: []
+    landscape_categories:
+    - App Definition and Development / Database
+    landscape_entries: 1
+    signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
+      categories, tier and projects are CONTEXT, never read (breadth is not credit)'
+    detected_by: sweep-cloud-native.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: weaviate-pipedream
+  label: Pipedream
+  partner: pipedream
+  partner_name: Pipedream
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/weaviate
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: weaviate
+    matched_domain: weaviate.io
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: weaviate
+    actions: true
+    sources: false
+    builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
