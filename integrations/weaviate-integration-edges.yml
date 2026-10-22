@@ -22,6 +22,7 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- artifact-hub/integrations/artifact-hub-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -245,28 +246,6 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
-- partner_name: Docker Hub (docker-verified-publisher)
-  partner: docker-hub
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: docker-verified-publisher
-  evidence: https://hub.docker.com/u/semitechnologies
-  mirror_of: docker-hub/integrations/docker-hub-integration-edges.yml
-  apps:
-  - semitechnologies/weaviate
-  - semitechnologies/janusgraph-docker
-  - semitechnologies/elasticsearch-vector
-  - semitechnologies/weaviatebuildcache
-  listing_count: 1
-  detected: '2026-10-20'
-  detected_by: mirror-platform-listings.py
-  category: Docker Verified Publisher
-  badges:
-  - Docker Verified Publisher
 - partner_name: Battery Ventures
   partner: battery-ventures
   partner_match: register
@@ -321,6 +300,47 @@ edges:
     sector: aiml
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Docker Hub (docker-verified-publisher)
+  partner: docker-hub
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: docker-verified-publisher
+  evidence: https://hub.docker.com/u/semitechnologies
+  mirror_of: docker-hub/integrations/docker-hub-integration-edges.yml
+  apps:
+  - semitechnologies/weaviate
+  - semitechnologies/janusgraph-docker
+  - semitechnologies/elasticsearch-vector
+  - semitechnologies/weaviatebuildcache
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Docker Verified Publisher
+  badges:
+  - Docker Verified Publisher
+- partner_name: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: artifact-hub
+  evidence: https://artifacthub.io/packages/search?repo=weaviate
+  mirror_of: artifact-hub/integrations/artifact-hub-integration-edges.yml
+  apps:
+  - weaviate
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Artifact Hub listing (Helm chart)
+  badges:
+  - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
 source:
 - https://github.com/cncf/landscape
 - https://github.com/cncf/k8s-conformance
