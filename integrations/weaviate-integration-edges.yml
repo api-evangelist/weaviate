@@ -23,6 +23,9 @@ checked:
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
 - artifact-hub/integrations/artifact-hub-integration-edges.yml
+- https://buf.build/buf.registry.module.v1.ModuleService/ListModules
+- https://buf.build/buf.registry.owner.v1.OwnerService/GetOwners
+- https://buf.build/explore
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -341,6 +344,42 @@ edges:
   category: Artifact Hub listing (Helm chart)
   badges:
   - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
+- partner_name: Buf Schema Registry (BSR) public modules
+  partner: buf
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: third-party
+  evidence: https://buf.build/weaviate-io
+  category: Protocol Buffers schema publishing (BSR)
+  contract_reference:
+    register: Buf Schema Registry (BSR) public modules
+    spec_file: null
+    standard: Protocol Buffers
+    role: schema-publisher
+    registrations:
+    - registered_name: weaviate-io
+      register_status: public-modules
+      evidence_url: https://buf.build/weaviate-io
+      matched_domain: weaviate.io
+      matched_by: domain
+      url_source: owner-url
+    modules:
+    - module: buf.build/weaviate-io/flight
+      state: active
+      lapsed: false
+      created: '2026-04-08'
+    - module: buf.build/weaviate-io/weaviate
+      state: active
+      lapsed: false
+      created: '2026-04-08'
+    signal_note: 'participation only: the owner publishes Protocol Buffers schema modules on the public BSR; a listing
+      is not conformance (no certified_products)'
+    detected_by: sweep-buf-schema-registry.py
+    detected: '2026-10-23'
+  detected_by: sweep-buf-schema-registry.py
+  first_seen: '2026-10-23'
 source:
 - https://github.com/cncf/landscape
 - https://github.com/cncf/k8s-conformance
